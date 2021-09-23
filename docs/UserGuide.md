@@ -15,7 +15,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
     - Exiting the program: ``exit``
   - FAQ
   - Command summary
-  
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -149,8 +149,8 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME l/LEVEL` <br> e.g. `add n/James Ho l/S4`
-**Delete** | `delete INDEX`<br> e.g. `delete 3` 
-**Get** | `get INDEX`<br> e.g. `get 2` 
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Get** | `get INDEX`<br> e.g. `get 2`
 **List** | `list`
 **Help** | `help`
 **Exit** | `exit`
