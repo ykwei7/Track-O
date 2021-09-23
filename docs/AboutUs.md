@@ -1,59 +1,61 @@
----
-layout: page
-title: About Us
----
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at our respective emails as shown below.
 
-## Project team
+## Project Team
 
-### John Doe
+### Amos Tan Yan Heng
 
-<img src="images/johndoe.png" width="200px">
+![profile_atyamos](images/johndoe.png)
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/atyhamos)]
 
-* Role: Project Advisor
+[[portfolio](team/atyhamos.md)]
 
-### Jane Doe
+* Role: *To be decided*
 
-<img src="images/johndoe.png" width="200px">
+### Liao Keng I
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+![profile_kengxiii](images/kengxiii.png)
 
-* Role: Team Lead
-* Responsibilities: UI
+[[github](https://github.com/KengXIII)]
 
-### Johnny Doe
+[[portfolio](team/kengxiii.md)]
 
-<img src="images/johndoe.png" width="200px">
+* Role: *To be decided*
+* Responsibilities: *To be decided*
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+### Ng Hong Jie Ryan
 
-* Role: Developer
-* Responsibilities: Data
+![profile_nhjryan](images/nhjryan.png)
 
-### Jean Doe
+[[github](https://github.com/nhjryan)]
 
-<img src="images/johndoe.png" width="200px">
+[[portfolio](team/nhjryan.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: *To be decided*
+* Responsibilities: *To be decided*
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+### Ong Ting Rui, Brandon
 
-### James Doe
+![profile_botr99](images/botr99.png)
 
-<img src="images/johndoe.png" width="200px">
+[[github](https://github.com/botr99)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/botr99.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: *To be decided*
+* Responsibilities: *To be decided*
+
+### Wei Yangken
+
+![profile_ykwei7](images/ykwei7.png)
+
+[[github](https://github.com/ykwei7)]
+
+[[portfolio](team/ykwei7.md)]
+
+* Role: *To be decided*
+* Responsibilities: *To be decided*
