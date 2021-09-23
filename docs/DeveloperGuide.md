@@ -257,29 +257,56 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Private tutors who have many different tutees of different educational levels, teaching different subjects and/or in various different groups.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+The product manages the information of tutees on a collated digital platform, as opposed to storing it physically. Information specific to the progress of individual students can be tracked
+
+Tutors will have an overview of each individual tutee’s progress. As such, they would not have to manually keep track of all the information, which could lead to errors and be difficult to maintain.
+
+The platform is personalized for private tutors as opposed to other audiences (like tuition centres) as the app tracks the progress of individual tutees more closely and specific relevant information (e.g exam dates of particular student)
+
+The application does not offer functionality for contacting tutees.
+
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​                   | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | first-time user                            | view all the commands I need to learn  | start using the app right away. |
+| `* * *`  | private tutor with many students           | list out my tutee's information in an overview | plan my lessons effectively. |
+| `* * *`  | private tutor                              | add information about my tutees easily | keep track of which education level they are at. |
+| `* * *`  | private tutor with many students           | get information about one specific student by his name. | |
+| `* * *`  | recently fired tutor                       | delete or archive all the data of a particular student. | |
+| `* * *`  | tutor with two conflicting events          | cancel the class and reschedule it to a different day   | get a reminder. |
+| `* * *`  | forgetful tutor                            | know where I am teaching my tutee | find my way to the correct location. |
+| `* * *`  | private tutor who teaches tutees of various subjects and at various levels | tag the tutees by level and/or subject (e.g: P5 Math) | search for all tutees related to the level/subject easily. |
+| `* * *`  | private tutor                              | delete all data at one go (maybe with reconfirmation before clearing everything) | start afresh. |
+| `* *`    | first-time user                            | import all my existing data into the app when I first start it up | quickly set-up the app. |
+| `* *`    | careless user                              | edit each portion easily | minimize mistakes in storing data. |
+| `* *`    | careless user                              | know what I typed wrongly when I enter a wrong command. | |
+| `* *`    | organized tutor                            | know which students I will be teaching later | prepare materials accordingly. |
+| `* *`    | disorganized tutor                         | see my schedule for the week | plan for unconfirmed tuition time slots. |
+| `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about fee collection during the class. |
+| `* *`    | private tutor teaching students in groups  | take note of questions asked during a lesson | address them afterwards. |
+| `* *`    | private tutor                              | find a student's parents' contact | let them know if a student fails to turn up or shows misconduct. |
+| `* *`    | private tutor                              | make changes on the schedule of my classes when a tutee requires a make-up class. | |
+| `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s fee | contact them to pay up. |
+| `* *`    | private tutor                              | retrieve an ex-student's data back into the database | update their progress if they wish to return to class. |
+| `* *`    | private tutor                              | track the progress of each student in terms of their grades | adapt my methods of teaching. |
+| `*`      | first-time user                            | experiment with the basic commands with sample data | familiarise myself with the commands in a safe space. |
+| `*`      | first-time user                            | clear all sample data | start adding in my own data. |
+| `*`      | hardworking tutor                          | see the preparation tasks listed out over the weekends | refer to it at the end of the week. |
+| `*`      | forgetful tutor                            | have a reminder some time before my class | know when it starts. |
+| `*`      | forgetful tutor                            | know what's the current upcoming tuition session | plan for it. |
+| `*`      | private tutor with an increasing number of students | sort my students by specific fields, such as lesson date or level and school of student. | |
+| `*`      | tutor teaching students in groups          | “group” these students together | type a single command for the entire group (e.g. change lesson timing, create notes, weekly preparation). |
+| `*`      | up-and-coming private tutor                | see the improvements that my students and ex-students have made due to the tuition | use it to promote my services to others. |
+| `*`      | private tutor                              | see my monthly earnings. | |
 
-*{More to be added}*
+
 
 ### Use cases
 
