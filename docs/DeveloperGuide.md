@@ -310,45 +310,314 @@ The application does not offer functionality for contacting tutees.
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Track-o` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01: Seek help on the usage of commands**
 
 **MSS**
+1. User requests for help regarding how to use the commands.
+2. System provides the usage of commands.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+    Use case ends.
+
+<br>
+
+**UC02: Import existing data**
+
+**MSS**
+1. User requests to import existing data.
+2. System processes and shows the data.
 
     Use case ends.
 
 **Extensions**
+* 1a. Data is of an improper format.
+  * 1a1. System shows an error message.
+  
+    Use case resumes at step 1.
 
+<br>
+
+**UC03: Add a tutee**
+
+**MSS**
+1. User requests to add a tutee by providing the details of the tutee.
+2. System adds the tutee.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Some compulsory details of the tutee are not included.
+  * 1a1. System shows an error message.
+
+    Use case resumes at step 1.
+
+<br>
+
+**UC04: View all tutees**
+
+**MSS**
+1. User requests to view all tutees.
+2. System shows a list of tutees.
+
+    Use case ends.
+
+<br>
+
+**UC05: Delete a tutee**
+
+**MSS**
+1. User requests to list tutees
+2. System shows a list of tutees
+3. User requests to delete a specific tutee in the list
+4. System deletes the tutee
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+<br>
+
+**UC06: View a specific tutee**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to view a specific tutee.
+4. System shows that specific tutee.
+
+   Use case ends.
+
+**Extensions**
 * 2a. The list is empty.
 
   Use case ends.
 
 * 3a. The given index is invalid.
+  * 3a1. System shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+    Use case resumes at step 2.
 
-      Use case resumes at step 2.
+<br>
 
-*{More to be added}*
+**UC07: Search for tutees by their name**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to search for tutees by their name.
+4. System shows a list of tutees found.
+
+   Use case ends.
+
+**Extensions**
+* 3a. The given query is empty.
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+<br>
+
+**UC08: Sort tutees by their level, subject or date of lesson**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to sort tutees by their level, subject or date of lesson.
+4. System shows a sorted list of tutees.
+
+   Use case ends.
+
+<br>
+
+**UC09: Edit a specific tutee**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to edit a specific tutee.
+4. System edits that specific tutee.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+* 3b. No details of the tutee are provided.
+  * 3b1. System shows an error message.
+    
+    Use case resumes at step 2.
+
+<br>
+
+**UC10: View the schedule for the week**
+
+**MSS**
+1. User requests to view his/her schedule for the week.
+2. System shows the schedule.
+
+   Use case ends.
+
+<br>
+
+**UC11: Create a group**
+
+**MSS**
+1. User requests to create a group.
+2. System creates the group.
+
+**Extensions**
+* 1a. No group name is provided.
+  * 1a1. System shows an error message.
+  
+    Use case resumes at step 1.
+
+* 1b. The group name provided has already been used.
+  * 1b1. System shows an error message.
+
+    Use case resumes at step 1.
+  
+<br>
+
+**UC12: Add a tutee to a group**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to add a specific tutee in the list to a group.
+4. System adds the tutee to the group.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+* 3b. No group name is provided.
+  * 3b1. System shows an error message.
+
+    Use case resumes at step 2.
+  
+* 3c. There is no group with the group name provided.
+  * 3c1. System shows an error message.
+
+    Use case resumes at step 2.
+  
+<br>
+
+**UC13: View tutees that belong to a group**
+
+**MSS**
+1. User requests to view all tutees belonging to a group.
+2. System shows a list of tutees in the group.
+
+**Extensions**
+* 1a. No group name is provided.
+  * 1a1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. There is no group with the group name provided.
+  * 1b1. System shows an error message.
+
+    Use case resumes at step 1.
+
+<br>
+
+**UC14: Remove a tutee from a group**
+
+**MSS**
+1. User requests to remove a tutee from a group.
+2. System removes the tutee from the group.
+
+**Extensions**
+* 1a. The given index is invalid.
+  * 1a1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. No group name is provided.
+  * 1b1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1c. There is no group with the group name provided.
+  * 1c1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1d. The tutee does not belong to the group.
+  * 1d1. System shows an error message.
+
+    Use case resumes at step 1.
+  
+<br>
+
+**UC15: Delete a group**
+
+**Guarantees**
+* All tutees that were previously in the group are removed from the group.
+
+**MSS**
+1. User requests to delete a group.
+2. System deletes the group.
+
+**Extensions**
+* 1a. No group name is provided.
+  * 1a1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. There is no group with the group name provided.
+  * 1b1. System shows an error message.
+
+    Use case resumes at step 1.
+
+<br>
+
+**UC16: Clear all data**
+
+**MSS**
+1. User requests to clear all data.
+2. System clears all data.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 tutees without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The data should not be made accessible to anyone else other than the user.
+5. The system should be usable by a user who has never used a task manager, schedule tracker, or other forms of similar applications.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Education level**: Education level of an individual in the context of Singapore. For instance, `P5` refers to Primary 5, `JC2` refers to Junior College Year 2
+* **Database**: Storage on local system
+* **Group**: A collection of tutees. Any tutee can be part of any group, and any group can have any number of tutees.
 
 --------------------------------------------------------------------------------------------------------------------
 
