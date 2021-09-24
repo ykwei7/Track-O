@@ -8,7 +8,7 @@ You can reach us at our respective emails as shown below.
 
 ### Amos Tan Yan Heng
 
-![profile_atyamos](images/atyamos.png)
+![profile_atyhamos](images/atyhamos.png)
 
 [[github](https://github.com/atyhamos)]
 
