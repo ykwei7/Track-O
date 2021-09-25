@@ -2,7 +2,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-#Track-O <br>
+# Track-O
 A tracking application catered towards private tutors, built upon AddressBook Level 3<br>
   
 Example usage:
