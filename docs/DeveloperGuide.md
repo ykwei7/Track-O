@@ -257,71 +257,367 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Private tutors who have many different tutees of different educational levels, teaching different subjects and/or in various different groups.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+The product manages the information of tutees on a collated digital platform, as opposed to storing it physically. Information specific to the progress of individual students can be tracked
+
+Tutors will have an overview of each individual tutee’s progress. As such, they would not have to manually keep track of all the information, which could lead to errors and be difficult to maintain.
+
+The platform is personalized for private tutors as opposed to other audiences (like tuition centres) as the app tracks the progress of individual tutees more closely and specific relevant information (e.g exam dates of particular student)
+
+The application does not offer functionality for contacting tutees.
+
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​                   | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | first-time user                            | view all the commands I need to learn  | start using the app right away. |
+| `* * *`  | private tutor with many students           | list out my tutee's information in an overview | plan my lessons effectively. |
+| `* * *`  | private tutor                              | add information about my tutees easily | keep track of which education level they are at. |
+| `* * *`  | private tutor with many students           | get information about one specific student by his name. | |
+| `* * *`  | recently fired tutor                       | delete or archive all the data of a particular student. | |
+| `* * *`  | tutor with two conflicting events          | cancel the class and reschedule it to a different day   | get a reminder. |
+| `* * *`  | forgetful tutor                            | know where I am teaching my tutee | find my way to the correct location. |
+| `* * *`  | private tutor who teaches tutees of various subjects and at various levels | tag the tutees by level and/or subject (e.g: P5 Math) | search for all tutees related to the level/subject easily. |
+| `* * *`  | private tutor                              | delete all data at one go (maybe with reconfirmation before clearing everything) | start afresh. |
+| `* *`    | first-time user                            | import all my existing data into the app when I first start it up | quickly set-up the app. |
+| `* *`    | careless user                              | edit each portion easily | minimize mistakes in storing data. |
+| `* *`    | careless user                              | know what I typed wrongly when I enter a wrong command. | |
+| `* *`    | organized tutor                            | know which students I will be teaching later | prepare materials accordingly. |
+| `* *`    | disorganized tutor                         | see my schedule for the week | plan for unconfirmed tuition time slots. |
+| `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about fee collection during the class. |
+| `* *`    | private tutor teaching students in groups  | take note of questions asked during a lesson | address them afterwards. |
+| `* *`    | private tutor                              | find a student's parents' contact | let them know if a student fails to turn up or shows misconduct. |
+| `* *`    | private tutor                              | make changes on the schedule of my classes when a tutee requires a make-up class. | |
+| `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s fee | contact them to pay up. |
+| `* *`    | private tutor                              | retrieve an ex-student's data back into the database | update their progress if they wish to return to class. |
+| `* *`    | private tutor                              | track the progress of each student in terms of their grades | adapt my methods of teaching. |
+| `*`      | first-time user                            | experiment with the basic commands with sample data | familiarise myself with the commands in a safe space. |
+| `*`      | first-time user                            | clear all sample data | start adding in my own data. |
+| `*`      | hardworking tutor                          | see the preparation tasks listed out over the weekends | refer to it at the end of the week. |
+| `*`      | forgetful tutor                            | have a reminder some time before my class | know when it starts. |
+| `*`      | forgetful tutor                            | know what's the current upcoming tuition session | plan for it. |
+| `*`      | private tutor with an increasing number of students | sort my students by specific fields, such as lesson date or level and school of student. | |
+| `*`      | tutor teaching students in groups          | “group” these students together | type a single command for the entire group (e.g. change lesson timing, create notes, weekly preparation). |
+| `*`      | up-and-coming private tutor                | see the improvements that my students and ex-students have made due to the tuition | use it to promote my services to others. |
+| `*`      | private tutor                              | see my monthly earnings. | |
 
-*{More to be added}*
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Track-o` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01: Seek help on the usage of commands**
 
 **MSS**
+1. User requests for help regarding how to use the commands.
+2. System provides the usage of commands.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+    Use case ends.
+
+<br>
+
+**UC02: Import existing data**
+
+**MSS**
+1. User requests to import existing data.
+2. System processes and shows the data.
 
     Use case ends.
 
 **Extensions**
+* 1a. Data is of an improper format.
+  * 1a1. System shows an error message.
+  
+    Use case resumes at step 1.
 
+<br>
+
+**UC03: Add a tutee**
+
+**MSS**
+1. User requests to add a tutee by providing the details of the tutee.
+2. System adds the tutee.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Some compulsory details of the tutee are not included.
+  * 1a1. System shows an error message.
+
+    Use case resumes at step 1.
+
+<br>
+
+**UC04: View all tutees**
+
+**MSS**
+1. User requests to view all tutees.
+2. System shows a list of tutees.
+
+    Use case ends.
+
+<br>
+
+**UC05: Delete a tutee**
+
+**MSS**
+1. User requests to list tutees
+2. System shows a list of tutees
+3. User requests to delete a specific tutee in the list
+4. System deletes the tutee
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+<br>
+
+**UC06: View a specific tutee**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to view a specific tutee.
+4. System shows that specific tutee.
+
+   Use case ends.
+
+**Extensions**
 * 2a. The list is empty.
 
   Use case ends.
 
 * 3a. The given index is invalid.
+  * 3a1. System shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+    Use case resumes at step 2.
 
-      Use case resumes at step 2.
+<br>
 
-*{More to be added}*
+**UC07: Search for tutees by their name**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to search for tutees by their name.
+4. System shows a list of tutees found.
+
+   Use case ends.
+
+**Extensions**
+* 3a. The given query is empty.
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+<br>
+
+**UC08: Sort tutees by their level, subject or date of lesson**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to sort tutees by their level, subject or date of lesson.
+4. System shows a sorted list of tutees.
+
+   Use case ends.
+
+<br>
+
+**UC09: Edit a specific tutee**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to edit a specific tutee.
+4. System edits that specific tutee.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+* 3b. No details of the tutee are provided.
+  * 3b1. System shows an error message.
+    
+    Use case resumes at step 2.
+
+<br>
+
+**UC10: View the schedule for the week**
+
+**MSS**
+1. User requests to view his/her schedule for the week.
+2. System shows the schedule.
+
+   Use case ends.
+
+<br>
+
+**UC11: Create a group**
+
+**MSS**
+1. User requests to create a group.
+2. System creates the group.
+
+**Extensions**
+* 1a. No group name is provided.
+  * 1a1. System shows an error message.
+  
+    Use case resumes at step 1.
+
+* 1b. The group name provided has already been used.
+  * 1b1. System shows an error message.
+
+    Use case resumes at step 1.
+  
+<br>
+
+**UC12: Add a tutee to a group**
+
+**MSS**
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to add a specific tutee in the list to a group.
+4. System adds the tutee to the group.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+  * 3a1. System shows an error message.
+
+    Use case resumes at step 2.
+
+* 3b. No group name is provided.
+  * 3b1. System shows an error message.
+
+    Use case resumes at step 2.
+  
+* 3c. There is no group with the group name provided.
+  * 3c1. System shows an error message.
+
+    Use case resumes at step 2.
+  
+<br>
+
+**UC13: View tutees that belong to a group**
+
+**MSS**
+1. User requests to view all tutees belonging to a group.
+2. System shows a list of tutees in the group.
+
+**Extensions**
+* 1a. No group name is provided.
+  * 1a1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. There is no group with the group name provided.
+  * 1b1. System shows an error message.
+
+    Use case resumes at step 1.
+
+<br>
+
+**UC14: Remove a tutee from a group**
+
+**MSS**
+1. User requests to remove a tutee from a group.
+2. System removes the tutee from the group.
+
+**Extensions**
+* 1a. The given index is invalid.
+  * 1a1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. No group name is provided.
+  * 1b1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1c. There is no group with the group name provided.
+  * 1c1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1d. The tutee does not belong to the group.
+  * 1d1. System shows an error message.
+
+    Use case resumes at step 1.
+  
+<br>
+
+**UC15: Delete a group**
+
+**Guarantees**
+* All tutees that were previously in the group are removed from the group.
+
+**MSS**
+1. User requests to delete a group.
+2. System deletes the group.
+
+**Extensions**
+* 1a. No group name is provided.
+  * 1a1. System shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. There is no group with the group name provided.
+  * 1b1. System shows an error message.
+
+    Use case resumes at step 1.
+
+<br>
+
+**UC16: Clear all data**
+
+**MSS**
+1. User requests to clear all data.
+2. System clears all data.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 tutees without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The data should not be made accessible to anyone else other than the user.
+5. The system should be usable by a user who has never used a task manager, schedule tracker, or other forms of similar applications.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Education level**: Education level of an individual in the context of Singapore. For instance, `P5` refers to Primary 5, `JC2` refers to Junior College Year 2
+* **Database**: Storage on local system
+* **Group**: A collection of tutees. Any tutee can be part of any group, and any group can have any number of tutees.
 
 --------------------------------------------------------------------------------------------------------------------
 
