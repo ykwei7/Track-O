@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 <hr/>
 
 ## User Guide
