@@ -50,7 +50,7 @@ You can reach us at our respective emails as shown below.
 
 [[portfolio](team/botr99.md)]
 
-* Role: Testing developer
+* Role: Testing Developer
 * Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### Wei Yangken
@@ -62,4 +62,4 @@ You can reach us at our respective emails as shown below.
 [[portfolio](team/ykwei7.md)]
 
 * Role: Developer
-* Responsibilities: In charge of defining, assigning, and tracking project task
+* Responsibilities: In charge of defining, assigning, and tracking project tasks
