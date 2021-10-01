@@ -1,5 +1,3 @@
-# About Us
-
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at our respective emails as shown below.
@@ -14,7 +12,8 @@ You can reach us at our respective emails as shown below.
 
 [[portfolio](team/atyhamos.md)]
 
-* Role: *To be decided*
+* Role: UI Expert
+* Responsibilities: Be most familiar with UI component, ensure quality and vision of product is maintained throughout iterations
 
 ### Liao Keng I
 
@@ -24,8 +23,8 @@ You can reach us at our respective emails as shown below.
 
 [[portfolio](team/kengxiii.md)]
 
-* Role: *To be decided*
-* Responsibilities: *To be decided*
+* Role: GitHub Expert
+* Responsibilities: Help other team members with matters related to GitHub
 
 ### Ng Hong Jie Ryan
 
@@ -35,8 +34,8 @@ You can reach us at our respective emails as shown below.
 
 [[portfolio](team/nhjryan.md)]
 
-* Role: *To be decided*
-* Responsibilities: *To be decided*
+* Role: Team Lead
+* Responsibilities: Be most familiar with documentation and tracks deadlines, ensuring quality of deliverables 
 
 ### Ong Ting Rui, Brandon
 
@@ -46,8 +45,8 @@ You can reach us at our respective emails as shown below.
 
 [[portfolio](team/botr99.md)]
 
-* Role: *To be decided*
-* Responsibilities: *To be decided*
+* Role: Testing developer
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### Wei Yangken
 
@@ -57,5 +56,5 @@ You can reach us at our respective emails as shown below.
 
 [[portfolio](team/ykwei7.md)]
 
-* Role: *To be decided*
-* Responsibilities: *To be decided*
+* Role: Developer
+* Responsibilities: In charge of defining, assigning, and tracking project task
