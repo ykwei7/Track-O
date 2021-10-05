@@ -21,7 +21,7 @@ public class GetCommandParserTest {
     private GetCommandParser parser = new GetCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsGetCommand() {
         assertParseSuccess(parser, "1", new GetCommand(INDEX_FIRST_PERSON));
     }
 
