@@ -11,19 +11,22 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Gets a person identified using it's displayed index from the address book and displays additional information on console
+ * Gets a person identified using it's displayed index from the address book and
+ * displays additional information on console
  */
 public class GetCommand extends Command {
 
     public static final String COMMAND_WORD = "get";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Obtains additional information on the person identified by the index number used in the displayed person list.\n"
+            + ": Obtains additional information on the person identified by the index "
+            + "number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     //Displays additional information field of individual
-    public static final String MESSAGE_GET_PERSON_SUCCESS = "Retrieved Tutee: %1$s\nRemarks: [To be added with remark field]";
+    public static final String MESSAGE_GET_PERSON_SUCCESS = "Retrieved Tutee: %1$s\n"
+            + "Remarks: [To be added with remark field]";
 
     private final Index targetIndex;
 
