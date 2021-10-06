@@ -13,9 +13,13 @@ public class Level {
             + "followed by the year of study eg. p2, s4, j1";
     /*
      * The first character has to be either p, s, j.
-     * The second character has to be 1-6.
+     * For p valid years are 1-6
+     * For s, valid years are 1-5
+     * For j, valid years are 1-2
      */
-    public static final String VALIDATION_REGEX = "[psj][1-6]";
+    public static final String VALIDATION_REGEX_PRIMARY = "[p][1-6]";
+    public static final String VALIDATION_REGEX_SECONDARY = "[s][1-5]";
+    public static final String VALIDATION_REGEX_JC = "[j][1-2]";
 
     public final String value;
 
@@ -61,7 +65,9 @@ public class Level {
      * Returns if a given string is a valid education level.
      */
     public static boolean isValidLevel(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX_PRIMARY)
+                || test.matches(VALIDATION_REGEX_SECONDARY)
+                || test.matches(VALIDATION_REGEX_JC);
     }
 
     @Override
