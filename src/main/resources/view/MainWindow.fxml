@@ -23,7 +23,6 @@
         <URL value="@Extensions.css" />
             <URL value="@NewTheme.css" />
       </stylesheets>
-
       <VBox>
         <MenuBar fx:id="menuBar" prefHeight="24.0" prefWidth="340.0" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
@@ -33,7 +32,6 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-
         <VBox fx:id="personList" minWidth="340.0" prefHeight="34.0" prefWidth="333.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
@@ -41,18 +39,15 @@
                <HBox minWidth="340.0" prefHeight="506.0" prefWidth="340.0" VBox.vgrow="ALWAYS">
                   <children>
                 <StackPane fx:id="personListPanelPlaceholder" alignment="CENTER_LEFT" centerShape="false" prefHeight="200.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
-         
                           <StackPane fx:id="resultDisplayPlaceholder" alignment="CENTER_RIGHT" centerShape="false" prefHeight="200.0" prefWidth="158.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" />
                   </children>
                </HBox>
-   
                           <StackPane fx:id="commandBoxPlaceholder" alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="147.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
              <padding>
                <Insets bottom="5" left="10" right="10" top="5" />
              </padding>
            </StackPane>
         </VBox>
-
         <StackPane fx:id="statusbarPlaceholder" prefWidth="260.0" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
