@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Level {
 
     public static final String MESSAGE_CONSTRAINTS = "Education level should only contain the prefix [p, s, j], "
-            + "followed by the year of study eg. p2, s4, j1";
+            + "followed by the year of study eg. p2, s4, j1"
+            + "Primary: years 1-6    Secondary: years 1-5    JC: years 1-2";
     /*
      * The first character has to be either p, s, j.
      * For p valid years are 1-6
