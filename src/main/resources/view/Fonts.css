@@ -42,3 +42,66 @@
     font-family: "Open Sans SemiBold Italic";
     src: url("/fonts/open-sans/OpenSans-SemiBoldItalic.ttf");
 }
+
+@font-face {
+    font-family: 'SF UI Display Ultralight';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/sf-ui-display/sf-ui-display-ultralight.otf");
+}
+
+
+@font-face {
+    font-family: 'SF UI Display Thin';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/sf-ui-display/sf-ui-display-thin.otf");
+}
+
+
+@font-face {
+    font-family: 'SF UI Display Light';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/sf-ui-display/sf-ui-display-light.otf");
+}
+
+
+@font-face {
+    font-family: 'SF UI Display Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/sf-ui-display/sf-ui-display-medium.otf");
+}
+
+
+@font-face {
+    font-family: 'SF UI Display Semibold';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/sf-ui-display/sf-ui-display-semibold.otf");
+}
+
+
+@font-face {
+    font-family: 'SF UI Display Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/sf-ui-display/sf-ui-display-bold.otf");
+}
+
+
+@font-face {
+    font-family: 'SF UI Display Heavy';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/sf-ui-display/sf-ui-display-heavy.otf");
+}
+
+
+@font-face {
+    font-family: 'SF UI Display Black';
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/sf-ui-display/sf-ui-display-black.otf");
+}
