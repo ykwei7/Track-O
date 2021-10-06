@@ -53,7 +53,7 @@ public class Level {
         case 'j':
             return "JC " + secondChar;
         default:
-            return "";
+            return "Should not happen due to regex validation";
         }
     }
 

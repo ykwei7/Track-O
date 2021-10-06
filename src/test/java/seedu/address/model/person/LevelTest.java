@@ -46,5 +46,8 @@ public class LevelTest {
         // jc level
         assertEquals(Level.parse("j1"), "JC 1");
         assertEquals(Level.parse("j2"), "JC 2");
+
+        // invalid input
+        assertEquals(Level.parse("a3"), "Should not happen due to regex validation");
     }
 }
