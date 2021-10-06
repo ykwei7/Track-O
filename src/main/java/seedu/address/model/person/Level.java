@@ -33,20 +33,27 @@ public class Level {
         value = level;
     }
 
+    /**
+     * Returns the full string representation of an indexed education level.
+     * The String will be used for UI display.
+     *
+     * @param index The input education level.
+     * @return The education level spelt out in full.
+     */
     public static String parse(String index) {
         char[] splitByCharacter = index.toCharArray();
         char firstChar = splitByCharacter[0];
         char secondChar = splitByCharacter[1];
 
         switch (firstChar) {
-            case 'p':
-                return "Primary " + secondChar;
-            case 's':
-                return "Secondary " + secondChar;
-            case 'j':
-                return "JC " + secondChar;
-            default:
-                return "";
+        case 'p':
+            return "Primary " + secondChar;
+        case 's':
+            return "Secondary " + secondChar;
+        case 'j':
+            return "JC " + secondChar;
+        default:
+            return "";
         }
     }
 
