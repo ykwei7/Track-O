@@ -28,7 +28,7 @@ public class LevelTest {
         assertFalse(Level.isValidLevel(" ")); // spaces only
 
         // invalid level
-        assertFalse(Level.isValidLevel("@2"));
-        assertFalse(Level.isValidLevel("$5"));
+        assertFalse(Level.isValidLevel("p7"));
+        assertFalse(Level.isValidLevel("w4"));
     }
 }

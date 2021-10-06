@@ -9,15 +9,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Level {
 
-    public static final String MESSAGE_CONSTRAINTS = "Education level should only contain alphanumeric characters "
-            + "and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Education level should only contain the prefix [p, s, j], "
+            + "followed by the year of study eg. p2, s4, j1";
     /*
-     * The first character of the education level must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The first character has to be either p, s, j.
+     * The second character has to be 1-6.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[psj][1-6]";
 
     public final String value;
+
+    public final String index;
 
     /**
      * Constructs an {@code Level}.
@@ -27,7 +29,25 @@ public class Level {
     public Level(String level) {
         requireNonNull(level);
         checkArgument(isValidLevel(level), MESSAGE_CONSTRAINTS);
-        value = level;
+        index = level;
+        value = Level.parse(level);
+    }
+
+    public static String parse(String index) {
+        char[] splitByCharacter = index.toCharArray();
+        char firstChar = splitByCharacter[0];
+        char secondChar = splitByCharacter[1];
+
+        switch (firstChar) {
+            case 'p':
+                return "Primary " + secondChar;
+            case 's':
+                return "Secondary " + secondChar;
+            case 'j':
+                return "JC " + secondChar;
+            default:
+                return "";
+        }
     }
 
     /**
