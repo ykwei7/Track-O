@@ -29,8 +29,8 @@ public class Level {
     public Level(String level) {
         requireNonNull(level);
         checkArgument(isValidLevel(level), MESSAGE_CONSTRAINTS);
-        index = level;
-        value = Level.parse(level);
+        index = Level.parse(level);
+        value = level;
     }
 
     public static String parse(String index) {

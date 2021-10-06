@@ -2,13 +2,13 @@
   "persons": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "level": "pri 1",
+    "level": "p1",
     "address": "123, Jurong West Ave 6, #08-111",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "level": "pri 2",
+    "level": "p2",
     "address": "4th street"
   } ]
 }
