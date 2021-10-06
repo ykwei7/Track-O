@@ -73,7 +73,7 @@ public class Level {
 
     @Override
     public String toString() {
-        return value;
+        return Level.parse(value);
     }
 
     @Override
