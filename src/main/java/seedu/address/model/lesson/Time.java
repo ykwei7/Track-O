@@ -37,7 +37,7 @@ public class Time {
     public Time(DayOfWeek dayOfOccurrence, LocalTime startTime, LocalTime endTime) {
         requireAllNonNull(dayOfOccurrence, startTime, endTime);
         checkArgument(startTime.isBefore(endTime), MESSAGE_CONSTRAINTS_IMPROPER_TIME);
-        checkArgument(isValidDuration(startTime, endTime), MESSAGE_CONSTRAINTS_INVALID_DURATION);
+        checkArgument(isValidDuration(startTime, endTime, MINIMUM_DURATION), MESSAGE_CONSTRAINTS_INVALID_DURATION);
 
         this.dayOfOccurrence = dayOfOccurrence;
         this.startTime = startTime;
@@ -48,9 +48,9 @@ public class Time {
      * Returns true if the time interval between the given start time and the given end time
      * is at least the minimum duration.
      */
-    public boolean isValidDuration(LocalTime startTime, LocalTime endTime) {
+    public static boolean isValidDuration(LocalTime startTime, LocalTime endTime, long minDuration) {
         long duration = Duration.between(startTime, endTime).toMinutes();
-        return duration >= MINIMUM_DURATION;
+        return duration >= minDuration;
     }
 
     public DayOfWeek getDayOfOccurrence() {
