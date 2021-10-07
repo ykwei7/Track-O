@@ -24,7 +24,7 @@ public class Level {
 
     public final String value;
 
-    public final String index;
+    public final String stringRepresentation;
 
     /**
      * Constructs an {@code Level}.
@@ -34,7 +34,7 @@ public class Level {
     public Level(String level) {
         requireNonNull(level);
         checkArgument(isValidLevel(level), MESSAGE_CONSTRAINTS);
-        index = Level.parse(level);
+        stringRepresentation = Level.parse(level);
         value = level;
     }
 
@@ -73,19 +73,19 @@ public class Level {
 
     @Override
     public String toString() {
-        return value;
+        return stringRepresentation;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Level // instanceof handles nulls
-                && value.equals(((Level) other).value)); // state check
+                && stringRepresentation.equals(((Level) other).stringRepresentation)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return stringRepresentation.hashCode();
     }
 
 }

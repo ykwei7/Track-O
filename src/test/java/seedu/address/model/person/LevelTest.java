@@ -36,18 +36,18 @@ public class LevelTest {
     @Test
     public void parse() {
         // primary level
-        assertEquals(Level.parse("p3"), "Primary 3");
-        assertEquals(Level.parse("p5"), "Primary 5");
+        assertEquals("Primary 3", Level.parse("p3"));
+        assertEquals("Primary 5", Level.parse("p5"));
 
         // secondary level
-        assertEquals(Level.parse("s3"), "Secondary 3");
-        assertEquals(Level.parse("s4"), "Secondary 4");
+        assertEquals("Secondary 3", Level.parse("s3"));
+        assertEquals("Secondary 4", Level.parse("s4"));
 
         // jc level
-        assertEquals(Level.parse("j1"), "JC 1");
-        assertEquals(Level.parse("j2"), "JC 2");
+        assertEquals("JC 1", Level.parse("j1"));
+        assertEquals("JC 2", Level.parse("j2"));
 
         // invalid input
-        assertEquals(Level.parse("a3"), "Should not happen due to regex validation");
+        assertEquals("Should not happen due to regex validation", Level.parse("a3"));
     }
 }

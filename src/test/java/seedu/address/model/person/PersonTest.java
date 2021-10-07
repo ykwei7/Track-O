@@ -27,10 +27,10 @@ public class PersonTest {
     @Test
     public void displayEducationLevelInFull() {
         // display value of p1 to Primary 1
-        assertEquals(ALICE.getLevel().index, "Primary 1");
+        assertEquals("Primary 1", ALICE.getLevel().stringRepresentation);
 
         // display value of p2 to Primary 2
-        assertEquals(BOB.getLevel().index, "Secondary 2");
+        assertEquals("Secondary 2", BOB.getLevel().stringRepresentation);
     }
 
     @Test
