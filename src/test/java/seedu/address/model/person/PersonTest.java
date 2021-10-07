@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -21,6 +22,15 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    public void displayEducationLevelInFull() {
+        // display value of p1 to Primary 1
+        assertEquals("Primary 1", ALICE.getLevel().stringRepresentation);
+
+        // display value of p2 to Primary 2
+        assertEquals("Secondary 2", BOB.getLevel().stringRepresentation);
     }
 
     @Test

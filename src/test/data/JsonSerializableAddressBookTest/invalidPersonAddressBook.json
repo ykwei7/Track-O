@@ -2,7 +2,7 @@
   "persons": [ {
     "name": "Hans Muster",
     "phone": "9482424",
-    "level": "@2",
+    "level": "p8",
     "address": "4th street"
   } ]
 }
