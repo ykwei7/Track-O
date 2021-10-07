@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -28,7 +29,25 @@ public class LevelTest {
         assertFalse(Level.isValidLevel(" ")); // spaces only
 
         // invalid level
-        assertFalse(Level.isValidLevel("@2"));
-        assertFalse(Level.isValidLevel("$5"));
+        assertFalse(Level.isValidLevel("p7"));
+        assertFalse(Level.isValidLevel("w4"));
+    }
+
+    @Test
+    public void parse() {
+        // primary level
+        assertEquals("Primary 3", Level.parse("p3"));
+        assertEquals("Primary 5", Level.parse("p5"));
+
+        // secondary level
+        assertEquals("Secondary 3", Level.parse("s3"));
+        assertEquals("Secondary 4", Level.parse("s4"));
+
+        // jc level
+        assertEquals("JC 1", Level.parse("j1"));
+        assertEquals("JC 2", Level.parse("j2"));
+
+        // invalid input
+        assertEquals("Should not happen due to regex validation", Level.parse("a3"));
     }
 }
