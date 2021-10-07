@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -7,6 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Lesson> lessons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -34,6 +37,27 @@ public class Person {
         this.level = level;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Level level, Address address, Set<Tag> tags, Set<Lesson> lessons) {
+        requireAllNonNull(name, phone, level, address, tags, lessons);
+        this.name = name;
+        this.phone = phone;
+        this.level = level;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.lessons.addAll(lessons);
+    }
+
+    /**
+     * Adds a lesson to the person.
+     */
+    public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        this.lessons.add(lesson);
     }
 
     public Name getName() {
@@ -58,6 +82,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
     }
 
     /**
@@ -98,7 +130,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, level, address, tags);
+        return Objects.hash(name, phone, level, address, tags, lessons);
     }
 
     @Override
@@ -115,6 +147,12 @@ public class Person {
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
+            tags.forEach(builder::append);
+        }
+
+        Set<Lesson> lessons = getLessons();
+        if (!lessons.isEmpty()) {
+            builder.append("; Lessons: ");
             tags.forEach(builder::append);
         }
         return builder.toString();

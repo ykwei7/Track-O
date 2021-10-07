@@ -9,8 +9,8 @@ import java.util.Objects;
  */
 public class Lesson {
 
-    private final Subject subject;
-    private final Time time;
+    private Subject subject;
+    private Time time;
 
     /**
      * Constructs a {@code Lesson}.
@@ -22,6 +22,9 @@ public class Lesson {
         requireAllNonNull(subject, time);
         this.subject = subject;
         this.time = time;
+    }
+
+    public Lesson() {
     }
 
     public Subject getSubject() {

@@ -14,7 +14,7 @@ public class Subject {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String value;
+    public String value;
 
     /**
      * Constructs a {@code Subject}.
@@ -25,6 +25,9 @@ public class Subject {
         requireNonNull(subject);
         checkArgument(isValidSubject(subject), MESSAGE_CONSTRAINTS);
         value = subject;
+    }
+
+    public Subject() {
     }
 
     /**

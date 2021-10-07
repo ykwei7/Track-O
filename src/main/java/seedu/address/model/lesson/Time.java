@@ -10,6 +10,8 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * Represents the Time of a particular Lesson.
  */
@@ -17,15 +19,23 @@ public class Time {
 
     public static final long MINIMUM_DURATION = 10;
 
+    public static final String MESSAGE_CONSTRAINTS_INVALID_DAY =
+            "Day of week should be included in full";
+
+    public static final String MESSAGE_CONSTRAINTS_INVALID_LOCALTIME =
+            "The start or end time should be in HH:MM format";
+
     public static final String MESSAGE_CONSTRAINTS_IMPROPER_TIME =
             "Start time should be before end time";
 
     public static final String MESSAGE_CONSTRAINTS_INVALID_DURATION =
             "Lesson duration must be at least " + MINIMUM_DURATION + " minutes";
 
-    private final DayOfWeek dayOfOccurrence;
-    private final LocalTime startTime;
-    private final LocalTime endTime;
+    private DayOfWeek dayOfOccurrence;
+    @JsonFormat(pattern="HH:mm")
+    private LocalTime startTime;
+    @JsonFormat(pattern="HH:mm")
+    private LocalTime endTime;
 
     /**
      * Constructs a {@code Time}.
@@ -42,6 +52,9 @@ public class Time {
         this.dayOfOccurrence = dayOfOccurrence;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    public Time() {
     }
 
     /**
