@@ -16,61 +16,61 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.tutee.Tutee;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Tutee} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalTutees {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+    public static final Tutee ALICE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLevel("p1")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+    public static final Tutee BENSON = new TuteeBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withLevel("p2").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+    public static final Tutee CARL = new TuteeBuilder().withName("Carl Kurz").withPhone("95352563")
             .withLevel("p3").withAddress("wall street").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+    public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
             .withLevel("p4").withAddress("10th street").withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("9482224")
             .withLevel("p5").withAddress("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withLevel("p6").withAddress("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
             .withLevel("p5").withAddress("4th street").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Tutee HOON = new TuteeBuilder().withName("Hoon Meier").withPhone("8482424")
             .withLevel("p5").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Tutee IDA = new TuteeBuilder().withName("Ida Mueller").withPhone("8482131")
             .withLevel("p4").withAddress("chicago ave").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+    // Manually added - Tutee's details found in {@code CommandTestUtil}
+    public static final Tutee AMY = new TuteeBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withLevel(VALID_LEVEL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+    public static final Tutee BOB = new TuteeBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withLevel(VALID_LEVEL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalTutees() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical tutees.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+        for (Tutee tutee : getTypicalTutees()) {
+            ab.addTutee(tutee);
         }
         return ab;
     }
 
-    public static List<Person> getTypicalPersons() {
+    public static List<Tutee> getTypicalTutees() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

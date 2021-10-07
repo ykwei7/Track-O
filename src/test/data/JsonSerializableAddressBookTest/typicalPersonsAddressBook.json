@@ -1,6 +1,6 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
+  "_comment": "AddressBook save file which contains the same Tutee values as in TypicalTutees#getTypicalAddressBook()",
+  "tutees" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "level" : "p1",

@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
+import static seedu.address.testutil.TypicalTutees.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -27,10 +27,10 @@ public class GetCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person retrievedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        GetCommand getCommand = new GetCommand(INDEX_FIRST_PERSON);
+        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        GetCommand getCommand = new GetCommand(INDEX_FIRST_TUTEE);
 
-        String expectedMessage = String.format(GetCommand.MESSAGE_GET_PERSON_SUCCESS, retrievedPerson);
+        String expectedMessage = String.format(GetCommand.MESSAGE_GET_TUTEE_SUCCESS, retrievedTutee);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -39,22 +39,22 @@ public class GetCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size() + 1);
         GetCommand getCommand = new GetCommand(outOfBoundIndex);
 
-        assertCommandFailure(getCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(getCommand, model, Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        GetCommand getFirstCommand = new GetCommand(INDEX_FIRST_PERSON);
-        GetCommand getSecondCommand = new GetCommand(INDEX_SECOND_PERSON);
+        GetCommand getFirstCommand = new GetCommand(INDEX_FIRST_TUTEE);
+        GetCommand getSecondCommand = new GetCommand(INDEX_SECOND_TUTEE);
 
         // same object -> returns true
         assertTrue(getFirstCommand.equals(getFirstCommand));
 
         // same values -> returns true
-        GetCommand getFirstCommandCopy = new GetCommand(INDEX_FIRST_PERSON);
+        GetCommand getFirstCommandCopy = new GetCommand(INDEX_FIRST_TUTEE);
         assertTrue(getFirstCommand.equals(getFirstCommandCopy));
 
         // different types -> returns false
@@ -63,7 +63,7 @@ public class GetCommandTest {
         // null -> returns false
         assertFalse(getFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different tutee -> returns false
         assertFalse(getFirstCommand.equals(getSecondCommand));
     }
 
