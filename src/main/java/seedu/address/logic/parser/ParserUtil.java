@@ -137,7 +137,7 @@ public class ParserUtil {
         requireNonNull(dayOfWeek);
         String trimmedDayOfWeek = dayOfWeek.trim();
         try {
-            return DayOfWeek.valueOf(trimmedDayOfWeek);
+            return DayOfWeek.valueOf(trimmedDayOfWeek.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS_INVALID_DAY);
         }
