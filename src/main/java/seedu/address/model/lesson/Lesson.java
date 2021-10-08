@@ -24,6 +24,10 @@ public class Lesson {
         this.time = time;
     }
 
+    /**
+     * Default constructor to aid Jackson in deserializing the class.
+     * Solution adapted from https://www.baeldung.com/jackson-exception#2-the-solution
+     */
     public Lesson() {
     }
 
