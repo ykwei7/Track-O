@@ -43,7 +43,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Level level, Address address, Set<Tag> tags, Set<Lesson> lessons) {
-        requireAllNonNull(name, phone, level, address, tags, lessons);
+        requireAllNonNull(name, phone, level, address, tags);
         this.name = name;
         this.phone = phone;
         this.level = level;
@@ -153,7 +153,7 @@ public class Person {
         Set<Lesson> lessons = getLessons();
         if (!lessons.isEmpty()) {
             builder.append("; Lessons: ");
-            tags.forEach(builder::append);
+            lessons.forEach(builder::append);
         }
         return builder.toString();
     }

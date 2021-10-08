@@ -32,9 +32,9 @@ public class Time {
             "Lesson duration must be at least " + MINIMUM_DURATION + " minutes";
 
     private DayOfWeek dayOfOccurrence;
-    @JsonFormat(pattern="HH:mm")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
-    @JsonFormat(pattern="HH:mm")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime endTime;
 
     /**

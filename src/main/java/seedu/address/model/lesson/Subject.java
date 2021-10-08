@@ -14,7 +14,7 @@ public class Subject {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public String value;
+    private String value;
 
     /**
      * Constructs a {@code Subject}.

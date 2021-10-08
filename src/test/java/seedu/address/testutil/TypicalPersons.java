@@ -28,7 +28,7 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    private static final Lesson lesson = new Lesson(
+    public static final Lesson lesson = new Lesson(
             new Subject("Physics"),
             new Time(DayOfWeek.SUNDAY, LocalTime.parse("12:30"), LocalTime.parse("14:30")));
 

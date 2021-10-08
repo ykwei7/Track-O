@@ -61,7 +61,7 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return subject + " " + time;
+        return "[" + subject + " " + time + "]";
     }
 
 }
