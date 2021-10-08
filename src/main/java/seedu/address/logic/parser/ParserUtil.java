@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -13,7 +12,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
@@ -130,19 +128,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses the parameters needed to construct Lesson into a {@code Lesson}.
-     *
-     * @throws ParseException if the given parameters are invalid.
-     */
-    public static Lesson parseLesson(String dayOfWeek, String startTime,
-                                     String endTime, String subject) throws ParseException {
-        requireAllNonNull(dayOfWeek, startTime, endTime, subject);
-        return new Lesson(
-                parseSubject(subject),
-                parseTime(dayOfWeek, startTime, endTime));
-    }
-
-    /**
      * Parses a {@code String dayOfWeek} into a {@code DayOfWeek}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -159,31 +144,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses the parameters needed to construct Time into a {@code Time}.
+     * Parses a {@code String localTime} into a {@code LocalTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code time} is invalid.
+     * @throws ParseException if the given {@code localTime} is invalid.
      */
-    public static Time parseTime(String dayOfWeek, String startTime, String endTime) throws ParseException {
-        requireAllNonNull(dayOfWeek, startTime, endTime);
-        DayOfWeek parsedDayOfWeek = parseDayOfWeek(dayOfWeek);
-        LocalTime parsedStartTime;
-        LocalTime parsedEndTime;
-
-        String trimmedStartTime = startTime.trim();
-        String trimmedEndTime = endTime.trim();
+    public static LocalTime parseLocalTime(String localTime) throws ParseException {
+        requireNonNull(localTime);
+        String trimmedLocalTime = localTime.trim();
 
         try {
-            parsedStartTime = LocalTime.parse(trimmedStartTime);
-            parsedEndTime = LocalTime.parse(trimmedEndTime);
+            return LocalTime.parse(trimmedLocalTime);
         } catch (DateTimeParseException e) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS_INVALID_LOCALTIME);
         }
-
-        if (!Time.isValidDuration(parsedStartTime, parsedEndTime, Time.MINIMUM_DURATION)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Time(parsedDayOfWeek, parsedStartTime, parsedEndTime);
     }
 
     /**
