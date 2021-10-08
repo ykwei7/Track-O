@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Level;
@@ -32,7 +33,7 @@ class JsonAdaptedPerson {
     private final String level;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
+    private final List<String> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +42,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("level") String level, @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                             @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+                             @JsonProperty("lessons") List<String> lessons) {
         this.name = name;
         this.phone = phone;
         this.level = level;
@@ -67,7 +68,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         Set<Lesson> sourceLessons = source.getLessons();
         for (Lesson lesson : sourceLessons) {
-            lessons.add(new JsonAdaptedLesson(lesson));
+            lessons.add(JsonUtil.toJsonString(lesson));
         }
     }
 
@@ -83,8 +84,8 @@ class JsonAdaptedPerson {
         }
 
         final List<Lesson> personLessons = new ArrayList<>();
-        for (JsonAdaptedLesson lesson : lessons) {
-            personLessons.add(lesson.toModelType());
+        for (String lesson : lessons) {
+            personLessons.add(JsonUtil.fromJsonString(lesson, Lesson.class));
         }
 
         if (name == null) {
@@ -121,7 +122,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Lesson> modelLessons = new HashSet<>(personLessons);
-        return new Person(modelName, modelPhone, modelLevel, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelLevel, modelAddress, modelTags, modelLessons);
     }
 
 }
