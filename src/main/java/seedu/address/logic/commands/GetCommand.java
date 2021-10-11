@@ -25,8 +25,7 @@ public class GetCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     //Displays additional information field of individual
-    public static final String MESSAGE_GET_PERSON_SUCCESS = "Retrieved Tutee: %1$s\n"
-            + "Remarks: [To be added with remark field]";
+    public static final String MESSAGE_GET_PERSON_SUCCESS = "Retrieved Tutee: %1$s\n";
 
     private final Index targetIndex;
 
