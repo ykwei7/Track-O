@@ -25,13 +25,13 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Level("p1"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_REMARK,
+                new Address("Blk 30 Geylang Street 29, #06-40"), new Remark("Good progress!"),
                 getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Level("p2"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK,
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Remark("Needs to work on math"),
                 getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Level("p3"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_REMARK,
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Remark("Needs to work on English"),
                 getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Level("p4"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_REMARK,
