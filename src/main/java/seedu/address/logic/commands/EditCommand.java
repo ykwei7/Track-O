@@ -45,7 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_LEVEL + "johndoe@example.com";
+            + PREFIX_LEVEL + "p5";
 
     public static final String MESSAGE_EDIT_TUTEE_SUCCESS = "Edited Tutee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
