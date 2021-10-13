@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.TrackO;
 
 /**
- * Clears the address book.
+ * Clears Track-O.
  */
 public class ClearCommand extends Command {
 
@@ -16,13 +16,13 @@ public class ClearCommand extends Command {
             + "replacing it with an empty list.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Track-O has been cleared!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setTrackO(new TrackO());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

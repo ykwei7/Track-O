@@ -11,34 +11,34 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.tutee.Tutee;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of Track-O data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TrackO trackO;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Tutee> filteredTutees;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given Track-O and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTrackO trackO, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(trackO, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Track-O: " + trackO + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.trackO = new TrackO(trackO);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTutees = new FilteredList<>(this.trackO.getTuteeList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TrackO(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +66,67 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getTrackOFilePath() {
+        return userPrefs.getTrackOFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setTrackOFilePath(Path trackOFilePath) {
+        requireNonNull(trackOFilePath);
+        userPrefs.setTrackOFilePath(trackOFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== TrackO ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setTrackO(ReadOnlyTrackO trackO) {
+        this.trackO.resetData(trackO);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyTrackO getTrackO() {
+        return trackO;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasTutee(Tutee tutee) {
+        requireNonNull(tutee);
+        return trackO.hasTutee(tutee);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteTutee(Tutee target) {
+        trackO.removeTutee(target);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addTutee(Tutee tutee) {
+        trackO.addTutee(tutee);
+        updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setTutee(Tutee target, Tutee editedTutee) {
+        requireAllNonNull(target, editedTutee);
+
+        trackO.setTutee(target, editedTutee);
+    }
+
+    //=========== Filtered Tutee List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Tutee} backed by the internal list of
+     * {@code versionedTrackO}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Tutee> getFilteredTuteeList() {
+        return filteredTutees;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredTuteeList(Predicate<Tutee> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredTutees.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +143,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return trackO.equals(other.trackO)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredTutees.equals(other.filteredTutees);
     }
 
 }

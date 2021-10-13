@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Tutee> PREDICATE_SHOW_ALL_TUTEES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +35,53 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Track-O file path.
      */
-    Path getAddressBookFilePath();
+    Path getTrackOFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Track-O file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTrackOFilePath(Path trackOFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Track-O data with the data in {@code trackO}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setTrackO(ReadOnlyTrackO trackO);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns Track-O */
+    ReadOnlyTrackO getTrackO();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a tutee with the same identity as {@code tutee} exists in Track-O.
      */
-    boolean hasPerson(Person person);
+    boolean hasTutee(Tutee tutee);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given tutee.
+     * The tutee must exist in Track-O.
      */
-    void deletePerson(Person target);
+    void deleteTutee(Tutee target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given tutee.
+     * {@code tutee} must not already exist in Track-O.
      */
-    void addPerson(Person person);
+    void addTutee(Tutee tutee);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given tutee {@code target} with {@code editedTutee}.
+     * {@code target} must exist in Track-O.
+     * The tutee identity of {@code editedTutee} must not be the same as another existing tutee in Track-O.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setTutee(Tutee target, Tutee editedTutee);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered tutee list */
+    ObservableList<Tutee> getFilteredTuteeList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered tutee list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredTuteeList(Predicate<Tutee> predicate);
 }

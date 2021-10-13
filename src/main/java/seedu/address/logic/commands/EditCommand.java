@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,23 +19,23 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.Address;
+import seedu.address.model.tutee.Level;
+import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Phone;
+import seedu.address.model.tutee.Remark;
+import seedu.address.model.tutee.Tutee;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing tutee in Track-O.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the tutee identified "
+            + "by the index number used in the displayed tutee list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -47,61 +47,61 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_LEVEL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_TUTEE_SUCCESS = "Edited Tutee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TUTEE = "This tutee already exists in Track-O.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditTuteeDescriptor editTuteeDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the tutee in the filtered tutee list to edit
+     * @param editTuteeDescriptor details to edit the tutee with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditTuteeDescriptor editTuteeDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editTuteeDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editTuteeDescriptor = new EditTuteeDescriptor(editTuteeDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Tutee> lastShownList = model.getFilteredTuteeList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Tutee tuteeToEdit = lastShownList.get(index.getZeroBased());
+        Tutee editedTutee = createEditedTutee(tuteeToEdit, editTuteeDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!tuteeToEdit.isSameTutee(editedTutee) && model.hasTutee(editedTutee)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TUTEE);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.setTutee(tuteeToEdit, editedTutee);
+        model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
+        return new CommandResult(String.format(MESSAGE_EDIT_TUTEE_SUCCESS, editedTutee));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Tutee} with the details of {@code tuteeToEdit}
+     * edited with {@code editTuteeDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Tutee createEditedTutee(Tutee tuteeToEdit, EditTuteeDescriptor editTuteeDescriptor) {
+        assert tuteeToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Level updatedLevel = editPersonDescriptor.getLevel().orElse(personToEdit.getLevel());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editTuteeDescriptor.getName().orElse(tuteeToEdit.getName());
+        Phone updatedPhone = editTuteeDescriptor.getPhone().orElse(tuteeToEdit.getPhone());
+        Level updatedLevel = editTuteeDescriptor.getLevel().orElse(tuteeToEdit.getLevel());
+        Address updatedAddress = editTuteeDescriptor.getAddress().orElse(tuteeToEdit.getAddress());
+        Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
+        Set<Tag> updatedTags = editTuteeDescriptor.getTags().orElse(tuteeToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedLevel, updatedAddress, updatedRemark, updatedTags);
+        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress, updatedRemark, updatedTags);
     }
 
     @Override
@@ -119,27 +119,27 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editTuteeDescriptor.equals(e.editTuteeDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the tutee with. Each non-empty field value will replace the
+     * corresponding field value of the tutee.
      */
-    public static class EditPersonDescriptor {
+    public static class EditTuteeDescriptor {
         private Name name;
         private Phone phone;
         private Level level;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditTuteeDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditTuteeDescriptor(EditTuteeDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setLevel(toCopy.level);
@@ -211,12 +211,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditTuteeDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditTuteeDescriptor e = (EditTuteeDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
