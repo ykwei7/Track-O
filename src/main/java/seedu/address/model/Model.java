@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Track-O file path.
      */
-    Path getAddressBookFilePath();
+    Path getTrackOFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Track-O file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTrackOFilePath(Path trackOFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Track-O data with the data in {@code trackO}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setTrackO(ReadOnlyTrackO trackO);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns Track-O */
+    ReadOnlyTrackO getTrackO();
 
     /**
-     * Returns true if a tutee with the same identity as {@code tutee} exists in the address book.
+     * Returns true if a tutee with the same identity as {@code tutee} exists in Track-O.
      */
     boolean hasTutee(Tutee tutee);
 
     /**
      * Deletes the given tutee.
-     * The tutee must exist in the address book.
+     * The tutee must exist in Track-O.
      */
     void deleteTutee(Tutee target);
 
     /**
      * Adds the given tutee.
-     * {@code tutee} must not already exist in the address book.
+     * {@code tutee} must not already exist in Track-O.
      */
     void addTutee(Tutee tutee);
 
     /**
      * Replaces the given tutee {@code target} with {@code editedTutee}.
-     * {@code target} must exist in the address book.
-     * The tutee identity of {@code editedTutee} must not be the same as another existing tutee in the address book.
+     * {@code target} must exist in Track-O.
+     * The tutee identity of {@code editedTutee} must not be the same as another existing tutee in Track-O.
      */
     void setTutee(Tutee target, Tutee editedTutee);
 

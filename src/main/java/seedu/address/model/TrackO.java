@@ -12,7 +12,7 @@ import seedu.address.model.tutee.UniqueTuteeList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameTutee comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TrackO implements ReadOnlyTrackO {
 
     private final UniqueTuteeList tutees;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tutees = new UniqueTuteeList();
     }
 
-    public AddressBook() {}
+    public TrackO() {}
 
     /**
-     * Creates an AddressBook using the Tutees in the {@code toBeCopied}
+     * Creates an Track-O using the Tutees in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TrackO(ReadOnlyTrackO toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code TrackO} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTrackO newData) {
         requireNonNull(newData);
 
         setTutees(newData.getTuteeList());
@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// tutee-level operations
 
     /**
-     * Returns true if a tutee with the same identity as {@code tutee} exists in the address book.
+     * Returns true if a tutee with the same identity as {@code tutee} exists in Track-O.
      */
     public boolean hasTutee(Tutee tutee) {
         requireNonNull(tutee);
@@ -67,8 +67,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a tutee to the address book.
-     * The tutee must not already exist in the address book.
+     * Adds a tutee to Track-O.
+     * The tutee must not already exist in Track-O.
      */
     public void addTutee(Tutee p) {
         tutees.add(p);
@@ -76,8 +76,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given tutee {@code target} in the list with {@code editedTutee}.
-     * {@code target} must exist in the address book.
-     * The tutee identity of {@code editedTutee} must not be the same as another existing tutee in the address book.
+     * {@code target} must exist in Track-O.
+     * The tutee identity of {@code editedTutee} must not be the same as another existing tutee in Track-O.
      */
     public void setTutee(Tutee target, Tutee editedTutee) {
         requireNonNull(editedTutee);
@@ -86,8 +86,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code TrackO}.
+     * {@code key} must exist in Track-O.
      */
     public void removeTutee(Tutee key) {
         tutees.remove(key);
@@ -109,8 +109,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && tutees.equals(((AddressBook) other).tutees));
+                || (other instanceof TrackO // instanceof handles nulls
+                && tutees.equals(((TrackO) other).tutees));
     }
 
     @Override

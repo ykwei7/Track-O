@@ -19,15 +19,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
-import seedu.address.model.tutee.Tutee;
 import seedu.address.model.tutee.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.Remark;
+import seedu.address.model.tutee.Tutee;
 
 /**
- * Edits the details of an existing tutee in the address book.
+ * Edits the details of an existing tutee in Track-O.
  */
 public class EditCommand extends Command {
 
@@ -48,7 +49,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TUTEE_SUCCESS = "Edited Tutee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TUTEE = "This tutee already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TUTEE = "This tutee already exists in Track-O.";
 
     private final Index index;
     private final EditTuteeDescriptor editTuteeDescriptor;
@@ -97,9 +98,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editTuteeDescriptor.getPhone().orElse(tuteeToEdit.getPhone());
         Level updatedLevel = editTuteeDescriptor.getLevel().orElse(tuteeToEdit.getLevel());
         Address updatedAddress = editTuteeDescriptor.getAddress().orElse(tuteeToEdit.getAddress());
+        Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editTuteeDescriptor.getTags().orElse(tuteeToEdit.getTags());
 
-        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress, updatedTags);
+        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress, updatedRemark, updatedTags);
     }
 
     @Override

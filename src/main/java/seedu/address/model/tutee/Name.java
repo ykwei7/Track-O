@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tutee's name in the address book.
+ * Represents a Tutee's name in Track-O.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

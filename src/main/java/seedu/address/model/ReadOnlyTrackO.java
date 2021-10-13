@@ -4,9 +4,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tutee.Tutee;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of Track-O
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyTrackO {
 
     /**
      * Returns an unmodifiable view of the tutees list.

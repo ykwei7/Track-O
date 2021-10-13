@@ -9,52 +9,52 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.TrackO;
+import seedu.address.model.ReadOnlyTrackO;
 import seedu.address.model.tutee.Tutee;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable Track-O that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "tracko")
+class JsonSerializableTrackO {
 
     public static final String MESSAGE_DUPLICATE_TUTEE = "Tutees list contains duplicate tutee(s).";
 
     private final List<JsonAdaptedTutee> tutees = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given tutees.
+     * Constructs a {@code JsonSerializableTrackO} with the given tutees.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("tutees") List<JsonAdaptedTutee> tutees) {
+    public JsonSerializableTrackO(@JsonProperty("tutees") List<JsonAdaptedTutee> tutees) {
         this.tutees.addAll(tutees);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyTrackO} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableTrackO}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableTrackO(ReadOnlyTrackO source) {
         tutees.addAll(source.getTuteeList().stream().map(JsonAdaptedTutee::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this Track-O into the model's {@code TrackO} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public TrackO toModelType() throws IllegalValueException {
+        TrackO trackO = new TrackO();
         for (JsonAdaptedTutee jsonAdaptedTutee : tutees) {
             Tutee tutee = jsonAdaptedTutee.toModelType();
-            if (addressBook.hasTutee(tutee)) {
+            if (trackO.hasTutee(tutee)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TUTEE);
             }
-            addressBook.addTutee(tutee);
+            trackO.addTutee(tutee);
         }
-        return addressBook;
+        return trackO;
     }
 
 }

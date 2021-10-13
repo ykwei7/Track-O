@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Tutee in the address book.
+ * Represents a Tutee in Track-O.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Tutee {
@@ -22,17 +22,19 @@ public class Tutee {
 
     // Data fields
     private final Address address;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Tutee(Name name, Phone phone, Level level, Address address, Set<Tag> tags) {
+    public Tutee(Name name, Phone phone, Level level, Address address, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, level, address, tags);
         this.name = name;
         this.phone = phone;
         this.level = level;
         this.address = address;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +53,11 @@ public class Tutee {
     public Address getAddress() {
         return address;
     }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -105,18 +112,22 @@ public class Tutee {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
+                .append("\nPhone: ")
                 .append(getPhone())
-                .append("; Level: ")
+                .append("\nLevel: ")
                 .append(getLevel())
-                .append("; Address: ")
+                .append("\nAddress: ")
                 .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("\nTags: ");
             tags.forEach(builder::append);
         }
+
+        builder.append("\nRemark: ")
+                .append(getRemark());
+
         return builder.toString();
     }
 

@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tutee.Tutee;
 
 /**
- * Gets a tutee identified using it's displayed index from the address book and
+ * Gets a tutee identified using it's displayed index from Track-O and
  * displays additional information on console
  */
 public class GetCommand extends Command {

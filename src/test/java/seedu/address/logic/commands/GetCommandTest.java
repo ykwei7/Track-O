@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
-import static seedu.address.testutil.TypicalTutees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ import seedu.address.model.tutee.Tutee;
  */
 public class GetCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -32,7 +32,7 @@ public class GetCommandTest {
 
         String expectedMessage = String.format(GetCommand.MESSAGE_GET_TUTEE_SUCCESS, retrievedTutee);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
 
         assertCommandSuccess(getCommand, model, expectedMessage, expectedModel);
     }

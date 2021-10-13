@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTuteeAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
-import static seedu.address.testutil.TypicalTutees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ import seedu.address.model.tutee.Tutee;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_TUTEE_SUCCESS, tuteeToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
         expectedModel.deleteTutee(tuteeToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_TUTEE_SUCCESS, tuteeToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
         expectedModel.deleteTutee(tuteeToDelete);
         showNoTutee(expectedModel);
 
@@ -68,8 +68,8 @@ public class DeleteCommandTest {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
 
         Index outOfBoundIndex = INDEX_SECOND_TUTEE;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getTuteeList().size());
+        // ensures that outOfBoundIndex is still in bounds of Track-O list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackO().getTuteeList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 

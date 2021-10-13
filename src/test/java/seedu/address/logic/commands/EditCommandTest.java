@@ -12,14 +12,14 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTuteeAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
-import static seedu.address.testutil.TypicalTutees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditTuteeDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TrackO;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -32,7 +32,7 @@ import seedu.address.testutil.TuteeBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -42,7 +42,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTEE_SUCCESS, editedTutee);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
         expectedModel.setTutee(model.getFilteredTuteeList().get(0), editedTutee);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -63,7 +63,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTEE_SUCCESS, editedTutee);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
         expectedModel.setTutee(lastTutee, editedTutee);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTEE_SUCCESS, editedTutee);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -92,7 +92,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTEE_SUCCESS, editedTutee);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
         expectedModel.setTutee(model.getFilteredTuteeList().get(0), editedTutee);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -111,8 +111,8 @@ public class EditCommandTest {
     public void execute_duplicateTuteeFilteredList_failure() {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
 
-        // edit tutee in filtered list into a duplicate in address book
-        Tutee tuteeInList = model.getAddressBook().getTuteeList().get(INDEX_SECOND_TUTEE.getZeroBased());
+        // edit tutee in filtered list into a duplicate in Track-O
+        Tutee tuteeInList = model.getTrackO().getTuteeList().get(INDEX_SECOND_TUTEE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_TUTEE,
                 new EditTuteeDescriptorBuilder(tuteeInList).build());
 
@@ -130,14 +130,14 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of Track-O
      */
     @Test
     public void execute_invalidTuteeIndexFilteredList_failure() {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
         Index outOfBoundIndex = INDEX_SECOND_TUTEE;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getTuteeList().size());
+        // ensures that outOfBoundIndex is still in bounds of Track-O list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackO().getTuteeList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditTuteeDescriptorBuilder().withName(VALID_NAME_BOB).build());

@@ -14,31 +14,31 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tutee.Tutee;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of Track-O data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TrackO trackO;
     private final UserPrefs userPrefs;
     private final FilteredList<Tutee> filteredTutees;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given Track-O and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTrackO trackO, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(trackO, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Track-O: " + trackO + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.trackO = new TrackO(trackO);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTutees = new FilteredList<>(this.addressBook.getTuteeList());
+        filteredTutees = new FilteredList<>(this.trackO.getTuteeList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TrackO(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,42 +66,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getTrackOFilePath() {
+        return userPrefs.getTrackOFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setTrackOFilePath(Path trackOFilePath) {
+        requireNonNull(trackOFilePath);
+        userPrefs.setTrackOFilePath(trackOFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== TrackO ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setTrackO(ReadOnlyTrackO trackO) {
+        this.trackO.resetData(trackO);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyTrackO getTrackO() {
+        return trackO;
     }
 
     @Override
     public boolean hasTutee(Tutee tutee) {
         requireNonNull(tutee);
-        return addressBook.hasTutee(tutee);
+        return trackO.hasTutee(tutee);
     }
 
     @Override
     public void deleteTutee(Tutee target) {
-        addressBook.removeTutee(target);
+        trackO.removeTutee(target);
     }
 
     @Override
     public void addTutee(Tutee tutee) {
-        addressBook.addTutee(tutee);
+        trackO.addTutee(tutee);
         updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
     }
 
@@ -109,14 +109,14 @@ public class ModelManager implements Model {
     public void setTutee(Tutee target, Tutee editedTutee) {
         requireAllNonNull(target, editedTutee);
 
-        addressBook.setTutee(target, editedTutee);
+        trackO.setTutee(target, editedTutee);
     }
 
     //=========== Filtered Tutee List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Tutee} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedTrackO}
      */
     @Override
     public ObservableList<Tutee> getFilteredTuteeList() {
@@ -143,7 +143,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return trackO.equals(other.trackO)
                 && userPrefs.equals(other.userPrefs)
                 && filteredTutees.equals(other.filteredTutees);
     }

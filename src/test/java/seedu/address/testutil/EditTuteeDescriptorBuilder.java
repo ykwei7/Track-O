@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditTuteeDescriptor;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
-import seedu.address.model.tutee.Tutee;
 import seedu.address.model.tutee.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * A utility class to help with building EditTuteeDescriptor objects.

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalTutees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,14 +22,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
     }
 
     @Test
     public void execute_newTutee_success() {
         Tutee validTutee = new TuteeBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
         expectedModel.addTutee(validTutee);
 
         assertCommandSuccess(new AddCommand(validTutee), model,
@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateTutee_throwsCommandException() {
-        Tutee tuteeInList = model.getAddressBook().getTuteeList().get(0);
+        Tutee tuteeInList = model.getTrackO().getTuteeList().get(0);
         assertCommandFailure(new AddCommand(tuteeInList), model, AddCommand.MESSAGE_DUPLICATE_TUTEE);
     }
 

@@ -4,8 +4,8 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniqueTuteeList
-AddressBook *-right-> "1" UniqueTagList
+TrackO *-right-> "1" UniqueTuteeList
+TrackO *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniqueTuteeList
 UniqueTagList -[hidden]down- UniqueTuteeList
 

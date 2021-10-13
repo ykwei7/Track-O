@@ -36,11 +36,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTuteeDescriptor;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditTuteeDescriptorBuilder;
 
 public class EditCommandParserTest {

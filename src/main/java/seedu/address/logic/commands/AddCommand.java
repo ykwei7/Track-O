@@ -12,13 +12,13 @@ import seedu.address.model.Model;
 import seedu.address.model.tutee.Tutee;
 
 /**
- * Adds a tutee to the address book.
+ * Adds a tutee to Track-O.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutee to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutee to Track-O. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New tutee added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TUTEE = "This tutee already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TUTEE = "This tutee already exists in Track-O";
 
     private final Tutee toAdd;
 

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.TrackO;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -30,6 +30,7 @@ public class TypicalTutees {
     public static final Tutee BENSON = new TuteeBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withLevel("p2").withPhone("98765432")
+            .withRemark("Good progress")
             .withTags("owesMoney", "friends").build();
     public static final Tutee CARL = new TuteeBuilder().withName("Carl Kurz").withPhone("95352563")
             .withLevel("p3").withAddress("wall street").build();
@@ -60,10 +61,10 @@ public class TypicalTutees {
     private TypicalTutees() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical tutees.
+     * Returns a {@code TrackO} with all the typical tutees.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static TrackO getTypicalTrackO() {
+        TrackO ab = new TrackO();
         for (Tutee tutee : getTypicalTutees()) {
             ab.addTutee(tutee);
         }

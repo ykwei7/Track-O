@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.ALICE;
-import static seedu.address.testutil.TypicalTutees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.address.model.tutee.Tutee;
 import seedu.address.model.tutee.exceptions.DuplicateTuteeException;
 import seedu.address.testutil.TuteeBuilder;
 
-public class AddressBookTest {
+public class TrackOTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TrackO trackO = new TrackO();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTuteeList());
+        assertEquals(Collections.emptyList(), trackO.getTuteeList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> trackO.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyTrackO_replacesData() {
+        TrackO newData = getTypicalTrackO();
+        trackO.resetData(newData);
+        assertEquals(newData, trackO);
     }
 
     @Test
@@ -49,47 +49,47 @@ public class AddressBookTest {
         Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Tutee> newTutees = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newTutees);
+        TrackOStub newData = new TrackOStub(newTutees);
 
-        assertThrows(DuplicateTuteeException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateTuteeException.class, () -> trackO.resetData(newData));
     }
 
     @Test
     public void hasTutee_nullTutee_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasTutee(null));
+        assertThrows(NullPointerException.class, () -> trackO.hasTutee(null));
     }
 
     @Test
-    public void hasTutee_tuteeNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasTutee(ALICE));
+    public void hasTutee_tuteeNotInTrackO_returnsFalse() {
+        assertFalse(trackO.hasTutee(ALICE));
     }
 
     @Test
-    public void hasTutee_tuteeInAddressBook_returnsTrue() {
-        addressBook.addTutee(ALICE);
-        assertTrue(addressBook.hasTutee(ALICE));
+    public void hasTutee_tuteeInTrackO_returnsTrue() {
+        trackO.addTutee(ALICE);
+        assertTrue(trackO.hasTutee(ALICE));
     }
 
     @Test
-    public void hasTutee_tuteeWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addTutee(ALICE);
+    public void hasTutee_tuteeWithSameIdentityFieldsInTrackO_returnsTrue() {
+        trackO.addTutee(ALICE);
         Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasTutee(editedAlice));
+        assertTrue(trackO.hasTutee(editedAlice));
     }
 
     @Test
     public void getTuteeList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTuteeList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> trackO.getTuteeList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose tutees list can violate interface constraints.
+     * A stub ReadOnlyTrackO whose tutees list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class TrackOStub implements ReadOnlyTrackO {
         private final ObservableList<Tutee> tutees = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Tutee> tutees) {
+        TrackOStub(Collection<Tutee> tutees) {
             this.tutees.setAll(tutees);
         }
 

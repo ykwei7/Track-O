@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
 <fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Track-O" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
@@ -36,16 +38,53 @@
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
+               <HBox minWidth="340.0" prefHeight="40.0" prefWidth="340.0">
+                  <children>
+                     <StackPane fx:id="tuteeListPanelPlaceholder1" alignment="CENTER_LEFT" centerShape="false" prefHeight="40.0" prefWidth="158.0" HBox.hgrow="ALWAYS">
+                        <children>
+                           <Label styleClass="window-headers" text="Tutees" textFill="WHITE">
+                              <font>
+                                 <Font name="System Bold" size="14.0" />
+                              </font>
+                           </Label>
+                        </children>
+                        <padding>
+                           <Insets left="10.0" />
+                        </padding>
+                     </StackPane>
+                     <StackPane fx:id="resultDisplayPlaceholder1" alignment="CENTER_RIGHT" centerShape="false" prefHeight="40.0" prefWidth="158.0" HBox.hgrow="ALWAYS">
+                        <children>
+                           <Label styleClass="window-headers" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                              <font>
+                                 <Font name="System Bold" size="14.0" />
+                              </font>
+                              <padding>
+                                 <Insets left="5.0" />
+                              </padding>
+                           </Label>
+                        </children>
+                        <padding>
+                           <Insets left="10.0" />
+                        </padding>
+                     </StackPane>
+                  </children>
+               </HBox>
                <HBox minWidth="340.0" prefHeight="506.0" prefWidth="340.0" VBox.vgrow="ALWAYS">
                   <children>
                 <StackPane fx:id="tuteeListPanelPlaceholder" alignment="CENTER_LEFT" centerShape="false" prefHeight="200.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
                           <StackPane fx:id="resultDisplayPlaceholder" alignment="CENTER_RIGHT" centerShape="false" prefHeight="200.0" prefWidth="158.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" />
                   </children>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
                </HBox>
-                          <StackPane fx:id="commandBoxPlaceholder" alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="147.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
-             <padding>
-               <Insets bottom="5" left="10" right="10" top="5" />
-             </padding>
+                          <StackPane fx:id="commandBoxPlaceholder" alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="147.0" styleClass="pane-without-border" VBox.vgrow="NEVER">
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding>
            </StackPane>
         </VBox>
         <StackPane fx:id="statusbarPlaceholder" prefWidth="260.0" VBox.vgrow="NEVER" />

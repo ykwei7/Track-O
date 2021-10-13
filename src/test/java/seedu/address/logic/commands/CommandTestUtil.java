@@ -15,7 +15,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TrackO;
 import seedu.address.model.Model;
 import seedu.address.model.tutee.NameContainsKeywordsPredicate;
 import seedu.address.model.tutee.Tutee;
@@ -36,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_REMARK_AMY = "Good progress";
+    public static final String VALID_REMARK_BOB = "Need to work on Math";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -99,21 +101,21 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered tutee list and selected tutee in {@code actualModel} remain unchanged
+     * - Track-O, filtered tutee list and selected tutee in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        TrackO expectedTrackO = new TrackO(actualModel.getTrackO());
         List<Tutee> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTuteeList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedTrackO, actualModel.getTrackO());
         assertEquals(expectedFilteredList, actualModel.getFilteredTuteeList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the tutee at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s Track-O.
      */
     public static void showTuteeAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredTuteeList().size());

@@ -6,7 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 import seedu.address.model.Model;
 
 /**
- * Lists all tutees in the address book to the user.
+ * Lists all tutees in Track-O to the user.
  */
 public class ListCommand extends Command {
 
@@ -14,6 +14,8 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all tutees";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the current list of tutees.\n"
+            + "Example: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute(Model model) {
