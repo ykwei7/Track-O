@@ -9,7 +9,7 @@ import seedu.address.model.tutee.Tutee;
 import seedu.address.model.tutee.UniqueTuteeList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at Track-O level
  * Duplicates are not allowed (by .isSameTutee comparison)
  */
 public class TrackO implements ReadOnlyTrackO {

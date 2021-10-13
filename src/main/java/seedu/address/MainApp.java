@@ -83,10 +83,10 @@ public class MainApp extends Application {
             }
             initialData = trackOOptional.orElseGet(SampleDataUtil::getSampleTrackO);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty TrackO");
+            logger.warning("Data file not in the correct format. Will be starting with an empty Track-O");
             initialData = new TrackO();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TrackO");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Track-O");
             initialData = new TrackO();
         }
 
@@ -151,7 +151,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TrackO");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Track-O");
             initializedPrefs = new UserPrefs();
         }
 
@@ -167,13 +167,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting TrackO " + MainApp.VERSION);
+        logger.info("Starting Track-O " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping TrackO ] =============================");
+        logger.info("============================ [ Stopping Track-O ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

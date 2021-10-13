@@ -72,7 +72,7 @@
                <HBox minWidth="340.0" prefHeight="506.0" prefWidth="340.0" VBox.vgrow="ALWAYS">
                   <children>
                 <StackPane fx:id="tuteeListPanelPlaceholder" alignment="CENTER_LEFT" centerShape="false" prefHeight="200.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
-                          <StackPane fx:id="resultDisplayPlaceholder" alignment="CENTER_RIGHT" centerShape="false" prefHeight="200.0" prefWidth="158.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" />
+                          <StackPane fx:id="resultDisplayPlaceholder" alignment="CENTER_RIGHT" centerShape="false" prefHeight="200.0" prefWidth="158.0" styleClass="pane-without-border" HBox.hgrow="ALWAYS" />
                   </children>
                   <opaqueInsets>
                      <Insets />

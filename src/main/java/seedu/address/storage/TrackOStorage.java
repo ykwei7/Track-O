@@ -6,10 +6,9 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyTrackO;
-import seedu.address.model.TrackO;
 
 /**
- * Represents a storage for {@link TrackO}.
+ * Represents a storage for {@link seedu.address.model.TrackO}.
  */
 public interface TrackOStorage {
 
