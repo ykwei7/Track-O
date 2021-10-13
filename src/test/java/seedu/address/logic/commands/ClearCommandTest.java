@@ -5,9 +5,9 @@ import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.TrackO;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TrackO;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
