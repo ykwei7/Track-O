@@ -142,6 +142,11 @@
      -fx-border-top-width: 1px;
 }
 
+.pane-without-border {
+    -fx-background-color: derive(#243040, 20%);
+}
+
+
 .status-bar {
     -fx-background-color: derive(#3977d5, 30%);
 }
@@ -198,7 +203,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "SF UI DisplayLight";
+    -fx-font-family: "SF UI Display Semibold";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -307,6 +312,13 @@
     -fx-padding: 8 1 8 1;
 }
 
+.window-headers {
+    -fx-background-color: transparent;
+    -fx-font-family: "SF UI Display Semibold";
+    -fx-font-size: 16pt;
+    -fx-text-fill: white;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -328,7 +340,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #tuteeListPanel, #tuteeWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -350,3 +362,5 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+

@@ -82,31 +82,31 @@ Shows the current list of tutees.
 
 Format: `list`
 
-### Deleting a person : `delete`
+### Deleting a tutee : `delete`
 
 Deletes the specified tutee from our list of tutees.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the tutee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed tutee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd tutee in the address book.
 
-### Deleting a person : `get`
+### Deleting a tutee : `get`
 
 Gets details of the specified tutee from our list of tutees.
 
 Format: `get INDEX`
 
-* Gets the person at the specified `INDEX` in the format `Name: John Doe Level: P5`
-* The index refers to the index number shown in the displayed person list.
+* Gets the tutee at the specified `INDEX` in the format `Name: John Doe Level: P5`
+* The index refers to the index number shown in the displayed tutee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `get 2` shows the 2nd person in the address book.
+* `list` followed by `get 2` shows the 2nd tutee in the address book.
 
 
 ### Exiting application : `exit`
@@ -115,7 +115,7 @@ Exits from the application.
 
 ### Editing a tutee :  `[coming in v2.0]`
 
-### Locating persons by name:  `[coming in v2.0]`
+### Locating tutees by name:  `[coming in v2.0]`
 
 ### Clearing all entries : `[coming in v2.0]`
 

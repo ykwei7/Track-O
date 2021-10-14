@@ -12,12 +12,13 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Level;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.Address;
+import seedu.address.model.tutee.Level;
+import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Phone;
+import seedu.address.model.tutee.Remark;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -42,11 +43,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, level, address, tagList);
+        Tutee tutee = new Tutee(name, phone, level, address, remark, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(tutee);
     }
 
     /**

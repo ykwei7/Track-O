@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -18,7 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
-import seedu.address.model.person.Person;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * Adds a lesson to an existing tutee in the tutee list.
@@ -69,10 +69,10 @@ public class AddLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Tutee> lastShownList = model.getFilteredTuteeList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 
         Time lessonTime;
@@ -83,10 +83,10 @@ public class AddLessonCommand extends Command {
         }
         Lesson lesson = new Lesson(subject, lessonTime);
 
-        Person editedPerson = lastShownList.get(targetIndex.getZeroBased());
+        Tutee editedPerson = lastShownList.get(targetIndex.getZeroBased());
         editedPerson.addLesson(lesson);
-        model.setPerson(lastShownList.get(targetIndex.getZeroBased()), editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setTutee(lastShownList.get(targetIndex.getZeroBased()), editedPerson);
+        model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
     }
