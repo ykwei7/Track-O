@@ -160,7 +160,7 @@ public class Tutee {
 
         Set<Lesson> lessons = getLessons();
         if (!lessons.isEmpty()) {
-            builder.append("; Lessons: ");
+            builder.append("\nLessons: ");
             lessons.forEach(builder::append);
         }
 

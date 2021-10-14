@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.TrackO;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
-import seedu.address.model.TrackO;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -28,7 +28,7 @@ import seedu.address.model.tutee.Tutee;
  */
 public class TypicalTutees {
 
-    public static final Lesson lesson = new Lesson(
+    public static final Lesson LESSON = new Lesson(
             new Subject("Physics"),
             new Time(DayOfWeek.SUNDAY, LocalTime.parse("12:30"), LocalTime.parse("14:30")));
 
@@ -39,7 +39,7 @@ public class TypicalTutees {
     public static final Tutee BENSON = new TuteeBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withLevel("p2").withPhone("98765432")
-            .withTags("owesMoney", "friends").withLesson(lesson).build();
+            .withTags("owesMoney", "friends").withLesson(LESSON).build();
     public static final Tutee CARL = new TuteeBuilder().withName("Carl Kurz").withPhone("95352563")
             .withLevel("p3").withAddress("wall street").build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
