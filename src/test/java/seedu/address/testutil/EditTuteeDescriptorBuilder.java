@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditTuteeDescriptor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
+import seedu.address.model.tutee.Fee;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
@@ -68,6 +69,14 @@ public class EditTuteeDescriptorBuilder {
      */
     public EditTuteeDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Fee} of the {@code EditTuteeDescriptor} that we are building.
+     */
+    public EditTuteeDescriptorBuilder withFee(String fee) {
+        descriptor.setFee(new Fee(fee));
         return this;
     }
 

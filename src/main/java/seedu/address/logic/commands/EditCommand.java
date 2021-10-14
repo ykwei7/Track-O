@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
+import seedu.address.model.tutee.Fee;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
@@ -98,10 +99,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editTuteeDescriptor.getPhone().orElse(tuteeToEdit.getPhone());
         Level updatedLevel = editTuteeDescriptor.getLevel().orElse(tuteeToEdit.getLevel());
         Address updatedAddress = editTuteeDescriptor.getAddress().orElse(tuteeToEdit.getAddress());
+        Fee updatedFee = editTuteeDescriptor.getFee().orElse(tuteeToEdit.getFee());
         Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editTuteeDescriptor.getTags().orElse(tuteeToEdit.getTags());
 
-        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress, updatedRemark, updatedTags);
+        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress, updatedFee, updatedRemark,
+                updatedTags);
     }
 
     @Override
@@ -131,6 +134,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Level level;
         private Address address;
+        private Fee fee;
         private Set<Tag> tags;
 
         public EditTuteeDescriptor() {}
@@ -184,6 +188,15 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+
+        public void setFee(Fee fee) {
+            this.fee = fee;
+        }
+
+        public Optional<Fee> getFee() {
+            return Optional.ofNullable(fee);
         }
 
         /**

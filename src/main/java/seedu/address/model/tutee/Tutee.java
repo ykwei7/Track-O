@@ -22,18 +22,20 @@ public class Tutee {
 
     // Data fields
     private final Address address;
+    private final Fee fee;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Tutee(Name name, Phone phone, Level level, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, level, address, tags);
+    public Tutee(Name name, Phone phone, Level level, Address address, Fee fee, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, level, address, fee, tags);
         this.name = name;
         this.phone = phone;
         this.level = level;
         this.address = address;
+        this.fee = fee;
         this.remark = remark;
         this.tags.addAll(tags);
     }
@@ -52,6 +54,10 @@ public class Tutee {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Fee getFee() {
+        return fee;
     }
 
     public Remark getRemark() {
@@ -99,13 +105,14 @@ public class Tutee {
                 && otherTutee.getPhone().equals(getPhone())
                 && otherTutee.getLevel().equals(getLevel())
                 && otherTutee.getAddress().equals(getAddress())
+                && otherTutee.getFee().equals(getFee())
                 && otherTutee.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, level, address, tags);
+        return Objects.hash(name, phone, level, address, fee, tags);
     }
 
     @Override
@@ -117,7 +124,9 @@ public class Tutee {
                 .append("\nLevel: ")
                 .append(getLevel())
                 .append("\nAddress: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("\nPayment details: ")
+                .append(getFee());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
