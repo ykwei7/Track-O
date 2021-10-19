@@ -17,10 +17,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 public class Time {
 
-    public static final long MINIMUM_DURATION = 10;
+    public static final long MINIMUM_DURATION = 30;
 
     public static final String MESSAGE_CONSTRAINTS_INVALID_DAY =
-            "Day of week should be included in full";
+            "Day of week should be an integer in the range [1, 7]";
 
     public static final String MESSAGE_CONSTRAINTS_INVALID_LOCALTIME =
             "The start or end time should be in HH:MM format";

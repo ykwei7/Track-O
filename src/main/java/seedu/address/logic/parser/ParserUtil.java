@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -137,8 +138,8 @@ public class ParserUtil {
         requireNonNull(dayOfWeek);
         String trimmedDayOfWeek = dayOfWeek.trim();
         try {
-            return DayOfWeek.valueOf(trimmedDayOfWeek.toUpperCase());
-        } catch (IllegalArgumentException e) {
+            return DayOfWeek.of(Integer.parseInt(trimmedDayOfWeek));
+        } catch (DateTimeException | NumberFormatException e) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS_INVALID_DAY);
         }
     }

@@ -36,7 +36,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_END_TIME + "END_TIME\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SUBJECT + "Principles of Accounting "
-            + PREFIX_DAY_OF_WEEK + "Thursday "
+            + PREFIX_DAY_OF_WEEK + "4 "
             + PREFIX_START_TIME + "11:30 "
             + PREFIX_END_TIME + "13:30 ";
 
