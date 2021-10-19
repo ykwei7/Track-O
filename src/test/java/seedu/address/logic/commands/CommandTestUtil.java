@@ -83,11 +83,14 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    public static final String INVALID_LESSON_SUBJECT_DESC = " " + PREFIX_SUBJECT + "Math&"; // '&' not allowed in subjects
+    public static final String INVALID_LESSON_SUBJECT_DESC =
+            " " + PREFIX_SUBJECT + "Math&"; // '&' not allowed in subjects
     public static final String INVALID_LESSON_DAY_OF_WEEK_DESC = " " + PREFIX_DAY_OF_WEEK + "8"; // out of range [1, 7]
     public static final String INVALID_LESSON_START_TIME_DESC = " " + PREFIX_START_TIME + "25:30"; // out of range
-    public static final String INVALID_LESSON_END_TIME_DESC = " " + PREFIX_END_TIME + "20:00!"; // invalid symbol '!'
-    public static final String INVALID_LESSON_HOURLY_RATE_DESC = " " + PREFIX_HOURLY_RATE + "45.5"; // not expressed in 2dp
+    public static final String INVALID_LESSON_END_TIME_DESC =
+            " " + PREFIX_END_TIME + "20:00!"; // invalid symbol '!'
+    public static final String INVALID_LESSON_HOURLY_RATE_DESC =
+            " " + PREFIX_HOURLY_RATE + "45.5"; // not expressed in 2dp
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

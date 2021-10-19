@@ -1,10 +1,8 @@
 package seedu.address.model.lesson;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Objects;
 
@@ -14,9 +12,9 @@ import java.util.Objects;
 public class Lesson {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Hourly rate should only contain numbers expressed strictly in " +
-                    "either no decimal places or two decimal places with the last decimal place being 0 or 5, " +
-                    "and it should not be blank.";
+            "Hourly rate should only contain numbers expressed strictly in "
+                    + "either no decimal places or two decimal places with the last decimal place being 0 or 5, "
+                    + "and it should not be blank.";
 
     /*
      * The first character has to a digit that is not zero.
@@ -53,9 +51,12 @@ public class Lesson {
     public Lesson() {
     }
 
+    /**
+     * Returns true if a given string is a valid hourly rate.
+     */
     public static boolean isValidHourlyRate(String hourlyRate) {
-        return hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_NO_DECIMAL_PLACES) ||
-                hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_TWO_DECIMAL_PLACES);
+        return hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_NO_DECIMAL_PLACES)
+                || hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_TWO_DECIMAL_PLACES);
     }
 
     public Subject getSubject() {

@@ -48,8 +48,8 @@ public class AddLessonCommandParserTest {
     public void parse_missingParts_failure() {
         // no index specified
         assertParseFailure(parser,
-                LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY + LESSON_START_TIME_DESC_AMY +
-                        LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY + LESSON_START_TIME_DESC_AMY
+                        + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 MESSAGE_INVALID_FORMAT);
 
         // no field specified
@@ -68,68 +68,68 @@ public class AddLessonCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // negative index
         assertParseFailure(parser,
-                "-5" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY + LESSON_START_TIME_DESC_AMY +
-                        LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                "-5" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY + LESSON_START_TIME_DESC_AMY
+                        + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 MESSAGE_INVALID_FORMAT);
 
         // zero index
         assertParseFailure(parser,
-                "0" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY + LESSON_START_TIME_DESC_AMY +
-                        LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                "0" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY + LESSON_START_TIME_DESC_AMY
+                        + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser,
-                "1 some random string" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY +
-                        LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                "1 some random string" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY
+                        + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser,
-                "1 i/ string" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY +
-                        LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                "1 i/ string" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY
+                        + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser,
-                "1" + INVALID_LESSON_SUBJECT_DESC + LESSON_DAY_OF_WEEK_DESC_AMY +
-                        LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                "1" + INVALID_LESSON_SUBJECT_DESC + LESSON_DAY_OF_WEEK_DESC_AMY
+                        + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 Subject.MESSAGE_CONSTRAINTS); // invalid subject
 
         assertParseFailure(parser,
-                "1" + LESSON_SUBJECT_DESC_AMY + INVALID_LESSON_DAY_OF_WEEK_DESC +
-                        LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                "1" + LESSON_SUBJECT_DESC_AMY + INVALID_LESSON_DAY_OF_WEEK_DESC
+                        + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 Time.MESSAGE_CONSTRAINTS_INVALID_DAY); // invalid day of week
 
         assertParseFailure(parser,
-                "1" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY +
-                        INVALID_LESSON_START_TIME_DESC + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                "1" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY
+                        + INVALID_LESSON_START_TIME_DESC + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 Time.MESSAGE_CONSTRAINTS_INVALID_LOCALTIME); // invalid start time
 
         assertParseFailure(parser,
-                "1" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY +
-                        LESSON_START_TIME_DESC_AMY + INVALID_LESSON_END_TIME_DESC + LESSON_HOURLY_RATE_DESC_AMY,
+                "1" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY
+                        + LESSON_START_TIME_DESC_AMY + INVALID_LESSON_END_TIME_DESC + LESSON_HOURLY_RATE_DESC_AMY,
                 Time.MESSAGE_CONSTRAINTS_INVALID_LOCALTIME); // invalid end time
 
         assertParseFailure(parser,
-                "1" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY +
-                        LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + INVALID_LESSON_HOURLY_RATE_DESC,
+                "1" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY
+                        + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + INVALID_LESSON_HOURLY_RATE_DESC,
                 Lesson.MESSAGE_CONSTRAINTS); // invalid hourly rate
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
-                "1" + INVALID_LESSON_SUBJECT_DESC + INVALID_LESSON_DAY_OF_WEEK_DESC +
-                        INVALID_LESSON_START_TIME_DESC + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
+                "1" + INVALID_LESSON_SUBJECT_DESC + INVALID_LESSON_DAY_OF_WEEK_DESC
+                        + INVALID_LESSON_START_TIME_DESC + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 Subject.MESSAGE_CONSTRAINTS); // invalid subject
     }
 
     @Test
     public void parse_allFieldsPresent_success() throws ParseException {
         Index targetIndex = INDEX_SECOND_TUTEE;
-        String userInput = targetIndex.getOneBased() + LESSON_SUBJECT_DESC_BOB + LESSON_DAY_OF_WEEK_DESC_BOB +
-                LESSON_START_TIME_DESC_BOB + LESSON_END_TIME_DESC_BOB + LESSON_HOURLY_RATE_DESC_BOB;
+        String userInput = targetIndex.getOneBased() + LESSON_SUBJECT_DESC_BOB + LESSON_DAY_OF_WEEK_DESC_BOB
+                + LESSON_START_TIME_DESC_BOB + LESSON_END_TIME_DESC_BOB + LESSON_HOURLY_RATE_DESC_BOB;
 
         Subject subject = ParserUtil.parseSubject(VALID_LESSON_SUBJECT_BOB);
         DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(VALID_LESSON_DAY_OF_WEEK_BOB);

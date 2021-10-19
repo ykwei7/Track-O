@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -156,7 +157,8 @@ public class ParserUtil {
         String trimmedLocalTime = localTime.trim();
 
         try {
-            return LocalTime.parse(trimmedLocalTime);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            return LocalTime.parse(trimmedLocalTime, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS_INVALID_LOCALTIME);
         }
