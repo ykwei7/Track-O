@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
-import seedu.address.model.tutee.Fee;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
@@ -33,9 +33,10 @@ class JsonAdaptedTutee {
     private final String phone;
     private final String level;
     private final String address;
-    private final String fee;
-    private final String lastPaymentDateAsString;
     private final String remark;
+    private final String payment;
+    private final String payByDateAsString;
+    private final List<String> paymentHistory;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -44,18 +45,20 @@ class JsonAdaptedTutee {
     @JsonCreator
     public JsonAdaptedTutee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                             @JsonProperty("level") String level, @JsonProperty("address") String address,
-                            @JsonProperty("fee") String fee,
-                            @JsonProperty("lastPaymentDate") String lastPaymentDateAsString,
                             @JsonProperty("remark") String remark,
+                            @JsonProperty("payment") String payment,
+                            @JsonProperty("payByDateAsString") String payByDateAsString,
+                            @JsonProperty("paymentHistory") List<String> paymentHistory,
                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
 
         this.name = name;
         this.phone = phone;
         this.level = level;
         this.address = address;
-        this.fee = fee;
-        this.lastPaymentDateAsString = lastPaymentDateAsString;
         this.remark = remark;
+        this.payment = payment;
+        this.payByDateAsString = payByDateAsString;
+        this.paymentHistory = paymentHistory;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -69,9 +72,10 @@ class JsonAdaptedTutee {
         phone = source.getPhone().value;
         level = source.getLevel().value;
         address = source.getAddress().value;
-        fee = source.getFee().value;
-        lastPaymentDateAsString = source.getFee().lastPaymentDateAsString;
         remark = source.getRemark().value;
+        payment = source.getPayment().value;
+        payByDateAsString = source.getPayment().payByDateAsString;
+        paymentHistory = source.getPayment().paymentHistory;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -119,22 +123,23 @@ class JsonAdaptedTutee {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
 
-        if (fee == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
+        if (payment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName()));
         }
-        if (!Fee.isValidFee(fee)) {
-            throw new IllegalValueException(Fee.MESSAGE_CONSTRAINTS);
+        if (!Payment.isValidPayment(payment)) {
+            throw new IllegalValueException(Payment.MESSAGE_CONSTRAINTS);
         }
 
         final Address modelAddress = new Address(address);
 
-        final Fee modelFee = new Fee(fee, LocalDateTime.parse(lastPaymentDateAsString,
-                DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+        final Payment modelPayment = new Payment(payment, payByDateAsString.equals("-") ? null
+                : LocalDate.parse(payByDateAsString, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        modelPayment.copyPaymentHistory(paymentHistory);
 
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
-        return new Tutee(modelName, modelPhone, modelLevel, modelAddress, modelFee, modelRemark, modelTags);
+        return new Tutee(modelName, modelPhone, modelLevel, modelAddress, modelPayment, modelRemark, modelTags);
     }
 
 }

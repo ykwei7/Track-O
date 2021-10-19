@@ -38,7 +38,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
-import seedu.address.model.tutee.Fee;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
@@ -137,7 +137,7 @@ public class AddCommandParserTest {
 
         // invalid fee
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + LEVEL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_FEE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Fee.MESSAGE_CONSTRAINTS);
+                + INVALID_FEE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Payment.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + LEVEL_DESC_BOB + ADDRESS_DESC_BOB

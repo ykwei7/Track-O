@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
-import seedu.address.model.tutee.Fee;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
@@ -70,18 +68,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String fee} into a {@code Fee}.
+     * Parses a {@code String payment} into a {@code Payment}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code fee} is invalid.
+     * @throws ParseException if the given {@code payment} is invalid.
      */
-    public static Fee parseFee(String fee) throws ParseException {
-        requireNonNull(fee);
-        String trimmedFee = fee.trim();
-        if (!Fee.isValidFee(trimmedFee)) {
-            throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
+    public static Payment parsePayment(String payment) throws ParseException {
+        requireNonNull(payment);
+        String trimmedPayment = payment.trim();
+        if (!Payment.isValidPayment(trimmedPayment)) {
+            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
         }
-        return new Fee(trimmedFee, LocalDateTime.now());
+        return new Payment(trimmedPayment, null);
     }
 
     /**

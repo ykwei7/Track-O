@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tutee.Address;
-import seedu.address.model.tutee.Fee;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
@@ -127,7 +127,7 @@ public class JsonAdaptedTuteeTest {
                 new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, INVALID_FEE,
                         VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
 
-        String expectedMessage = Fee.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Payment.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
     }
 
@@ -136,7 +136,7 @@ public class JsonAdaptedTuteeTest {
         JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, null,
                 VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
 
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
     }
 

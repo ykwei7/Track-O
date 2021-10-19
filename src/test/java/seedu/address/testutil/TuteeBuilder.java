@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
-import seedu.address.model.tutee.Fee;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
@@ -22,14 +22,14 @@ public class TuteeBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_LEVEL = "p1";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_FEE = "100";
+    public static final String DEFAULT_FEE = "0";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;
     private Level level;
     private Address address;
-    private Fee fee;
+    private Payment payment;
     private Remark remark;
     private Set<Tag> tags;
 
@@ -41,7 +41,7 @@ public class TuteeBuilder {
         phone = new Phone(DEFAULT_PHONE);
         level = new Level(DEFAULT_LEVEL);
         address = new Address(DEFAULT_ADDRESS);
-        fee = new Fee(DEFAULT_FEE);
+        payment = new Payment(DEFAULT_FEE, null);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
@@ -54,7 +54,7 @@ public class TuteeBuilder {
         phone = tuteeToCopy.getPhone();
         level = tuteeToCopy.getLevel();
         address = tuteeToCopy.getAddress();
-        fee = tuteeToCopy.getFee();
+        payment = tuteeToCopy.getPayment();
         remark = tuteeToCopy.getRemark();
         tags = new HashSet<>(tuteeToCopy.getTags());
     }
@@ -86,8 +86,8 @@ public class TuteeBuilder {
     /**
      * Sets the {@code Fee} of the {@code Tutee} that we are building.
      */
-    public TuteeBuilder withFee(String fee) {
-        this.fee = new Fee(fee);
+    public TuteeBuilder withPayment(String payment) {
+        this.payment = new Payment(payment, null);
         return this;
     }
 
@@ -116,7 +116,7 @@ public class TuteeBuilder {
     }
 
     public Tutee build() {
-        return new Tutee(name, phone, level, address, fee, remark, tags);
+        return new Tutee(name, phone, level, address, payment, remark, tags);
     }
 
 }
