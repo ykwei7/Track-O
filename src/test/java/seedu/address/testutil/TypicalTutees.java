@@ -30,7 +30,7 @@ public class TypicalTutees {
 
     public static final Lesson LESSON = new Lesson(
             new Subject("Physics"),
-            new Time(DayOfWeek.SUNDAY, LocalTime.parse("12:30"), LocalTime.parse("14:30")));
+            new Time(DayOfWeek.SUNDAY, LocalTime.parse("12:30"), LocalTime.parse("14:30")), 40.0);
 
     public static final Tutee ALICE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLevel("p1")

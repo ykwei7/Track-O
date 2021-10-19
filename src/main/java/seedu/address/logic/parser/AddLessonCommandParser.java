@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
@@ -30,7 +31,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_DAY_OF_WEEK,
-                        PREFIX_START_TIME, PREFIX_END_TIME);
+                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_HOURLY_RATE);
 
         Index index;
 
@@ -48,8 +49,9 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY_OF_WEEK).get());
         LocalTime startTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_START_TIME).get());
         LocalTime endTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_END_TIME).get());
+        double hourlyRate = ParserUtil.parseHourlyRate(argMultimap.getValue(PREFIX_HOURLY_RATE).get());
 
-        return new AddLessonCommand(index, subject, dayOfWeek, startTime, endTime);
+        return new AddLessonCommand(index, subject, dayOfWeek, startTime, endTime, hourlyRate);
     }
 
     /**

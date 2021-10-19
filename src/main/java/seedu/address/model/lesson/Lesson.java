@@ -1,7 +1,11 @@
 package seedu.address.model.lesson;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 /**
@@ -9,19 +13,37 @@ import java.util.Objects;
  */
 public class Lesson {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Hourly rate should only contain numbers expressed strictly in " +
+                    "either no decimal places or two decimal places with the last decimal place being 0 or 5, " +
+                    "and it should not be blank.";
+
+    /*
+     * The first character has to a digit that is not zero.
+     * Only 0 or 2 decimal places of a number is allowed.
+     * For 2 decimal places, the last decimal place has to end in either 0 or 5.
+     */
+    public static final String VALIDATION_REGEX_HOURLY_RATE_NO_DECIMAL_PLACES = "^[1-9][\\d]*$";
+    public static final String VALIDATION_REGEX_HOURLY_RATE_TWO_DECIMAL_PLACES = "^[1-9][\\d]*[.][0-9][0|5]$";
+
     private Subject subject;
     private Time time;
+    private double hourlyRate;
+    private double cost;
 
     /**
      * Constructs a {@code Lesson}.
      *
      * @param subject The subject of the lesson.
      * @param time The time of the lesson.
+     * @param hourlyRate The hourly rate of the lesson.
      */
-    public Lesson(Subject subject, Time time) {
+    public Lesson(Subject subject, Time time, double hourlyRate) {
         requireAllNonNull(subject, time);
         this.subject = subject;
         this.time = time;
+        this.hourlyRate = hourlyRate;
+        this.cost = computeCost(time, hourlyRate);
     }
 
     /**
@@ -31,12 +53,38 @@ public class Lesson {
     public Lesson() {
     }
 
+    public static boolean isValidHourlyRate(String hourlyRate) {
+        return hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_NO_DECIMAL_PLACES) ||
+                hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_TWO_DECIMAL_PLACES);
+    }
+
     public Subject getSubject() {
         return subject;
     }
 
     public Time getTime() {
         return time;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    /**
+     * Computes cost of lesson based on the product of duration and hourly rate.
+     *
+     * @param time The time of the lesson.
+     * @param hourlyRate The hourly rate of the lesson.
+     * @return The cost of the lesson as a double with 2 decimal places.
+     */
+    private double computeCost(Time time, double hourlyRate) {
+        double cost = time.getDuration() * hourlyRate;
+
+        // Solution below adapted from https://www.baeldung.com/java-bigdecimal-biginteger#rounding
+        BigDecimal bd = new BigDecimal(cost);
+        BigDecimal roundedBd = bd.round(new MathContext(2, RoundingMode.HALF_DOWN));
+
+        return roundedBd.doubleValue();
     }
 
     /**
@@ -65,7 +113,8 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return "[" + subject + " " + time + "]";
+        // return "[" + subject + " " + time + "Hourly rate: $" + hourlyRate + "/hour Total cost: " + cost + "]";
+        return String.format("[%s %s (Hourly rate: $%.2f/h, Total cost: $%.2f)]", subject, time, hourlyRate, cost);
     }
 
 }

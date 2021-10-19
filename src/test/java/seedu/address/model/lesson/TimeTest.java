@@ -20,21 +20,20 @@ public class TimeTest {
     }
 
     @Test
-    public void isValidDuration() {
-        final long minDuration = 30; // 30 minutes
+    public void constructor_startTimeNotBeforeEndTime_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Time(DayOfWeek.TUESDAY, LocalTime.NOON, LocalTime.NOON));
+        assertThrows(IllegalArgumentException.class, () ->
+                new Time(DayOfWeek.TUESDAY, LocalTime.NOON, LocalTime.MIDNIGHT));
+    }
 
-        // invalid duration
-        assertFalse(Time.isValidDuration(LocalTime.NOON, LocalTime.NOON, minDuration)); // 0 minutes
-        assertFalse(Time.isValidDuration(LocalTime.NOON, LocalTime.MIDNIGHT, minDuration)); // negative minutes
+    @Test
+    public void constructor_invalidDuration_throwsIllegalArgumentException() {
+        final double minDuration = Time.MINIMUM_DURATION;
+        final double invalidDuration = minDuration - 1;
+        final long invalidDurationInMinutes = (long) (invalidDuration * 60);
 
-        final long invalidDuration = minDuration - 1;
-        assertFalse(Time.isValidDuration(LocalTime.NOON, LocalTime.NOON.plusMinutes(invalidDuration), minDuration));
-
-        // valid duration
-        assertTrue(Time.isValidDuration(LocalTime.NOON, LocalTime.NOON.plusMinutes(minDuration), minDuration));
-
-        final long validDuration = minDuration + 1;
-        assertTrue(Time.isValidDuration(LocalTime.NOON, LocalTime.NOON.plusMinutes(validDuration), minDuration));
+        assertThrows(IllegalArgumentException.class, () ->
+                new Time(DayOfWeek.TUESDAY, LocalTime.NOON, LocalTime.NOON.plusMinutes(invalidDurationInMinutes)));
     }
 
     @Test

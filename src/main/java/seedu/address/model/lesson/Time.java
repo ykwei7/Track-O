@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 public class Time {
 
-    public static final long MINIMUM_DURATION = 30;
+    public static final double MINIMUM_DURATION = 0.5;
 
     public static final String MESSAGE_CONSTRAINTS_INVALID_DAY =
             "Day of week should be an integer in the range [1, 7]";
@@ -29,13 +29,15 @@ public class Time {
             "Start time should be before end time";
 
     public static final String MESSAGE_CONSTRAINTS_INVALID_DURATION =
-            "Lesson duration must be at least " + MINIMUM_DURATION + " minutes";
+            "Lesson duration must be at least " + MINIMUM_DURATION + " hours";
 
     private DayOfWeek dayOfOccurrence;
     @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
     @JsonFormat(pattern = "HH:mm")
     private LocalTime endTime;
+
+    private double duration;
 
     /**
      * Constructs a {@code Time}.
@@ -47,7 +49,9 @@ public class Time {
     public Time(DayOfWeek dayOfOccurrence, LocalTime startTime, LocalTime endTime) {
         requireAllNonNull(dayOfOccurrence, startTime, endTime);
         checkArgument(startTime.isBefore(endTime), MESSAGE_CONSTRAINTS_IMPROPER_TIME);
-        checkArgument(isValidDuration(startTime, endTime, MINIMUM_DURATION), MESSAGE_CONSTRAINTS_INVALID_DURATION);
+
+        duration = computeDuration(startTime, endTime);
+        checkArgument(isValidDuration(duration, MINIMUM_DURATION), MESSAGE_CONSTRAINTS_INVALID_DURATION);
 
         this.dayOfOccurrence = dayOfOccurrence;
         this.startTime = startTime;
@@ -62,11 +66,22 @@ public class Time {
     }
 
     /**
+     * Computes the number of hours between start time and end time.
+     *
+     * @param startTime The start time.
+     * @param endTime The end time.
+     * @return A double representing the number of hours.
+     */
+    private double computeDuration(LocalTime startTime, LocalTime endTime) {
+        long durationInMinutes = Duration.between(startTime, endTime).toMinutes();
+        return durationInMinutes / 60.0;
+    }
+
+    /**
      * Returns true if the time interval between the given start time and the given end time
      * is at least the minimum duration.
      */
-    public static boolean isValidDuration(LocalTime startTime, LocalTime endTime, long minDuration) {
-        long duration = Duration.between(startTime, endTime).toMinutes();
+    public static boolean isValidDuration(double duration, double minDuration) {
         return duration >= minDuration;
     }
 
@@ -80,6 +95,10 @@ public class Time {
 
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    public double getDuration() {
+        return duration;
     }
 
     /**

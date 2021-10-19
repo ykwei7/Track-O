@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
@@ -38,7 +39,8 @@ public class AddLessonCommand extends Command {
             + PREFIX_SUBJECT + "Principles of Accounting "
             + PREFIX_DAY_OF_WEEK + "4 "
             + PREFIX_START_TIME + "11:30 "
-            + PREFIX_END_TIME + "13:30 ";
+            + PREFIX_END_TIME + "13:30 "
+            + PREFIX_HOURLY_RATE + "40.50";
 
     public static final String MESSAGE_SUCCESS = "New lesson added to Tutee: %1$s";
 
@@ -47,6 +49,7 @@ public class AddLessonCommand extends Command {
     private final DayOfWeek dayOfWeek;
     private final LocalTime startTime;
     private final LocalTime endTime;
+    private final double hourlyRate;
 
     /**
      * Creates an AddLessonCommand to add a {@code Lesson} to the specified {@code Person}
@@ -58,12 +61,13 @@ public class AddLessonCommand extends Command {
      * @param endTime of the Lesson
      */
     public AddLessonCommand(Index targetIndex, Subject subject, DayOfWeek dayOfWeek,
-                            LocalTime startTime, LocalTime endTime) {
+                            LocalTime startTime, LocalTime endTime, double hourlyRate) {
         this.targetIndex = targetIndex;
         this.subject = subject;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.hourlyRate = hourlyRate;
     }
 
     @Override
@@ -81,7 +85,7 @@ public class AddLessonCommand extends Command {
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());
         }
-        Lesson lesson = new Lesson(subject, lessonTime);
+        Lesson lesson = new Lesson(subject, lessonTime, hourlyRate);
 
         Tutee editedPerson = lastShownList.get(targetIndex.getZeroBased());
         editedPerson.addLesson(lesson);
@@ -109,6 +113,7 @@ public class AddLessonCommand extends Command {
                 && subject.equals(addLessonCommand.subject)
                 && dayOfWeek.equals(addLessonCommand.dayOfWeek)
                 && startTime.equals(addLessonCommand.startTime)
-                && endTime.equals(addLessonCommand.endTime);
+                && endTime.equals(addLessonCommand.endTime)
+                && hourlyRate == addLessonCommand.hourlyRate;
     }
 }
