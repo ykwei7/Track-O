@@ -3,9 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -39,6 +44,17 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_AMY = "Good progress";
     public static final String VALID_REMARK_BOB = "Need to work on Math";
 
+    public static final String VALID_LESSON_SUBJECT_AMY = "Economics";
+    public static final String VALID_LESSON_SUBJECT_BOB = "Math";
+    public static final String VALID_LESSON_DAY_OF_WEEK_AMY = "3";
+    public static final String VALID_LESSON_DAY_OF_WEEK_BOB = "6";
+    public static final String VALID_LESSON_START_TIME_AMY = "11:30";
+    public static final String VALID_LESSON_START_TIME_BOB = "15:00";
+    public static final String VALID_LESSON_END_TIME_AMY = "12:30";
+    public static final String VALID_LESSON_END_TIME_BOB = "16:30";
+    public static final String VALID_LESSON_HOURLY_RATE_AMY = "40";
+    public static final String VALID_LESSON_HOURLY_RATE_BOB = "45.50";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -50,11 +66,28 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String LESSON_SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_LESSON_SUBJECT_AMY;
+    public static final String LESSON_SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_LESSON_SUBJECT_BOB;
+    public static final String LESSON_DAY_OF_WEEK_DESC_AMY = " " + PREFIX_DAY_OF_WEEK + VALID_LESSON_DAY_OF_WEEK_AMY;
+    public static final String LESSON_DAY_OF_WEEK_DESC_BOB = " " + PREFIX_DAY_OF_WEEK + VALID_LESSON_DAY_OF_WEEK_BOB;
+    public static final String LESSON_START_TIME_DESC_AMY = " " + PREFIX_START_TIME + VALID_LESSON_START_TIME_AMY;
+    public static final String LESSON_START_TIME_DESC_BOB = " " + PREFIX_START_TIME + VALID_LESSON_START_TIME_BOB;
+    public static final String LESSON_END_TIME_DESC_AMY = " " + PREFIX_END_TIME + VALID_LESSON_END_TIME_AMY;
+    public static final String LESSON_END_TIME_DESC_BOB = " " + PREFIX_END_TIME + VALID_LESSON_END_TIME_BOB;
+    public static final String LESSON_HOURLY_RATE_DESC_AMY = " " + PREFIX_HOURLY_RATE + VALID_LESSON_HOURLY_RATE_AMY;
+    public static final String LESSON_HOURLY_RATE_DESC_BOB = " " + PREFIX_HOURLY_RATE + VALID_LESSON_HOURLY_RATE_BOB;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "p7"; // year of study out of range
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String INVALID_LESSON_SUBJECT_DESC = " " + PREFIX_SUBJECT + "Math&"; // '&' not allowed in subjects
+    public static final String INVALID_LESSON_DAY_OF_WEEK_DESC = " " + PREFIX_DAY_OF_WEEK + "8"; // out of range [1, 7]
+    public static final String INVALID_LESSON_START_TIME_DESC = " " + PREFIX_START_TIME + "25:30"; // out of range
+    public static final String INVALID_LESSON_END_TIME_DESC = " " + PREFIX_END_TIME + "20:00!"; // invalid symbol '!'
+    public static final String INVALID_LESSON_HOURLY_RATE_DESC = " " + PREFIX_HOURLY_RATE + "45.5"; // not expressed in 2dp
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -82,7 +82,7 @@ public class Lesson {
 
         // Solution below adapted from https://www.baeldung.com/java-bigdecimal-biginteger#rounding
         BigDecimal bd = new BigDecimal(cost);
-        BigDecimal roundedBd = bd.round(new MathContext(2, RoundingMode.HALF_DOWN));
+        BigDecimal roundedBd = bd.setScale(2, RoundingMode.HALF_EVEN);
 
         return roundedBd.doubleValue();
     }
