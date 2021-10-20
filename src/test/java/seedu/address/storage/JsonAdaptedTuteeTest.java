@@ -31,8 +31,9 @@ public class JsonAdaptedTuteeTest {
     private static final String INVALID_LEVEL = "w5";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_LESSON = "{\r\n  \"subject\" : {\r\n    \"value\" : \"Ec@ns\"\r\n  },\r\n  "
-            + "\"time\" : {\r\n    \"dayOfOccurrence\" : \"Moon day\",\r\n    \"startTime\" : \"25:00\",\r\n    "
-            + "\"endTime\" : \"50:45\"\r\n  }\r\n}";
+            + "\"time\" : {\r\n    \"dayOfOccurrence\" : \"Moon day\",\r\n    \"startTime\" : \"23:30\",\r\n    "
+            + "\"endTime\" : \"25:30\",\r\n    \"duration\" : 2.0\r\n  },\r\n  \"hourlyRate\" : 40.5,\r\n  \"cost\" : "
+            + "81.0\r\n}";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
