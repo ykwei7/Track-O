@@ -107,7 +107,7 @@ public class EditCommand extends Command {
 
         return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);
-
+    }
 
     @Override
     public boolean equals(Object other) {
