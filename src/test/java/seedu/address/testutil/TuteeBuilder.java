@@ -2,8 +2,10 @@ package seedu.address.testutil;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
@@ -33,6 +35,7 @@ public class TuteeBuilder {
     private Payment payment;
     private Remark remark;
     private Set<Tag> tags;
+    private Set<Lesson> lessons;
 
     /**
      * Creates a {@code TuteeBuilder} with the default details.
@@ -45,6 +48,7 @@ public class TuteeBuilder {
         payment = new Payment(DEFAULT_FEE, null);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
+        lessons = new LinkedHashSet<>();
     }
 
     /**
@@ -58,6 +62,7 @@ public class TuteeBuilder {
         payment = tuteeToCopy.getPayment();
         remark = tuteeToCopy.getRemark();
         tags = new HashSet<>(tuteeToCopy.getTags());
+        lessons = new LinkedHashSet<>(tuteeToCopy.getLessons());
     }
 
     /**
@@ -73,6 +78,14 @@ public class TuteeBuilder {
      */
     public TuteeBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Adds the {@code lesson} to the {@code Set<Lesson>} of the {@code Tutee} that we are building.
+     */
+    public TuteeBuilder withLesson(Lesson lesson) {
+        lessons.add(lesson);
         return this;
     }
 
@@ -117,7 +130,7 @@ public class TuteeBuilder {
     }
 
     public Tutee build() {
-        return new Tutee(name, phone, level, address, payment, remark, tags);
+        return new Tutee(name, phone, level, address, payment, remark, tags, lessons);
     }
 
 }
