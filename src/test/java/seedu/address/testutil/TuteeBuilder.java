@@ -1,13 +1,14 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
-import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 import seedu.address.model.tutee.Remark;
 import seedu.address.model.tutee.Tutee;
@@ -86,8 +87,8 @@ public class TuteeBuilder {
     /**
      * Sets the {@code Fee} of the {@code Tutee} that we are building.
      */
-    public TuteeBuilder withPayment(String payment) {
-        this.payment = new Payment(payment, null);
+    public TuteeBuilder withPayment(String payment, LocalDate payByDate) {
+        this.payment = new Payment(payment, payByDate);
         return this;
     }
 

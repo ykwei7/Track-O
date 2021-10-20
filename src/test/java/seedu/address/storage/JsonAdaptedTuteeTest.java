@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.BENSON;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,25 +14,28 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tutee.Address;
-import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 
 public class JsonAdaptedTuteeTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_FEE = "9a";
     private static final String INVALID_LEVEL = "w5";
+    private static final String INVALID_PAYMENT = "9a";
+    private static final String INVALID_PAYMENT_DATE = "10 OCTobeR 20000021";
+    private static final List<String> INVALID_PAYMENT_HISTORY = Arrays.asList(" ", "20-Oct-2021");
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_LEVEL = BENSON.getLevel().value;
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final String VALID_FEE = BENSON.getFee().value;
-    private static final String VALID_PAYMENT_DATE = BENSON.getFee().lastPaymentDateAsString;
+    private static final String VALID_PAYMENT = BENSON.getPayment().value;
+    private static final String VALID_PAYMENT_DATE = BENSON.getPayment().payByDateAsString;
+    private static final List<String> VALID_PAYMENT_HISTORY = BENSON.getPayment().paymentHistory;
     private static final String VALID_REMARK = BENSON.getRemark().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
@@ -46,8 +50,8 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(INVALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_FEE,
-                        VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+                new JsonAdaptedTutee(INVALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                        VALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -55,8 +59,8 @@ public class JsonAdaptedTuteeTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(null, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_FEE,
-                VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(null, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                VALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -65,8 +69,8 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, INVALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_FEE,
-                        VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+                new JsonAdaptedTutee(VALID_NAME, INVALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                        VALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
 
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
@@ -75,8 +79,8 @@ public class JsonAdaptedTuteeTest {
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, null, VALID_LEVEL, VALID_ADDRESS, VALID_FEE,
-                VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, null, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                VALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -85,8 +89,8 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidLevel_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, INVALID_LEVEL, VALID_ADDRESS, VALID_FEE,
-                        VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, INVALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                        VALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
 
         String expectedMessage = Level.MESSAGE_CONSTRAINTS;
@@ -95,8 +99,8 @@ public class JsonAdaptedTuteeTest {
 
     @Test
     public void toModelType_nullLevel_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS, VALID_FEE,
-                VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS, VALID_REMARK,
+                VALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Level.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -105,8 +109,8 @@ public class JsonAdaptedTuteeTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, INVALID_ADDRESS, VALID_FEE,
-                        VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, INVALID_ADDRESS, VALID_REMARK,
+                        VALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
@@ -114,29 +118,65 @@ public class JsonAdaptedTuteeTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, null, VALID_FEE,
-                VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, null, VALID_REMARK,
+                VALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
     }
 
     @Test
-    public void toModelType_invalidFee_throwsIllegalValueException() {
+    public void toModelType_invalidPayment_throwsIllegalValueException() {
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, INVALID_FEE,
-                        VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                        INVALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
         String expectedMessage = Payment.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
     }
 
     @Test
-    public void toModelType_nullFee_throwsIllegalValueException() {
-        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, null,
-                VALID_PAYMENT_DATE, VALID_REMARK, VALID_TAGS);
+    public void toModelType_nullPayment_throwsIllegalValueException() {
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                null, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidPaymentDate_throwsIllegalValueException() {
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                VALID_PAYMENT, INVALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS);
+
+        String expectedMessage = Payment.DATE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullPaymentDate_throwsIllegalValueException() {
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                VALID_PAYMENT, null, VALID_PAYMENT_HISTORY, VALID_TAGS);
+
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "payment pay-by date");
+        assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidPaymentHistory_throwsIllegalValueException() {
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                VALID_PAYMENT, VALID_PAYMENT_DATE, INVALID_PAYMENT_HISTORY, VALID_TAGS);
+
+        String expectedMessage = Payment.PAYMENT_HISTORY_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullPaymentHistory_throwsIllegalValueException() {
+        JsonAdaptedTutee tutee = new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
+                VALID_PAYMENT, VALID_PAYMENT_DATE, null, VALID_TAGS);
+
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "payment history");
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
     }
 
@@ -146,8 +186,8 @@ public class JsonAdaptedTuteeTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
 
         JsonAdaptedTutee tutee =
-                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_FEE, VALID_PAYMENT_DATE,
-                        VALID_REMARK, invalidTags);
+                new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK, VALID_PAYMENT,
+                        VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, invalidTags);
         assertThrows(IllegalValueException.class, tutee::toModelType);
     }
 

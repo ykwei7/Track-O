@@ -6,6 +6,9 @@
     "level" : "p1",
     "address" : "123, Jurong West Ave 6, #08-111",
     "remark" : "",
+    "payment" : "0",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +16,9 @@
     "level" : "p2",
     "address" : "311, Clementi Ave 2, #02-25",
     "remark" : "",
+    "payment" : "90",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -20,6 +26,9 @@
     "level" : "p3",
     "address" : "wall street",
     "remark" : "",
+    "payment" : "80",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +36,9 @@
     "level" : "p4",
     "address" : "10th street",
     "remark" : "",
+    "payment" : "85",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +46,9 @@
     "level" : "p5",
     "address" : "michegan ave",
     "remark" : "",
+    "payment" : "75",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +56,9 @@
     "level" : "p6",
     "address" : "little tokyo",
     "remark" : "",
+    "payment" : "70",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +66,9 @@
     "level" : "p5",
     "address" : "4th street",
     "remark" : "",
+    "payment" : "65",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
     "tagged" : [ ]
   } ]
 }

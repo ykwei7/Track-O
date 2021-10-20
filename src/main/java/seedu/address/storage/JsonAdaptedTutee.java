@@ -14,9 +14,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
-import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 import seedu.address.model.tutee.Remark;
 import seedu.address.model.tutee.Tutee;
@@ -128,6 +128,20 @@ class JsonAdaptedTutee {
         }
         if (!Payment.isValidPayment(payment)) {
             throw new IllegalValueException(Payment.MESSAGE_CONSTRAINTS);
+        }
+
+        if (payByDateAsString == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "payment pay-by date"));
+        }
+        if (!Payment.isValidPayByDate(payByDateAsString)) {
+            throw new IllegalValueException(Payment.DATE_CONSTRAINTS);
+        }
+
+        if (paymentHistory == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "payment history"));
+        }
+        if (!Payment.isValidPaymentHistory(paymentHistory)) {
+            throw new IllegalValueException(Payment.PAYMENT_HISTORY_CONSTRAINTS);
         }
 
         final Address modelAddress = new Address(address);

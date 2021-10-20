@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -37,8 +36,6 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_FEE_AMY = "70";
-    public static final String VALID_FEE_BOB = "80";
     public static final String VALID_REMARK_AMY = "Good progress";
     public static final String VALID_REMARK_BOB = "Need to work on Math";
 
@@ -50,8 +47,6 @@ public class CommandTestUtil {
     public static final String LEVEL_DESC_BOB = " " + PREFIX_LEVEL + VALID_LEVEL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String FEE_DESC_AMY = " " + PREFIX_FEE + VALID_FEE_AMY;
-    public static final String FEE_DESC_BOB = " " + PREFIX_FEE + VALID_FEE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -59,7 +54,6 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "p7"; // year of study out of range
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "100a"; // 'a' not allowed in fees
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -71,10 +65,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditTuteeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withLevel(VALID_LEVEL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withFee(VALID_FEE_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditTuteeDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withLevel(VALID_LEVEL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withFee(VALID_FEE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
