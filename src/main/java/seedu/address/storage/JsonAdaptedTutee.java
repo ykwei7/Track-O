@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -128,7 +129,7 @@ class JsonAdaptedTutee {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
-        final Set<Lesson> modelLessons = new HashSet<>(tuteeLessons);
+        final Set<Lesson> modelLessons = new LinkedHashSet<>(tuteeLessons);
 
         return new Tutee(modelName, modelPhone, modelLevel, modelAddress, modelRemark, modelTags, modelLessons);
     }

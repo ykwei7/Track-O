@@ -56,7 +56,7 @@ public class TuteeBuilder {
         address = tuteeToCopy.getAddress();
         remark = tuteeToCopy.getRemark();
         tags = new HashSet<>(tuteeToCopy.getTags());
-        lessons = new HashSet<>(tuteeToCopy.getLessons());
+        lessons = new LinkedHashSet<>(tuteeToCopy.getLessons());
     }
 
     /**
