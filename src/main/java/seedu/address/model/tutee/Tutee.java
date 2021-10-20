@@ -31,22 +31,9 @@ public class Tutee {
     /**
      * Every field must be present and not null.
      */
-    public Tutee(Name name, Phone phone, Level level, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, level, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.level = level;
-        this.address = address;
-        this.remark = remark;
-        this.tags.addAll(tags);
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
     public Tutee(Name name, Phone phone, Level level, Address address, Remark remark,
                  Set<Tag> tags, Set<Lesson> lessons) {
-        requireAllNonNull(name, phone, level, address, tags);
+        requireAllNonNull(name, phone, level, address, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.level = level;

@@ -87,12 +87,15 @@ public class AddLessonCommand extends Command {
         }
         Lesson lesson = new Lesson(subject, lessonTime, hourlyRate);
 
-        Tutee editedPerson = lastShownList.get(targetIndex.getZeroBased());
-        editedPerson.addLesson(lesson);
-        model.setTutee(lastShownList.get(targetIndex.getZeroBased()), editedPerson);
+        Tutee tuteeToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
+                tuteeToEdit.getAddress(), tuteeToEdit.getRemark(), tuteeToEdit.getTags(), tuteeToEdit.getLessons());
+        editedTutee.addLesson(lesson);
+
+        model.setTutee(tuteeToEdit, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedTutee));
     }
 
     @Override
