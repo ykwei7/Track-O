@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.address.model.lesson.Lesson;
@@ -42,7 +43,7 @@ public class TuteeBuilder {
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
-        lessons = new HashSet<>();
+        lessons = new LinkedHashSet<>();
     }
 
     /**

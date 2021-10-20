@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class Tutee {
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Lesson> lessons = new HashSet<>();
+    private final Set<Lesson> lessons = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.

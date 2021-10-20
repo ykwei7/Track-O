@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Set<Lesson> lessons = new HashSet<>(); // add command does not allow adding lessons straight away
+        Set<Lesson> lessons = new LinkedHashSet<>(); // add command does not allow adding lessons straight away
 
         Tutee tutee = new Tutee(name, phone, level, address, remark, tagList, lessons);
 

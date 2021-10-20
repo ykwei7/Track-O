@@ -89,7 +89,7 @@ public class Lesson {
     }
 
     /**
-     * Returns true if both lessons have the same subject and time.
+     * Returns true if both lessons have the same time, i.e. they overlap with one another.
      */
     @Override
     public boolean equals(Object other) {
@@ -102,14 +102,13 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return otherLesson.getSubject().equals(getSubject())
-                && otherLesson.getTime().equals(getTime());
+        return otherLesson.getTime().equals(getTime());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(subject, time);
+        return Objects.hash(time);
     }
 
     @Override

@@ -3,9 +3,10 @@ package seedu.address.model.util;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.model.ReadOnlyTrackO;
 import seedu.address.model.TrackO;
@@ -27,16 +28,15 @@ public class SampleDataUtil {
 
     public static final Remark EMPTY_REMARK = new Remark("");
 
-    public static final Set<Lesson> EMPTY_LESSONS = new HashSet<>();
+    public static final Set<Lesson> EMPTY_LESSONS = new LinkedHashSet<>();
 
-    public static final Set<Lesson> NON_EMPTY_LESSONS = new HashSet<>() {{
+    public static final Set<Lesson> NON_EMPTY_LESSONS = Stream.of(
             new Lesson(new Subject("Math"),
-                new Time(DayOfWeek.WEDNESDAY, LocalTime.parse("19:30"), LocalTime.parse("21:00")),
-                40);
+                    new Time(DayOfWeek.WEDNESDAY, LocalTime.parse("19:30"), LocalTime.parse("21:00")),
+            40),
             new Lesson(new Subject("Chinese"),
                 new Time(DayOfWeek.SATURDAY, LocalTime.parse("08:00"), LocalTime.parse("09:00")),
-                40);
-        }};
+            40)).collect(Collectors.toCollection(LinkedHashSet::new));
 
     public static Tutee[] getSampleTutees() {
 

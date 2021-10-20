@@ -102,7 +102,7 @@ public class Time {
     }
 
     /**
-     * Returns true if both times have the same day of occurrence, start time and end time.
+     * Returns true if both times have the same day of occurrence, and overlap with one another.
      */
     @Override
     public boolean equals(Object other) {
@@ -114,16 +114,24 @@ public class Time {
             return false;
         }
 
-        Time otherLesson = (Time) other;
-        return otherLesson.getDayOfOccurrence().equals(getDayOfOccurrence())
-                && otherLesson.getStartTime().equals(getStartTime())
-                && otherLesson.getEndTime().equals(getEndTime());
+        Time otherTime = (Time) other;
+        return otherTime.getDayOfOccurrence().equals(getDayOfOccurrence())
+                && isOverlap(otherTime);
+    }
+
+    /**
+     * Checks if the two time intervals overlap. Precondition of start time before end time is enforced
+     * by the constructor.
+     * Solution adapted from https://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap
+     */
+    private boolean isOverlap(Time other) {
+        return startTime.isBefore(other.getEndTime()) && other.getStartTime().isBefore(endTime);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(dayOfOccurrence, startTime, endTime);
+        return Objects.hash(dayOfOccurrence);
     }
 
     @Override

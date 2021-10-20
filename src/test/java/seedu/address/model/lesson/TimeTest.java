@@ -39,7 +39,6 @@ public class TimeTest {
     @Test
     public void equals() {
         Time time = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
-        Time differentTime = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(20, 0));
 
         // same object -> returns true
         assertTrue(time.equals(time));
@@ -48,13 +47,30 @@ public class TimeTest {
         Time timeCopy = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
         assertTrue(time.equals(timeCopy));
 
+        // same day and overlapping start time -> returns true
+        Time overlapStartTime = new Time(DayOfWeek.FRIDAY, LocalTime.of(11, 0), LocalTime.of(13, 0));
+        assertTrue(time.equals(overlapStartTime));
+
+        // same day and fully contained inside -> returns true
+        Time fullOverlapTime = new Time(DayOfWeek.FRIDAY, LocalTime.of(12, 15), LocalTime.of(16, 30));
+        assertTrue(time.equals(fullOverlapTime));
+
+        // same day and overlapping end time -> returns true
+        Time overlapEndTime = new Time(DayOfWeek.FRIDAY, LocalTime.of(17, 0), LocalTime.of(20, 0));
+        assertTrue(time.equals(overlapEndTime));
+
         // different types -> returns false
         assertFalse(time.equals(1));
 
         // null -> returns false
         assertFalse(time.equals(null));
 
-        // different time -> returns false
+        // different day -> returns false
+        Time differentDayTime = new Time(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.of(18, 0));
+        assertFalse(time.equals(differentDayTime));
+
+        // same day and back-to-back (no overlap) time -> returns false
+        Time differentTime = new Time(DayOfWeek.FRIDAY, LocalTime.of(18, 0), LocalTime.of(22, 0));
         assertFalse(time.equals(differentTime));
     }
 }

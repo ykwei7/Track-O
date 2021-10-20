@@ -44,11 +44,13 @@ public class LessonTest {
         Subject differentSubject = new Subject("German");
 
         Time time = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
-        Time differentTime = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(20, 0));
+        Time overlapTime = new Time(DayOfWeek.FRIDAY, LocalTime.of(11, 45), LocalTime.of(20, 0));
+        Time differentTime = new Time(DayOfWeek.FRIDAY, LocalTime.of(7, 45), LocalTime.of(8, 45));
 
         double cost = 45.0;
 
         Lesson lesson = new Lesson(subject, time, cost);
+        Lesson overlappedLesson = new Lesson(differentSubject, overlapTime, cost);
         Lesson differentLesson = new Lesson(differentSubject, differentTime, cost);
 
         // same object -> returns true
@@ -57,6 +59,9 @@ public class LessonTest {
         // same values -> returns true
         Lesson lessonCopy = new Lesson(subject, time, cost);
         assertTrue(lesson.equals(lessonCopy));
+
+        // overlapping lesson time -> returns true
+        assertTrue(lesson.equals(overlappedLesson));
 
         // different types -> returns false
         assertFalse(lesson.equals(1));

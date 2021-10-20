@@ -43,17 +43,17 @@ public class AddLessonCommandTest {
 
     @Test
     public void execute_addLessonUnfilteredList_success() throws ParseException {
-        Tutee secondTutee = model.getFilteredTuteeList().get(INDEX_SECOND_TUTEE.getZeroBased());
-        Tutee editedTutee = new TuteeBuilder(secondTutee)
+        Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        Tutee editedTutee = new TuteeBuilder(firstTutee)
                 .withLesson(LessonMock.getLesson())
                 .build();
 
-        AddLessonCommand addLessonCommand = AddLessonCommandParserMock.parse(INDEX_SECOND_TUTEE);
+        AddLessonCommand addLessonCommand = AddLessonCommandParserMock.parse(INDEX_FIRST_TUTEE);
 
         String expectedMessage = String.format(AddLessonCommand.MESSAGE_SUCCESS, editedTutee);
 
         Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
-        expectedModel.setTutee(secondTutee, editedTutee);
+        expectedModel.setTutee(firstTutee, editedTutee);
 
         assertCommandSuccess(addLessonCommand, model, expectedMessage, expectedModel);
     }
@@ -78,8 +78,6 @@ public class AddLessonCommandTest {
 
     @Test
     public void execute_invalidTuteeIndexUnfilteredList_failure() throws ParseException {
-        System.out.println(model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased()));
-
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size() + 1);
         AddLessonCommand addLessonCommand = AddLessonCommandParserMock.parse(outOfBoundIndex);
 
