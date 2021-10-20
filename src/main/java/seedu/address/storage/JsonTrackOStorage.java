@@ -32,7 +32,7 @@ public class JsonTrackOStorage implements TrackOStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTrackO> readTrackO() throws DataConversionException {
+    public Optional<ReadOnlyTrackO> readTrackO() throws DataConversionException, IOException {
         return readTrackO(filePath);
     }
 
@@ -42,7 +42,7 @@ public class JsonTrackOStorage implements TrackOStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTrackO> readTrackO(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyTrackO> readTrackO(Path filePath) throws DataConversionException, IOException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableTrackO> jsonTrackO = JsonUtil.readJsonFile(

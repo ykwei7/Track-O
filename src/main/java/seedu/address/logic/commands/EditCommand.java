@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
@@ -100,8 +101,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editTuteeDescriptor.getAddress().orElse(tuteeToEdit.getAddress());
         Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editTuteeDescriptor.getTags().orElse(tuteeToEdit.getTags());
+        Set<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
-        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress, updatedRemark, updatedTags);
+        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
+                updatedRemark, updatedTags, updatedLessons);
     }
 
     @Override

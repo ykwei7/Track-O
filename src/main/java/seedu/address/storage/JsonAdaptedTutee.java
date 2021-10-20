@@ -1,15 +1,20 @@
 package seedu.address.storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
@@ -31,16 +36,17 @@ class JsonAdaptedTutee {
     private final String address;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<String> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedTutee} with the given tutee details.
      */
     @JsonCreator
     public JsonAdaptedTutee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                            @JsonProperty("level") String level, @JsonProperty("address") String address,
-                            @JsonProperty("remark") String remark,
-                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-
+                             @JsonProperty("level") String level, @JsonProperty("address") String address,
+                             @JsonProperty("remark") String remark,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("lessons") List<String> lessons) {
         this.name = name;
         this.phone = phone;
         this.level = level;
@@ -49,12 +55,15 @@ class JsonAdaptedTutee {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
+        }
     }
 
     /**
      * Converts a given {@code Tutee} into this class for Jackson use.
      */
-    public JsonAdaptedTutee(Tutee source) {
+    public JsonAdaptedTutee(Tutee source) throws JsonProcessingException {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         level = source.getLevel().value;
@@ -63,6 +72,10 @@ class JsonAdaptedTutee {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        Set<Lesson> sourceLessons = source.getLessons();
+        for (Lesson lesson : sourceLessons) {
+            lessons.add(JsonUtil.toJsonString(lesson));
+        }
     }
 
     /**
@@ -70,10 +83,15 @@ class JsonAdaptedTutee {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tutee.
      */
-    public Tutee toModelType() throws IllegalValueException {
+    public Tutee toModelType() throws IllegalValueException, IOException {
         final List<Tag> tuteeTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             tuteeTags.add(tag.toModelType());
+        }
+
+        final List<Lesson> tuteeLessons = new ArrayList<>();
+        for (String lesson : lessons) {
+            tuteeLessons.add(JsonUtil.fromJsonString(lesson, Lesson.class));
         }
 
         if (name == null) {
@@ -111,7 +129,9 @@ class JsonAdaptedTutee {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
-        return new Tutee(modelName, modelPhone, modelLevel, modelAddress, modelRemark, modelTags);
+        final Set<Lesson> modelLessons = new LinkedHashSet<>(tuteeLessons);
+
+        return new Tutee(modelName, modelPhone, modelLevel, modelAddress, modelRemark, modelTags, modelLessons);
     }
 
 }

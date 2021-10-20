@@ -1,12 +1,15 @@
 package seedu.address.model.tutee;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,18 +27,29 @@ public class Tutee {
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Lesson> lessons = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Tutee(Name name, Phone phone, Level level, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, level, address, tags);
+    public Tutee(Name name, Phone phone, Level level, Address address, Remark remark,
+                 Set<Tag> tags, Set<Lesson> lessons) {
+        requireAllNonNull(name, phone, level, address, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.level = level;
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.lessons.addAll(lessons);
+    }
+
+    /**
+     * Adds a lesson to the tutee.
+     */
+    public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        this.lessons.add(lesson);
     }
 
     public Name getName() {
@@ -58,13 +72,20 @@ public class Tutee {
         return remark;
     }
 
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
     }
 
     /**
@@ -105,7 +126,7 @@ public class Tutee {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, level, address, tags);
+        return Objects.hash(name, phone, level, address, remark, tags, lessons);
     }
 
     @Override
@@ -123,6 +144,12 @@ public class Tutee {
         if (!tags.isEmpty()) {
             builder.append("\nTags: ");
             tags.forEach(builder::append);
+        }
+
+        Set<Lesson> lessons = getLessons();
+        if (!lessons.isEmpty()) {
+            builder.append("\nLessons: ");
+            lessons.forEach(builder::append);
         }
 
         builder.append("\nRemark: ")

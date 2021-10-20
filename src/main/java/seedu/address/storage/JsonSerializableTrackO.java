@@ -1,13 +1,15 @@
 package seedu.address.storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTrackO;
 import seedu.address.model.TrackO;
@@ -36,8 +38,11 @@ class JsonSerializableTrackO {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableTrackO}.
      */
-    public JsonSerializableTrackO(ReadOnlyTrackO source) {
-        tutees.addAll(source.getTuteeList().stream().map(JsonAdaptedTutee::new).collect(Collectors.toList()));
+    public JsonSerializableTrackO(ReadOnlyTrackO source) throws JsonProcessingException {
+        ObservableList<Tutee> sourceTuteeList = source.getTuteeList();
+        for (Tutee tutee : sourceTuteeList) {
+            tutees.add(new JsonAdaptedTutee(tutee));
+        }
     }
 
     /**
@@ -45,7 +50,7 @@ class JsonSerializableTrackO {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public TrackO toModelType() throws IllegalValueException {
+    public TrackO toModelType() throws IllegalValueException, IOException {
         TrackO trackO = new TrackO();
         for (JsonAdaptedTutee jsonAdaptedTutee : tutees) {
             Tutee tutee = jsonAdaptedTutee.toModelType();
