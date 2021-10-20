@@ -289,11 +289,11 @@ The application does not offer functionality for contacting tutees.
 | `* *`    | careless user                              | know what I typed wrongly when I enter a wrong command. | |
 | `* *`    | organized tutor                            | know which students I will be teaching later | prepare materials accordingly. |
 | `* *`    | disorganized tutor                         | see my schedule for the week | plan for unconfirmed tuition time slots. |
-| `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about fee collection during the class. |
+| `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about payment collection during the class. |
 | `* *`    | private tutor teaching students in groups  | take note of questions asked during a lesson | address them afterwards. |
 | `* *`    | private tutor                              | find a student's parents' contact | let them know if a student fails to turn up or shows misconduct. |
 | `* *`    | private tutor                              | make changes on the schedule of my classes when a tutee requires a make-up class. | |
-| `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s fee | contact them to pay up. |
+| `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s payment | contact them to pay up. |
 | `* *`    | private tutor                              | retrieve an ex-student's data back into the database | update their progress if they wish to return to class. |
 | `* *`    | private tutor                              | track the progress of each student in terms of their grades | adapt my methods of teaching. |
 | `*`      | first-time user                            | experiment with the basic commands with sample data | familiarise myself with the commands in a safe space. |

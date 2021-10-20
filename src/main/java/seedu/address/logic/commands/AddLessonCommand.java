@@ -89,7 +89,8 @@ public class AddLessonCommand extends Command {
 
         Tutee tuteeToEdit = lastShownList.get(targetIndex.getZeroBased());
         Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
-                tuteeToEdit.getAddress(), tuteeToEdit.getRemark(), tuteeToEdit.getTags(), tuteeToEdit.getLessons());
+                tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), tuteeToEdit.getRemark(), tuteeToEdit.getTags(),
+                tuteeToEdit.getLessons());
         editedTutee.addLesson(lesson);
 
         model.setTutee(tuteeToEdit, editedTutee);
