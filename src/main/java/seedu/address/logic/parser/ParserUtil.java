@@ -2,6 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +14,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
@@ -120,5 +128,69 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into a {@code DayOfWeek}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dayOfWeek} is invalid.
+     */
+    public static DayOfWeek parseDayOfWeek(String dayOfWeek) throws ParseException {
+        requireNonNull(dayOfWeek);
+        String trimmedDayOfWeek = dayOfWeek.trim();
+        try {
+            return DayOfWeek.of(Integer.parseInt(trimmedDayOfWeek));
+        } catch (DateTimeException | NumberFormatException e) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS_INVALID_DAY);
+        }
+    }
+
+    /**
+     * Parses a {@code String localTime} into a {@code LocalTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code localTime} is invalid.
+     */
+    public static LocalTime parseLocalTime(String localTime) throws ParseException {
+        requireNonNull(localTime);
+        String trimmedLocalTime = localTime.trim();
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            return LocalTime.parse(trimmedLocalTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS_INVALID_LOCALTIME);
+        }
+    }
+
+    /**
+     * Parses a {@code String subject} into a {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses a {@code String hourlyRate} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code hourlyRate} is invalid.
+     */
+    public static double parseHourlyRate(String hourlyRate) throws ParseException {
+        requireNonNull(hourlyRate);
+        String trimmedHourlyRate = hourlyRate.trim();
+        if (!Lesson.isValidHourlyRate(trimmedHourlyRate)) {
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
+        }
+        return Double.parseDouble(hourlyRate);
     }
 }

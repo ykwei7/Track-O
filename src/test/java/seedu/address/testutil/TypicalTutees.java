@@ -11,17 +11,26 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.TrackO;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.tutee.Tutee;
 
 /**
  * A utility class containing a list of {@code Tutee} objects to be used in tests.
  */
 public class TypicalTutees {
+
+    public static final Lesson LESSON = new Lesson(
+            new Subject("Physics"),
+            new Time(DayOfWeek.SUNDAY, LocalTime.parse("12:30"), LocalTime.parse("14:30")), 40.0);
 
     public static final Tutee ALICE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLevel("p1")
@@ -30,8 +39,7 @@ public class TypicalTutees {
     public static final Tutee BENSON = new TuteeBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withLevel("p2").withPhone("98765432")
-            .withRemark("Good progress")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withLesson(LESSON).build();
     public static final Tutee CARL = new TuteeBuilder().withName("Carl Kurz").withPhone("95352563")
             .withLevel("p3").withAddress("wall street").build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
