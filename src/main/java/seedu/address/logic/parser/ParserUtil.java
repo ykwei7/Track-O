@@ -210,4 +210,13 @@ public class ParserUtil {
         }
         return Double.parseDouble(hourlyRate);
     }
+
+    public static String parsePaymentValue(String paymentValue) throws ParseException {
+        requireNonNull(paymentValue);
+        String trimmedPayment = paymentValue.trim();
+        if (!Payment.isValidPayment(trimmedPayment)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedPayment;
+    }
 }

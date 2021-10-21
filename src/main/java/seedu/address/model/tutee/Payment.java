@@ -117,6 +117,14 @@ public class Payment {
                 && value.equals(((Payment) other).value)); // state check
     }
 
+    public LocalDate getPayByDate() {
+        return this.payByDate;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();

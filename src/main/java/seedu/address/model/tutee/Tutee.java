@@ -166,6 +166,8 @@ public class Tutee {
         builder.append("\nRemark: ")
                 .append(getRemark());
 
+        builder.append("\n");
+
         return builder.toString();
     }
 
