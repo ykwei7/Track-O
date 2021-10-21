@@ -154,6 +154,30 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Get feature
+
+#### Rationale
+
+The initial implementation showcases all the information on the tutee card viewer.
+However, when more information of a tutee is added, it may clog up the viewer with 
+less relevant information. The `get` feature hence solves this through only
+listing this additional information when necessary.
+
+#### Current Implementation
+
+The current implementation uses indexing to identify
+the tutee selected. For instance, `get 2` will list the information
+of the second tutee found on the list. The information to be listed is based on
+`Tutee#toString()` which contains additional information on fields such as `remark` and `lesson`.
+
+#### Design considerations:
+
+**Aspect: How `get` executes:**
+
+* **Current execution** Prints information of tutee to output.
+    * Pros: Displays information on output terminal.
+    * Cons: May be less aesthetic compared to initial implementation.
+    
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
