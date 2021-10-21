@@ -79,8 +79,11 @@ public class Payment {
      * Returns true if a given list is a valid payment history.
      */
     public static boolean isValidPaymentHistory(List<String> paymentHistory) {
-        for (String entry : paymentHistory) {
-            if (!(isValidPayByDate(entry) || entry.equals("Never"))) {
+        if (!paymentHistory.get(0).equals("Never")) {
+            return false;
+        }
+        for (int i = 1; i < paymentHistory.size(); i++) {
+            if (!isValidPayByDate(paymentHistory.get(i))) {
                 return false;
             }
         }
@@ -96,6 +99,7 @@ public class Payment {
             return;
         } else {
             paymentHistory.clear();
+            assert paymentHistory.isEmpty() : "paymentHistory should be empty";
             for (String payment : historyToCopy) {
                 this.paymentHistory.add(payment);
             }
