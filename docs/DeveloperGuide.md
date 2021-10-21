@@ -169,12 +169,12 @@ the first letter of the education level in lowercase, followed by the year of st
 #### Design
 The `value` field of education level in Tutee class is in the abbreviation form. 
 In `TuteeCard`, the string displayed is `stringRepresentation`, 
-which is the parsed output of value that returns the full name of the education level. 
-For example, `stringRepresentation` of `p5` will output `Primary 5`. 
+which is the returned value of the parse method in Level class, using `value` as the parameter. 
+For example, `stringRepresentation` of `p5` is `Primary 5`. 
 
 Both `value` and `stringRepresentation` are fields belonging to Level. 
 This is designed for better readability in displaying tutees while ensuring the 
-abbreviation can be obtained using `getLevel()` method, instead of the string representation.
+abbreviation can be obtained using `getLevel()` method in Tutee, instead of returning the string representation.
 
 #### Restrictions
 1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
