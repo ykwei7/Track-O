@@ -154,6 +154,35 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Education Level of tutees
+
+Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`, 
+followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters: 
+the first letter of the education level in lowercase, followed by the year of study.
+
+#### Supported Education Levels
+
+* Primary: 1 to 6
+* Secondary: 1 to 5
+* Junior College: 1 to 2
+
+#### Design
+The `value` field of education level in Tutee class is in the abbreviation form. 
+In TuteeCard, the string displayed is `stringRepresentation`, 
+which is the parsed output of value that returns the full name of the education level. 
+
+For example, `stringRepresentation` of `p5` will output `Primary 5`. 
+Both `value` and `stringRepresentation` are fields belonging to Level. 
+This is designed for better readability in displaying tutees while ensuring the 
+abbreviation can be obtained using `getLevel()` method, instead of the string representation.
+
+#### Restrictions
+1. The first character of the education level has to be lowercase.
+2. The second character has to be a valid year of study according to its respective level.
+
+Failing either restriction will result in the constraint message showing up in the console component, 
+and the tutee will not be created/modified.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
