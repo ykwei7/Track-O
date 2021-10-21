@@ -154,6 +154,57 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Payment tracking feature
+
+The payment tracking feature is facilitated by `Payment`, `PaymentCommand`[Proposed]
+and `PaymentCommandParser`[Proposed].
+
+`Payment` contains:
+* `value`  — the amount of fees incurred by the Tutee since the last payment date
+* `payByDate`  — the date which the Tutee has to pay the `value` by
+* `paymentHistory`  — a list of dates which the Tutee previously paid on
+* `isOverdue` — a boolean flag which denotes if the payment is overdue
+
+Parsing the user's input through `PaymentCommand`, the user may:
+* `Payment#addPayment(Lesson, int)`  — Adds the cost of `Lesson` to total fees incurred, `int` times 
+* `Payment#editPayment(float)`  — Updates the total fees incurred to the specified `float` amount
+* `Payment#setPayByDate(LocalDate)`  — Updates the pay-by date for the Tutee to the specified `LocalDate`
+* `Payment#receivePayment()`  — Resets the Tutee's incurred fees and updates their payment history
+
+[Proposed] Given below is an example scenario of how payments may be tracked.
+
+Step 1. The user adds a new `Tutee` John to Track-O and the `Payment` object is initialized with default values.
+
+![PaymentTracking1](images/PaymentTracking1.png)
+
+Step 2. After adding lessons to John, the user executes "payment 1 add/2 l/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` set.
+
+![PaymentTracking2](images/PaymentTracking2.png)
+
+Step 3. The user executes "payment 1 edit/180" after accidentally overcharging fees previously.
+
+![PaymentTracking3](images/PaymentTracking3.png)
+
+Step 4. The user executes "payment 1 by/25-10-2021", updating the `Payment#payByDate` for John.
+
+![PaymentTracking4](images/PaymentTracking4.png)
+
+Step 5. In the event that the current date passes the `Payment#payByDate`, the `Payment#isOverdue` flag will turn `true`.
+
+![PaymentTracking5](images/PaymentTracking5.png)
+
+Step 6. The user executes `payment 1 receive` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
+
+![PaymentTracking6](images/PaymentTracking6.png)
+
+
+The following sequence diagram shows how the add payment operation works, which is similar to how the other payment functions work as well:
+
+![PaymentSequenceDiagram](images/PaymentSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
 ### Schedule
 
 `Schedule` helps to list the weekly lessons of the tutor.
@@ -227,6 +278,7 @@ Due to the regex validation when creating tutee, the first char will be a valid 
 
 Failing either restriction will result in the constraint message showing up in the console component, 
 and the tutee will not be created/modified.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -363,11 +415,11 @@ The application does not offer functionality for contacting tutees.
 | `* *`    | careless user                              | know what I typed wrongly when I enter a wrong command. | |
 | `* *`    | organized tutor                            | know which students I will be teaching later | prepare materials accordingly. |
 | `* *`    | disorganized tutor                         | see my schedule for the week | plan for unconfirmed tuition time slots. |
-| `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about fee collection during the class. |
+| `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about payment collection during the class. |
 | `* *`    | private tutor teaching students in groups  | take note of questions asked during a lesson | address them afterwards. |
 | `* *`    | private tutor                              | find a student's parents' contact | let them know if a student fails to turn up or shows misconduct. |
 | `* *`    | private tutor                              | make changes on the schedule of my classes when a tutee requires a make-up class. | |
-| `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s fee | contact them to pay up. |
+| `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s payment | contact them to pay up. |
 | `* *`    | private tutor                              | retrieve an ex-student's data back into the database | update their progress if they wish to return to class. |
 | `* *`    | private tutor                              | track the progress of each student in terms of their grades | adapt my methods of teaching. |
 | `*`      | first-time user                            | experiment with the basic commands with sample data | familiarise myself with the commands in a safe space. |

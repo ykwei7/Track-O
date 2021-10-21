@@ -25,6 +25,7 @@ public class Tutee {
 
     // Data fields
     private final Address address;
+    private final Payment payment;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Lesson> lessons = new LinkedHashSet<>();
@@ -32,7 +33,8 @@ public class Tutee {
     /**
      * Every field must be present and not null.
      */
-    public Tutee(Name name, Phone phone, Level level, Address address, Remark remark,
+
+    public Tutee(Name name, Phone phone, Level level, Address address, Payment payment, Remark remark,
                  Set<Tag> tags, Set<Lesson> lessons) {
         requireAllNonNull(name, phone, level, address, tags, lessons);
         this.name = name;
@@ -41,6 +43,7 @@ public class Tutee {
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.payment = payment == null ? Payment.initializePayment() : payment;
         this.lessons.addAll(lessons);
     }
 
@@ -66,6 +69,10 @@ public class Tutee {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Payment getPayment() {
+        return payment;
     }
 
     public Remark getRemark() {
@@ -120,13 +127,15 @@ public class Tutee {
                 && otherTutee.getPhone().equals(getPhone())
                 && otherTutee.getLevel().equals(getLevel())
                 && otherTutee.getAddress().equals(getAddress())
+                && otherTutee.getPayment().equals(getPayment())
                 && otherTutee.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, level, address, remark, tags, lessons);
+        return Objects.hash(name, phone, level, address, payment,
+                            remark, tags, lessons);
     }
 
     @Override
@@ -138,7 +147,9 @@ public class Tutee {
                 .append("\nLevel: ")
                 .append(getLevel())
                 .append("\nAddress: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("\nFees incurred: ")
+                .append(getPayment());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
