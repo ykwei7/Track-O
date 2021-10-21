@@ -192,6 +192,42 @@ The tutor's schedule can be accessed via the `schedule` command. The `ArrayList<
     * Pros: The tutor can view their schedule directly on their hard disk without starting up Track-O.
     * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out. 
 
+### Education Level of tutees
+
+Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`, 
+followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters: 
+the first letter of the education level in lowercase, followed by the year of study.
+
+#### Supported Education Levels
+
+* Primary: 1 to 6
+* Secondary: 1 to 5
+* Junior College: 1 to 2
+
+#### Design
+The `value` field of education level in Tutee class is in the abbreviation form. 
+In `TuteeCard`, the string displayed is `stringRepresentation`, 
+which is the returned value of the `parse` method in Level class, using `value` as the parameter. 
+For example, `stringRepresentation` of `p5` is `Primary 5`. 
+
+####
+Both `value` and `stringRepresentation` are fields belonging to Level.
+This is designed for better readability in displaying tutees. Having two fields ensures that the
+abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back 
+to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
+education level.
+
+#### Parse method
+The `parse` method splits the string parameter into a charArray and switches case according to the first char.
+Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
+
+#### Restrictions
+1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
+2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
+
+Failing either restriction will result in the constraint message showing up in the console component, 
+and the tutee will not be created/modified.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
