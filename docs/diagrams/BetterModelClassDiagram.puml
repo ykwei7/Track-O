@@ -16,6 +16,7 @@ Tutee -up-> "*" Tag
 
 Tutee *--> Name
 Tutee *--> Phone
-Tutee *--> Email
+Tutee *--> Level
 Tutee *--> Address
+Tutee *--> Remark
 @enduml
