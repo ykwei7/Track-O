@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After command "payment 1 add/2 l/1"
+
+package "Payment tracking" <<rectangle>> {
+
+    class Tutee as "__John:Tutee__"
+    class Payment as "__p:Payment__" {
+        value = "360"
+        payByDate = "-"
+        paymentHistory = ["Never"]
+        isOverdue = false
+        addPayment(Lesson, int)
+        editPayment(float)
+        receivePayment()
+        setPayByDate(LocalDate)
+    }
+    class Lesson1 as "__lesson1:Lesson__" {
+        subject = "Science"
+        time = "Mon 11:00 - "13:00"
+        hourlyRate = 90.00
+        cost = 180.00
+    }
+    class Lesson2 as "__lesson2:Lesson__" {
+        subject = "Math"
+        time = "Tue 12:00 - 13:30"
+        hourlyRate = 100.00
+        cost = 150.00
+    }
+}
+Tutee -right-> Payment : > owes
+Tutee -left-> Lesson1 : > has
+Tutee -down-> Lesson2 : > has
+
+show Payment members
+show Lesson1 members
+show Lesson2 members
+@end

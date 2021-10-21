@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -9,6 +10,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 import seedu.address.model.tutee.Remark;
 import seedu.address.model.tutee.Tutee;
@@ -23,12 +25,14 @@ public class TuteeBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_LEVEL = "p1";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_FEE = "0";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;
     private Level level;
     private Address address;
+    private Payment payment;
     private Remark remark;
     private Set<Tag> tags;
     private Set<Lesson> lessons;
@@ -41,6 +45,7 @@ public class TuteeBuilder {
         phone = new Phone(DEFAULT_PHONE);
         level = new Level(DEFAULT_LEVEL);
         address = new Address(DEFAULT_ADDRESS);
+        payment = new Payment(DEFAULT_FEE, null);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
         lessons = new LinkedHashSet<>();
@@ -54,6 +59,7 @@ public class TuteeBuilder {
         phone = tuteeToCopy.getPhone();
         level = tuteeToCopy.getLevel();
         address = tuteeToCopy.getAddress();
+        payment = tuteeToCopy.getPayment();
         remark = tuteeToCopy.getRemark();
         tags = new HashSet<>(tuteeToCopy.getTags());
         lessons = new LinkedHashSet<>(tuteeToCopy.getLessons());
@@ -92,6 +98,14 @@ public class TuteeBuilder {
     }
 
     /**
+     * Sets the {@code Fee} of the {@code Tutee} that we are building.
+     */
+    public TuteeBuilder withPayment(String payment, LocalDate payByDate) {
+        this.payment = new Payment(payment, payByDate);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Tutee} that we are building.
      */
     public TuteeBuilder withPhone(String phone) {
@@ -116,7 +130,7 @@ public class TuteeBuilder {
     }
 
     public Tutee build() {
-        return new Tutee(name, phone, level, address, remark, tags, lessons);
+        return new Tutee(name, phone, level, address, payment, remark, tags, lessons);
     }
 
 }
