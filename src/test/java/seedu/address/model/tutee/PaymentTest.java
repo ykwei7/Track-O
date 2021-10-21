@@ -1,14 +1,14 @@
 package seedu.address.model.tutee;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 public class PaymentTest {
 
@@ -47,7 +47,7 @@ public class PaymentTest {
 
         // invalid payment dates
         assertFalse(Payment.isValidPayByDate("")); // empty string
-        assertFalse(Payment.isValidPayByDate(" "));// spaces only
+        assertFalse(Payment.isValidPayByDate(" ")); // spaces only
         assertFalse(Payment.isValidPayByDate("20 October 2021")); // Incorrect DateTime format
         assertFalse(Payment.isValidPayByDate("32-12-2021")); // Impossible day
         assertFalse(Payment.isValidPayByDate("01-13-2021")); // Impossible month
