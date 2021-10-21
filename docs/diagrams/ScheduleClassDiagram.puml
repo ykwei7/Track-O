@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor SCHEDULE_COLOR
+skinparam classBackgroundColor SCHEDULE_COLOR
+
+package Model{
+
+Class Lesson
+Class Tutee
+Class Schedule
+Class ModelManager
+
+Schedule .r.> ModelManager
+Schedule -d-> Lesson
+Tutee -r-> Lesson : attends >
+ModelManager --> Tutee : tutee list
+
+}
+
+@enduml
