@@ -154,6 +154,53 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Payment tracking feature (Amos)
+
+The payment tracking feature is facilitated by `Payment`, `PaymentCommand`[Proposed]
+and `PaymentCommandParser`[Proposed].
+
+`Payment` contains:
+* `value`  — the amount of fees incurred by the Tutee since the last payment date
+* `payByDate`  — the date which the Tutee has to pay the `value` by
+* `paymentHistory`  — a list of dates which the Tutee previously paid on
+* `isOverdue` — a boolean flag which denotes if the payment is overdue
+
+Parsing the user's input through `PaymentCommand`, the user may:
+* `Payment#addPayment(Lesson, int)`  — Adds the cost of `Lesson` to total fees incurred, `int` times 
+* `Payment#editPayment(float)`  — Updates the total fees incurred to the specified `float` amount
+* `Payment#setPayByDate(LocalDate)`  — Updates the pay-by date for the Tutee to the specified `LocalDate`
+* `Payment#receivePayment()`  — Resets the Tutee's incurred fees and updates their payment history
+
+[Proposed] Given below is an example scenario of how payments may be tracked.
+
+Step 1. The user adds a new `Tutee` John to Track-O.
+![PaymentTracking1](images/PaymentTracking1.png)
+
+Step 2. After adding lessons to John, the user executes "payment 1 add/2 l/1", 
+where John is index `1` in the `Tutee` list.
+![PaymentTracking2](images/PaymentTracking2.png)
+
+Step 3. The user executes "payment 1 edit/180", accidentally overcharging fees previously.
+where John is index `1` in the `Tutee` list.
+![PaymentTracking3](images/PaymentTracking3.png)
+
+Step 4. The user executes "payment 1 by/25-10-2021", updating the `Payment#payByDate` for John.
+![PaymentTracking4](images/PaymentTracking4.png)
+
+Step 5. In the event that the current date passes the `Payment#payByDate`,
+the `Payment#isOverdue` flag will turn `true`.
+![PaymentTracking5](images/PaymentTracking5.png)
+
+Step 6. The user executes `payment 1 receive` and receives John's payment.
+the `Payment#isOverdue` flag will turn `true`.
+![PaymentTracking6](images/PaymentTracking6.png)
+
+
+The following sequence diagram shows how the add payment operation works, which is similar to how the other payment 
+functions work as well:
+![PaymentSequenceDiagram](images/PaymentSequenceDiagram.png)
+:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to 
+a limitation of PlantUML, the lifeline reaches the end of diagram.
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
