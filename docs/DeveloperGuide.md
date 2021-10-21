@@ -154,6 +154,44 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Schedule
+
+`Schedule` helps to list the weekly lessons of the tutor.
+
+#### Rationale
+
+A tutor may be teaching many lessons to many tutees. It may be difficult to track their upcoming lessons, hence `Schedule` solves these through listing these upcoming lessons.
+
+#### Current Implementation
+
+The `Schedule` class consists of a `HashSet<Lesson>` that stores a set of lessons and an `ArrayList<Lesson>` that stores a list of lessons sorted by time.
+
+On the start-up of Track-O, before the tutor inputs any commands, the tutee list is iterated through and each `Lesson` of each tutee is added to the `HashSet<Lesson>` set of lessons. Afterwards, a copy of the set of lessons is sorted and stored as an `ArrayList<Lesson>`.
+
+![ScheduleClassDiagram](images/ScheduleClassDiagram.png)
+
+*Figure: Structure of `Schedule`*
+
+These fields in the `Schedule` class will be updated after every execution of commands that modify a tutee's lessons. The activity diagram below shows how `Schedule` is involved when an `addlesson` command is executed.
+
+![AddLessonCommandActivityDiagram](images/AddLessonCommandActivityDiagram.png)
+
+*Figure: Steps involved in adding a lesson*
+
+The tutor's schedule can be accessed via the `schedule` command. The `ArrayList<Lesson>` field that stores the sorted lessons will be displayed.
+
+#### Design considerations:
+
+**Aspect: How the schedule is to be stored**
+
+* **Option 1 (current choice):** Retrieves the schedule by iterating through the `TuteeList` on start-up.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues when the number of tutees and the number of lessons become excessively large.
+
+* **Option 2:** Retrieves the schedule from another JSON file (e.g: `schedule.json`)
+    * Pros: The tutor can view their schedule directly on their hard disk without starting up Track-O.
+    * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out. 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
