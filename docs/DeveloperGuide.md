@@ -203,6 +203,83 @@ The following sequence diagram shows how the add payment operation works, which 
 ![PaymentSequenceDiagram](images/PaymentSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+
+### Schedule
+
+`Schedule` helps to list the weekly lessons of the tutor.
+
+#### Rationale
+
+A tutor may be teaching many lessons to many tutees. It may be difficult to track their upcoming lessons, hence `Schedule` solves these through listing these upcoming lessons.
+
+#### Current Implementation
+
+The `Schedule` class consists of a `HashSet<Lesson>` that stores a set of lessons and an `ArrayList<Lesson>` that stores a list of lessons sorted by time.
+
+On the start-up of Track-O, before the tutor inputs any commands, the tutee list is iterated through and each `Lesson` of each tutee is added to the `HashSet<Lesson>` set of lessons. Afterwards, a copy of the set of lessons is sorted and stored as an `ArrayList<Lesson>`.
+
+![ScheduleClassDiagram](images/ScheduleClassDiagram.png)
+
+*Figure: Structure of `Schedule`*
+
+These fields in the `Schedule` class will be updated after every execution of commands that modify a tutee's lessons. The activity diagram below shows how `Schedule` is involved when an `addlesson` command is executed.
+
+![AddLessonCommandActivityDiagram](images/AddLessonCommandActivityDiagram.png)
+
+*Figure: Steps involved in adding a lesson*
+
+The tutor's schedule can be accessed via the `schedule` command. The `ArrayList<Lesson>` field that stores the sorted lessons will be displayed.
+
+#### Design considerations:
+
+**Aspect: How the schedule is to be stored**
+
+* **Option 1 (current choice):** Retrieves the schedule by iterating through the `TuteeList` on start-up.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues when the number of tutees and the number of lessons become excessively large.
+
+* **Option 2:** Retrieves the schedule from another JSON file (e.g: `schedule.json`)
+    * Pros: The tutor can view their schedule directly on their hard disk without starting up Track-O.
+    * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out. 
+
+### Education Level of tutees
+
+Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`, 
+followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters: 
+the first letter of the education level in lowercase, followed by the year of study.
+
+#### Supported Education Levels
+
+* Primary: 1 to 6
+* Secondary: 1 to 5
+* Junior College: 1 to 2
+
+#### Design
+The `value` field of education level in Tutee class is in the abbreviation form. 
+In `TuteeCard`, the string displayed is `stringRepresentation`, 
+which is the returned value of the `parse` method in Level class, using `value` as the parameter. 
+For example, `stringRepresentation` of `p5` is `Primary 5`. 
+
+####
+Both `value` and `stringRepresentation` are fields belonging to Level.
+This is designed for better readability in displaying tutees. Having two fields ensures that the
+abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back 
+to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
+education level.
+
+#### Parse method
+The `parse` method splits the string parameter into a charArray and switches case according to the first char.
+Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
+
+#### Restrictions
+1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
+2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
+
+Failing either restriction will result in the constraint message showing up in the console component, 
+and the tutee will not be created/modified.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
