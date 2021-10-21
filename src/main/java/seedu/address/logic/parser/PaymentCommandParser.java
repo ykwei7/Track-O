@@ -41,14 +41,14 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
             }
 
-            String paymentValue = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_NAME).get());
-            return new PaymentAddCommand(index, paymentValue);
+            return new PaymentAddCommand(index);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).isPresent()) {
             if (anyPrefixesPresent(argMultimap,PREFIX_LESSON , PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_RECEIVED_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
             }
-            return new PaymentSetAmountCommand(index);
+            String paymentValue = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
+            return new PaymentSetAmountCommand(index, paymentValue);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_DATE).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_LESSON, PREFIX_PAYMENT_RECEIVED_DATE)) {

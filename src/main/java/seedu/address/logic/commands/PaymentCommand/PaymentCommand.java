@@ -62,8 +62,12 @@ public class PaymentCommand extends Command {
             + PaymentReceiveCommand.MESSAGE_USAGE
             + "\n";
 
-    public static final String MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS = "Payment details of %1$s:\n%s\n\n"
-            + MESSAGE_USAGE + ALL_INSTRUCTIONS;
+    public static final String SEPARATOR = "----------------HOW TO USE PAYMENT----------------\n";
+    public static final String MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS = "Payment details of %s:\n%s\n\n"
+            + SEPARATOR
+            + MESSAGE_USAGE
+            + ALL_INSTRUCTIONS;
+
 
     private final Index targetIndex;
 
@@ -88,9 +92,10 @@ public class PaymentCommand extends Command {
         }
 
         Tutee tuteeToGet = lastShownList.get(targetIndex.getZeroBased());
+
         //Edit this portion to link payment details instead of tutee
         String tuteePaymentDetails = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, tuteeToGet.getName()
-                , tuteeToGet.getPayment().toString());
+                , tuteeToGet.getPayment());
         return new CommandResult(tuteePaymentDetails);
     }
 

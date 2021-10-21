@@ -27,33 +27,9 @@ public class PaymentAddCommand extends PaymentCommand {
             + MESSAGE_USAGE + ALL_INSTRUCTIONS;
 
     private final Index targetIndex;
-    private final String value;
-    public PaymentAddCommand(Index targetIndex, String value) {
+
+    public PaymentAddCommand(Index targetIndex) {
         super(targetIndex);
         this.targetIndex = targetIndex;
-        this.value = value;
-    }
-
-    /**
-     * Executes the command and returns the result message.
-     *
-     * @param model {@code Model} which the command should operate on.
-     * @return feedback message of the operation result for display
-     * @throws CommandException If an error occurs during command execution.
-     */
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Tutee> lastShownList = model.getFilteredTuteeList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
-        }
-
-        Tutee tuteeToGet = lastShownList.get(targetIndex.getZeroBased());
-
-        Tutee editedTutee = editedPaymentDetailsTutee(tuteeToGet, value, tuteeToGet.getPayment().getPayByDate());
-
-        return new CommandResult(String.format(ADD_TUTEE_PAYMENT_SUCCESS, editedTutee));
     }
 }
