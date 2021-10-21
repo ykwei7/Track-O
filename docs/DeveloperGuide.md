@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,6 +154,30 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Get feature
+
+#### Rationale
+
+The initial implementation showcases all the information on the tutee card viewer.
+However, when more information of a tutee is added, it may clog up the viewer with
+less relevant information. The `get` feature hence solves this through only
+listing this additional information when necessary.
+
+#### Current Implementation
+
+The current implementation uses indexing to identify
+the tutee selected. For instance, `get 2` will list the information
+of the second tutee found on the list. The information to be listed is based on
+`Tutee#toString()` which contains additional information on fields such as `remark` and `lesson`.
+
+#### Design considerations:
+
+**Aspect: How `get` executes:**
+
+* **Current execution** Prints information of tutee to output.
+    * Pros: Displays information on output terminal.
+    * Cons: May be less aesthetic compared to initial implementation.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -224,13 +248,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the tutee being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the tutee being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -289,11 +313,11 @@ The application does not offer functionality for contacting tutees.
 | `* *`    | careless user                              | know what I typed wrongly when I enter a wrong command. | |
 | `* *`    | organized tutor                            | know which students I will be teaching later | prepare materials accordingly. |
 | `* *`    | disorganized tutor                         | see my schedule for the week | plan for unconfirmed tuition time slots. |
-| `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about fee collection during the class. |
+| `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about payment collection during the class. |
 | `* *`    | private tutor teaching students in groups  | take note of questions asked during a lesson | address them afterwards. |
 | `* *`    | private tutor                              | find a student's parents' contact | let them know if a student fails to turn up or shows misconduct. |
 | `* *`    | private tutor                              | make changes on the schedule of my classes when a tutee requires a make-up class. | |
-| `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s fee | contact them to pay up. |
+| `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s payment | contact them to pay up. |
 | `* *`    | private tutor                              | retrieve an ex-student's data back into the database | update their progress if they wish to return to class. |
 | `* *`    | private tutor                              | track the progress of each student in terms of their grades | adapt my methods of teaching. |
 | `*`      | first-time user                            | experiment with the basic commands with sample data | familiarise myself with the commands in a safe space. |
@@ -318,7 +342,7 @@ The application does not offer functionality for contacting tutees.
 1. User requests for help regarding how to use the commands.
 2. System provides the usage of commands.
 
-    Use case ends.
+   Use case ends.
 
 <br>
 
@@ -328,13 +352,13 @@ The application does not offer functionality for contacting tutees.
 1. User requests to import existing data.
 2. System processes and shows the data.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 * 1a. Data is of an improper format.
-  * 1a1. System shows an error message.
-  
-    Use case resumes at step 1.
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
 
 <br>
 
@@ -348,9 +372,9 @@ The application does not offer functionality for contacting tutees.
 
 **Extensions**
 * 1a. Some compulsory details of the tutee are not included.
-  * 1a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 <br>
 
@@ -360,7 +384,7 @@ The application does not offer functionality for contacting tutees.
 1. User requests to view all tutees.
 2. System shows a list of tutees.
 
-    Use case ends.
+   Use case ends.
 
 <br>
 
@@ -377,12 +401,12 @@ The application does not offer functionality for contacting tutees.
 **Extensions**
 * 2a. The list is empty.
 
-    Use case ends.
+  Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. System shows an error message.
+    * 3a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 <br>
 
@@ -402,9 +426,9 @@ The application does not offer functionality for contacting tutees.
   Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. System shows an error message.
+    * 3a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 <br>
 
@@ -420,9 +444,9 @@ The application does not offer functionality for contacting tutees.
 
 **Extensions**
 * 3a. The given query is empty.
-  * 3a1. System shows an error message.
+    * 3a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 <br>
 
@@ -451,17 +475,17 @@ The application does not offer functionality for contacting tutees.
 **Extensions**
 * 2a. The list is empty.
 
-    Use case ends.
+  Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. System shows an error message.
+    * 3a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 * 3b. No details of the tutee are provided.
-  * 3b1. System shows an error message.
-    
-    Use case resumes at step 2.
+    * 3b1. System shows an error message.
+
+      Use case resumes at step 2.
 
 <br>
 
@@ -483,15 +507,15 @@ The application does not offer functionality for contacting tutees.
 
 **Extensions**
 * 1a. No group name is provided.
-  * 1a1. System shows an error message.
-  
-    Use case resumes at step 1.
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
 
 * 1b. The group name provided has already been used.
-  * 1b1. System shows an error message.
+    * 1b1. System shows an error message.
 
-    Use case resumes at step 1.
-  
+      Use case resumes at step 1.
+
 <br>
 
 **UC12: Add a tutee to a group**
@@ -510,20 +534,20 @@ The application does not offer functionality for contacting tutees.
   Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. System shows an error message.
+    * 3a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 * 3b. No group name is provided.
-  * 3b1. System shows an error message.
+    * 3b1. System shows an error message.
 
-    Use case resumes at step 2.
-  
+      Use case resumes at step 2.
+
 * 3c. There is no group with the group name provided.
-  * 3c1. System shows an error message.
+    * 3c1. System shows an error message.
 
-    Use case resumes at step 2.
-  
+      Use case resumes at step 2.
+
 <br>
 
 **UC13: View tutees that belong to a group**
@@ -534,14 +558,14 @@ The application does not offer functionality for contacting tutees.
 
 **Extensions**
 * 1a. No group name is provided.
-  * 1a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 * 1b. There is no group with the group name provided.
-  * 1b1. System shows an error message.
+    * 1b1. System shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 <br>
 
@@ -553,25 +577,25 @@ The application does not offer functionality for contacting tutees.
 
 **Extensions**
 * 1a. The given index is invalid.
-  * 1a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 * 1b. No group name is provided.
-  * 1b1. System shows an error message.
+    * 1b1. System shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 * 1c. There is no group with the group name provided.
-  * 1c1. System shows an error message.
+    * 1c1. System shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 * 1d. The tutee does not belong to the group.
-  * 1d1. System shows an error message.
+    * 1d1. System shows an error message.
 
-    Use case resumes at step 1.
-  
+      Use case resumes at step 1.
+
 <br>
 
 **UC15: Delete a group**
@@ -585,14 +609,14 @@ The application does not offer functionality for contacting tutees.
 
 **Extensions**
 * 1a. No group name is provided.
-  * 1a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 * 1b. There is no group with the group name provided.
-  * 1b1. System shows an error message.
+    * 1b1. System shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 <br>
 
@@ -634,15 +658,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -651,16 +675,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a tutee while all tutees are being shown
 
-   1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No tutee is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No tutee is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -668,6 +692,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
