@@ -201,8 +201,8 @@ Step 6. The user executes `payment 1 receive` and receives John's payment, updat
 The following sequence diagram shows how the add payment operation works, which is similar to how the other payment functions work as well:
 
 ![PaymentSequenceDiagram](images/PaymentSequenceDiagram.png)
-:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to 
-a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
