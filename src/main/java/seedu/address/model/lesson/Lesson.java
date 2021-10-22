@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Represents a Lesson in the application.
  */
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Hourly rate should only contain numbers expressed strictly in "
@@ -115,6 +115,11 @@ public class Lesson {
     public String toString() {
         // return "[" + subject + " " + time + "Hourly rate: $" + hourlyRate + "/hour Total cost: " + cost + "]";
         return String.format("[%s %s (Hourly rate: $%.2f/h, Total cost: $%.2f)]", subject, time, hourlyRate, cost);
+    }
+
+    @Override
+    public int compareTo(Lesson other) {
+        return time.compareTo(other.getTime());
     }
 
 }
