@@ -7,8 +7,11 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -118,6 +121,68 @@ public class ParserUtil {
             throw new ParseException(Level.MESSAGE_CONSTRAINTS);
         }
         return new Level(trimmedLevel);
+    }
+
+    /**
+     * Parses multiple {@code String levels} into an array of {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
+    public static String[] parseMultipleLevels(String levels) throws ParseException {
+        requireNonNull(levels);
+        String trimmedLevel = levels.trim();
+        String[] levelsSplitBySpace = trimmedLevel.split("\\s+");
+        List<String> arrayOfLevels = new ArrayList<>();
+
+        for (String levelName: levelsSplitBySpace) {
+            if (!Level.isValidLevel(levelName)) {
+                throw new ParseException(Level.MESSAGE_CONSTRAINTS);
+            }
+            arrayOfLevels.add(levelName);
+        }
+
+        String[] arrayOfLevelsInString = new String[arrayOfLevels.size()];
+        arrayOfLevelsInString = arrayOfLevels.toArray(arrayOfLevelsInString);
+        return arrayOfLevelsInString;
+    }
+
+    /**
+     * Parses multiple {@code String levels} into an array of {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
+    public static String[] parseMultipleSubjects(String subjects) throws ParseException {
+        requireNonNull(subjects);
+        String trimmedSubjects = subjects.trim();
+        String[] subjectsSplitBySpace = trimmedSubjects.split("\\s+");
+        List<String> arrayOfSubjects = new ArrayList<>();
+
+        for (String subjectName: subjectsSplitBySpace) {
+            if (!Subject.isValidSubject(subjectName)) {
+                throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+            }
+            arrayOfSubjects.add(subjectName);
+        }
+
+        String[] arrayOfSubjectsInString = new String[arrayOfSubjects.size()];
+        arrayOfSubjectsInString = arrayOfSubjects.toArray(arrayOfSubjectsInString);
+        return arrayOfSubjectsInString;
+    }
+
+    public static String[] parseIsOverdue(String overdue) throws ParseException {
+        requireNonNull(overdue);
+        String trimmedIsOverdue = overdue.trim();
+        String[] isOverdueSplitBySpace = trimmedIsOverdue.split("\\s+");
+
+        if (isOverdueSplitBySpace.length != 1
+                || !(isOverdueSplitBySpace[0].equals("true")
+                || isOverdueSplitBySpace[0].equals("false"))) {
+            throw new ParseException("Overdue flag can only be true or false.");
+        }
+
+        return isOverdueSplitBySpace;
     }
 
     /**

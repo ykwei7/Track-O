@@ -39,6 +39,15 @@ public class Level {
     }
 
     /**
+     * Returns the value of education level.
+     *
+     * @return the abbreviation of education level
+     */
+    public String getValue() {
+        return value;
+    }
+
+    /**
      * Returns the full string representation of an indexed education level.
      * The String will be used for UI display.
      *
