@@ -19,8 +19,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTrackO;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Schedule;
 import seedu.address.model.TrackO;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.JsonTrackOStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -90,7 +92,17 @@ public class MainApp extends Application {
             initialData = new TrackO();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        ModelManager modelManager = new ModelManager(initialData, userPrefs);
+        Schedule schedule = new Schedule(modelManager.getFilteredTuteeList());
+        try {
+            schedule.initSortedLessonsMap();
+        } catch (ScheduleClashException e) {
+            logger.warning("Clashes found in lessons. Will be starting with an empty Track-O");
+            initialData = new TrackO();
+            return new ModelManager(initialData, userPrefs);
+        }
+
+        return modelManager;
     }
 
     private void initLogging(Config config) {
