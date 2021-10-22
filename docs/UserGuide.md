@@ -95,7 +95,7 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd tutee in the address book.
 
-### Deleting a tutee : `get`
+### Obtaining details of a tutee : `get`
 
 Gets details of the specified tutee from our list of tutees.
 
