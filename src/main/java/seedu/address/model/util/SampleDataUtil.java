@@ -46,7 +46,7 @@ public class SampleDataUtil {
 
         return new Tutee[] {
             new Tutee(new Name("Alex Yeoh"), new Phone("87438807"), new Level("p1"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), new Payment("50", STANDARD_PAYMENT_DATE.minusDays(1)),
+                new Address("Blk 30 Geylang Street 29, #06-40"), new Payment("50", STANDARD_PAYMENT_DATE),
                 new Remark("Good progress!"), getTagSet("friends"), EMPTY_LESSONS),
             new Tutee(new Name("Bernice Yu"), new Phone("99272758"), new Level("p2"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Payment("55", STANDARD_PAYMENT_DATE),

@@ -2,12 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OVERDUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,10 +28,9 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String trimmedArgs = args.trim();
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_LEVEL, PREFIX_NAME, PREFIX_OVERDUE);
-        if (trimmedArgs.isEmpty()) {
+        if (isMissingAllPrefixes(argMultimap, PREFIX_SUBJECT, PREFIX_LEVEL, PREFIX_NAME, PREFIX_OVERDUE)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -50,10 +52,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_OVERDUE).isPresent()) {
             overdueCheck = ParserUtil.parseIsOverdue(argMultimap.getValue(PREFIX_OVERDUE).get());
         }
-
         CollectivePredicate combinedPredicate = new CollectivePredicate(Arrays.asList(nameKeywords),
                 Arrays.asList(levelNames), Arrays.asList(subjectNames), Arrays.asList(overdueCheck));
         return new FindCommand(combinedPredicate);
+    }
+
+    /**
+     * Returns true if none of the prefixes has a {@code Optional} value in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean isMissingAllPrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).noneMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
