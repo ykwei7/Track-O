@@ -93,9 +93,9 @@ public class MainApp extends Application {
         }
 
         ModelManager modelManager = new ModelManager(initialData, userPrefs);
-        Schedule schedule = new Schedule(modelManager.getFilteredTuteeList());
+
         try {
-            schedule.initSortedLessonsMap();
+            Schedule.initSortedLessonsMap(modelManager.getFilteredTuteeList());
         } catch (ScheduleClashException e) {
             logger.warning("Clashes found in lessons. Will be starting with an empty Track-O");
             initialData = new TrackO();

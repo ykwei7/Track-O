@@ -149,6 +149,10 @@ public class Time implements Comparable<Time> {
             return compareDay;
         }
 
+        if (isOverlap(other)) {
+            return 0;
+        }
+
         return startTime.compareTo(other.getStartTime());
     }
 

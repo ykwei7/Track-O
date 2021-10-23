@@ -87,6 +87,9 @@ public class AddLessonCommand extends Command {
         }
         Lesson lesson = new Lesson(subject, lessonTime, hourlyRate);
 
+        // do the checking with schedule over here with try catch
+        // if conflict, throw new CommandException and abort operation!!!
+
         Tutee tuteeToEdit = lastShownList.get(targetIndex.getZeroBased());
         Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
                 tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), tuteeToEdit.getRemark(), tuteeToEdit.getTags(),
