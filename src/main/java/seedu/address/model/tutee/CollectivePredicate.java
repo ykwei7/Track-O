@@ -26,7 +26,8 @@ public class CollectivePredicate implements Predicate<Tutee> {
 
     @Override
     public boolean test(Tutee tutee) {
-        return Arrays.stream(initialiseTests(tutee)).allMatch(bool -> bool);
+        return Arrays.stream(initialiseTests(tutee)).allMatch(bool -> bool)
+                && Arrays.stream(initialiseTests(tutee)).count() > 0;
     }
 
     private Boolean[] initialiseTests(Tutee tutee) {

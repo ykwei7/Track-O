@@ -28,7 +28,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tutee.CollectivePredicate;
-import seedu.address.model.tutee.NameContainsKeywordsPredicate;
 import seedu.address.model.tutee.Remark;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.EditTuteeDescriptorBuilder;

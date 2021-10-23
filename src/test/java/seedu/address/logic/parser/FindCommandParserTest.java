@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.tutee.CollectivePredicate;
-import seedu.address.model.tutee.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

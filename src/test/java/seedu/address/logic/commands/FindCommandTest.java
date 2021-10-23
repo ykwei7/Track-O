@@ -5,20 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_TUTEES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalTutees.BENSON;
 import static seedu.address.testutil.TypicalTutees.CARL;
 import static seedu.address.testutil.TypicalTutees.ELLE;
 import static seedu.address.testutil.TypicalTutees.FIONA;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.tutee.NameContainsKeywordsPredicate;
+import seedu.address.model.tutee.CollectivePredicate;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -26,13 +30,16 @@ import seedu.address.model.tutee.NameContainsKeywordsPredicate;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalTrackO(), new UserPrefs());
+    private List<String> emptyKeywordList = Collections.emptyList();
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        CollectivePredicate firstPredicate =
+                new CollectivePredicate(Collections.singletonList("first"),
+                        emptyKeywordList, emptyKeywordList, emptyKeywordList);
+        CollectivePredicate secondPredicate =
+                new CollectivePredicate(Collections.singletonList("second"),
+                        emptyKeywordList, emptyKeywordList, emptyKeywordList);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -57,7 +64,10 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noTuteeFound() {
         String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        String keyword = " ";
+        List<String> nameList = Arrays.asList(keyword.split("\\s+"));
+        CollectivePredicate predicate = new CollectivePredicate(nameList,
+                emptyKeywordList, emptyKeywordList, emptyKeywordList);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTuteeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -65,19 +75,28 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multipleTuteesFound() {
-        String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+    public void execute_multipleKeywords_TuteesFound() {
+        String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 1);
+        String keyword = "Physics Chemistry";
+        List<String> subjectList = Arrays.asList(keyword.split("\\s+"));
+        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
+                emptyKeywordList, subjectList, emptyKeywordList);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTuteeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredTuteeList());
+        assertEquals(Arrays.asList(CARL), model.getFilteredTuteeList());
     }
 
-    /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
-     */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    @Test
+    public void execute_multipleKeywords_multipleTuteesFound() {
+        String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 2);
+        String keyword = "Chemistry";
+        List<String> subjectList = Arrays.asList(keyword.split("\\s+"));
+        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
+                emptyKeywordList, subjectList, emptyKeywordList);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredTuteeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(List.of(BENSON, CARL), model.getFilteredTuteeList());
     }
 }
