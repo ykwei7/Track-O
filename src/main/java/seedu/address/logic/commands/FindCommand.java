@@ -2,11 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.tutee.Tutee;
+import seedu.address.model.tutee.CollectivePredicate;
 
 /**
  * Finds and lists all tutees in Track-O whose name contains any of the argument keywords.
@@ -26,9 +24,9 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_LEVEL_CONSTRAINT = "Find by level requires 1 level keyword to search for.";
 
-    private final Predicate<Tutee> predicate;
+    private final CollectivePredicate predicate;
 
-    public FindCommand(Predicate<Tutee> predicate) {
+    public FindCommand(CollectivePredicate predicate) {
         this.predicate = predicate;
     }
 
