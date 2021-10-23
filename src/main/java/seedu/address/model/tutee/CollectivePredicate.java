@@ -16,6 +16,14 @@ public class CollectivePredicate implements Predicate<Tutee> {
     private final List<String> subjectKeywords;
     private final List<String> overdueKeyword;
 
+    /**
+     * Constructs a {@code CollectivePredicate} using a list of keywords for each search criteria.
+     *
+     * @param nameKeywords list of name keywords.
+     * @param levelKeywords list of level keyword.
+     * @param subjectKeywords list of level keyword.
+     * @param isOverdue list of overdue keyword.
+     */
     public CollectivePredicate(List<String> nameKeywords, List<String> levelKeywords,
                                List<String> subjectKeywords, List<String> isOverdue) {
         this.nameKeywords = nameKeywords;
