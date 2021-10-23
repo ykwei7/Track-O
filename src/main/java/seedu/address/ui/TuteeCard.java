@@ -83,12 +83,13 @@ public class TuteeCard extends UiPart<Region> {
      */
     private void addSubjectToTag(Lesson lesson) {
         Label subjectLabel = new Label(lesson.getSubject().toString());
-        subjectLabel.setStyle(" -fx-text-fill: white;\n" +
-                "    -fx-background-color: " + subjectColors.get(colorIndex) + ";\n" +
-                "    -fx-padding: 1 3 1 3;\n" +
-                "    -fx-border-radius: 2;\n" +
-                "    -fx-background-radius: 2;\n" +
-                "    -fx-font-size: 11;\n");
+        subjectLabel.setStyle(" -fx-text-fill: white;\n"
+                + "    -fx-background-color: " + subjectColors.get(colorIndex)
+                + ";\n"
+                + "    -fx-padding: 1 3 1 3;\n"
+                + "    -fx-border-radius: 2;\n"
+                + "    -fx-background-radius: 2;\n"
+                + "    -fx-font-size: 11;\n");
         colorIndex = colorIndex == 4 ? 0 : colorIndex + 1;
         tags.getChildren().add(subjectLabel);
     }
