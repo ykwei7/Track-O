@@ -39,9 +39,11 @@ public class CollectivePredicate implements Predicate<Tutee> {
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tutee.getLevel().getValue(), keyword));
         boolean subjectTest = subjectKeywords.stream()
                 .allMatch(keyword -> tutee.getLessons().stream()
-                        .anyMatch(lesson -> StringUtil.containsWordIgnoreCase(lesson.getSubject().toString(), keyword)));
+                        .anyMatch(lesson ->
+                                StringUtil.containsWordIgnoreCase(lesson.getSubject().toString(), keyword)));
         boolean overdueTest = overdueKeyword.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(Boolean.toString(tutee.getPayment().isOverdue), keyword));
+                .anyMatch(keyword ->
+                        StringUtil.containsWordIgnoreCase(Boolean.toString(tutee.getPayment().isOverdue), keyword));
 
         if (nameKeywords.size() > 0) {
             activeTests.add(nameTest);

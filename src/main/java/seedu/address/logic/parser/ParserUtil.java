@@ -8,7 +8,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -171,6 +170,12 @@ public class ParserUtil {
         return arrayOfSubjectsInString;
     }
 
+    /**
+     * Returns an array of String with the overdue boolean at index 0 in type String.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
     public static String[] parseIsOverdue(String overdue) throws ParseException {
         requireNonNull(overdue);
         String trimmedIsOverdue = overdue.trim();
@@ -202,6 +207,8 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);

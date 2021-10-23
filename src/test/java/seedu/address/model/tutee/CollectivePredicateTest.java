@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,16 +17,16 @@ import seedu.address.model.lesson.Time;
 import seedu.address.testutil.TuteeBuilder;
 
 public class CollectivePredicateTest {
-    List<String> emptyKeywordList = Collections.emptyList();
+    private List<String> emptyKeywordList = Collections.emptyList();
 
-    Subject subject = new Subject("Math");
-    Time time = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
-    double cost = 45.0;
-    Lesson lesson = new Lesson(subject, time, cost);
+    private Subject subject = new Subject("Math");
+    private Time time = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
+    private double cost = 45.0;
+    private Lesson lesson = new Lesson(subject, time, cost);
 
-    Subject subject2 = new Subject("Chemistry");
-    Time time2 = new Time(DayOfWeek.SATURDAY, LocalTime.NOON, LocalTime.of(18, 0));
-    Lesson lesson2 = new Lesson(subject2, time2, cost);
+    private Subject subject2 = new Subject("Chemistry");
+    private Time time2 = new Time(DayOfWeek.SATURDAY, LocalTime.NOON, LocalTime.of(18, 0));
+    private Lesson lesson2 = new Lesson(subject2, time2, cost);
 
     @Test
     public void equals() {
@@ -123,7 +122,7 @@ public class CollectivePredicateTest {
     }
 
     @Test
-    public void test_SubjectContainsKeywords_returnsTrue() {
+    public void test_nubjectContainsKeywords_returnsTrue() {
         // One keyword
         CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
                 emptyKeywordList, Collections.singletonList("Math"), emptyKeywordList);
@@ -141,7 +140,7 @@ public class CollectivePredicateTest {
     }
 
     @Test
-    public void test_SubjectDoesNotContainsKeywords_returnsFalse() {
+    public void test_subjectDoesNotContainsKeywords_returnsFalse() {
         // Non-matching keyword
         CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
                 emptyKeywordList, Collections.singletonList("Math"), emptyKeywordList);

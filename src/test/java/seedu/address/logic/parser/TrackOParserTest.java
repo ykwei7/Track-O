@@ -8,10 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -88,7 +86,8 @@ public class TrackOParserTest {
         List<String> overdueKeywords = Collections.singletonList("true");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + "n/Alice l/p5 subject/Math overdue/true");
-        assertEquals(new FindCommand(new CollectivePredicate(nameKeywords, levelKeywords, subjectKeywords, overdueKeywords)), command);
+        assertEquals(new FindCommand(new CollectivePredicate(nameKeywords,
+                levelKeywords, subjectKeywords, overdueKeywords)), command);
     }
 
     @Test

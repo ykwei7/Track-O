@@ -7,11 +7,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_TUTEES_LISTED_OVERVIEW
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalTutees.BENSON;
 import static seedu.address.testutil.TypicalTutees.CARL;
-import static seedu.address.testutil.TypicalTutees.ELLE;
-import static seedu.address.testutil.TypicalTutees.FIONA;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +19,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tutee.CollectivePredicate;
-import seedu.address.model.tutee.Tutee;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -75,7 +71,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_TuteesFound() {
+    public void execute_multipleKeywords_tuteesFound() {
         String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 1);
         String keyword = "Physics Chemistry";
         List<String> subjectList = Arrays.asList(keyword.split("\\s+"));
