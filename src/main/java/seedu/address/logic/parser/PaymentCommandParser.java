@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.*;
 
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -32,35 +33,45 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_INDEX_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PaymentCommand.MESSAGE_USAGE_ALL), pe);
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE,
                     PREFIX_PAYMENT_RECEIVED_DATE)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE));
             }
-
-            return new PaymentAddCommand(index);
+            String paymentValueToSet = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_LESSON).get());
+            return new PaymentAddCommand(index, paymentValueToSet);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).isPresent()) {
             if (anyPrefixesPresent(argMultimap,PREFIX_LESSON , PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_RECEIVED_DATE)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE));
             }
-            String paymentValue = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
-            return new PaymentSetAmountCommand(index, paymentValue);
+            String paymentValueToSet = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
+            return new PaymentSetAmountCommand(index, paymentValueToSet);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_DATE).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_LESSON, PREFIX_PAYMENT_RECEIVED_DATE)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE));
             }
-            return new PaymentSetDateCommand(index);
+            // Null value for payByDate is disallowed in the constructor for PaymentSetDateCommand
+            LocalDate paymentPayByDateToSet = ParserUtil.parsePayByDate(
+                    argMultimap.getValue(PREFIX_PAYMENT_DATE).get());
+            return new PaymentSetDateCommand(index, paymentPayByDateToSet);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_RECEIVED_DATE).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE, PREFIX_LESSON)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE));
             }
-            return new PaymentReceiveCommand(index);
+            // Null value for payByDate is allowed here
+            LocalDate paymentPayByDateToSet =
+                    ParserUtil.parsePayByDate(argMultimap.getValue(PREFIX_PAYMENT_RECEIVED_DATE).get());
+            return new PaymentReceiveCommand(index, paymentPayByDateToSet);
         }
         return new PaymentCommand(index);
     }

@@ -16,11 +16,10 @@ import java.util.List;
  */
 public class Payment {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Payments should only contain numbers, and it should be at least 1 digit long";
+            "Payment values should only contain numbers, and it should be at least 1 digit long";
     public static final String DATE_CONSTRAINTS =
-            "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-Oct-2021";
+            "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-10-2021";
     public static final String PAYMENT_HISTORY_CONSTRAINTS =
             "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-Oct-2021, and 'Never'";
     public static final String VALIDATION_REGEX = "\\d{1,}";

@@ -7,23 +7,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_RECEIVED_DATE;
 
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
@@ -37,24 +28,18 @@ import seedu.address.model.tutee.Remark;
 import seedu.address.model.tutee.Tutee;
 
 /**
- * Manages the payment details of an existing tutee in Track-O.
+ * Showcases the payment details of an existing tutee in Track-O and provides additional information on how to use
+ * other features of the payment class.
  */
 public class PaymentCommand extends Command {
 
     public static final String COMMAND_WORD = "payment";
 
-    public static final String MESSAGE_INDEX_USAGE = COMMAND_WORD + ": View payment details of the tutee identified "
-            + "by the index number used in the displayed tutee list. "
-            + "Required Parameters: INDEX (must be a positive integer)";
-
-    public static final String MESSAGE_USAGE = "Manage payment details of the tutee identified "
-            + "by the index number used in the displayed tutee list. "
-            + "Required Parameters: INDEX (must be a positive integer) "
-            + "and strictly one of the following parameters:\n\n"
-            + PREFIX_LESSON + "LESSON_INDEX\n"
-            + PREFIX_PAYMENT_AMOUNT + "PAYMENT_AMOUNT\n"
-            + PREFIX_PAYMENT_DATE + "PAYMENT_DATE\n"
-            + PREFIX_PAYMENT_RECEIVED_DATE + "[DATE_RECEIVED]\n\n";
+    public static final String MESSAGE_DEFAULT_USAGE = COMMAND_WORD + ":\n"
+            + "View payment details of the tutee identified "
+            + "by the index number used in the displayed tutee list.\n"
+            + "Required Parameters: TUTEE_INDEX (must be a positive integer)\n"
+            + "Example: payment 1";
 
     public static final String ALL_INSTRUCTIONS = PaymentAddCommand.MESSAGE_USAGE
             + PaymentSetAmountCommand.MESSAGE_USAGE
@@ -62,12 +47,22 @@ public class PaymentCommand extends Command {
             + PaymentReceiveCommand.MESSAGE_USAGE
             + "\n";
 
-    public static final String SEPARATOR = "----------------HOW TO USE PAYMENT----------------\n";
-    public static final String MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS = "Payment details of %s:\n%s\n\n"
-            + SEPARATOR
-            + MESSAGE_USAGE
+    public static final String MESSAGE_PAYMENT_MANAGEMENT_USAGE
+            = COMMAND_WORD + " TUTEE_INDEX " + PREFIX_LESSON + "LESSON_INDEX\n"
+            + COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_AMOUNT + "PAYMENT_AMOUNT\n"
+            + COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_DATE + "PAYMENT_DATE\n"
+            + COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_RECEIVED_DATE + "[DATE_RECEIVED]\n\n"
+            + "For more details on payment commands: payment";
+
+    public static final String MESSAGE_USAGE_ALL = MESSAGE_DEFAULT_USAGE
+            + "\n\n"
             + ALL_INSTRUCTIONS;
 
+    public static final String SEPARATOR_TITLE = "Command usages to manage the payment details of tutee:\n";
+
+    public static final String MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS = "Payment details of %s:\n%s\n\n"
+            + SEPARATOR_TITLE
+            + MESSAGE_PAYMENT_MANAGEMENT_USAGE;
 
     private final Index targetIndex;
 
@@ -75,13 +70,6 @@ public class PaymentCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
-    /**
-     * Executes the command and returns the result message.
-     *
-     * @param model {@code Model} which the command should operate on.
-     * @return feedback message of the operation result for display
-     * @throws CommandException If an error occurs during command execution.
-     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -100,8 +88,12 @@ public class PaymentCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Tutee} with the details of {@code tuteeToEdit}
-     * edited with {@code editTuteeDescriptor}.
+     * Uses the information of an existing tutee and creates a new tutee with the updated payment details.
+     *
+     * @param tuteeToEdit Existing tutee
+     * @param payment Payment amount to set
+     * @param payByDate Date that tutee is to pay amount by
+     * @return A new tutee object with the updated payment details
      */
     public Tutee editedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate) {
         assert tuteeToEdit != null;

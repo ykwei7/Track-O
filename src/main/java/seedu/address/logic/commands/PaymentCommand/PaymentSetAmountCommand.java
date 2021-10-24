@@ -15,30 +15,37 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 
+/**
+ * Updates the payment value of the tutee to the new value inputted by the user.
+ *
+ * Payment value refers to the amount that the tutee owes the user.
+ */
 public class PaymentSetAmountCommand extends PaymentCommand {
 
     public static final String COMMAND_WORD = "payment";
 
-    public static final String COMMAND_DETAILS = "Sets the lump sum to the amount specified after "
-            + PREFIX_PAYMENT_AMOUNT
-            + " as new lump sum for specified tutee. ";
-
-    public static final String MESSAGE_USAGE = COMMAND_DETAILS + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PAYMENT_AMOUNT + "150\n\n";
+    public static final String MESSAGE_USAGE = "Update payment value owed by the tutee identified "
+            + "by the index number used in the displayed tutee list to new specified value.\n"
+            + "Required Parameters: TUTEE_INDEX (must be a positive integer), "
+            + "PAYMENT_VALUE (must be a positive integer)\n"
+            + "Example: payment 1 " + PREFIX_PAYMENT_AMOUNT + "150\n\n";
 
     public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
 
-    private final Index targetIndex;
-    private final String value;
+    public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE = "Payment value provided is the same"
+            + " as the existing payment value of tutee.";
 
-    public PaymentSetAmountCommand(Index targetIndex, String value) {
+    private final Index targetIndex;
+    private final String paymentValueToSet;
+
+    public PaymentSetAmountCommand(Index targetIndex, String paymentValueToSet) {
         super(targetIndex);
         this.targetIndex = targetIndex;
-        this.value = value;
+        this.paymentValueToSet = paymentValueToSet;
     }
 
     /**
-     * Executes the command and returns the result message.
+     * Creates a duplicate tutee with the updated payment value to replace the existing tutee
      *
      * @param model {@code Model} which the command should operate on.
      * @return feedback message of the operation result for display
@@ -54,11 +61,21 @@ public class PaymentSetAmountCommand extends PaymentCommand {
         }
 
         Tutee tuteeToGet = lastShownList.get(targetIndex.getZeroBased());
-        Tutee editedTutee = editedPaymentDetailsTutee(tuteeToGet, value, tuteeToGet.getPayment().getPayByDate());
+        Payment existingPayment = tuteeToGet.getPayment();
+        String existingPaymentValue = existingPayment.getValue();
+        LocalDate existingPayByDate = existingPayment.getPayByDate();
+
+        Tutee editedTutee = editedPaymentDetailsTutee(tuteeToGet, paymentValueToSet, existingPayByDate);
+
+        // If existing value is same as input value
+        if (paymentValueToSet.equals(existingPaymentValue)) {
+            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
+        }
+
         model.setTutee(tuteeToGet, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
-        Payment paymentDetails = editedTutee.getPayment();
+        Payment newPaymentDetails = editedTutee.getPayment();
 
-        return new CommandResult(String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, editedTutee.getName(), paymentDetails));
+        return new CommandResult(String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, editedTutee.getName(), newPaymentDetails));
     }
 }

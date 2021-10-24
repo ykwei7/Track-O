@@ -11,25 +11,28 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 
 public class PaymentAddCommand extends PaymentCommand {
 
     public static final String COMMAND_WORD = "payment";
 
-    public static final String COMMAND_DETAILS = "Adds the cost of the lesson specified after "
-            + PREFIX_LESSON
-            + " to the lump sum of specified tutee. ";
-
-    public static final String MESSAGE_USAGE = COMMAND_DETAILS + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_LESSON + "1\n\n";
+    public static final String MESSAGE_USAGE = "Obtains tutee identified "
+            + "by the index number used in the displayed tutee list and lesson identified in tutee's lesson list. "
+            + "Fees of the indexed lesson are then added to the payment value owed by tutee.\n"
+            + "Required Parameters: TUTEE_INDEX (must be a positive integer), "
+            + "LESSON_INDEX (must be a positive integer)\n"
+            + "Example: payment 1 " + PREFIX_LESSON + "1\n\n";
 
     public static final String ADD_TUTEE_PAYMENT_SUCCESS = "Payment details of %1$s:\n%s\n\n"
             + MESSAGE_USAGE + ALL_INSTRUCTIONS;
 
     private final Index targetIndex;
+    private final String paymentValue;
 
-    public PaymentAddCommand(Index targetIndex) {
+    public PaymentAddCommand(Index targetIndex, String paymentValue) {
         super(targetIndex);
         this.targetIndex = targetIndex;
+        this.paymentValue = paymentValue;
     }
 }

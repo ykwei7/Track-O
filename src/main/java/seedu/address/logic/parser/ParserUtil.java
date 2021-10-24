@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -23,6 +24,8 @@ import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
+
+import javax.swing.text.DateFormatter;
 
 
 /**
@@ -215,8 +218,27 @@ public class ParserUtil {
         requireNonNull(paymentValue);
         String trimmedPayment = paymentValue.trim();
         if (!Payment.isValidPayment(trimmedPayment)) {
-            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
         }
         return trimmedPayment;
+    }
+
+    public static LocalDate parsePayByDate(String payByDate) throws ParseException {
+        if (payByDate == null) {
+            return null;
+        }
+        String trimmedPayByDate = payByDate.trim();
+
+        if (!Payment.isValidPayByDate(trimmedPayByDate)) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS);
+        }
+
+        try {
+            LocalDate formattedPayByDate = LocalDate.parse(trimmedPayByDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            return formattedPayByDate;
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS);
+        }
+
     }
 }
