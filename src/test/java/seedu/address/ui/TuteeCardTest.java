@@ -22,15 +22,22 @@ public class TuteeCardTest {
     private static final Tutee VALID_TUTEE = BENSON;
     private static final Tutee VALID_TUTEE_NO_TAGS = CARL;
 
+    // Singleton pattern ensures no multiple initialisations of JavaFX toolkit
+    private static TuteeCardTest instance = new TuteeCardTest();
+
     public TuteeCardTest() {
-        Platform.startup(()-> {});
+        if (instance != null) {
+            return;
+        } else {
+            Platform.startup(() -> {});
+            instance = this;
+        }
     }
 
     // Solution to initialise JavaFX toolkit below adapted from https://stackoverflow.com/a/38883519
     @Test
     public void constructor_invalidTutee_throwsAssertionError() {
         assertThrows(AssertionError.class, () -> new TuteeCard(null, VALID_INDEX));
-
     }
 
     @Test
@@ -67,5 +74,4 @@ public class TuteeCardTest {
         assertEquals(validSubject.toString(), subjectsAsTags.get(0).tagName);
         assertEquals(validSubject2.toString(), subjectsAsTags.get(1).tagName);
     }
-
 }
