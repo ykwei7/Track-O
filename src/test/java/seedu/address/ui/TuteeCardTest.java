@@ -24,33 +24,33 @@ public class TuteeCardTest {
     private static final Tutee VALID_TUTEE_NO_TAGS = CARL;
 
     // Singleton pattern ensures no multiple initialisations of JavaFX toolkit
-    private static boolean initialised = false;
+    private static boolean isJavaFxCompatible = true;
 
     // Solution to initialise JavaFX toolkit below adapted from https://stackoverflow.com/a/38883519
     @Test
     public void constructor_invalidTutee_throwsAssertionError() {
-        if (initToolkitSuccess()) {
+        if (isJavaFxCompatible && initToolkitSuccess()) {
             assertThrows(AssertionError.class, () -> new TuteeCard(null, VALID_INDEX));
         }
     }
 
     @Test
     public void constructor_invalidIndex_throwsAssertionError() {
-        if (initToolkitSuccess()) {
+        if (isJavaFxCompatible && initToolkitSuccess()) {
             assertThrows(AssertionError.class, () -> new TuteeCard(VALID_TUTEE, INVALID_INDEX));
         }
     }
 
     @Test
     public void constructor_validInput_success() {
-        if (initToolkitSuccess()) {
+        if (isJavaFxCompatible && initToolkitSuccess()) {
             TuteeCard validTuteeCard = new TuteeCard(VALID_TUTEE, VALID_INDEX);
         }
     }
 
     @Test
     public void addSubjectToTagTest_nullSubject_throwsNullPointerException() {
-        if (initToolkitSuccess()) {
+        if (isJavaFxCompatible && initToolkitSuccess()) {
             assertThrows(NullPointerException.class, () ->
                     new TuteeCard(VALID_TUTEE, VALID_INDEX).addSubjectToTag(null));
         }
@@ -58,7 +58,7 @@ public class TuteeCardTest {
 
     @Test
     public void addSubjectToTagTest_invalidSubject_throwsIllegalArgumentException() {
-        if (initToolkitSuccess()) {
+        if (isJavaFxCompatible && initToolkitSuccess()) {
             assertThrows(IllegalArgumentException.class, () -> new TuteeCard(VALID_TUTEE, VALID_INDEX)
                     .addSubjectToTag(new Subject("math*")));
         }
@@ -66,7 +66,7 @@ public class TuteeCardTest {
 
     @Test
     public void addSubjectToTagTest_validSubject_success() {
-        if (initToolkitSuccess()) {
+        if (isJavaFxCompatible && initToolkitSuccess()) {
             TuteeCard validTuteeCard = new TuteeCard(VALID_TUTEE_NO_TAGS, VALID_INDEX);
             Subject validSubject = new Subject("Math");
             validTuteeCard.addSubjectToTag(validSubject);
@@ -83,11 +83,14 @@ public class TuteeCardTest {
     private boolean initToolkitSuccess() {
         try {
             Platform.startup(() -> {});
+            isJavaFxCompatible = true;
             return true;
         } catch (UnsupportedOperationException | IllegalStateException e) {
             if (e instanceof UnsupportedOperationException) {
+                isJavaFxCompatible = false;
                 return false; // build-Ubuntu cannot run Platform.startup
             } else {
+                isJavaFxCompatible = true;
                 return true;
             }
         }
