@@ -154,69 +154,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMultipleLevels_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseMultipleLevels((String) null));
-    }
-
-    @Test
-    public void parseMultipleLevels_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleLevels(INVALID_LEVEL));
-    }
-
-    @Test
-    public void parseMultipleLevels_multipleValues_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleLevels(VALID_LEVEL + " " + VALID_LEVEL));
-    }
-
-    @Test
-    public void parseMultipleLevels_validValueWithoutWhitespace_returnsLevel() throws Exception {
-        assertEquals(VALID_LEVEL, ParserUtil.parseMultipleLevels(VALID_LEVEL)[0]);
-    }
-
-    @Test
-    public void parseMultipleLevels_validValueWithWhitespace_returnsTrimmedLevel() throws Exception {
-        String levelWithWhitespace = WHITESPACE + VALID_LEVEL + WHITESPACE;
-        assertEquals(VALID_LEVEL, ParserUtil.parseMultipleLevels(levelWithWhitespace)[0]);
-    }
-
-    @Test
-    public void parseMultipleSubjects_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseMultipleSubjects((String) null));
-    }
-
-    @Test
-    public void parseMultipleSubjects_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleSubjects(INVALID_SUBJECT));
-    }
-
-    @Test
-    public void parseMultipleSubjects_validValueWithoutWhitespace_returnsLevel() throws Exception {
-        assertEquals(VALID_SUBJECT, ParserUtil.parseMultipleSubjects(VALID_SUBJECT)[0]);
-    }
-
-    @Test
-    public void parseMultipleSubjects_validValueWithWhitespace_returnsTrimmedLevel() throws Exception {
-        String levelWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE;
-        assertEquals(VALID_SUBJECT, ParserUtil.parseMultipleSubjects(levelWithWhitespace)[0]);
-    }
-
-    @Test
-    public void parseMultipleSubjects_multipleValidValuesWithWhitespace_returnsTrimmedLevel() throws Exception {
-        String levelWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE + VALID_SUBJECT_2;
-        // 1st Subject
-        assertEquals(VALID_SUBJECT, ParserUtil.parseMultipleSubjects(levelWithWhitespace)[0]);
-
-        // 2nd Subject
-        assertEquals(VALID_SUBJECT_2, ParserUtil.parseMultipleSubjects(levelWithWhitespace)[1]);
-    }
-
-    @Test
-    public void parseMultipleSubjects_multipleValidValuesWithInvalidValue_throwsParseException() {
-        String levelWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE + INVALID_SUBJECT;
-        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleSubjects(levelWithWhitespace));
-    }
-
-    @Test
     public void parseIsOverdue_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIsOverdue(INVALID_OVERDUE));
     }

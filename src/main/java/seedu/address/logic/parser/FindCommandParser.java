@@ -42,7 +42,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                     .toString().split("\\s+");
         }
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
-            levelNames = ParserUtil.parseMultipleLevels(argMultimap.getValue(PREFIX_LEVEL).get());
+            try {
+                levelNames = new String[] {ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()).getValue()};
+            } catch (ParseException pe) {
+                throw new ParseException(FindCommand.MESSAGE_LEVEL_CONSTRAINT + "\n\n" + pe.getMessage());
+            }
         }
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             subjectNames = ParserUtil.parseMultipleSubjects(argMultimap.getValue(PREFIX_SUBJECT).get());

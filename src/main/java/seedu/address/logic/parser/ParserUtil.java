@@ -15,7 +15,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
@@ -121,29 +120,6 @@ public class ParserUtil {
             throw new ParseException(Level.MESSAGE_CONSTRAINTS);
         }
         return new Level(trimmedLevel);
-    }
-
-    /**
-     * Parses multiple {@code String levels} into an array of {@code String}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code level} contains multiple levels or is invalid.
-     */
-    public static String[] parseMultipleLevels(String levels) throws ParseException {
-        requireNonNull(levels);
-        String trimmedLevel = levels.trim();
-        String[] levelsSplitBySpace = trimmedLevel.split("\\s+");
-
-        if (levelsSplitBySpace.length != 1) {
-            throw new ParseException(FindCommand.MESSAGE_LEVEL_CONSTRAINT);
-        }
-        List<String> arrayOfLevels = new ArrayList<>();
-
-        arrayOfLevels.add(parseLevel(trimmedLevel).getValue());
-
-        String[] arrayOfLevelsInString = new String[arrayOfLevels.size()];
-        arrayOfLevelsInString = arrayOfLevels.toArray(arrayOfLevelsInString);
-        return arrayOfLevelsInString;
     }
 
     /**
