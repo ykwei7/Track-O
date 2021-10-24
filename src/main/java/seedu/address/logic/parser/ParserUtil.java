@@ -228,6 +228,22 @@ public class ParserUtil {
     }
 
     /**
+     * Trims input by user and checks if index is a positive number represented as a string.
+     *
+     * @param lessonIndex Payment value inputted by user
+     * @return Trimmed string of payment value
+     * @throws ParseException
+     */
+    public static String parseLessonIndex(String lessonIndex) throws ParseException {
+        requireNonNull(lessonIndex);
+        String trimmedPayment = lessonIndex.trim();
+        if (!Payment.isValidPayment(trimmedPayment)) {
+            throw new ParseException(Lesson.MESSAGE_INDEX_CONSTRAINTS);
+        }
+        return trimmedPayment;
+    }
+
+    /**
      * Trims string by user and parses into a LocalDate format of dd-mm-yyyy.
      *
      * @param payByDate Date to make payment by inputted by user
@@ -250,6 +266,5 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException(Payment.DATE_CONSTRAINTS);
         }
-
     }
 }

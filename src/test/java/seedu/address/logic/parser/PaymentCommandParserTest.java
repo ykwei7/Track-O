@@ -123,10 +123,11 @@ public class PaymentCommandParserTest {
     }
 
     @Test
-    public void parse_addPaymentCommand_success() {
+    public void parse_addPaymentCommand_success() throws ParseException {
         Index targetIndex = INDEX_SECOND_TUTEE;
+        Index lessonIndex = ParserUtil.parseIndex(VALID_LESSON_INDEX_AMY);
         String userInput = targetIndex.getOneBased() + PAYMENT_LESSON_INDEX_AMY;
-        PaymentCommand expectedCommand = new PaymentAddCommand(targetIndex, VALID_LESSON_INDEX_AMY);
+        PaymentCommand expectedCommand = new PaymentAddCommand(targetIndex, lessonIndex);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
