@@ -19,7 +19,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTrackO;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.Schedule;
 import seedu.address.model.TrackO;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.exceptions.ScheduleClashException;
@@ -75,7 +74,7 @@ public class MainApp extends Application {
      * The data from the sample Track-O will be used instead if {@code storage}'s Track-O is not found,
      * or an empty Track-O will be used instead if errors occur when reading {@code storage}'s Track-O.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) throws ScheduleClashException {
         Optional<ReadOnlyTrackO> trackOOptional;
         ReadOnlyTrackO initialData;
         try {
@@ -92,17 +91,14 @@ public class MainApp extends Application {
             initialData = new TrackO();
         }
 
-        ModelManager modelManager = new ModelManager(initialData, userPrefs);
-
         try {
-            Schedule.initSortedLessonsMap(modelManager.getFilteredTuteeList());
+            return new ModelManager(initialData, userPrefs);
         } catch (ScheduleClashException e) {
             logger.warning("Clashes found in lessons. Will be starting with an empty Track-O");
             initialData = new TrackO();
             return new ModelManager(initialData, userPrefs);
         }
 
-        return modelManager;
     }
 
     private void initLogging(Config config) {

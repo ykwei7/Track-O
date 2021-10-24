@@ -15,6 +15,11 @@ public interface Model {
     Predicate<Tutee> PREDICATE_SHOW_ALL_TUTEES = unused -> true;
 
     /**
+     * Returns the user's schedule.
+     */
+    Schedule getSchedule();
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
