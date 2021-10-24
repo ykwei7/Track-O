@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TrackO;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
@@ -41,8 +42,11 @@ public class AddLessonCommandTest {
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
+    public AddLessonCommandTest() throws ScheduleClashException {
+    }
+
     @Test
-    public void execute_addLessonUnfilteredList_success() throws ParseException {
+    public void execute_addLessonUnfilteredList_success() throws ParseException, ScheduleClashException {
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Tutee editedTutee = new TuteeBuilder(firstTutee)
                 .withLesson(LessonMock.getLesson())
@@ -59,7 +63,7 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() throws ParseException {
+    public void execute_filteredList_success() throws ParseException, ScheduleClashException {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
 
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.TuteeBuilder;
 
@@ -21,12 +22,12 @@ public class AddCommandIntegrationTest {
     private Model model;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws ScheduleClashException {
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
     }
 
     @Test
-    public void execute_newTutee_success() {
+    public void execute_newTutee_success() throws ScheduleClashException {
         Tutee validTutee = new TuteeBuilder().build();
 
         Model expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());

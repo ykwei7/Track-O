@@ -15,12 +15,16 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.NameContainsKeywordsPredicate;
 import seedu.address.testutil.TrackOBuilder;
 
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
+
+    public ModelManagerTest() throws ScheduleClashException {
+    }
 
     @Test
     public void constructor() {
@@ -94,7 +98,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws ScheduleClashException {
         TrackO trackO = new TrackOBuilder().withTutee(ALICE).withTutee(BENSON).build();
         TrackO differentTrackO = new TrackO();
         UserPrefs userPrefs = new UserPrefs();
