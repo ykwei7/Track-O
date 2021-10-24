@@ -24,9 +24,10 @@ import seedu.address.model.tutee.CollectivePredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
+    private static final List<String> EMPTY_KEYWORD_LIST = Collections.emptyList();
+
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalTrackO(), new UserPrefs());
-    private static final List<String> EMPTY_KEYWORD_LIST = Collections.emptyList();
 
     @Test
     public void equals() {
