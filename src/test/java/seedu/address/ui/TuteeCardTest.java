@@ -23,41 +23,40 @@ public class TuteeCardTest {
     private static final Tutee VALID_TUTEE = BENSON;
     private static final Tutee VALID_TUTEE_NO_TAGS = CARL;
 
+    public TuteeCardTest() {
+        PlatformImpl.startup(()-> {});
+    }
+
     // Solution to initialise JavaFX toolkit below adapted from https://stackoverflow.com/a/38883519
     @Test
-    public void constructor_invalidTutee_throwsAssertionError() throws InterruptedException {
-        PlatformImpl.startup(()-> {});
+    public void constructor_invalidTutee_throwsAssertionError() {
         assertThrows(AssertionError.class, () -> new TuteeCard(null, VALID_INDEX));
+
     }
 
     @Test
-    public void constructor_invalidIndex_throwsAssertionError() throws InterruptedException {
-        PlatformImpl.startup(()-> {});
+    public void constructor_invalidIndex_throwsAssertionError() {
         assertThrows(AssertionError.class, () -> new TuteeCard(VALID_TUTEE, INVALID_INDEX));
     }
 
     @Test
-    public void constructor_validInput_success() throws InterruptedException {
-        PlatformImpl.startup(()-> {});
+    public void constructor_validInput_success() {
         TuteeCard validTuteeCard = new TuteeCard(VALID_TUTEE, VALID_INDEX);
     }
 
     @Test
     public void addSubjectToTagTest_nullSubject_throwsNullPointerException() {
-        PlatformImpl.startup(()-> {});
         assertThrows(NullPointerException.class, () -> new TuteeCard(VALID_TUTEE, VALID_INDEX).addSubjectToTag(null));
     }
 
     @Test
     public void addSubjectToTagTest_invalidSubject_throwsIllegalArgumentException() {
-        PlatformImpl.startup(()-> {});
         assertThrows(IllegalArgumentException.class, () -> new TuteeCard(VALID_TUTEE, VALID_INDEX)
                 .addSubjectToTag(new Subject("math*")));
     }
 
     @Test
     public void addSubjectToTagTest_validSubject_success() {
-        PlatformImpl.startup(()-> {});
         TuteeCard validTuteeCard = new TuteeCard(VALID_TUTEE_NO_TAGS, VALID_INDEX);
         Subject validSubject = new Subject("Math");
         validTuteeCard.addSubjectToTag(validSubject);
