@@ -14,8 +14,8 @@ import seedu.address.model.tutee.CollectivePredicate;
 
 public class FindCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
     private static final List<String> EMPTY_KEYWORD_LIST = Collections.emptyList();
+    private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
