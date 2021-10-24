@@ -26,16 +26,16 @@ import seedu.address.model.tutee.CollectivePredicate;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalTrackO(), new UserPrefs());
-    private List<String> emptyKeywordList = Collections.emptyList();
+    private static final List<String> EMPTY_KEYWORD_LIST = Collections.emptyList();
 
     @Test
     public void equals() {
         CollectivePredicate firstPredicate =
                 new CollectivePredicate(Collections.singletonList("first"),
-                        emptyKeywordList, emptyKeywordList, emptyKeywordList);
+                        EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
         CollectivePredicate secondPredicate =
                 new CollectivePredicate(Collections.singletonList("second"),
-                        emptyKeywordList, emptyKeywordList, emptyKeywordList);
+                        EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -63,7 +63,7 @@ public class FindCommandTest {
         String keyword = " ";
         List<String> nameList = Arrays.asList(keyword.split("\\s+"));
         CollectivePredicate predicate = new CollectivePredicate(nameList,
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTuteeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -75,8 +75,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 1);
         String keyword = "Physics Chemistry";
         List<String> subjectList = Arrays.asList(keyword.split("\\s+"));
-        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, subjectList, emptyKeywordList);
+        CollectivePredicate predicate = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, subjectList, EMPTY_KEYWORD_LIST);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTuteeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -88,8 +88,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_TUTEES_LISTED_OVERVIEW, 2);
         String keyword = "Chemistry";
         List<String> subjectList = Arrays.asList(keyword.split("\\s+"));
-        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, subjectList, emptyKeywordList);
+        CollectivePredicate predicate = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, subjectList, EMPTY_KEYWORD_LIST);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTuteeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

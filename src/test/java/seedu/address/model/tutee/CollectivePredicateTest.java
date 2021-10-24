@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,16 +18,16 @@ import seedu.address.model.lesson.Time;
 import seedu.address.testutil.TuteeBuilder;
 
 public class CollectivePredicateTest {
-    private List<String> emptyKeywordList = Collections.emptyList();
+    private static final List<String> EMPTY_KEYWORD_LIST = Collections.emptyList();
 
-    private Subject subject = new Subject("Math");
-    private Time time = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
-    private double cost = 45.0;
-    private Lesson lesson = new Lesson(subject, time, cost);
+    private static final Subject VALID_SUBJECT_1 = new Subject("Math");
+    private static final Time VALID_TIME_1 = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
+    private static final double VALID_COST = 45.0;
+    private static final Lesson VALID_LESSON_1 = new Lesson(VALID_SUBJECT_1, VALID_TIME_1, VALID_COST);
 
-    private Subject subject2 = new Subject("Chemistry");
-    private Time time2 = new Time(DayOfWeek.SATURDAY, LocalTime.NOON, LocalTime.of(18, 0));
-    private Lesson lesson2 = new Lesson(subject2, time2, cost);
+    private static final Subject VALID_SUBJECT_2 = new Subject("Chemistry");
+    private static final Time VALID_TIME_2 = new Time(DayOfWeek.SATURDAY, LocalTime.NOON, LocalTime.of(18, 0));
+    private static final Lesson VALID_LESSON_2 = new Lesson(VALID_SUBJECT_2, VALID_TIME_2, VALID_COST);
 
     @Test
     public void equals() {
@@ -34,16 +35,16 @@ public class CollectivePredicateTest {
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
         CollectivePredicate firstPredicate = new CollectivePredicate(firstPredicateKeywordList,
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
         CollectivePredicate secondPredicate = new CollectivePredicate(secondPredicateKeywordList,
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         CollectivePredicate firstPredicateCopy = new CollectivePredicate(firstPredicateKeywordList,
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -59,101 +60,137 @@ public class CollectivePredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        CollectivePredicate predicate = new CollectivePredicate(Collections.singletonList("Alice"),
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
-        assertTrue(predicate.test(new TuteeBuilder().withName("Alice Bob").build()));
+        CollectivePredicate predicate1 = new CollectivePredicate(Collections.singletonList("Alice"),
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertTrue(predicate1.test(new TuteeBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
-        predicate = new CollectivePredicate(Arrays.asList("Alice", "Bob"),
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
-        assertTrue(predicate.test(new TuteeBuilder().withName("Alice Bob").build()));
-
-        // Only one matching keyword
-        predicate = new CollectivePredicate(Arrays.asList("Bob", "Carol"),
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().withName("Alice Carol").build()));
+        CollectivePredicate predicate2 = new CollectivePredicate(Arrays.asList("Alice", "Bob"),
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertTrue(predicate2.test(new TuteeBuilder().withName("Alice Bob").build()));
 
         // Mixed-case keywords
-        predicate = new CollectivePredicate(Arrays.asList("aLIce", "bOB"),
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
-        assertTrue(predicate.test(new TuteeBuilder().withName("Alice Bob").build()));
+        CollectivePredicate predicate3 = new CollectivePredicate(Arrays.asList("aLIce", "bOB"),
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertTrue(predicate3.test(new TuteeBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Non-matching keyword
-        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
-        predicate = new CollectivePredicate(Arrays.asList("Carol"),
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().withName("Alice Bob").build()));
+        CollectivePredicate predicate1 = new CollectivePredicate(Arrays.asList("Carol"),
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertFalse(predicate1.test(new TuteeBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
-        predicate = new CollectivePredicate(Arrays.asList("Street"),
-                emptyKeywordList, emptyKeywordList, emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().withName("Alice").withPhone("12345")
+        CollectivePredicate predicate2 = new CollectivePredicate(Arrays.asList("Street"),
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertFalse(predicate2.test(new TuteeBuilder().withName("Alice").withPhone("12345")
                 .withLevel("p2").withAddress("Main Street").build()));
+
+        // Only one matching keyword
+        CollectivePredicate predicate3 = new CollectivePredicate(Arrays.asList("Bob", "Carol"),
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertFalse(predicate3.test(new TuteeBuilder().withName("Alice Carol").build()));
+    }
+
+    @Test
+    public void test_nameOnlyOneContainKeywords_returnsFalse() {
+        // Only one matching keyword
+        CollectivePredicate predicate1 = new CollectivePredicate(Arrays.asList("Bob", "Carol"),
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertFalse(predicate1.test(new TuteeBuilder().withName("Alice Carol").build()));
     }
 
     @Test
     public void test_levelContainsKeywords_returnsTrue() {
         // One keyword
-        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
-                Collections.singletonList("p5"), emptyKeywordList, emptyKeywordList);
-        assertTrue(predicate.test(new TuteeBuilder().withLevel("p5").build()));
-
-        // Non-matching keyword
-        predicate = new CollectivePredicate(emptyKeywordList,
-                Collections.singletonList("p5"), emptyKeywordList, emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().withLevel("p4").build()));
+        CollectivePredicate predicate1 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                Collections.singletonList("p5"), EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertTrue(predicate1.test(new TuteeBuilder().withLevel("p5").build()));
     }
 
     @Test
     public void test_levelDoesNotContainsKeywords_returnsFalse() {
         // Non-matching keyword
-        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
-                Collections.singletonList("p4"), emptyKeywordList, emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().withLevel("p5").build()));
+        CollectivePredicate predicate1 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                Collections.singletonList("p4"), EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertFalse(predicate1.test(new TuteeBuilder().withLevel("p5").build()));
 
         // Keyword matches name but not level
-        predicate = new CollectivePredicate(emptyKeywordList,
-                Collections.singletonList("p5"), emptyKeywordList, emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().withName("p4").build()));
+        CollectivePredicate predicate2 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                Collections.singletonList("p5"), EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
+        assertFalse(predicate2.test(new TuteeBuilder().withName("p4").build()));
     }
 
     @Test
-    public void test_nubjectContainsKeywords_returnsTrue() {
+    public void test_subjectContainsKeywords_returnsTrue() {
         // One keyword
-        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, Collections.singletonList("Math"), emptyKeywordList);
-        assertTrue(predicate.test(new TuteeBuilder().withLesson(lesson).build()));
+        CollectivePredicate predicate1 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, Collections.singletonList("Math"), EMPTY_KEYWORD_LIST);
+        assertTrue(predicate1.test(new TuteeBuilder().withLesson(VALID_LESSON_1).build()));
 
         // Two keyword
-        predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, Arrays.asList("Math", "Chemistry"), emptyKeywordList);
-        assertTrue(predicate.test(new TuteeBuilder().withLesson(lesson).withLesson(lesson2).build()));
+        CollectivePredicate predicate2 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, Arrays.asList("Math", "Chemistry"), EMPTY_KEYWORD_LIST);
+        assertTrue(predicate2.test(new TuteeBuilder().withLesson(VALID_LESSON_1).withLesson(VALID_LESSON_2).build()));
 
         // Mixed-case keyword
-        predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, Collections.singletonList("math"), emptyKeywordList);
-        assertTrue(predicate.test(new TuteeBuilder().withLesson(lesson).build()));
+        CollectivePredicate predicate3 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, Collections.singletonList("math"), EMPTY_KEYWORD_LIST);
+        assertTrue(predicate3.test(new TuteeBuilder().withLesson(VALID_LESSON_1).build()));
     }
 
     @Test
     public void test_subjectDoesNotContainsKeywords_returnsFalse() {
         // Non-matching keyword
-        CollectivePredicate predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, Collections.singletonList("Math"), emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().withLesson(lesson2).build()));
+        CollectivePredicate predicate1 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, Collections.singletonList("Math"), EMPTY_KEYWORD_LIST);
+        assertFalse(predicate1.test(new TuteeBuilder().withLesson(VALID_LESSON_2).build()));
+
+        // Only 1 subject matches
+        CollectivePredicate predicate2 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, Arrays.asList("Chemistry", "Math"), EMPTY_KEYWORD_LIST);
+        assertFalse(predicate2.test(new TuteeBuilder().withLesson(VALID_LESSON_2).build()));
 
         // Keyword matches name but not level
-        predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, Collections.singletonList("Math"), emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().withName("chemistry").withLesson(lesson2).build()));
+        CollectivePredicate predicate3 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, Collections.singletonList("Math"), EMPTY_KEYWORD_LIST);
+        assertFalse(predicate3.test(new TuteeBuilder().withName("chemistry").withLesson(VALID_LESSON_2).build()));
 
         // Tutee has no lessons
-        predicate = new CollectivePredicate(emptyKeywordList,
-                emptyKeywordList, Collections.singletonList("Math"), emptyKeywordList);
-        assertFalse(predicate.test(new TuteeBuilder().build()));
+        CollectivePredicate predicate4 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, Collections.singletonList("Math"), EMPTY_KEYWORD_LIST);
+        assertFalse(predicate4.test(new TuteeBuilder().build()));
+    }
+
+    @Test
+    public void test_overdueContainsKeywords_returnsTrue() {
+        // One keyword return true
+        CollectivePredicate predicate1 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, Collections.singletonList("true"));
+        assertTrue(predicate1.test(new TuteeBuilder().withPayment("100", LocalDate.now().minusDays(1)).build()));
+
+        // Mixed-case keyword return true
+        CollectivePredicate predicate2 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, Collections.singletonList("tRue"));
+        assertTrue(predicate2.test(new TuteeBuilder().withPayment("100", LocalDate.now().minusDays(1)).build()));
+    }
+
+    @Test
+    public void test_overdueDoesNotContainsKeywords_returnsFalse() {
+        // One keyword return false
+        CollectivePredicate predicate1 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, Collections.singletonList("true"));
+        assertFalse(predicate1.test(new TuteeBuilder().withPayment("100", LocalDate.now().plusDays(1)).build()));
+
+        // 2 keywords return false
+        CollectivePredicate predicate2 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, Arrays.asList("true", "false"));
+        assertFalse(predicate2.test(new TuteeBuilder().withPayment("100", LocalDate.now().minusDays(1)).build()));
+
+        CollectivePredicate predicate3 = new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, Arrays.asList("true", "false"));
+        assertFalse(predicate3.test(new TuteeBuilder().withPayment("100", null).build()));
     }
 }
