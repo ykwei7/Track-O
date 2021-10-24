@@ -15,6 +15,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
@@ -41,7 +42,9 @@ public class PaymentCommand extends Command {
             + "Required Parameters: TUTEE_INDEX (must be a positive integer)\n"
             + "Example: payment 1";
 
-    public static final String ALL_INSTRUCTIONS = PaymentAddCommand.MESSAGE_USAGE
+    public static final String ALL_INSTRUCTIONS = "Payment command has following functionalities and"
+            + " is to only include up to 1 parameter.\n\n"
+            + PaymentAddCommand.MESSAGE_USAGE
             + PaymentSetAmountCommand.MESSAGE_USAGE
             + PaymentSetDateCommand.MESSAGE_USAGE
             + PaymentReceiveCommand.MESSAGE_USAGE
@@ -95,7 +98,7 @@ public class PaymentCommand extends Command {
      * @param payByDate Date that tutee is to pay amount by
      * @return A new tutee object with the updated payment details
      */
-    public Tutee editedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate) {
+    public static Tutee editedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate) {
         assert tuteeToEdit != null;
 
         Name updatedName = tuteeToEdit.getName();
@@ -109,5 +112,12 @@ public class PaymentCommand extends Command {
 
         return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PaymentCommand // instanceof handles nulls
+                && targetIndex.equals(((PaymentCommand) other).targetIndex)); // state check
     }
 }

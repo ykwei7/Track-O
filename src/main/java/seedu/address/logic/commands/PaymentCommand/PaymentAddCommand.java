@@ -35,4 +35,12 @@ public class PaymentAddCommand extends PaymentCommand {
         this.targetIndex = targetIndex;
         this.paymentValue = paymentValue;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PaymentAddCommand // instanceof handles nulls
+                && targetIndex.equals(((PaymentAddCommand) other).targetIndex)
+                && paymentValue.equals((((PaymentAddCommand) other).paymentValue))); // state check
+    }
 }

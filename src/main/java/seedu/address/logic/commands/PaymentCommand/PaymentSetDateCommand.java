@@ -20,10 +20,19 @@ public class PaymentSetDateCommand extends PaymentCommand {
 
     private final Index targetIndex;
     private final LocalDate payByDate;
+
     public PaymentSetDateCommand(Index targetIndex, LocalDate payByDate) {
         super(targetIndex);
         requireNonNull(payByDate);
         this.targetIndex = targetIndex;
         this.payByDate = payByDate;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PaymentSetDateCommand // instanceof handles nulls
+                && targetIndex.equals(((PaymentSetDateCommand) other).targetIndex)
+                && payByDate.equals((((PaymentSetDateCommand) other).payByDate))); // state check
     }
 }

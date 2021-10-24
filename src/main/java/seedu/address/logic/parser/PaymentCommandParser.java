@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PaymentCommand.*;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tutee.Payment;
 
 /**
  * Parses input arguments and creates a new PaymentCommand object
@@ -41,7 +42,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE,
                     PREFIX_PAYMENT_RECEIVED_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE));
+                        PaymentCommand.MESSAGE_USAGE_ALL));
             }
             String paymentValueToSet = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_LESSON).get());
             return new PaymentAddCommand(index, paymentValueToSet);
@@ -49,7 +50,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
         if (argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).isPresent()) {
             if (anyPrefixesPresent(argMultimap,PREFIX_LESSON , PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_RECEIVED_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE));
+                        PaymentCommand.MESSAGE_USAGE_ALL));
             }
             String paymentValueToSet = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
             return new PaymentSetAmountCommand(index, paymentValueToSet);
@@ -57,16 +58,20 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
         if (argMultimap.getValue(PREFIX_PAYMENT_DATE).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_LESSON, PREFIX_PAYMENT_RECEIVED_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE));
+                        PaymentCommand.MESSAGE_USAGE_ALL));
             }
             // Null value for payByDate is disallowed in the constructor for PaymentSetDateCommand
-            LocalDate paymentPayByDateToSet = ParserUtil.parsePayByDate(
-                    argMultimap.getValue(PREFIX_PAYMENT_DATE).get());
+            String userInput = argMultimap.getValue(PREFIX_PAYMENT_DATE).get();
+            LocalDate paymentPayByDateToSet = ParserUtil.parsePayByDate(userInput);
+            if (paymentPayByDateToSet == null) {
+                throw new ParseException(Payment.DATE_CONSTRAINTS);
+            }
             return new PaymentSetDateCommand(index, paymentPayByDateToSet);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_RECEIVED_DATE).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE, PREFIX_LESSON)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        PaymentCommand.MESSAGE_USAGE_ALL));
             }
             // Null value for payByDate is allowed here
             LocalDate paymentPayByDateToSet =

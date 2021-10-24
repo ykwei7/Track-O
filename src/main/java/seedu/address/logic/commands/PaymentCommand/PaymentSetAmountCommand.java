@@ -78,4 +78,12 @@ public class PaymentSetAmountCommand extends PaymentCommand {
 
         return new CommandResult(String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, editedTutee.getName(), newPaymentDetails));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PaymentSetAmountCommand // instanceof handles nulls
+                && targetIndex.equals(((PaymentSetAmountCommand) other).targetIndex)
+                && paymentValueToSet.equals((((PaymentSetAmountCommand) other).paymentValueToSet))); // state check
+    }
 }

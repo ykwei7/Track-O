@@ -26,4 +26,12 @@ public class PaymentReceiveCommand extends PaymentCommand {
         this.targetIndex = targetIndex;
         this.payByDate = payByDate;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PaymentReceiveCommand // instanceof handles nulls
+                && targetIndex.equals(((PaymentReceiveCommand) other).targetIndex)
+                && payByDate.equals((((PaymentReceiveCommand) other).payByDate))); // state check
+    }
 }

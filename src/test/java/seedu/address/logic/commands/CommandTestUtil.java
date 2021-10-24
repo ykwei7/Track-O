@@ -2,16 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -55,6 +46,15 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_HOURLY_RATE_AMY = "40";
     public static final String VALID_LESSON_HOURLY_RATE_BOB = "45.50";
 
+    public static final String VALID_PAYMENT_AMOUNT_AMY = "0";
+    public static final String VALID_PAYMENT_AMOUNT_BOB = "200";
+    public static final String VALID_PAYMENT_DATE_AMY = "15-10-2021";
+    public static final String VALID_PAYMENT_DATE_BOB = "02-05-2021";
+    public static final String VALID_PAYMENT_RECV_DATE_AMY = "03-10-2021";
+    public static final String VALID_PAYMENT_RECV_DATE_BOB = "";
+    public static final String VALID_LESSON_INDEX_AMY = "1";
+    public static final String VALID_LESSON_INDEX_BOB = "3";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -77,6 +77,17 @@ public class CommandTestUtil {
     public static final String LESSON_HOURLY_RATE_DESC_AMY = " " + PREFIX_HOURLY_RATE + VALID_LESSON_HOURLY_RATE_AMY;
     public static final String LESSON_HOURLY_RATE_DESC_BOB = " " + PREFIX_HOURLY_RATE + VALID_LESSON_HOURLY_RATE_BOB;
 
+    public static final String PAYMENT_AMOUNT_DESC_AMY = " " + PREFIX_PAYMENT_AMOUNT + VALID_PAYMENT_AMOUNT_AMY;
+    public static final String PAYMENT_AMOUNT_DESC_BOB = " " + PREFIX_PAYMENT_AMOUNT + VALID_PAYMENT_AMOUNT_BOB;
+    public static final String PAYMENT_DATE_DESC_AMY = " " + PREFIX_PAYMENT_DATE + VALID_PAYMENT_DATE_AMY;
+    public static final String PAYMENT_DATE_DESC_BOB = " " + PREFIX_PAYMENT_DATE + VALID_PAYMENT_DATE_BOB;
+    public static final String PAYMENT_RECV_DATE_DESC_AMY = " " + PREFIX_PAYMENT_RECEIVED_DATE
+            + VALID_PAYMENT_RECV_DATE_AMY;
+    public static final String PAYMENT_RECV_DATE_DESC_BOB = " " + PREFIX_PAYMENT_RECEIVED_DATE +
+            VALID_PAYMENT_RECV_DATE_BOB;
+    public static final String PAYMENT_LESSON_INDEX_AMY = " " + PREFIX_LESSON + VALID_LESSON_INDEX_AMY;
+    public static final String PAYMENT_LESSON_INDEX_BOB = " " + PREFIX_LESSON + VALID_LESSON_INDEX_BOB;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "p7"; // year of study out of range
@@ -92,8 +103,16 @@ public class CommandTestUtil {
     public static final String INVALID_LESSON_HOURLY_RATE_DESC =
             " " + PREFIX_HOURLY_RATE + "45.5"; // not expressed in 2dp
 
+    public static final String INVALID_PAYMENT_AMOUNT_DESC = " " + PREFIX_PAYMENT_AMOUNT + "20!"; // No unknown symbols
+    public static final String INVALID_LESSON_INDEX_DESC = " " + PREFIX_LESSON + "0"; // Not a positive integer
+    public static final String INVALID_PAYMENT_DATE_DESC = " "
+            + PREFIX_PAYMENT_DATE + "15-Oct-2021"; // Invalid date formatting
+    public static final String INVALID_PAYMENT_RECV_DATE_DESC = " "
+            + PREFIX_PAYMENT_RECEIVED_DATE + "15-Oct-2021"; // Invalid date formatting
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
 
     public static final EditCommand.EditTuteeDescriptor DESC_AMY;
     public static final EditCommand.EditTuteeDescriptor DESC_BOB;

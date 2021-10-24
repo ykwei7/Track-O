@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -224,10 +225,10 @@ public class ParserUtil {
     }
 
     public static LocalDate parsePayByDate(String payByDate) throws ParseException {
-        if (payByDate == null) {
+        String trimmedPayByDate = payByDate.trim();
+        if (trimmedPayByDate.equals("")) {
             return null;
         }
-        String trimmedPayByDate = payByDate.trim();
 
         if (!Payment.isValidPayByDate(trimmedPayByDate)) {
             throw new ParseException(Payment.DATE_CONSTRAINTS);
