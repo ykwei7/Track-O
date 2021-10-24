@@ -9,8 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.sun.javafx.application.PlatformImpl;
-
+import javafx.application.Platform;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Tutee;
@@ -24,7 +23,7 @@ public class TuteeCardTest {
     private static final Tutee VALID_TUTEE_NO_TAGS = CARL;
 
     public TuteeCardTest() {
-        PlatformImpl.startup(()-> {});
+        Platform.startup(()-> {});
     }
 
     // Solution to initialise JavaFX toolkit below adapted from https://stackoverflow.com/a/38883519
