@@ -23,46 +23,61 @@ public class TuteeCardTest {
     private static final Tutee VALID_TUTEE_NO_TAGS = CARL;
 
     // Singleton pattern ensures no multiple initialisations of JavaFX toolkit
-    private static TuteeCardTest instance = new TuteeCardTest();
-
-    public TuteeCardTest() {
-        if (instance != null) {
-            return;
-        } else {
-            Platform.startup(() -> {});
-            instance = this;
-        }
-    }
+    private static boolean initialised = false;
 
     // Solution to initialise JavaFX toolkit below adapted from https://stackoverflow.com/a/38883519
     @Test
     public void constructor_invalidTutee_throwsAssertionError() {
+        if (!initialised) {
+            Platform.startup(() -> {});
+            initialised = true;
+        }
         assertThrows(AssertionError.class, () -> new TuteeCard(null, VALID_INDEX));
     }
 
     @Test
     public void constructor_invalidIndex_throwsAssertionError() {
+        if (!initialised) {
+            Platform.startup(() -> {});
+            initialised = true;
+        }
         assertThrows(AssertionError.class, () -> new TuteeCard(VALID_TUTEE, INVALID_INDEX));
     }
 
     @Test
     public void constructor_validInput_success() {
+        if (!initialised) {
+            Platform.startup(() -> {});
+            initialised = true;
+        }
         TuteeCard validTuteeCard = new TuteeCard(VALID_TUTEE, VALID_INDEX);
     }
 
     @Test
     public void addSubjectToTagTest_nullSubject_throwsNullPointerException() {
+        if (!initialised) {
+            Platform.startup(() -> {});
+            initialised = true;
+        }
         assertThrows(NullPointerException.class, () -> new TuteeCard(VALID_TUTEE, VALID_INDEX).addSubjectToTag(null));
     }
 
     @Test
     public void addSubjectToTagTest_invalidSubject_throwsIllegalArgumentException() {
+        if (!initialised) {
+            Platform.startup(() -> {});
+            initialised = true;
+        }
         assertThrows(IllegalArgumentException.class, () -> new TuteeCard(VALID_TUTEE, VALID_INDEX)
                 .addSubjectToTag(new Subject("math*")));
     }
 
     @Test
     public void addSubjectToTagTest_validSubject_success() {
+        if (!initialised) {
+            Platform.startup(() -> {});
+            initialised = true;
+        }
         TuteeCard validTuteeCard = new TuteeCard(VALID_TUTEE_NO_TAGS, VALID_INDEX);
         Subject validSubject = new Subject("Math");
         validTuteeCard.addSubjectToTag(validSubject);
