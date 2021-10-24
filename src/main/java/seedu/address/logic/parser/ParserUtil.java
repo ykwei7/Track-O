@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -25,9 +24,6 @@ import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
-
-import javax.swing.text.DateFormatter;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -215,6 +211,13 @@ public class ParserUtil {
         return Double.parseDouble(hourlyRate);
     }
 
+    /**
+     * Trims input by user and checks if it is a positive number represented as a string.
+     *
+     * @param paymentValue Payment value inputted by user
+     * @return Trimmed string of payment value
+     * @throws ParseException
+     */
     public static String parsePaymentValue(String paymentValue) throws ParseException {
         requireNonNull(paymentValue);
         String trimmedPayment = paymentValue.trim();
@@ -224,6 +227,13 @@ public class ParserUtil {
         return trimmedPayment;
     }
 
+    /**
+     * Trims string by user and parses into a LocalDate format of dd-mm-yyyy.
+     *
+     * @param payByDate Date to make payment by inputted by user
+     * @return LocalDate of formatted string
+     * @throws ParseException
+     */
     public static LocalDate parsePayByDate(String payByDate) throws ParseException {
         String trimmedPayByDate = payByDate.trim();
         if (trimmedPayByDate.equals("")) {

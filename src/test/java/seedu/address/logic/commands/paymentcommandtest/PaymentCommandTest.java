@@ -1,23 +1,25 @@
-package seedu.address.logic.commands.PaymentCommandTest;
-
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.PaymentCommand.PaymentCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.tutee.Tutee;
+package seedu.address.logic.commands.paymentcommandtest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.paymentcommand.PaymentCommand.MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
-import static seedu.address.logic.commands.PaymentCommand.PaymentCommand.MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.paymentcommand.PaymentCommand;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.tutee.Tutee;
+
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -32,8 +34,8 @@ public class PaymentCommandTest {
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_TUTEE);
 
-        String expectedMessage = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName()
-                , retrievedTutee.getPayment());
+        String expectedMessage = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(),
+                retrievedTutee.getPayment());
 
         ModelManager expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
 

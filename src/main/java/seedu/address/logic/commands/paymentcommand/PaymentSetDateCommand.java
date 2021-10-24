@@ -1,12 +1,13 @@
-package seedu.address.logic.commands.PaymentCommand;
+package seedu.address.logic.commands.paymentcommand;
 
-import seedu.address.commons.core.index.Index;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 
 import java.time.LocalDate;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
+import seedu.address.commons.core.index.Index;
+
+
 
 public class PaymentSetDateCommand extends PaymentCommand {
 
@@ -21,6 +22,13 @@ public class PaymentSetDateCommand extends PaymentCommand {
     private final Index targetIndex;
     private final LocalDate payByDate;
 
+    /**
+     * Creates a command to modify the date to make next payment by
+     * of desired tutee.
+     *
+     * @param targetIndex Index of the tutee
+     * @param payByDate Date to make next payment by
+     */
     public PaymentSetDateCommand(Index targetIndex, LocalDate payByDate) {
         super(targetIndex);
         requireNonNull(payByDate);

@@ -1,17 +1,8 @@
-package seedu.address.logic.commands.PaymentCommand;
+package seedu.address.logic.commands.paymentcommand;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.tutee.Tutee;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+
+import seedu.address.commons.core.index.Index;
 
 public class PaymentAddCommand extends PaymentCommand {
 
@@ -28,12 +19,18 @@ public class PaymentAddCommand extends PaymentCommand {
             + MESSAGE_USAGE + ALL_INSTRUCTIONS;
 
     private final Index targetIndex;
-    private final String paymentValue;
+    private final String lessonIndex;
 
-    public PaymentAddCommand(Index targetIndex, String paymentValue) {
+    /**
+     * Creates a command to add cost of the lesson to existing payment value of tutee.
+     *
+     * @param targetIndex Index of the tutee desired
+     * @param lessonIndex Index of the lesson for its cost to be added to existing payment value
+     */
+    public PaymentAddCommand(Index targetIndex, String lessonIndex) {
         super(targetIndex);
         this.targetIndex = targetIndex;
-        this.paymentValue = paymentValue;
+        this.lessonIndex = lessonIndex;
     }
 
     @Override
@@ -41,6 +38,6 @@ public class PaymentAddCommand extends PaymentCommand {
         return other == this // short circuit if same object
                 || (other instanceof PaymentAddCommand // instanceof handles nulls
                 && targetIndex.equals(((PaymentAddCommand) other).targetIndex)
-                && paymentValue.equals((((PaymentAddCommand) other).paymentValue))); // state check
+                && lessonIndex.equals((((PaymentAddCommand) other).lessonIndex))); // state check
     }
 }

@@ -2,7 +2,20 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_RECEIVED_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -83,8 +96,8 @@ public class CommandTestUtil {
     public static final String PAYMENT_DATE_DESC_BOB = " " + PREFIX_PAYMENT_DATE + VALID_PAYMENT_DATE_BOB;
     public static final String PAYMENT_RECV_DATE_DESC_AMY = " " + PREFIX_PAYMENT_RECEIVED_DATE
             + VALID_PAYMENT_RECV_DATE_AMY;
-    public static final String PAYMENT_RECV_DATE_DESC_BOB = " " + PREFIX_PAYMENT_RECEIVED_DATE +
-            VALID_PAYMENT_RECV_DATE_BOB;
+    public static final String PAYMENT_RECV_DATE_DESC_BOB = " " + PREFIX_PAYMENT_RECEIVED_DATE
+            + VALID_PAYMENT_RECV_DATE_BOB;
     public static final String PAYMENT_LESSON_INDEX_AMY = " " + PREFIX_LESSON + VALID_LESSON_INDEX_AMY;
     public static final String PAYMENT_LESSON_INDEX_BOB = " " + PREFIX_LESSON + VALID_LESSON_INDEX_BOB;
 

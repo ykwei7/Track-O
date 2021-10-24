@@ -1,11 +1,10 @@
-package seedu.address.logic.commands.PaymentCommand;
+package seedu.address.logic.commands.paymentcommand;
 
-import seedu.address.commons.core.index.Index;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_RECEIVED_DATE;
 
 import java.time.LocalDate;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_RECEIVED_DATE;
+import seedu.address.commons.core.index.Index;
 
 public class PaymentReceiveCommand extends PaymentCommand {
 
@@ -21,6 +20,13 @@ public class PaymentReceiveCommand extends PaymentCommand {
     private final Index targetIndex;
     private final LocalDate payByDate;
 
+    /**
+     * Creates a command to set the payment value owed by tutee to 0 and
+     * has an optional field to set next date to make payment by.
+     *
+     * @param targetIndex Index of the tutee
+     * @param payByDate Date to make next payment by
+     */
     public PaymentReceiveCommand(Index targetIndex, LocalDate payByDate) {
         super(targetIndex);
         this.targetIndex = targetIndex;

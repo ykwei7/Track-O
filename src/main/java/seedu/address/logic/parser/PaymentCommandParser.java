@@ -2,14 +2,20 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_RECEIVED_DATE;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.PaymentCommand.*;
+import seedu.address.logic.commands.paymentcommand.PaymentAddCommand;
+import seedu.address.logic.commands.paymentcommand.PaymentCommand;
+import seedu.address.logic.commands.paymentcommand.PaymentReceiveCommand;
+import seedu.address.logic.commands.paymentcommand.PaymentSetAmountCommand;
+import seedu.address.logic.commands.paymentcommand.PaymentSetDateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tutee.Payment;
 
@@ -48,7 +54,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             return new PaymentAddCommand(index, paymentValueToSet);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).isPresent()) {
-            if (anyPrefixesPresent(argMultimap,PREFIX_LESSON , PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_RECEIVED_DATE)) {
+            if (anyPrefixesPresent(argMultimap, PREFIX_LESSON , PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_RECEIVED_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         PaymentCommand.MESSAGE_USAGE_ALL));
             }

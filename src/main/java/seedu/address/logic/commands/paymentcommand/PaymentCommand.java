@@ -1,9 +1,8 @@
-package seedu.address.logic.commands.PaymentCommand;
+package seedu.address.logic.commands.paymentcommand;
 
 import static java.util.Objects.requireNonNull;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_RECEIVED_DATE;
 
@@ -15,7 +14,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
@@ -50,8 +48,8 @@ public class PaymentCommand extends Command {
             + PaymentReceiveCommand.MESSAGE_USAGE
             + "\n";
 
-    public static final String MESSAGE_PAYMENT_MANAGEMENT_USAGE
-            = COMMAND_WORD + " TUTEE_INDEX " + PREFIX_LESSON + "LESSON_INDEX\n"
+    public static final String MESSAGE_PAYMENT_MANAGEMENT_USAGE =
+            COMMAND_WORD + " TUTEE_INDEX " + PREFIX_LESSON + "LESSON_INDEX\n"
             + COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_AMOUNT + "PAYMENT_AMOUNT\n"
             + COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_DATE + "PAYMENT_DATE\n"
             + COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_RECEIVED_DATE + "[DATE_RECEIVED]\n\n"
@@ -85,8 +83,8 @@ public class PaymentCommand extends Command {
         Tutee tuteeToGet = lastShownList.get(targetIndex.getZeroBased());
 
         //Edit this portion to link payment details instead of tutee
-        String tuteePaymentDetails = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, tuteeToGet.getName()
-                , tuteeToGet.getPayment());
+        String tuteePaymentDetails = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, tuteeToGet.getName(),
+                tuteeToGet.getPayment());
         return new CommandResult(tuteePaymentDetails);
     }
 

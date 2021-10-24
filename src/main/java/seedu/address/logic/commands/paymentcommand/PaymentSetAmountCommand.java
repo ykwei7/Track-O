@@ -1,4 +1,11 @@
-package seedu.address.logic.commands.PaymentCommand;
+package seedu.address.logic.commands.paymentcommand;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
+
+import java.time.LocalDate;
+import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -8,12 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Tutee;
 
-import java.time.LocalDate;
-import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 
 /**
  * Updates the payment value of the tutee to the new value inputted by the user.
@@ -38,6 +40,12 @@ public class PaymentSetAmountCommand extends PaymentCommand {
     private final Index targetIndex;
     private final String paymentValueToSet;
 
+    /**
+     * Creates a command to modify the existing payment value owed by desired tutee.
+     *
+     * @param targetIndex Index of the tutee
+     * @param paymentValueToSet Payment value to set to
+     */
     public PaymentSetAmountCommand(Index targetIndex, String paymentValueToSet) {
         super(targetIndex);
         this.targetIndex = targetIndex;
