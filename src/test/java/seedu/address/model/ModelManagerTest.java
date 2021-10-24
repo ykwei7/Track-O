@@ -10,13 +10,16 @@ import static seedu.address.testutil.TypicalTutees.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.NameContainsKeywordsPredicate;
+import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.TrackOBuilder;
 
 public class ModelManagerTest {
@@ -31,6 +34,18 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new TrackO(), new TrackO(modelManager.getTrackO()));
+    }
+
+    @Test
+    public void clearSchedule_emptySchedule() throws ScheduleClashException {
+        ModelManager modelManagerToClearSchedule = new ModelManager();
+        modelManagerToClearSchedule.clearSchedule();
+
+        // create empty schedule from empty tutee list
+        List<Tutee> emptyTuteeList = new ArrayList<>();
+        Schedule emptySchedule = new Schedule(emptyTuteeList);
+
+        assertEquals(modelManagerToClearSchedule.getSchedule(), emptySchedule);
     }
 
     @Test

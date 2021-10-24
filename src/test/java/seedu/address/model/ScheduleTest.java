@@ -13,6 +13,8 @@ import static seedu.address.testutil.TypicalTutees.getTypicalTutees;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +24,7 @@ import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
+import seedu.address.model.tutee.Tutee;
 
 public class ScheduleTest {
 
@@ -96,6 +99,27 @@ public class ScheduleTest {
         // the lesson to be removed should be under Fiona's name,
         // but is instead under George's name
         assertFalse(schedule.remove(FIRST_LESSON, georgeName));
+    }
+
+    @Test
+    public void equals() throws ScheduleClashException {
+        // same values -> returns true
+        Schedule scheduleCopy = new Schedule(getTypicalTutees());
+        assertTrue(schedule.equals(scheduleCopy));
+
+        // same object -> returns true
+        assertTrue(schedule.equals(schedule));
+
+        // null -> returns false
+        assertFalse(schedule.equals(null));
+
+        // different type -> returns false
+        assertFalse(schedule.equals(5));
+
+        // different schedule -> returns false
+        List<Tutee> emptyTuteeList = new ArrayList<>();
+        Schedule emptySchedule = new Schedule(emptyTuteeList);
+        assertFalse(schedule.equals(emptySchedule));
     }
 
 }

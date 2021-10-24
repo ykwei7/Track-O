@@ -101,4 +101,11 @@ public class Schedule {
         return builder.toString();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Schedule // instanceof handles nulls
+                && sortedLessonsMap.equals(((Schedule) other).getSortedLessonsMap())); // state check
+    }
+
 }

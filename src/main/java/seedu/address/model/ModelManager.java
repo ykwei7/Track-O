@@ -51,6 +51,11 @@ public class ModelManager implements Model {
         return schedule;
     }
 
+    @Override
+    public void clearSchedule() {
+        schedule.clear();
+    }
+
     //=========== UserPrefs ==================================================================================
 
     @Override
