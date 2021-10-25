@@ -22,7 +22,7 @@ public class Payment {
             "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-10-2021";
     public static final String PAYMENT_HISTORY_CONSTRAINTS =
             "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-Oct-2021, and 'Never'";
-    public static final String VALIDATION_REGEX = "\\d{1,}";
+    public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$";
     public final String value;
     public final LocalDate payByDate;
     public final String payByDateAsString;
@@ -57,7 +57,7 @@ public class Payment {
      * Returns true if a given string is a valid payment amount.
      */
     public static boolean isValidPayment(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES);
     }
 
     /**
