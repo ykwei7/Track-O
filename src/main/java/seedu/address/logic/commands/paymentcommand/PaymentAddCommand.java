@@ -82,7 +82,7 @@ public class PaymentAddCommand extends PaymentCommand {
         Double lessonCost = lessonRetrieved.getCost();
         int updatedPaymentVal = (int) Math.round(Double.parseDouble(existingPaymentValue) + lessonCost);
         String updatedPaymentAsString = String.valueOf(updatedPaymentVal);
-        Tutee editedTutee = editedPaymentDetailsTutee(tuteeToGet, updatedPaymentAsString, existingPayByDate);
+        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, updatedPaymentAsString, existingPayByDate);
 
         model.setTutee(tuteeToGet, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);

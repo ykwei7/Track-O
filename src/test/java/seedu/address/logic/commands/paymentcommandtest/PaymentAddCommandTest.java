@@ -34,7 +34,7 @@ public class PaymentAddCommandTest {
                                        LocalDate newPayByDate) {
         Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
-        Tutee editedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
+        Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
                 newPayByDate);
         model.setTutee(retrievedTutee, editedTutee);
         return model;

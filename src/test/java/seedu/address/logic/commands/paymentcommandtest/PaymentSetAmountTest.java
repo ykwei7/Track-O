@@ -38,7 +38,7 @@ public class PaymentSetAmountTest {
                                        LocalDate newPayByDate) {
         Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
-        Tutee editedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
+        Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
                 newPayByDate);
         model.setTutee(retrievedTutee, editedTutee);
         return model;
@@ -107,7 +107,7 @@ public class PaymentSetAmountTest {
                 NEW_PAYMENT_VAL_STUB_2);
 
         paymentSetAmountCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, NEW_PAYMENT_VAL_STUB_2,
+        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, NEW_PAYMENT_VAL_STUB_2,
                 payByDate);
         Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());

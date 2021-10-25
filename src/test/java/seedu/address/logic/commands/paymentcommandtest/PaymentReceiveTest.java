@@ -44,7 +44,7 @@ public class PaymentReceiveTest {
                                        LocalDate newPayByDate) {
         Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
-        Tutee editedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
+        Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
                 newPayByDate);
         model.setTutee(retrievedTutee, editedTutee);
         return model;
@@ -116,7 +116,7 @@ public class PaymentReceiveTest {
                 payByDate);
 
         paymentReceiveCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
+        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
                 payByDate);
         Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
@@ -136,7 +136,7 @@ public class PaymentReceiveTest {
                 NULL_DATE);
 
         paymentReceiveCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
+        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
                 payByDate);
         Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
@@ -158,7 +158,7 @@ public class PaymentReceiveTest {
                 NULL_DATE);
 
         paymentReceiveCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
+        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
                 payByDate);
 
         Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
@@ -180,7 +180,7 @@ public class PaymentReceiveTest {
                 payByDate);
 
         paymentReceiveCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
+        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
                 payByDate);
         Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
