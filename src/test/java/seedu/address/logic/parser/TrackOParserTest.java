@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTuteeDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -105,6 +108,17 @@ public class TrackOParserTest {
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_TUTEE.getOneBased() + " " + PREFIX_REMARK + remark.value);
         assertEquals(new RemarkCommand(INDEX_FIRST_TUTEE, remark), command);
+    }
+
+    @Test
+    public void parseCommand_deleteLesson() throws Exception {
+        Index tuteeIndex = Index.fromOneBased(1);
+        Index lessonIndex = Index.fromOneBased(1);
+
+        DeleteLessonCommand command = (DeleteLessonCommand) parser.parseCommand(DeleteLessonCommand.COMMAND_WORD
+                + " " + tuteeIndex.getOneBased() + " " + PREFIX_LESSON + lessonIndex.getOneBased());
+
+        assertEquals(new DeleteLessonCommand(tuteeIndex, lessonIndex), command);
     }
 
     @Test

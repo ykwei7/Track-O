@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -54,6 +55,7 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_END_TIME_BOB = "16:30";
     public static final String VALID_LESSON_HOURLY_RATE_AMY = "40";
     public static final String VALID_LESSON_HOURLY_RATE_BOB = "45.50";
+    public static final String VALID_LESSON_INDEX = "1";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -76,6 +78,7 @@ public class CommandTestUtil {
     public static final String LESSON_END_TIME_DESC_BOB = " " + PREFIX_END_TIME + VALID_LESSON_END_TIME_BOB;
     public static final String LESSON_HOURLY_RATE_DESC_AMY = " " + PREFIX_HOURLY_RATE + VALID_LESSON_HOURLY_RATE_AMY;
     public static final String LESSON_HOURLY_RATE_DESC_BOB = " " + PREFIX_HOURLY_RATE + VALID_LESSON_HOURLY_RATE_BOB;
+    public static final String LESSON_INDEX = " " + PREFIX_LESSON + VALID_LESSON_INDEX;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -91,6 +94,7 @@ public class CommandTestUtil {
             " " + PREFIX_END_TIME + "20:00!"; // invalid symbol '!'
     public static final String INVALID_LESSON_HOURLY_RATE_DESC =
             " " + PREFIX_HOURLY_RATE + "45.5"; // not expressed in 2dp
+    public static final String INVALID_LESSON_INDEX =  " " + PREFIX_LESSON + "*"; // not an integer larger than 0
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
