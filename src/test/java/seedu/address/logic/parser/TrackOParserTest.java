@@ -85,7 +85,7 @@ public class TrackOParserTest {
         List<String> subjectKeywords = Collections.singletonList("Math");
         List<String> overdueKeywords = Collections.singletonList("true");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + "n/Alice l/p5 subject/Math overdue/true");
+                FindCommand.COMMAND_WORD + " " + "n/Alice l/p5 subject/Math overdue/yes");
         assertEquals(new FindCommand(new CollectivePredicate(nameKeywords,
                 levelKeywords, subjectKeywords, overdueKeywords)), command);
     }

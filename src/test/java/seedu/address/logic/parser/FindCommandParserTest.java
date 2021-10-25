@@ -49,7 +49,7 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand4 =
                 new FindCommand(new CollectivePredicate(EMPTY_KEYWORD_LIST,
                         EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, Collections.singletonList("true")));
-        assertParseSuccess(parser, " overdue/true", expectedFindCommand4);
+        assertParseSuccess(parser, " overdue/yes", expectedFindCommand4);
     }
 
 }

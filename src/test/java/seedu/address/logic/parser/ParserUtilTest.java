@@ -26,7 +26,6 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_LEVEL = "@2 ";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_SUBJECT = "Chemistry%";
     private static final String INVALID_OVERDUE = "nope";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -35,9 +34,7 @@ public class ParserUtilTest {
     private static final String VALID_LEVEL = "p5";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_SUBJECT = "Chemistry";
-    private static final String VALID_SUBJECT_2 = "Math";
-    private static final String VALID_OVERDUE = "true";
+    private static final String VALID_OVERDUE = "yes";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -166,12 +163,12 @@ public class ParserUtilTest {
     @Test
     public void parseIsOverdue_validValueWithWhitespace_returnsTrimmedOverdue() throws Exception {
         String overdueWithWhiteSpace = WHITESPACE + VALID_OVERDUE + WHITESPACE;
-        assertEquals(VALID_OVERDUE, ParserUtil.parseIsOverdue(overdueWithWhiteSpace)[0]);
+        assertEquals("true", ParserUtil.parseIsOverdue(overdueWithWhiteSpace)[0]);
     }
 
     @Test
     public void parseIsOverdue_validValueWithoutWhitespace_returnsOverdue() throws Exception {
-        assertEquals(VALID_OVERDUE, ParserUtil.parseIsOverdue(VALID_OVERDUE)[0]);
+        assertEquals("true", ParserUtil.parseIsOverdue(VALID_OVERDUE)[0]);
     }
 
     @Test
