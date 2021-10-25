@@ -36,8 +36,7 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException
-    {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Tutee editedTutee = new TuteeBuilder().build();
         EditTuteeDescriptor descriptor = new EditTuteeDescriptorBuilder(editedTutee).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_TUTEE, descriptor);
