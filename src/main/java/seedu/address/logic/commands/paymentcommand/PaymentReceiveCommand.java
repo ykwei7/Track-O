@@ -26,14 +26,14 @@ public class PaymentReceiveCommand extends PaymentCommand {
             + "Optional Parameters: PAY_BY_DATE (in the format of dd-mm-yyyy)\n"
             + "Example: payment 1 " + PREFIX_PAYMENT_RECEIVED_DATE + "15-10-2021\n\n";
 
+    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
+
+    public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE = "Payment value owed by tutee "
+            + "is already 0 and date to make payment by had no change.";
     private final Index targetIndex;
     private final LocalDate newPayByDate;
     private final String zeroPaymentVal = "0";
 
-    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
-
-    public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE = "Payment value owed by tutee "
-            + "is already 0.";
 
     /**
      * Creates a command to set the payment value owed by tutee to 0 and
@@ -73,6 +73,8 @@ public class PaymentReceiveCommand extends PaymentCommand {
         // If existing value is same as input value
         if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == null) {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
+        } else if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == existingPayByDate) {
+            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
         }
 
         if (newPayByDate == null) {
@@ -93,6 +95,7 @@ public class PaymentReceiveCommand extends PaymentCommand {
         return other == this // short circuit if same object
                 || (other instanceof PaymentReceiveCommand // instanceof handles nulls
                 && targetIndex.equals(((PaymentReceiveCommand) other).targetIndex)
-                && newPayByDate.equals((((PaymentReceiveCommand) other).newPayByDate))); // state check
+                && ((newPayByDate == null) || ((PaymentReceiveCommand) other).newPayByDate == null
+                || (newPayByDate.equals((((PaymentReceiveCommand) other).newPayByDate))))); // state check
     }
 }
