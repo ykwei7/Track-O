@@ -81,9 +81,11 @@ public class PaymentReceiveCommand extends PaymentCommand {
         }
 
         if (newPayByDate == null) {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal, nullPayByDate, TODAY_DATE_AS_STRING);
+            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal,
+                    nullPayByDate, TODAY_DATE_AS_STRING);
         } else {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal, newPayByDate, TODAY_DATE_AS_STRING);
+            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal,
+                    newPayByDate, TODAY_DATE_AS_STRING);
         }
 
         model.setTutee(tuteeToGet, editedTutee);
