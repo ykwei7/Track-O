@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.tutee.CollectivePredicate;
+import seedu.address.model.tutee.Level;
 
 public class FindCommandParserTest {
 
@@ -20,6 +21,11 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidLevel_throwsParseException() {
+        assertParseFailure(parser, " l/p8", FindCommand.MESSAGE_LEVEL_CONSTRAINT + "\n\n" + Level.MESSAGE_CONSTRAINTS);
     }
 
     @Test
