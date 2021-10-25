@@ -1,6 +1,9 @@
 package seedu.address.model;
 
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -13,6 +16,8 @@ import seedu.address.model.tutee.Tutee;
  * Represents the user's Schedule of lessons for the week.
  */
 public class Schedule {
+
+    public static final String SCHEDULE_CLASH_MESSAGE = "Schedule clash for the lesson: %1$s";
 
     /* Stores a sorted map of Lessons to tutees' names */
     private TreeMap<Lesson, String> sortedLessonsMap = new TreeMap<>();
@@ -62,7 +67,7 @@ public class Schedule {
      */
     public void add(Lesson lesson, String tuteeName) throws ScheduleClashException {
         if (isClash(lesson)) {
-            throw new ScheduleClashException("Schedule clash for the lesson: " + lesson);
+            throw new ScheduleClashException(String.format(SCHEDULE_CLASH_MESSAGE, lesson));
         }
         sortedLessonsMap.put(lesson, tuteeName);
     }
@@ -92,10 +97,31 @@ public class Schedule {
 
         final StringBuilder builder = new StringBuilder();
 
+        DayOfWeek currentDay = null;
+        boolean isCurrentDayNotDisplayed = true;
+
         for (Map.Entry<Lesson, String> entry : entrySet) {
             Lesson lesson = entry.getKey();
             String tuteeName = entry.getValue();
-            builder.append(lesson).append(" (Tutee: ").append(tuteeName).append(")\n");
+            DayOfWeek lessonDay = lesson.getTime().getDayOfOccurrence();
+
+            if (!lessonDay.equals(currentDay)) {
+                currentDay = lessonDay;
+                isCurrentDayNotDisplayed = true;
+            }
+
+            if (isCurrentDayNotDisplayed) {
+                builder.append("\n")
+                        .append(currentDay.getDisplayName(TextStyle.SHORT, Locale.ENGLISH))
+                        .append("\n");
+                isCurrentDayNotDisplayed = false;
+            }
+
+            builder.append("\u2022 ")
+                    .append(lesson.toCondensedString())
+                    .append("(")
+                    .append(tuteeName)
+                    .append(")\n");
         }
 
         return builder.toString();

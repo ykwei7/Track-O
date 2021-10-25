@@ -137,7 +137,14 @@ public class Time implements Comparable<Time> {
     @Override
     public String toString() {
         return getDayOfOccurrence().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) // output "Mon" instead of "Monday"
-                + " " + getStartTime() + " to " + getEndTime();
+                + " " + toCondensedString();
+    }
+
+    /**
+     * Returns the condensed string representation of the time, containing only start time and end time.
+     */
+    public String toCondensedString() {
+        return getStartTime() + " to " + getEndTime();
     }
 
     @Override

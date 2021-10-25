@@ -67,6 +67,10 @@ public class Lesson implements Comparable<Lesson> {
         return time;
     }
 
+    public double getHourlyRate() {
+        return hourlyRate;
+    }
+
     public double getCost() {
         return cost;
     }
@@ -113,8 +117,14 @@ public class Lesson implements Comparable<Lesson> {
 
     @Override
     public String toString() {
-        // return "[" + subject + " " + time + "Hourly rate: $" + hourlyRate + "/hour Total cost: " + cost + "]";
-        return String.format("[%s %s (Hourly rate: $%.2f/h, Total cost: $%.2f)]", subject, time, hourlyRate, cost);
+        return String.format("%s    %s \n(Hourly rate: $%.2f/h, Total cost: $%.2f)\n", subject, time, hourlyRate, cost);
+    }
+
+    /**
+     * Returns the condensed string representation of the lesson, containing only subject and time.
+     */
+    public String toCondensedString() {
+        return String.format("%s\n%s\n", subject, time.toCondensedString());
     }
 
     @Override

@@ -12,7 +12,7 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_SUCCESS = "Here is your schedule for the week: \n\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Here is your schedule for the week: \n%1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your schedule for the week.\n"
             + "Example: " + COMMAND_WORD;
