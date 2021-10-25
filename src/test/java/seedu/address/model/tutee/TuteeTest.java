@@ -4,11 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DAY_OF_WEEK_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_END_TIME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_HOURLY_RATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_START_TIME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_SUBJECT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -17,20 +12,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.ALICE;
 import static seedu.address.testutil.TypicalTutees.BENSON;
 import static seedu.address.testutil.TypicalTutees.BOB;
-import static seedu.address.testutil.TypicalTutees.LESSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
 import seedu.address.testutil.TuteeBuilder;
-
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 
 public class TuteeTest {
     @Test

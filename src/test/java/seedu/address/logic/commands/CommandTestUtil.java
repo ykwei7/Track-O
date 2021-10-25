@@ -94,7 +94,7 @@ public class CommandTestUtil {
             " " + PREFIX_END_TIME + "20:00!"; // invalid symbol '!'
     public static final String INVALID_LESSON_HOURLY_RATE_DESC =
             " " + PREFIX_HOURLY_RATE + "45.5"; // not expressed in 2dp
-    public static final String INVALID_LESSON_INDEX =  " " + PREFIX_LESSON + "*"; // not an integer larger than 0
+    public static final String INVALID_LESSON_INDEX = " " + PREFIX_LESSON + "*"; // not an integer larger than 0
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

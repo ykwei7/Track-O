@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
@@ -56,7 +55,8 @@ public class DeleteLessonCommandTest {
 
         model.setTutee(firstTutee, firstTuteeWithLesson);
 
-        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(INDEX_FIRST_TUTEE, firstLessonIndex);
+        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(INDEX_FIRST_TUTEE,
+                firstLessonIndex);
 
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_SUCCESS, firstTutee);
 
@@ -75,7 +75,8 @@ public class DeleteLessonCommandTest {
         model.setTutee(firstTutee, editedTutee);
 
         Index firstLessonIndex = Index.fromOneBased(1);
-        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(INDEX_FIRST_TUTEE, firstLessonIndex);
+        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(INDEX_FIRST_TUTEE,
+                firstLessonIndex);
 
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_SUCCESS, firstTutee);
 
@@ -88,7 +89,8 @@ public class DeleteLessonCommandTest {
     public void execute_invalidTuteeIndexUnfilteredList_failure() throws ParseException {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size() + 1);
         Index firstLessonIndex = Index.fromOneBased(1);
-        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(outOfBoundIndex, firstLessonIndex);
+        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(outOfBoundIndex,
+                firstLessonIndex);
 
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
     }
@@ -106,7 +108,8 @@ public class DeleteLessonCommandTest {
         // ensures that outOfBoundIndex is still in bounds of Track-O list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTrackO().getTuteeList().size());
 
-        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(outOfBoundIndex, firstLessonIndex);
+        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(outOfBoundIndex,
+                firstLessonIndex);
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
     }
 
@@ -118,7 +121,8 @@ public class DeleteLessonCommandTest {
         showTuteeAtIndex(model, INDEX_SECOND_TUTEE);
         Index outOfBoundIndex = Index.fromOneBased(2);
 
-        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(INDEX_FIRST_TUTEE, outOfBoundIndex);
+        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(INDEX_FIRST_TUTEE,
+                outOfBoundIndex);
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_INDEX);
     }
 
@@ -129,7 +133,8 @@ public class DeleteLessonCommandTest {
     public void execute_invalidLessonIndexUnfilteredList_failure() throws ParseException {
         Index outOfBoundIndex = Index.fromOneBased(2);
 
-        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(INDEX_SECOND_TUTEE, outOfBoundIndex);
+        DeleteLessonCommand deleteLessonCommand = DeleteLessonCommandParserMock.parse(INDEX_SECOND_TUTEE,
+                outOfBoundIndex);
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_INDEX);
     }
 
@@ -137,10 +142,12 @@ public class DeleteLessonCommandTest {
     public void equals() throws ParseException {
         final Index firstLessonIndex = Index.fromOneBased(1);
         final Index secondLessonIndex = Index.fromOneBased(2);
-        final DeleteLessonCommand standardCommand = DeleteLessonCommandParserMock.parse(INDEX_SECOND_TUTEE, firstLessonIndex);
+        final DeleteLessonCommand standardCommand = DeleteLessonCommandParserMock.parse(INDEX_SECOND_TUTEE,
+                firstLessonIndex);
 
         // same values -> returns true
-        DeleteLessonCommand commandWithSameValues = DeleteLessonCommandParserMock.parse(INDEX_SECOND_TUTEE, firstLessonIndex);
+        DeleteLessonCommand commandWithSameValues = DeleteLessonCommandParserMock.parse(INDEX_SECOND_TUTEE,
+                firstLessonIndex);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true

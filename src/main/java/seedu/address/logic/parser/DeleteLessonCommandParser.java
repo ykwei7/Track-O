@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -29,7 +28,8 @@ public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
         try {
             tuteeIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteLessonCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isEmpty()) {
