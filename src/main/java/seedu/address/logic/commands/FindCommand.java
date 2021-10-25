@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tutees who satisfies all the criteria and "
             + "displays them as a list with index numbers."
             + "\nThe specified keywords are case-insensitive and works for name, level, subject and overdue status .\n"
-            + "\nPossible parameters: \nl/[...level] \nn/[...name] \nsubject/[...subject] \noverdue/[true/false]\n"
+            + "\nPossible parameters: \nl/[...level] \nn/[...name] \nsubject/[...subject] \noverdue/[yes/no]\n"
             + "\nName and subject can take in multiple keywords, "
             + "the returned result satisfies all the keywords provided."
             + "Example: " + COMMAND_WORD + " l/p5 subject/math chinese";
