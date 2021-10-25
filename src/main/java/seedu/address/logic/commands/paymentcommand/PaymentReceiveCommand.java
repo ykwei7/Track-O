@@ -3,8 +3,10 @@ package seedu.address.logic.commands.paymentcommand;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_RECEIVED_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
+import static seedu.address.model.tutee.Payment.TODAY_DATE_AS_STRING;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -21,7 +23,8 @@ public class PaymentReceiveCommand extends PaymentCommand {
 
     public static final String MESSAGE_USAGE = "Sets payment value owed by the tutee identified "
             + "by the index number used in the displayed tutee list to 0 and "
-            + "has an optional date field to update the date to make next payment by.\n"
+            + "has an optional date field to update the date to make next payment by. If no date is set, "
+            + "the new date to make payment by is reset.\n"
             + "Required Parameters: TUTEE_INDEX (must be a positive integer)\n"
             + "Optional Parameters: PAY_BY_DATE (in the format of dd-mm-yyyy)\n"
             + "Example: payment 1 " + PREFIX_PAYMENT_RECEIVED_DATE + "15-10-2021\n\n";
@@ -33,6 +36,7 @@ public class PaymentReceiveCommand extends PaymentCommand {
     private final Index targetIndex;
     private final LocalDate newPayByDate;
     private final String zeroPaymentVal = "0";
+    private final LocalDate nullPayByDate = null;
 
 
     /**
@@ -73,14 +77,14 @@ public class PaymentReceiveCommand extends PaymentCommand {
         // If existing value is same as input value
         if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == null) {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
-        } else if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == existingPayByDate) {
+        } else if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate.equals(existingPayByDate)) {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
         }
 
         if (newPayByDate == null) {
-            editedTutee = editedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal, existingPayByDate);
+            editedTutee = editedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal, nullPayByDate, TODAY_DATE_AS_STRING);
         } else {
-            editedTutee = editedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal, newPayByDate);
+            editedTutee = editedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal, newPayByDate, TODAY_DATE_AS_STRING);
         }
 
         model.setTutee(tuteeToGet, editedTutee);

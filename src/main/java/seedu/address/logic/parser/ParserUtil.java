@@ -252,6 +252,8 @@ public class ParserUtil {
      */
     public static LocalDate parsePayByDate(String payByDate) throws ParseException {
         String trimmedPayByDate = payByDate.trim();
+        LocalDate formattedPayByDate;
+        LocalDate dateToday = LocalDate.now();
         if (trimmedPayByDate.equals("")) {
             return null;
         }
@@ -261,10 +263,14 @@ public class ParserUtil {
         }
 
         try {
-            LocalDate formattedPayByDate = LocalDate.parse(trimmedPayByDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            return formattedPayByDate;
+            formattedPayByDate = LocalDate.parse(trimmedPayByDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         } catch (DateTimeParseException e) {
             throw new ParseException(Payment.DATE_CONSTRAINTS);
         }
+
+        if (!formattedPayByDate.isAfter(dateToday) && !formattedPayByDate.equals(dateToday)) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS);
+        }
+        return formattedPayByDate;
     }
 }

@@ -29,7 +29,7 @@ public class PaymentSetAmountCommand extends PaymentCommand {
     public static final String MESSAGE_USAGE = "Update payment value owed by the tutee identified "
             + "by the index number used in the displayed tutee list to new specified value.\n"
             + "Required Parameters: TUTEE_INDEX (must be a positive integer), "
-            + "PAYMENT_VALUE (must be a positive integer)\n"
+            + "PAYMENT_VALUE (must be a positive value up to 2dp)\n"
             + "Example: payment 1 " + PREFIX_PAYMENT_AMOUNT + "150\n\n";
 
     public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";

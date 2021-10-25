@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.paymentcommand.PaymentReceiveCommand.MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE;
+import static seedu.address.model.tutee.Payment.TODAY_DATE_AS_STRING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,8 +37,8 @@ public class PaymentReceiveTest {
 
     private static final String ZERO_PAYMENT_VAL_STUB = "0";
     private static final String NEW_PAYMENT_VAL_STUB_1 = "100";
-    private static final String NEW_PAYBYDATE_VAL_STUB_1 = "15-10-2021";
-    private static final String NEW_PAYBYDATE_VAL_STUB_2 = "20-10-2021";
+    private static final String NEW_PAYBYDATE_VAL_STUB_1 = "15-10-2022";
+    private static final String NEW_PAYBYDATE_VAL_STUB_2 = "20-10-2022";
     private static final LocalDate NULL_DATE = null;
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
@@ -102,6 +105,7 @@ public class PaymentReceiveTest {
         assertCommandFailure(paymentReceiveCommand, model, MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
     }
 
+    // When provided date is null e.g (200, payByDate) -> (0, payByDate)
     @Test
     public void execute_changeInPaymentVal_success() throws CommandException {
 
@@ -121,7 +125,7 @@ public class PaymentReceiveTest {
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
     }
 
-    // When provided date is null
+    // When provided date is null e.g (200, payByDate) -> (0, null)
     @Test
     public void execute_changeInPaymentVal2_success() throws CommandException {
 
@@ -141,12 +145,14 @@ public class PaymentReceiveTest {
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
     }
 
-    // When both dates provided are null
+    // When both dates provided are null e.g (200, null) -> (0, null)
     @Test
     public void execute_changeInPaymentVal3_success() throws CommandException {
 
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+
+        Model expectedModel = model;
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
         LocalDate payByDate = retrievedTuteePayment.getPayByDate();
         model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, NULL_DATE);
@@ -157,11 +163,13 @@ public class PaymentReceiveTest {
         paymentReceiveCommand.execute(model);
         Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
                 payByDate);
+
         Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
     }
 
-    // When initial date is null, and changed to non-null date
+    // When initial date is null, and changed to non-null date e.g (200, null) -> (0, payByDate)
     @Test
     public void execute_changeInPaymentVal4_success() throws CommandException {
 
@@ -180,4 +188,6 @@ public class PaymentReceiveTest {
         Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
     }
+
+
 }

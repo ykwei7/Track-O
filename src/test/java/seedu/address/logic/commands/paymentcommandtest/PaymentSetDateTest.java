@@ -32,8 +32,8 @@ import seedu.address.model.tutee.Tutee;
  */
 public class PaymentSetDateTest {
 
-    private static final String NEW_PAYBYDATE_VAL_STUB_1 = "15-10-2021";
-    private static final String NEW_PAYBYDATE_VAL_STUB_2 = "20-10-2021";
+    private static final String NEW_PAYBYDATE_VAL_STUB_1 = "15-10-2022";
+    private static final String NEW_PAYBYDATE_VAL_STUB_2 = "20-10-2022";
     private static final LocalDate NULL_DATE = null;
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
