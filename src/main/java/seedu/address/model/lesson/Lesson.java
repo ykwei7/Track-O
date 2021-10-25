@@ -117,6 +117,10 @@ public class Lesson implements Comparable<Lesson> {
         return String.format("[%s %s (Hourly rate: $%.2f/h, Total cost: $%.2f)]", subject, time, hourlyRate, cost);
     }
 
+    public String printLessons() {
+        return String.format("%s \t%s \n(Hourly rate: $%.2f/h, Total cost: $%.2f)\n", subject, time, hourlyRate, cost);
+    }
+
     @Override
     public int compareTo(Lesson other) {
         return time.compareTo(other.getTime());

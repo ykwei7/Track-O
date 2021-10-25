@@ -169,8 +169,11 @@ public class Tutee {
 
         List<Lesson> lessons = getLessons();
         if (!lessons.isEmpty()) {
-            builder.append("\nLessons: ");
-            lessons.forEach(builder::append);
+            builder.append("\n\nLessons: \n");
+//            lessons.forEach(builder::append);
+            for (int i = 0; i < lessons.size(); i++) {
+                builder.append(i+1 + ". " + lessons.get(i).printLessons());
+            }
         }
 
         builder.append("\nRemark: ")
