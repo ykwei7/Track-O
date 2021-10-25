@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.tutee.NameContainsKeywordsPredicate;
+import seedu.address.model.tutee.CollectivePredicate;
 
 /**
  * Finds and lists all tutees in Track-O whose name contains any of the argument keywords.
@@ -14,14 +14,19 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tutees whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tutees who satisfies all the criteria and "
+            + "displays them as a list with index numbers."
+            + "\nThe specified keywords are case-insensitive and works for name, level, subject and overdue status .\n"
+            + "\nPossible parameters: \nl/[...level] \nn/[...name] \nsubject/[...subject] \noverdue/[true/false]\n"
+            + "\nName and subject can take in multiple keywords, "
+            + "the returned result satisfies all the keywords provided."
+            + "Example: " + COMMAND_WORD + " l/p5 subject/math chinese";
 
-    private final NameContainsKeywordsPredicate predicate;
+    public static final String MESSAGE_LEVEL_CONSTRAINT = "Find by level requires 1 level keyword to search for.";
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    private final CollectivePredicate predicate;
+
+    public FindCommand(CollectivePredicate predicate) {
         this.predicate = predicate;
     }
 

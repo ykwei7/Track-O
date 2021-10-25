@@ -34,6 +34,14 @@ public class TypicalTutees {
             new Subject("Physics"),
             new Time(DayOfWeek.SUNDAY, LocalTime.parse("12:30"), LocalTime.parse("14:30")), 40.0);
 
+    public static final Lesson LESSON_1 = new Lesson(
+            new Subject("Chemistry"),
+            new Time(DayOfWeek.TUESDAY, LocalTime.parse("12:30"), LocalTime.parse("14:30")), 40.0);
+
+    public static final Lesson LESSON_2 = new Lesson(
+            new Subject("Chemistry"),
+            new Time(DayOfWeek.MONDAY, LocalTime.parse("12:30"), LocalTime.parse("14:30")), 40.0);
+
     public static final Tutee ALICE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLevel("p1")
             .withPhone("94351253")
@@ -44,11 +52,11 @@ public class TypicalTutees {
             .withLevel("p2").withPhone("98765432")
             .withRemark("Good progress")
             .withTags("owesMoney", "friends").withPayment("90",
-                    LocalDate.of(2023, 10, 20)).withLesson(LESSON).build();
+                    LocalDate.of(2023, 10, 20)).withLesson(LESSON_2).build();
 
     public static final Tutee CARL = new TuteeBuilder().withName("Carl Kurz").withPhone("95352563")
             .withLevel("p3").withAddress("wall street").withPayment("80",
-                    LocalDate.of(2023, 10, 20)).build();
+                    LocalDate.of(2023, 10, 20)).withLesson(LESSON).withLesson(LESSON_1).build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
             .withLevel("p4").withAddress("10th street").withTags("friends").withPayment("85",
                     LocalDate.of(2023, 10, 20)).build();
