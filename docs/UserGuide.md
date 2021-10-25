@@ -45,8 +45,8 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -62,15 +62,13 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 Shows a message explaining how to access the help page.
 
-
 Format: `help`
-
 
 ### Adding a tutee: `add`
 
 Adds a tutee to the existing list of tutees.
 
-Format: `add n/NAME l/LEVEL​`
+Format: `add n/NAME l/LEVEL`
 
 Examples:
 * `add n/John Doe l/J2`
@@ -89,25 +87,43 @@ Deletes the specified tutee from our list of tutees.
 Format: `delete INDEX`
 
 * Deletes the tutee at the specified `INDEX`.
-* The index refers to the index number shown in the displayed tutee list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number tagged to each tutee in the tutee list.
+* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd tutee in the address book.
 
-### Obtaining details of a tutee : `get`
+### Viewing a tutee : `get`
 
 Gets details of the specified tutee from our list of tutees.
 
 Format: `get INDEX`
 
 * Gets the tutee at the specified `INDEX` in the format `Name: John Doe Level: P5`
-* The index refers to the index number shown in the displayed tutee list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number tagged to each tutee in the tutee list.
+* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the address book.
 
+### Adding a lesson to a tutee : `addlesson`
+
+Adds a lesson to the specified tutee from our list of tutees.
+
+Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
+
+* Adds a lesson to the tutee at the specified `INDEX`.
+* The index refers to the index number tagged to each tutee in the tutee list.
+* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The lesson occurs on the specified `DAY_OF_WEEK`, from the specified `START_TIME` to the specified `END_TIME`, costing `HOURLY_RATE` dollars per hour.
+* `DAY_OF_WEEK` **must be an integer in the range [1, 7]** where `1` to `7` corresponds to Monday to Sunday.
+* `START_TIME` and `END_TIME` must be specified in an `HH:MM` format.
+* `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`. 
+
+Examples:
+* `addlesson 1 subject/Principles of Accounting d/4 s/11:30 e/13:30 rate/40.50`
+* `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
+* `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
 
 ### Exiting application : `exit`
 
