@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -71,5 +72,43 @@ public class LessonTest {
 
         // different lesson -> returns false
         assertFalse(lesson.equals(differentLesson));
+    }
+
+    @Test
+    public void compareTo() {
+        Subject subject = new Subject("English");
+        Time time = new Time(DayOfWeek.WEDNESDAY, LocalTime.NOON, LocalTime.of(18, 0));
+        double cost = 45.0;
+        Lesson lesson = new Lesson(subject, time, cost);
+
+        // comparing with later day -> returns a negative integer
+        Time timeWithLaterDay = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
+        Lesson lessonWithLaterDay = new Lesson(subject, timeWithLaterDay, cost);
+
+        assertTrue(lesson.compareTo(lessonWithLaterDay) < 0);
+
+        // comparing with earlier day -> returns a positive integer
+        Time timeWithEarlierDay = new Time(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.of(18, 0));
+        Lesson lessonWithEarlierDay = new Lesson(subject, timeWithEarlierDay, cost);
+
+        assertTrue(lesson.compareTo(lessonWithEarlierDay) > 0);
+
+        // comparing with same day but overlapping time -> returns 0 (i.e. both are equal)
+        Time timeWithOverlap = new Time(DayOfWeek.WEDNESDAY, LocalTime.of(17, 0), LocalTime.of(19, 0));
+        Lesson lessonWithOverlap = new Lesson(subject, timeWithOverlap, cost);
+
+        assertEquals(0, lesson.compareTo(lessonWithOverlap));
+
+        // comparing with same day but later time -> returns a negative integer
+        Time laterTime = new Time(DayOfWeek.WEDNESDAY, LocalTime.of(19, 0), LocalTime.of(21, 0));
+        Lesson lessonWithLaterTime = new Lesson(subject, laterTime, cost);
+
+        assertTrue(lesson.compareTo(lessonWithLaterTime) < 0);
+
+        // comparing with same day but earlier time -> returns a positive integer
+        Time earlierTime = new Time(DayOfWeek.WEDNESDAY, LocalTime.of(7, 30), LocalTime.of(10, 0));
+        Lesson lessonWithEarlierTime = new Lesson(subject, earlierTime, cost);
+
+        assertTrue(lesson.compareTo(lessonWithEarlierTime) > 0);
     }
 }

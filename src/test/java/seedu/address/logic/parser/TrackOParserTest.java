@@ -4,16 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -24,7 +33,9 @@ import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.tutee.CollectivePredicate;
 import seedu.address.model.tutee.Remark;
 import seedu.address.model.tutee.Tutee;
@@ -108,6 +119,31 @@ public class TrackOParserTest {
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_TUTEE.getOneBased() + " " + PREFIX_REMARK + remark.value);
         assertEquals(new RemarkCommand(INDEX_FIRST_TUTEE, remark), command);
+    }
+
+    @Test
+    public void parseCommand_addLesson() throws Exception {
+        final Subject subject = new Subject("Biology");
+        final DayOfWeek dayOfWeek = DayOfWeek.THURSDAY;
+        LocalTime startTime = LocalTime.of(11, 30);
+        LocalTime endTime = LocalTime.of(13, 30);
+        double hourlyRate = 40.50;
+
+        AddLessonCommand command = (AddLessonCommand) parser.parseCommand(AddLessonCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_TUTEE.getOneBased() + " "
+                + PREFIX_SUBJECT + subject + " "
+                + PREFIX_DAY_OF_WEEK + dayOfWeek.getValue() + " "
+                + PREFIX_START_TIME + startTime.format(DateTimeFormatter.ofPattern("HH:mm")) + " "
+                + PREFIX_END_TIME + endTime.format(DateTimeFormatter.ofPattern("HH:mm")) + " "
+                + PREFIX_HOURLY_RATE + String.format("%.2f", hourlyRate));
+        assertEquals(new AddLessonCommand(INDEX_FIRST_TUTEE, subject,
+                dayOfWeek, startTime, endTime, hourlyRate), command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
+        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD + " 3") instanceof ScheduleCommand);
     }
 
     @Test

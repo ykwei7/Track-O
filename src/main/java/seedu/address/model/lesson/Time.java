@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * Represents the Time of a particular Lesson.
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     public static final double MINIMUM_DURATION = 0.5;
 
@@ -138,6 +138,22 @@ public class Time {
     public String toString() {
         return getDayOfOccurrence().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) // output "Mon" instead of "Monday"
                 + " " + getStartTime() + " to " + getEndTime();
+    }
+
+    @Override
+    public int compareTo(Time other) {
+        int compareDay = dayOfOccurrence.compareTo(other.getDayOfOccurrence());
+
+        // different day
+        if (compareDay != 0) {
+            return compareDay;
+        }
+
+        if (isOverlap(other)) {
+            return 0;
+        }
+
+        return startTime.compareTo(other.getStartTime());
     }
 
 }
