@@ -4,15 +4,17 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.tutee.NameContainsKeywordsPredicate;
+import seedu.address.model.tutee.CollectivePredicate;
 
 public class FindCommandParserTest {
 
+    private static final List<String> EMPTY_KEYWORD_LIST = Collections.emptyList();
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
@@ -23,12 +25,31 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+        FindCommand expectedFindCommand1 =
+                new FindCommand(new CollectivePredicate(Collections.singletonList("Alice"),
+                        EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST));
+        assertParseSuccess(parser, " n/Alice", expectedFindCommand1);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t \t", expectedFindCommand1);
+
+        //keyword for level
+        FindCommand expectedFindCommand2 =
+                new FindCommand(new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                        Collections.singletonList("p5"), EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST));
+        assertParseSuccess(parser, " l/p5", expectedFindCommand2);
+
+        //keyword for subject
+        FindCommand expectedFindCommand3 =
+                new FindCommand(new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                        EMPTY_KEYWORD_LIST, Collections.singletonList("Math"), EMPTY_KEYWORD_LIST));
+        assertParseSuccess(parser, " subject/Math", expectedFindCommand3);
+
+        //keyword for overdue
+        FindCommand expectedFindCommand4 =
+                new FindCommand(new CollectivePredicate(EMPTY_KEYWORD_LIST,
+                        EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, Collections.singletonList("true")));
+        assertParseSuccess(parser, " overdue/true", expectedFindCommand4);
     }
 
 }

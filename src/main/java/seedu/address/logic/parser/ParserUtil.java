@@ -8,8 +8,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -76,21 +78,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String payment} into a {@code Payment}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code payment} is invalid.
-     */
-    public static Payment parsePayment(String payment) throws ParseException {
-        requireNonNull(payment);
-        String trimmedPayment = payment.trim();
-        if (!Payment.isValidPayment(trimmedPayment)) {
-            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
-        }
-        return new Payment(trimmedPayment, null);
-    }
-
-    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -121,6 +108,50 @@ public class ParserUtil {
     }
 
     /**
+     * Parses multiple {@code String levels} into an array of {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
+    public static String[] parseMultipleSubjects(String subjects) throws ParseException {
+        requireNonNull(subjects);
+        String trimmedSubjects = subjects.trim();
+        String[] subjectsSplitBySpace = trimmedSubjects.split("\\s+");
+        List<String> arrayOfSubjects = new ArrayList<>();
+
+        for (String subjectName: subjectsSplitBySpace) {
+            if (!Subject.isValidSubject(subjectName)) {
+                throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+            }
+            arrayOfSubjects.add(subjectName);
+        }
+
+        String[] arrayOfSubjectsInString = new String[arrayOfSubjects.size()];
+        arrayOfSubjectsInString = arrayOfSubjects.toArray(arrayOfSubjectsInString);
+        return arrayOfSubjectsInString;
+    }
+
+    /**
+     * Returns an array of String with the overdue boolean at index 0 in type String.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
+    public static String[] parseIsOverdue(String overdue) throws ParseException {
+        requireNonNull(overdue);
+        String trimmedIsOverdue = overdue.trim();
+        String[] isOverdueSplitBySpace = trimmedIsOverdue.split("\\s+");
+
+        if (isOverdueSplitBySpace.length != 1
+                || !(isOverdueSplitBySpace[0].equals("true")
+                || isOverdueSplitBySpace[0].equals("false"))) {
+            throw new ParseException("Overdue flag can only be true or false.");
+        }
+
+        return isOverdueSplitBySpace;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -137,6 +168,8 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);

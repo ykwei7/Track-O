@@ -11,7 +11,7 @@ public class Level {
 
     public static final String MESSAGE_CONSTRAINTS = "Education level should only contain the prefix [p, s, j], "
             + "followed by the year of study eg. p2, s4, j1"
-            + "Primary: years 1-6    Secondary: years 1-5    JC: years 1-2";
+            + "\nSupported levels are, Primary: years 1-6    Secondary: years 1-5    JC: years 1-2";
     /*
      * The first character has to be either p, s, j.
      * For p valid years are 1-6
@@ -36,6 +36,15 @@ public class Level {
         checkArgument(isValidLevel(level), MESSAGE_CONSTRAINTS);
         stringRepresentation = Level.parse(level);
         value = level;
+    }
+
+    /**
+     * Returns the value of education level.
+     *
+     * @return the abbreviation of education level
+     */
+    public String getValue() {
+        return value;
     }
 
     /**

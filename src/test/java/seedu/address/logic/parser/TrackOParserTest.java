@@ -8,9 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +25,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tutee.NameContainsKeywordsPredicate;
+import seedu.address.model.tutee.CollectivePredicate;
 import seedu.address.model.tutee.Remark;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.EditTuteeDescriptorBuilder;
@@ -81,10 +80,14 @@ public class TrackOParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> nameKeywords = Collections.singletonList("Alice");
+        List<String> levelKeywords = Collections.singletonList("p5");
+        List<String> subjectKeywords = Collections.singletonList("Math");
+        List<String> overdueKeywords = Collections.singletonList("true");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " " + "n/Alice l/p5 subject/Math overdue/true");
+        assertEquals(new FindCommand(new CollectivePredicate(nameKeywords,
+                levelKeywords, subjectKeywords, overdueKeywords)), command);
     }
 
     @Test

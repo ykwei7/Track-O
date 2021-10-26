@@ -11,11 +11,13 @@ import static seedu.address.testutil.TypicalTutees.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.tutee.NameContainsKeywordsPredicate;
+import seedu.address.model.tutee.CollectivePredicate;
 import seedu.address.testutil.TrackOBuilder;
 
 public class ModelManagerTest {
@@ -118,7 +120,9 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredTuteeList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        List<String> emptyKeywordList = Collections.emptyList();
+        modelManager.updateFilteredTuteeList(new CollectivePredicate(Arrays.asList(keywords),
+                emptyKeywordList, emptyKeywordList, emptyKeywordList));
         assertFalse(modelManager.equals(new ModelManager(trackO, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
