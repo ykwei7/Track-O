@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -88,7 +87,7 @@ class JsonAdaptedTutee {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        Set<Lesson> sourceLessons = source.getLessons();
+        List<Lesson> sourceLessons = source.getLessons();
         for (Lesson lesson : sourceLessons) {
             lessons.add(JsonUtil.toJsonString(lesson));
         }
@@ -172,7 +171,7 @@ class JsonAdaptedTutee {
 
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
 
-        final Set<Lesson> modelLessons = new LinkedHashSet<>(tuteeLessons);
+        final List<Lesson> modelLessons = new ArrayList<>(tuteeLessons);
 
         return new Tutee(modelName, modelPhone, modelLevel, modelAddress, modelPayment,
                          modelRemark, modelTags, modelLessons);

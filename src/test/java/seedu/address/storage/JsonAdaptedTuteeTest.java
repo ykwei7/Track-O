@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -55,7 +54,7 @@ public class JsonAdaptedTuteeTest {
 
     @BeforeAll
     public static void getLessons() throws JsonProcessingException {
-        Set<Lesson> bensonLessons = BENSON.getLessons();
+        List<Lesson> bensonLessons = BENSON.getLessons();
         for (Lesson lesson : bensonLessons) {
             VALID_LESSONS.add(JsonUtil.toJsonString(lesson));
         }

@@ -3,9 +3,10 @@ package seedu.address.model.tutee;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,14 +29,14 @@ public class Tutee {
     private final Payment payment;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Lesson> lessons = new LinkedHashSet<>();
+    private final List<Lesson> lessons = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
 
     public Tutee(Name name, Phone phone, Level level, Address address, Payment payment, Remark remark,
-                 Set<Tag> tags, Set<Lesson> lessons) {
+                 Set<Tag> tags, List<Lesson> lessons) {
         requireAllNonNull(name, phone, level, address, tags, lessons);
         this.name = name;
         this.phone = phone;
@@ -91,8 +92,8 @@ public class Tutee {
      * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Lesson> getLessons() {
-        return Collections.unmodifiableSet(lessons);
+    public List<Lesson> getLessons() {
+        return Collections.unmodifiableList(lessons);
     }
 
     /**
@@ -157,7 +158,7 @@ public class Tutee {
             tags.forEach(builder::append);
         }
 
-        Set<Lesson> lessons = getLessons();
+        List<Lesson> lessons = getLessons();
         if (!lessons.isEmpty()) {
             builder.append("\nLessons: ");
             lessons.forEach(builder::append);
