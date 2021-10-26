@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -21,7 +22,7 @@ public class ListCommandTest {
     private Model expectedModel;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws ScheduleClashException {
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
     }

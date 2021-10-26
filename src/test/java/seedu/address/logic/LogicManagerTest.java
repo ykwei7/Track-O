@@ -26,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTrackO;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.storage.JsonTrackOStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -41,6 +42,9 @@ public class LogicManagerTest {
     private Model model = new ModelManager();
     private Logic logic;
 
+    public LogicManagerTest() throws ScheduleClashException {
+    }
+
     @BeforeEach
     public void setUp() {
         JsonTrackOStorage trackOStorage =
@@ -51,13 +55,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalidCommandFormat_throwsParseException() {
+    public void execute_invalidCommandFormat_throwsParseException() throws ScheduleClashException {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_commandExecutionError_throwsCommandException() {
+    public void execute_commandExecutionError_throwsCommandException() throws ScheduleClashException {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
     }
@@ -69,7 +73,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
+    public void execute_storageThrowsIoException_throwsCommandException() throws ScheduleClashException {
         // Setup LogicManager with JsonTrackOIoExceptionThrowingStub
         JsonTrackOStorage trackOStorage =
                 new JsonTrackOIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionTrackO.json"));
@@ -111,7 +115,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertParseException(String inputCommand, String expectedMessage) {
+    private void assertParseException(String inputCommand, String expectedMessage) throws ScheduleClashException {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
     }
 
@@ -119,7 +123,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertCommandException(String inputCommand, String expectedMessage) {
+    private void assertCommandException(String inputCommand, String expectedMessage) throws ScheduleClashException {
         assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
     }
 
@@ -128,7 +132,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+            String expectedMessage) throws ScheduleClashException {
         Model expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }

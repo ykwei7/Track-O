@@ -7,10 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.exceptions.ScheduleClashException;
 
 public class ExitCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
+
+    public ExitCommandTest() throws ScheduleClashException {
+    }
 
     @Test
     public void execute_exit_success() {

@@ -16,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -26,8 +27,11 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
+    public DeleteCommandTest() throws ScheduleClashException {
+    }
+
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndexUnfilteredList_success() throws ScheduleClashException {
         Tutee tuteeToDelete = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_TUTEE);
 
@@ -48,7 +52,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIndexFilteredList_success() throws ScheduleClashException {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
 
         Tutee tuteeToDelete = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());

@@ -89,7 +89,7 @@ public class Tutee {
     }
 
     /**
-     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable lesson list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public List<Lesson> getLessons() {
@@ -160,8 +160,12 @@ public class Tutee {
 
         List<Lesson> lessons = getLessons();
         if (!lessons.isEmpty()) {
-            builder.append("\nLessons: ");
-            lessons.forEach(builder::append);
+            builder.append("\n\nLessons: \n");
+            for (int i = 0; i < lessons.size(); i++) {
+                builder.append(i + 1)
+                        .append(". ")
+                        .append(lessons.get(i));
+            }
         }
 
         builder.append("\nRemark: ")

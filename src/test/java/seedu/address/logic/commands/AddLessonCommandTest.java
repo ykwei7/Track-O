@@ -25,8 +25,10 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Schedule;
 import seedu.address.model.TrackO;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
@@ -41,8 +43,11 @@ public class AddLessonCommandTest {
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
+    public AddLessonCommandTest() throws ScheduleClashException {
+    }
+
     @Test
-    public void execute_addLessonUnfilteredList_success() throws ParseException {
+    public void execute_addLessonUnfilteredList_success() throws ParseException, ScheduleClashException {
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Tutee editedTutee = new TuteeBuilder(firstTutee)
                 .withLesson(LessonMock.getLesson())
@@ -59,7 +64,7 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() throws ParseException {
+    public void execute_filteredList_success() throws ParseException, ScheduleClashException {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
 
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
@@ -100,6 +105,29 @@ public class AddLessonCommandTest {
     }
 
     @Test
+    public void execute_improperLessonTime_failure() throws ParseException {
+        AddLessonCommand addLessonCommand = AddLessonCommandParserMock.parseImproperLessonTime(INDEX_FIRST_TUTEE);
+        assertCommandFailure(addLessonCommand, model, Time.MESSAGE_CONSTRAINTS_IMPROPER_TIME);
+    }
+
+    @Test
+    public void execute_invalidLessonDuration_failure() throws ParseException {
+        AddLessonCommand addLessonCommand = AddLessonCommandParserMock.parseInvalidLessonDuration(INDEX_FIRST_TUTEE);
+        assertCommandFailure(addLessonCommand, model, Time.MESSAGE_CONSTRAINTS_INVALID_DURATION);
+    }
+
+    @Test
+    public void execute_clashesInSchedule_failure() throws ParseException {
+        Lesson existingLesson = model.getFilteredTuteeList()
+                .get(INDEX_SECOND_TUTEE.getZeroBased())
+                .getLessons()
+                .get(0);
+        AddLessonCommand addLessonCommand = AddLessonCommandParserMock.parseClashingLesson(
+                INDEX_FIRST_TUTEE, existingLesson);
+        assertCommandFailure(addLessonCommand, model, String.format(Schedule.SCHEDULE_CLASH_MESSAGE, existingLesson));
+    }
+
+    @Test
     public void equals() throws ParseException {
         final AddLessonCommand standardCommand = AddLessonCommandParserMock.parse(INDEX_FIRST_TUTEE);
 
@@ -130,6 +158,39 @@ public class AddLessonCommandTest {
 
             return new AddLessonCommand(index, subject, dayOfWeek,
                     startTime, endTime, hourlyRate);
+        }
+
+        public static AddLessonCommand parseImproperLessonTime(Index index) throws ParseException {
+            Subject subject = ParserUtil.parseSubject(VALID_LESSON_SUBJECT_BOB);
+            DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(VALID_LESSON_DAY_OF_WEEK_BOB);
+            LocalTime startTime = ParserUtil.parseLocalTime(VALID_LESSON_START_TIME_BOB);
+            LocalTime endTime = ParserUtil.parseLocalTime(VALID_LESSON_END_TIME_BOB);
+            double hourlyRate = ParserUtil.parseHourlyRate(VALID_LESSON_HOURLY_RATE_BOB);
+
+            // end time and start time is swapped around
+            return new AddLessonCommand(index, subject, dayOfWeek,
+                    endTime, startTime, hourlyRate);
+        }
+
+        public static AddLessonCommand parseInvalidLessonDuration(Index index) throws ParseException {
+            Subject subject = ParserUtil.parseSubject(VALID_LESSON_SUBJECT_BOB);
+            DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(VALID_LESSON_DAY_OF_WEEK_BOB);
+            LocalTime startTime = ParserUtil.parseLocalTime(VALID_LESSON_START_TIME_BOB);
+            LocalTime endTime = startTime.plusMinutes(1);
+            double hourlyRate = ParserUtil.parseHourlyRate(VALID_LESSON_HOURLY_RATE_BOB);
+
+            // lesson duration is only 1 minute, which is too short
+            return new AddLessonCommand(index, subject, dayOfWeek,
+                    startTime, endTime, hourlyRate);
+        }
+
+        public static AddLessonCommand parseClashingLesson(Index index, Lesson existingLesson) {
+            DayOfWeek sameDayOfWeek = existingLesson.getTime().getDayOfOccurrence();
+            LocalTime clashingStartTime = existingLesson.getTime().getStartTime();
+            LocalTime clashingEndTime = existingLesson.getTime().getEndTime();
+
+            return new AddLessonCommand(index, existingLesson.getSubject(), sameDayOfWeek,
+                    clashingStartTime, clashingEndTime, existingLesson.getHourlyRate());
         }
     }
 
