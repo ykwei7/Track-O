@@ -124,7 +124,7 @@ public class Lesson implements Comparable<Lesson> {
      * Returns the condensed string representation of the lesson, containing only subject and time.
      */
     public String toCondensedString() {
-        return String.format("%s\n%s\n", subject, time.toCondensedString());
+        return String.format("%s\n%s\n", subject, time);
     }
 
     @Override
