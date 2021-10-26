@@ -16,13 +16,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TrackO;
-import seedu.address.model.tutee.NameContainsKeywordsPredicate;
+import seedu.address.model.tutee.CollectivePredicate;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.EditTuteeDescriptorBuilder;
 
@@ -154,11 +155,13 @@ public class CommandTestUtil {
      * {@code model}'s Track-O.
      */
     public static void showTuteeAtIndex(Model model, Index targetIndex) {
+        List<String> emptyKeywordList = Collections.emptyList();
         assertTrue(targetIndex.getZeroBased() < model.getFilteredTuteeList().size());
 
         Tutee tutee = model.getFilteredTuteeList().get(targetIndex.getZeroBased());
         final String[] splitName = tutee.getName().fullName.split("\\s+");
-        model.updateFilteredTuteeList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredTuteeList(new CollectivePredicate(Arrays.asList(splitName[0]),
+                emptyKeywordList, emptyKeywordList, emptyKeywordList));
 
         assertEquals(1, model.getFilteredTuteeList().size());
     }

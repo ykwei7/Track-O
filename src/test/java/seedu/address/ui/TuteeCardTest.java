@@ -3,7 +3,7 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.BENSON;
-import static seedu.address.testutil.TypicalTutees.CARL;
+import static seedu.address.testutil.TypicalTutees.TUTEE_WITHOUT_TAGS_AND_LESSONS;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class TuteeCardTest {
     private static final int VALID_INDEX = 1;
 
     private static final Tutee VALID_TUTEE = BENSON;
-    private static final Tutee VALID_TUTEE_NO_TAGS = CARL;
+    private static final Tutee VALID_TUTEE_NO_TAGS = TUTEE_WITHOUT_TAGS_AND_LESSONS;
 
     // Singleton pattern ensures no multiple initialisations of JavaFX toolkit
     private static boolean isJavaFxCompatible = true;
