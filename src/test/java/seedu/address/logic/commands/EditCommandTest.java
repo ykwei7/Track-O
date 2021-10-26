@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TrackO;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.EditTuteeDescriptorBuilder;
 import seedu.address.testutil.TuteeBuilder;
@@ -34,8 +35,11 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
+    public EditCommandTest() throws ScheduleClashException {
+    }
+
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws ScheduleClashException {
         Tutee editedTutee = new TuteeBuilder().build();
         EditTuteeDescriptor descriptor = new EditTuteeDescriptorBuilder(editedTutee).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_TUTEE, descriptor);
@@ -49,7 +53,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+    public void execute_someFieldsSpecifiedUnfilteredList_success() throws ScheduleClashException {
         Index indexLastTutee = Index.fromOneBased(model.getFilteredTuteeList().size());
         Tutee lastTutee = model.getFilteredTuteeList().get(indexLastTutee.getZeroBased());
 
@@ -70,7 +74,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecifiedUnfilteredList_success() throws ScheduleClashException {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_TUTEE, new EditTuteeDescriptor());
         Tutee editedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
 
@@ -82,7 +86,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws ScheduleClashException {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
 
         Tutee tuteeInFilteredList = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());

@@ -103,7 +103,7 @@ public class EditCommand extends Command {
         Payment updatedPayment = tuteeToEdit.getPayment(); // edit command does not allow editing fees
         Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editTuteeDescriptor.getTags().orElse(tuteeToEdit.getTags());
-        Set<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
+        List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
         return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);

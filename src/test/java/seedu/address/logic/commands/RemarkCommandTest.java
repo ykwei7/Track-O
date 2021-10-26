@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TrackO;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Remark;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.TuteeBuilder;
@@ -33,8 +34,11 @@ public class RemarkCommandTest {
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
+    public RemarkCommandTest() throws ScheduleClashException {
+    }
+
     @Test
-    public void execute_addRemarkUnfilteredList_success() {
+    public void execute_addRemarkUnfilteredList_success() throws ScheduleClashException {
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Tutee editedTutee = new TuteeBuilder(firstTutee).withRemark(REMARK_STUB).build();
 
@@ -49,7 +53,7 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_deleteRemarkUnfilteredList_success() {
+    public void execute_deleteRemarkUnfilteredList_success() throws ScheduleClashException {
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Tutee editedTutee = new TuteeBuilder(firstTutee).withRemark("").build();
 
@@ -65,7 +69,7 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws ScheduleClashException {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
 
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());

@@ -8,7 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -51,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Payment payment = Payment.initializePayment(); // add command does not allow adding fees straight away
         Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Set<Lesson> lessons = new LinkedHashSet<>(); // add command does not allow adding lessons straight away
+        List<Lesson> lessons = new ArrayList<>(); // add command does not allow adding lessons straight away
 
         Tutee tutee = new Tutee(name, phone, level, address, payment, remark, tagList, lessons);
 

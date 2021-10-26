@@ -69,6 +69,9 @@ public class TypicalTutees {
     public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
             .withLevel("p5").withAddress("4th street").withPayment("65",
                     LocalDate.of(2023, 10, 20)).build();
+    public static final Tutee TUTEE_WITHOUT_TAGS_AND_LESSONS = new TuteeBuilder().withName("Test Tutee")
+            .withPhone("94824423").withLevel("p1").withAddress("3rd street").withPayment("65",
+                    LocalDate.of(2023, 10, 20)).build();
 
     // Manually added
     public static final Tutee HOON = new TuteeBuilder().withName("Hoon Meier").withPhone("8482424")

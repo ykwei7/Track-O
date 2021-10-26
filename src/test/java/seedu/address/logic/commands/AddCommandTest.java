@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTrackO;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Schedule;
 import seedu.address.model.TrackO;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.TuteeBuilder;
@@ -78,6 +79,16 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        @Override
+        public Schedule getSchedule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearSchedule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");

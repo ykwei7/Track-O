@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -22,11 +23,12 @@ public class ModelManager implements Model {
     private final TrackO trackO;
     private final UserPrefs userPrefs;
     private final FilteredList<Tutee> filteredTutees;
+    private final Schedule schedule;
 
     /**
      * Initializes a ModelManager with the given Track-O and userPrefs.
      */
-    public ModelManager(ReadOnlyTrackO trackO, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTrackO trackO, ReadOnlyUserPrefs userPrefs) throws ScheduleClashException {
         super();
         requireAllNonNull(trackO, userPrefs);
 
@@ -35,10 +37,23 @@ public class ModelManager implements Model {
         this.trackO = new TrackO(trackO);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTutees = new FilteredList<>(this.trackO.getTuteeList());
+        schedule = new Schedule(this.trackO.getTuteeList());
     }
 
-    public ModelManager() {
+    public ModelManager() throws ScheduleClashException {
         this(new TrackO(), new UserPrefs());
+    }
+
+    //=========== Schedule ==================================================================================
+
+    @Override
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    @Override
+    public void clearSchedule() {
+        schedule.clear();
     }
 
     //=========== UserPrefs ==================================================================================
