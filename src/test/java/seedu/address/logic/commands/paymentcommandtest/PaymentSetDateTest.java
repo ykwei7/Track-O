@@ -86,12 +86,12 @@ public class PaymentSetDateTest {
     }
 
     @Test
-    public void execute_noChangeInPaymentDate_throwsCommandException() {
+    public void execute_noChangeInPaymentDate_throwsCommandException() throws ParseException {
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
         String retrievedPaymentVal = retrievedTuteePayment.getValue();
-        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
+        LocalDate payByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
 
         model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, retrievedPaymentVal , payByDate);
 
