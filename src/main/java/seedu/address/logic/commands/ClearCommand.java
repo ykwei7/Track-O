@@ -23,6 +23,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setTrackO(new TrackO());
+        model.clearSchedule();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -25,8 +26,11 @@ public class GetCommandTest {
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
+    public GetCommandTest() throws ScheduleClashException {
+    }
+
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndexUnfilteredList_success() throws ScheduleClashException {
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         GetCommand getCommand = new GetCommand(INDEX_FIRST_TUTEE);
 

@@ -3,11 +3,11 @@ package seedu.address.model.util;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.model.ReadOnlyTrackO;
 import seedu.address.model.TrackO;
@@ -32,15 +32,15 @@ public class SampleDataUtil {
 
     public static final LocalDate STANDARD_PAYMENT_DATE = LocalDate.now();
 
-    public static final Set<Lesson> EMPTY_LESSONS = new LinkedHashSet<>();
+    public static final List<Lesson> EMPTY_LESSONS = new ArrayList<>();
 
-    public static final Set<Lesson> NON_EMPTY_LESSONS = Stream.of(
+    public static final List<Lesson> NON_EMPTY_LESSONS = List.of(
             new Lesson(new Subject("Math"),
                     new Time(DayOfWeek.WEDNESDAY, LocalTime.parse("19:30"), LocalTime.parse("21:00")),
             40),
             new Lesson(new Subject("Chinese"),
                 new Time(DayOfWeek.SATURDAY, LocalTime.parse("08:00"), LocalTime.parse("09:00")),
-            40)).collect(Collectors.toCollection(LinkedHashSet::new));
+            40));
 
     public static Tutee[] getSampleTutees() {
 

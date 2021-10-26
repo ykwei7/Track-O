@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.CollectivePredicate;
 
 /**
@@ -28,6 +29,9 @@ public class FindCommandTest {
 
     private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalTrackO(), new UserPrefs());
+
+    public FindCommandTest() throws ScheduleClashException {
+    }
 
     @Test
     public void equals() {

@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -72,5 +73,30 @@ public class TimeTest {
         // same day and back-to-back (no overlap) time -> returns false
         Time differentTime = new Time(DayOfWeek.FRIDAY, LocalTime.of(18, 0), LocalTime.of(22, 0));
         assertFalse(time.equals(differentTime));
+    }
+
+    @Test
+    public void compareTo() {
+        Time time = new Time(DayOfWeek.WEDNESDAY, LocalTime.NOON, LocalTime.of(18, 0));
+
+        // comparing with later day -> returns a negative integer
+        Time timeWithLaterDay = new Time(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.of(18, 0));
+        assertTrue(time.compareTo(timeWithLaterDay) < 0);
+
+        // comparing with earlier day -> returns a positive integer
+        Time timeWithEarlierDay = new Time(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.of(18, 0));
+        assertTrue(time.compareTo(timeWithEarlierDay) > 0);
+
+        // comparing with same day but overlapping time -> returns 0 (i.e. both are equal)
+        Time timeWithOverlap = new Time(DayOfWeek.WEDNESDAY, LocalTime.of(17, 0), LocalTime.of(19, 0));
+        assertEquals(0, time.compareTo(timeWithOverlap));
+
+        // comparing with same day but later time -> returns a negative integer
+        Time laterTime = new Time(DayOfWeek.WEDNESDAY, LocalTime.of(19, 0), LocalTime.of(21, 0));
+        assertTrue(time.compareTo(laterTime) < 0);
+
+        // comparing with same day but earlier time -> returns a positive integer
+        Time earlierTime = new Time(DayOfWeek.WEDNESDAY, LocalTime.of(7, 30), LocalTime.of(10, 0));
+        assertTrue(time.compareTo(earlierTime) > 0);
     }
 }

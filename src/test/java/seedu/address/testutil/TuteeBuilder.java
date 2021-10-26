@@ -1,8 +1,9 @@
 package seedu.address.testutil;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.lesson.Lesson;
@@ -35,7 +36,7 @@ public class TuteeBuilder {
     private Payment payment;
     private Remark remark;
     private Set<Tag> tags;
-    private Set<Lesson> lessons;
+    private List<Lesson> lessons;
 
     /**
      * Creates a {@code TuteeBuilder} with the default details.
@@ -48,7 +49,7 @@ public class TuteeBuilder {
         payment = new Payment(DEFAULT_FEE, null);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
-        lessons = new LinkedHashSet<>();
+        lessons = new ArrayList<>();
     }
 
     /**
@@ -62,7 +63,7 @@ public class TuteeBuilder {
         payment = tuteeToCopy.getPayment();
         remark = tuteeToCopy.getRemark();
         tags = new HashSet<>(tuteeToCopy.getTags());
-        lessons = new LinkedHashSet<>(tuteeToCopy.getLessons());
+        lessons = new ArrayList<>(tuteeToCopy.getLessons());
     }
 
     /**

@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalTutees.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,18 +18,35 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.CollectivePredicate;
+import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.TrackOBuilder;
 
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
+    public ModelManagerTest() throws ScheduleClashException {
+    }
+
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new TrackO(), new TrackO(modelManager.getTrackO()));
+    }
+
+    @Test
+    public void clearSchedule_emptySchedule() throws ScheduleClashException {
+        ModelManager modelManagerToClearSchedule = new ModelManager();
+        modelManagerToClearSchedule.clearSchedule();
+
+        // create empty schedule from empty tutee list
+        List<Tutee> emptyTuteeList = new ArrayList<>();
+        Schedule emptySchedule = new Schedule(emptyTuteeList);
+
+        assertEquals(modelManagerToClearSchedule.getSchedule(), emptySchedule);
     }
 
     @Test
@@ -96,7 +114,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws ScheduleClashException {
         TrackO trackO = new TrackOBuilder().withTutee(ALICE).withTutee(BENSON).build();
         TrackO differentTrackO = new TrackO();
         UserPrefs userPrefs = new UserPrefs();
