@@ -267,13 +267,15 @@ public class ParserUtil {
      * @return Trimmed string of payment value
      * @throws ParseException
      */
-    public static String parseLessonIndex(String lessonIndex) throws ParseException {
+    public static Index parseLessonIndex(String lessonIndex) throws ParseException {
         requireNonNull(lessonIndex);
-        String trimmedPayment = lessonIndex.trim();
-        if (!Payment.isValidPayment(trimmedPayment)) {
+        String trimmedLessonIndex = lessonIndex.trim();
+        if (!Payment.isValidPayment(trimmedLessonIndex)) {
             throw new ParseException(Lesson.MESSAGE_INDEX_CONSTRAINTS);
         }
-        return trimmedPayment;
+
+        Index parsedLessonIndex = ParserUtil.parseIndex(trimmedLessonIndex);
+        return parsedLessonIndex;
     }
 
     /**
