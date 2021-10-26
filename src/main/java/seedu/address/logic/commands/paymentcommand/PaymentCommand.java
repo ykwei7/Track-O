@@ -108,7 +108,7 @@ public class PaymentCommand extends Command {
         updatedPayment.copyPaymentHistory(existingPayment.paymentHistory);
         Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = tuteeToEdit.getTags();
-        Set<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
+        List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
         return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);
@@ -135,7 +135,7 @@ public class PaymentCommand extends Command {
         updatedPayment.paymentHistory.add(lastPaidDate);
         Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = tuteeToEdit.getTags();
-        Set<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
+        List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
         return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);

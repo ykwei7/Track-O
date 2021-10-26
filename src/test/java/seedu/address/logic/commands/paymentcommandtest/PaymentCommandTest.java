@@ -17,6 +17,7 @@ import seedu.address.logic.commands.paymentcommand.PaymentCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Tutee;
 
 
@@ -27,10 +28,11 @@ import seedu.address.model.tutee.Tutee;
  */
 public class PaymentCommandTest {
 
-    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+    private Model model;
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndexUnfilteredList_success() throws ScheduleClashException {
+        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_TUTEE);
 
@@ -43,7 +45,8 @@ public class PaymentCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws ScheduleClashException {
+        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size() + 1);
         PaymentCommand paymentCommand = new PaymentCommand(outOfBoundIndex);
 

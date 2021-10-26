@@ -5,9 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -72,8 +70,7 @@ public class PaymentAddCommand extends PaymentCommand {
         LocalDate existingPayByDate = existingPayment.getPayByDate();
 
         // Gets the indexed lesson in tutee's lesson list
-        Set<Lesson> lessonSet = tuteeToGet.getLessons();
-        List<Lesson> lessonList = new ArrayList<>(lessonSet);
+        List<Lesson> lessonList = tuteeToGet.getLessons();
         if (lessonIndex.getZeroBased() >= lessonList.size()) {
             throw new CommandException(MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS);
         }

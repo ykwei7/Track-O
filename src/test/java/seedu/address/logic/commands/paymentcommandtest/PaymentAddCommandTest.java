@@ -21,6 +21,7 @@ import seedu.address.logic.commands.paymentcommand.PaymentCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tutee.Tutee;
 
@@ -28,10 +29,14 @@ public class PaymentAddCommandTest {
 
     private static final String NEW_PAYMENT_VAL_STUB_1 = "100";
     private static final String NEW_PAYMENT_VAL_STUB_2 = "200";
-    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+    private Model model;
+
+    public PaymentAddCommandTest() throws ScheduleClashException {
+        this.model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+    }
 
     private Model modifyPaymentOfTutee(Index index, String newPaymentValue,
-                                       LocalDate newPayByDate) {
+                                       LocalDate newPayByDate) throws ScheduleClashException {
         Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
         Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
@@ -79,23 +84,9 @@ public class PaymentAddCommandTest {
         assertFalse(getFirstCommand.equals(getSecondCommand));
     }
 
-    // To be completed once lesson cost calculation is finalized
-    /*@Test
-    public void execute_changeInPayment_success() throws CommandException {
-
-        // Creates tutee with specified payment details
-        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        Payment retrievedTuteePayment = retrievedTutee.getPayment();
-        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, payByDate);
-
-        PaymentAddCommand paymentAddCommand = new PaymentAddCommand(INDEX_FIRST_TUTEE,
-                NEW_PAYMENT_VAL_STUB_2);
-
-        paymentAddCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, NEW_PAYMENT_VAL_STUB_2,
-                payByDate);
-        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
-    }*/
+    // To be done when decimal system is integrated
+    @Test
+    public void execute_changeInPayment_success() {
+        return;
+    }
 }
