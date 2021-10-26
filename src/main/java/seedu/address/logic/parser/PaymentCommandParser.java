@@ -60,7 +60,9 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
                         PaymentCommand.MESSAGE_USAGE_ALL));
             }
             String paymentValueToSet = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
-            return new PaymentSetAmountCommand(index, paymentValueToSet);
+            Double paymentValueToSetValue = Double.parseDouble(paymentValueToSet);
+            String paymentValueToSetWithDecimals = String.format("%.2f", paymentValueToSetValue);
+            return new PaymentSetAmountCommand(index, paymentValueToSetWithDecimals);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_DATE).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_LESSON, PREFIX_PAYMENT_RECEIVED_DATE)) {

@@ -22,7 +22,9 @@ public class Payment {
             "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-10-2021";
     public static final String PAYMENT_HISTORY_CONSTRAINTS =
             "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-Oct-2021, and 'Never'";
-    public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$";
+    // Solution to strip leading zeros adapted from https://stackoverflow.com/a/29658820
+    public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
+            .replaceFirst("^0+", "");
     public final String value;
     public final LocalDate payByDate;
     public final String payByDateAsString;

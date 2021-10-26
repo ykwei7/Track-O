@@ -60,8 +60,8 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_HOURLY_RATE_AMY = "40";
     public static final String VALID_LESSON_HOURLY_RATE_BOB = "45.50";
 
-    public static final String VALID_PAYMENT_AMOUNT_AMY = "0";
-    public static final String VALID_PAYMENT_AMOUNT_BOB = "200";
+    public static final String VALID_PAYMENT_AMOUNT_AMY = "0.00";
+    public static final String VALID_PAYMENT_AMOUNT_BOB = "200.00";
     public static final String VALID_PAYMENT_DATE_AMY = "15-10-2021";
     public static final String VALID_PAYMENT_DATE_BOB = "02-05-2021";
     public static final String VALID_PAYMENT_RECV_DATE_AMY = "03-10-2021";
