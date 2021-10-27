@@ -14,6 +14,8 @@ import seedu.address.model.tutee.Tutee;
  */
 public class Schedule {
 
+    public static final String SCHEDULE_CLASH_MESSAGE = "Schedule clash for the lesson: %1$s";
+
     /* Stores a sorted map of Lessons to tutees' names */
     private TreeMap<Lesson, String> sortedLessonsMap = new TreeMap<>();
 
@@ -62,7 +64,7 @@ public class Schedule {
      */
     public void add(Lesson lesson, String tuteeName) throws ScheduleClashException {
         if (isClash(lesson)) {
-            throw new ScheduleClashException("Schedule clash for the lesson: " + lesson);
+            throw new ScheduleClashException(String.format(SCHEDULE_CLASH_MESSAGE, lesson));
         }
         sortedLessonsMap.put(lesson, tuteeName);
     }
@@ -95,7 +97,12 @@ public class Schedule {
         for (Map.Entry<Lesson, String> entry : entrySet) {
             Lesson lesson = entry.getKey();
             String tuteeName = entry.getValue();
-            builder.append(lesson).append(" (Tutee: ").append(tuteeName).append(")\n");
+
+            builder.append("\n\u2022 ")
+                    .append(lesson.toCondensedString())
+                    .append("(")
+                    .append(tuteeName)
+                    .append(")\n");
         }
 
         return builder.toString();

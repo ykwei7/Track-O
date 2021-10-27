@@ -171,12 +171,19 @@ public class Tutee {
         if (!lessons.isEmpty()) {
             builder.append("\n\nLessons: \n");
             for (int i = 0; i < lessons.size(); i++) {
+<<<<<<< HEAD
                 builder.append((i + 1) + ". " + lessons.get(i).printLessons());
+=======
+                builder.append(i + 1)
+                        .append(". ")
+                        .append(lessons.get(i));
+>>>>>>> f5f75cdac129f2412fe7fc72ae460e62085fc48e
             }
         }
 
         builder.append("\nRemark: ")
-                .append(getRemark());
+                .append(getRemark())
+                .append("\n");
 
         return builder.toString();
     }

@@ -126,6 +126,16 @@
     -fx-text-fill: #010504;
 }
 
+.cell_warning_label {
+    -fx-font-family: "SF UI Display Semibold";
+    -fx-text-fill: white;
+    -fx-background-color: #cf2323;
+    -fx-padding: 1 2 1 2;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
 .cell_small_label {
     -fx-font-family: "SF UI Display Regular";
     -fx-font-size: 13px;
@@ -363,4 +373,17 @@
     -fx-font-size: 11;
 }
 
+#subjects {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#subjects .label {
+    -fx-text-fill: black;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
 

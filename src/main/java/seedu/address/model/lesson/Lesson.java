@@ -16,6 +16,8 @@ public class Lesson implements Comparable<Lesson> {
                     + "either no decimal places or two decimal places with the last decimal place being 0 or 5, "
                     + "and it should not be blank.";
 
+    public static final String MESSAGE_INDEX_CONSTRAINTS = "Lesson index should be positive and "
+            + "within index boundaries of lesson list.";
     /*
      * The first character has to a digit that is not zero.
      * Only 0 or 2 decimal places of a number is allowed.
@@ -67,6 +69,10 @@ public class Lesson implements Comparable<Lesson> {
         return time;
     }
 
+    public double getHourlyRate() {
+        return hourlyRate;
+    }
+
     public double getCost() {
         return cost;
     }
@@ -113,8 +119,14 @@ public class Lesson implements Comparable<Lesson> {
 
     @Override
     public String toString() {
-        // return "[" + subject + " " + time + "Hourly rate: $" + hourlyRate + "/hour Total cost: " + cost + "]";
-        return String.format("[%s %s (Hourly rate: $%.2f/h, Total cost: $%.2f)]", subject, time, hourlyRate, cost);
+        return String.format("%s    %s \n(Hourly rate: $%.2f/h, Total cost: $%.2f)\n", subject, time, hourlyRate, cost);
+    }
+
+    /**
+     * Returns the condensed string representation of the lesson, containing only subject and time.
+     */
+    public String toCondensedString() {
+        return String.format("%s\n%s\n", subject, time);
     }
 
     public String printLessons() {
