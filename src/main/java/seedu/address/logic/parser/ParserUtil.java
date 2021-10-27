@@ -151,6 +151,7 @@ public class ParserUtil {
         if (isOverdueSplitBySpace[0].equalsIgnoreCase("yes")) {
             isOverdueSplitBySpace[0] = "true";
         } else {
+            assert isOverdueSplitBySpace[0].equals("no");
             isOverdueSplitBySpace[0] = "false";
         }
 

@@ -207,8 +207,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseIsOverdue_validValueWithoutWhitespace_returnsOverdue() throws Exception {
+    public void parseIsOverdue_yesWithoutWhitespace_returnsOverdue() throws Exception {
         assertEquals("true", ParserUtil.parseIsOverdue(VALID_OVERDUE)[0]);
+    }
+
+    @Test
+    public void parseIsOverdue_noWithoutWhitespace_returnsNotOverdue() throws Exception {
+        assertEquals("false", ParserUtil.parseIsOverdue("no")[0]);
     }
 
     @Test
