@@ -36,7 +36,7 @@ import seedu.address.testutil.TuteeBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code AddLessonCommand}.
+ * {@code DeleteLessonCommand}.
  */
 public class DeleteLessonCommandTest {
 

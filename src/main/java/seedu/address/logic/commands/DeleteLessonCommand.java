@@ -23,7 +23,7 @@ public class DeleteLessonCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a lesson from a tutee identified "
             + "by the index number used in the displayed tutee list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive number) "
             + PREFIX_LESSON + "INDEX "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LESSON + "2";
@@ -34,7 +34,7 @@ public class DeleteLessonCommand extends Command {
     private final Index lessonIndex;
 
     /**
-     * Creates an AddLessonCommand to add a {@code Lesson} to the specified {@code Person}
+     * Creates an DeleteLessonCommand to delete a {@code Lesson} from the specified {@code Tutee}
      *
      * @param tuteeIndex of the person in the filtered tutee list
      * @param lessonIndex of the Lesson in the lesson list
