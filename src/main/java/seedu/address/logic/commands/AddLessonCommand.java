@@ -16,6 +16,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Schedule;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
@@ -37,7 +39,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_END_TIME + "END_TIME "
             + PREFIX_HOURLY_RATE + "HOURLY_RATE\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_SUBJECT + "Principles of Accounting "
+            + PREFIX_SUBJECT + "Biology "
             + PREFIX_DAY_OF_WEEK + "4 "
             + PREFIX_START_TIME + "11:30 "
             + PREFIX_END_TIME + "13:30 "
@@ -89,6 +91,14 @@ public class AddLessonCommand extends Command {
         Lesson lesson = new Lesson(subject, lessonTime, hourlyRate);
 
         Tutee tuteeToEdit = lastShownList.get(targetIndex.getZeroBased());
+
+        Schedule schedule = model.getSchedule();
+        try {
+            schedule.add(lesson, tuteeToEdit.getName().toString());
+        } catch (ScheduleClashException sce) {
+            throw new CommandException(sce.getMessage());
+        }
+
         Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
                 tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), tuteeToEdit.getRemark(), tuteeToEdit.getTags(),
                 tuteeToEdit.getLessons());

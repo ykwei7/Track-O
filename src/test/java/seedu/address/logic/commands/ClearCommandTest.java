@@ -9,11 +9,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TrackO;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyTrackO_success() {
+    public void execute_emptyTrackO_success() throws ScheduleClashException {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +22,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyTrackO_success() {
+    public void execute_nonEmptyTrackO_success() throws ScheduleClashException {
         Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalTrackO(), new UserPrefs());
         expectedModel.setTrackO(new TrackO());

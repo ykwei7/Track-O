@@ -45,8 +45,7 @@ public class TypicalTutees {
     public static final Tutee ALICE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLevel("p1")
             .withPhone("94351253")
-            .withTags("friends")
-            .withPayment("0", LocalDate.of(2023, 10, 20)).build();
+            .withTags("friends").build();
     public static final Tutee BENSON = new TuteeBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withLevel("p2").withPhone("98765432")
@@ -68,6 +67,9 @@ public class TypicalTutees {
                     LocalDate.of(2023, 10, 20)).build();
     public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
             .withLevel("p5").withAddress("4th street").withPayment("65",
+                    LocalDate.of(2023, 10, 20)).build();
+    public static final Tutee TUTEE_WITHOUT_TAGS_AND_LESSONS = new TuteeBuilder().withName("Test Tutee")
+            .withPhone("94824423").withLevel("p1").withAddress("3rd street").withPayment("65",
                     LocalDate.of(2023, 10, 20)).build();
 
     // Manually added

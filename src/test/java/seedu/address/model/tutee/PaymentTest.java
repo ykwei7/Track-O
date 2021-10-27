@@ -34,11 +34,17 @@ public class PaymentTest {
         assertFalse(Payment.isValidPayment("-91")); // // non-numeric
         assertFalse(Payment.isValidPayment("9011p041")); // alphabets within digits
         assertFalse(Payment.isValidPayment("9312 1534")); // spaces within digits
+        assertFalse(Payment.isValidPayment("90.1")); // 1 decimal place
+        assertFalse(Payment.isValidPayment("90.33")); // second decimal place non-0 and non-5
+        assertFalse(Payment.isValidPayment("90.333")); // more than 2 decimal places
+
 
         // valid payment amounts
         assertTrue(Payment.isValidPayment("911"));
         assertTrue(Payment.isValidPayment("93121534"));
         assertTrue(Payment.isValidPayment("124293842033123"));
+        assertTrue(Payment.isValidPayment("90.50"));
+        assertTrue(Payment.isValidPayment("90.00"));
     }
 
     @Test

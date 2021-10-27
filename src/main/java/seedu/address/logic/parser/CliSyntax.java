@@ -20,4 +20,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_START_TIME = new Prefix("s/");
     public static final Prefix PREFIX_END_TIME = new Prefix("e/");
     public static final Prefix PREFIX_HOURLY_RATE = new Prefix("rate/");
+
+    // PREFIX_ADD_PAYMENT refers to number of lessons added
+    public static final Prefix PREFIX_LESSON = new Prefix("lesson/");
+    public static final Prefix PREFIX_PAYMENT_DATE = new Prefix("by/");
+    public static final Prefix PREFIX_PAYMENT_AMOUNT = new Prefix("amount/");
+    public static final Prefix PREFIX_PAYMENT_RECEIVED_DATE = new Prefix("receive/");
 }
