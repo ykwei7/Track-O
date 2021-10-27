@@ -171,7 +171,6 @@ public class Tutee {
         if (!lessons.isEmpty()) {
             builder.append("\n\nLessons: \n");
             for (int i = 0; i < lessons.size(); i++) {
-                builder.append((i + 1) + ". " + lessons.get(i).printLessons());
                 builder.append(i + 1)
                         .append(". ")
                         .append(lessons.get(i));
