@@ -59,6 +59,7 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_END_TIME_BOB = "16:30";
     public static final String VALID_LESSON_HOURLY_RATE_AMY = "40";
     public static final String VALID_LESSON_HOURLY_RATE_BOB = "45.50";
+    public static final String VALID_LESSON_INDEX = "1";
 
     public static final String VALID_PAYMENT_AMOUNT_AMY = "0.00";
     public static final String VALID_PAYMENT_AMOUNT_BOB = "200.00";
@@ -90,6 +91,7 @@ public class CommandTestUtil {
     public static final String LESSON_END_TIME_DESC_BOB = " " + PREFIX_END_TIME + VALID_LESSON_END_TIME_BOB;
     public static final String LESSON_HOURLY_RATE_DESC_AMY = " " + PREFIX_HOURLY_RATE + VALID_LESSON_HOURLY_RATE_AMY;
     public static final String LESSON_HOURLY_RATE_DESC_BOB = " " + PREFIX_HOURLY_RATE + VALID_LESSON_HOURLY_RATE_BOB;
+    public static final String LESSON_INDEX = " " + PREFIX_LESSON + VALID_LESSON_INDEX;
 
     public static final String PAYMENT_AMOUNT_DESC_AMY = " " + PREFIX_PAYMENT_AMOUNT + VALID_PAYMENT_AMOUNT_AMY;
     public static final String PAYMENT_AMOUNT_DESC_BOB = " " + PREFIX_PAYMENT_AMOUNT + VALID_PAYMENT_AMOUNT_BOB;
@@ -116,6 +118,7 @@ public class CommandTestUtil {
             " " + PREFIX_END_TIME + "20:00!"; // invalid symbol '!'
     public static final String INVALID_LESSON_HOURLY_RATE_DESC =
             " " + PREFIX_HOURLY_RATE + "45.5"; // not expressed in 2dp
+    public static final String INVALID_LESSON_INDEX = " " + PREFIX_LESSON + "*"; // not an integer larger than 0
 
     public static final String INVALID_PAYMENT_AMOUNT_DESC = " " + PREFIX_PAYMENT_AMOUNT + "20!"; // No unknown symbols
     public static final String INVALID_LESSON_INDEX_DESC = " " + PREFIX_LESSON + "0"; // Not a positive integer
