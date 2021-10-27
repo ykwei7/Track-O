@@ -62,9 +62,9 @@ public class CommandTestUtil {
 
     public static final String VALID_PAYMENT_AMOUNT_AMY = "0.00";
     public static final String VALID_PAYMENT_AMOUNT_BOB = "200.00";
-    public static final String VALID_PAYMENT_DATE_AMY = "15-10-2021";
-    public static final String VALID_PAYMENT_DATE_BOB = "02-05-2021";
-    public static final String VALID_PAYMENT_RECV_DATE_AMY = "03-10-2021";
+    public static final String VALID_PAYMENT_DATE_AMY = "15-10-2022";
+    public static final String VALID_PAYMENT_DATE_BOB = "02-05-2022";
+    public static final String VALID_PAYMENT_RECV_DATE_AMY = "03-10-2022";
     public static final String VALID_PAYMENT_RECV_DATE_BOB = "";
     public static final String VALID_LESSON_INDEX_AMY = "1";
     public static final String VALID_LESSON_INDEX_BOB = "3";

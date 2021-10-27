@@ -21,6 +21,7 @@ import seedu.address.logic.commands.paymentcommand.PaymentCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tutee.Tutee;
 
@@ -28,13 +29,17 @@ public class PaymentAddCommandTest {
 
     private static final String NEW_PAYMENT_VAL_STUB_1 = "100";
     private static final String NEW_PAYMENT_VAL_STUB_2 = "200";
-    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+    private Model model;
+
+    public PaymentAddCommandTest() throws ScheduleClashException {
+        this.model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+    }
 
     private Model modifyPaymentOfTutee(Index index, String newPaymentValue,
-                                       LocalDate newPayByDate) {
+                                       LocalDate newPayByDate) throws ScheduleClashException {
         Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
-        Tutee editedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
+        Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
                 newPayByDate);
         model.setTutee(retrievedTutee, editedTutee);
         return model;

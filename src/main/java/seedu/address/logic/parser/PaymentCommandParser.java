@@ -50,8 +50,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         PaymentCommand.MESSAGE_USAGE_ALL));
             }
-            String lessonIndexAsString = ParserUtil.parseLessonIndex(argMultimap.getValue(PREFIX_LESSON).get());
-            Index lessonIndex = ParserUtil.parseIndex(lessonIndexAsString);
+            Index lessonIndex = ParserUtil.parseLessonIndex(argMultimap.getValue(PREFIX_LESSON).get());
             return new PaymentAddCommand(index, lessonIndex);
         }
         if (argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).isPresent()) {

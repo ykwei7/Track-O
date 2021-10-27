@@ -75,7 +75,7 @@ public class PaymentSetDateCommand extends PaymentCommand {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_DATE);
         }
 
-        editedTutee = editedPaymentDetailsTutee(tuteeToGet, existingPaymentValue, newPayByDate);
+        editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, existingPaymentValue, newPayByDate);
 
         model.setTutee(tuteeToGet, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);

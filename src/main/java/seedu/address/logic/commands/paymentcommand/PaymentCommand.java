@@ -96,7 +96,36 @@ public class PaymentCommand extends Command {
      * @param payByDate Date that tutee is to pay amount by
      * @return A new tutee object with the updated payment details
      */
-    public static Tutee editedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate) {
+
+    public static Tutee createEditedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate) {
+        assert tuteeToEdit != null;
+
+        Name updatedName = tuteeToEdit.getName();
+        Phone updatedPhone = tuteeToEdit.getPhone();
+        Level updatedLevel = tuteeToEdit.getLevel();
+        Address updatedAddress = tuteeToEdit.getAddress();
+        Payment existingPayment = tuteeToEdit.getPayment();
+        Payment updatedPayment = new Payment(payment, payByDate);
+        updatedPayment.copyPaymentHistory(existingPayment.paymentHistory);
+        Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
+        Set<Tag> updatedTags = tuteeToEdit.getTags();
+        List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
+
+        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
+                updatedPayment, updatedRemark, updatedTags, updatedLessons);
+    }
+
+    /**
+     * Uses the information of an existing tutee and creates a new tutee with the updated payment details.
+     *
+     * @param tuteeToEdit Existing tutee
+     * @param payment Payment amount to set
+     * @param payByDate Date that tutee is to pay amount by
+     * @param lastPaidDate Date that tutee paid
+     * @return
+     */
+    public static Tutee createEditedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate,
+                                                        String lastPaidDate) {
         assert tuteeToEdit != null;
 
         Name updatedName = tuteeToEdit.getName();
@@ -104,9 +133,10 @@ public class PaymentCommand extends Command {
         Level updatedLevel = tuteeToEdit.getLevel();
         Address updatedAddress = tuteeToEdit.getAddress();
         Payment updatedPayment = new Payment(payment, payByDate);
+        updatedPayment.paymentHistory.add(lastPaidDate);
         Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = tuteeToEdit.getTags();
-        Set<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
+        List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
         return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);

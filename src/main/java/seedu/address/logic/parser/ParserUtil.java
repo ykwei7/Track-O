@@ -267,13 +267,15 @@ public class ParserUtil {
      * @return Trimmed string of payment value
      * @throws ParseException
      */
-    public static String parseLessonIndex(String lessonIndex) throws ParseException {
+    public static Index parseLessonIndex(String lessonIndex) throws ParseException {
         requireNonNull(lessonIndex);
-        String trimmedPayment = lessonIndex.trim();
-        if (!Payment.isValidPayment(trimmedPayment)) {
+        String trimmedLessonIndex = lessonIndex.trim();
+        if (!Payment.isValidPayment(trimmedLessonIndex)) {
             throw new ParseException(Lesson.MESSAGE_INDEX_CONSTRAINTS);
         }
-        return trimmedPayment;
+
+        Index parsedLessonIndex = ParserUtil.parseIndex(trimmedLessonIndex);
+        return parsedLessonIndex;
     }
 
     /**
@@ -285,6 +287,8 @@ public class ParserUtil {
      */
     public static LocalDate parsePayByDate(String payByDate) throws ParseException {
         String trimmedPayByDate = payByDate.trim();
+        LocalDate formattedPayByDate;
+        LocalDate dateToday = LocalDate.now();
         if (trimmedPayByDate.equals("")) {
             return null;
         }
@@ -294,10 +298,14 @@ public class ParserUtil {
         }
 
         try {
-            LocalDate formattedPayByDate = LocalDate.parse(trimmedPayByDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            return formattedPayByDate;
+            formattedPayByDate = LocalDate.parse(trimmedPayByDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         } catch (DateTimeParseException e) {
             throw new ParseException(Payment.DATE_CONSTRAINTS);
         }
+
+        if (!formattedPayByDate.isAfter(dateToday) && !formattedPayByDate.equals(dateToday)) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS);
+        }
+        return formattedPayByDate;
     }
 }

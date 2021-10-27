@@ -37,7 +37,7 @@ public class SampleDataUtil {
     public static final List<Lesson> NON_EMPTY_LESSONS = List.of(
             new Lesson(new Subject("Math"),
                     new Time(DayOfWeek.WEDNESDAY, LocalTime.parse("19:30"), LocalTime.parse("21:00")),
-            40),
+                    40),
             new Lesson(new Subject("Chinese"),
                 new Time(DayOfWeek.SATURDAY, LocalTime.parse("08:00"), LocalTime.parse("09:00")),
             40));
