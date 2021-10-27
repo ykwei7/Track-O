@@ -72,7 +72,6 @@ public class PaymentSetAmountCommand extends PaymentCommand {
         Payment existingPayment = tuteeToGet.getPayment();
         String existingPaymentValue = existingPayment.getValue();
         LocalDate existingPayByDate = existingPayment.getPayByDate();
-      
         Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, paymentValueToSet, existingPayByDate);
 
         // If existing value is same as input value

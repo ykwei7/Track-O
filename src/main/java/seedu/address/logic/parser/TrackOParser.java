@@ -20,7 +20,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.paymentcommand.PaymentCommand;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

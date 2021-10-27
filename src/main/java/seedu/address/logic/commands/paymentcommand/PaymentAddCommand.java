@@ -5,9 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 
 import java.time.LocalDate;
-
 import java.util.List;
-
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
