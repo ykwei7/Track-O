@@ -24,6 +24,7 @@ import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 import seedu.address.model.tutee.Remark;
+import seedu.address.model.tutee.School;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -102,6 +103,7 @@ public class PaymentCommand extends Command {
 
         Name updatedName = tuteeToEdit.getName();
         Phone updatedPhone = tuteeToEdit.getPhone();
+        School updatedSchool = tuteeToEdit.getSchool();
         Level updatedLevel = tuteeToEdit.getLevel();
         Address updatedAddress = tuteeToEdit.getAddress();
         Payment existingPayment = tuteeToEdit.getPayment();
@@ -111,7 +113,7 @@ public class PaymentCommand extends Command {
         Set<Tag> updatedTags = tuteeToEdit.getTags();
         List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
-        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
+        return new Tutee(updatedName, updatedPhone, updatedSchool, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);
     }
 
@@ -130,6 +132,7 @@ public class PaymentCommand extends Command {
 
         Name updatedName = tuteeToEdit.getName();
         Phone updatedPhone = tuteeToEdit.getPhone();
+        School updatedSchool = tuteeToEdit.getSchool();
         Level updatedLevel = tuteeToEdit.getLevel();
         Address updatedAddress = tuteeToEdit.getAddress();
         Payment updatedPayment = new Payment(payment, payByDate);
@@ -138,7 +141,7 @@ public class PaymentCommand extends Command {
         Set<Tag> updatedTags = tuteeToEdit.getTags();
         List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
-        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
+        return new Tutee(updatedName, updatedPhone, updatedSchool, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);
     }
 

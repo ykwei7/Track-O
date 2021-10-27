@@ -46,6 +46,8 @@ public class TuteeCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label school;
+    @FXML
     private Label level;
     @FXML
     private FlowPane tags;
@@ -68,6 +70,7 @@ public class TuteeCard extends UiPart<Region> {
         overdue.setVisible(tutee.getPayment().isOverdue);
         phone.setText(tutee.getPhone().value);
         address.setText(tutee.getAddress().value);
+        school.setText(tutee.getSchool().value);
         level.setText(tutee.getLevel().stringRepresentation);
 
         //Adds subject names as tags

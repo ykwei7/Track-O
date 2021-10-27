@@ -26,6 +26,7 @@ import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
+import seedu.address.model.tutee.School;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -75,6 +76,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String school} into an {@code School}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static School parseSchool(String school) throws ParseException {
+        requireNonNull(school);
+        String trimmedSchool = school.trim();
+        if (!School.isValidSchool(trimmedSchool)) {
+            throw new ParseException(School.MESSAGE_CONSTRAINTS);
+        }
+        return new School(trimmedSchool);
     }
 
     /**

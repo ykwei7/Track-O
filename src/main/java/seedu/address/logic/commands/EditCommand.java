@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 
@@ -27,6 +28,7 @@ import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 import seedu.address.model.tutee.Remark;
+import seedu.address.model.tutee.School;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -42,6 +44,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL] "
             + "[" + PREFIX_LEVEL + "LEVEL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -98,6 +101,7 @@ public class EditCommand extends Command {
 
         Name updatedName = editTuteeDescriptor.getName().orElse(tuteeToEdit.getName());
         Phone updatedPhone = editTuteeDescriptor.getPhone().orElse(tuteeToEdit.getPhone());
+        School updatedSchool = editTuteeDescriptor.getSchool().orElse(tuteeToEdit.getSchool());
         Level updatedLevel = editTuteeDescriptor.getLevel().orElse(tuteeToEdit.getLevel());
         Address updatedAddress = editTuteeDescriptor.getAddress().orElse(tuteeToEdit.getAddress());
         Payment updatedPayment = tuteeToEdit.getPayment(); // edit command does not allow editing fees
@@ -105,7 +109,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editTuteeDescriptor.getTags().orElse(tuteeToEdit.getTags());
         List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
-        return new Tutee(updatedName, updatedPhone, updatedLevel, updatedAddress,
+        return new Tutee(updatedName, updatedPhone, updatedSchool, updatedLevel, updatedAddress,
                 updatedPayment, updatedRemark, updatedTags, updatedLessons);
     }
 
@@ -134,6 +138,7 @@ public class EditCommand extends Command {
     public static class EditTuteeDescriptor {
         private Name name;
         private Phone phone;
+        private School school;
         private Level level;
         private Address address;
         private Set<Tag> tags;
@@ -147,6 +152,7 @@ public class EditCommand extends Command {
         public EditTuteeDescriptor(EditTuteeDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
+            setSchool(toCopy.school);
             setLevel(toCopy.level);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
@@ -156,7 +162,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, level, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, school, level, address, tags);
         }
 
         public void setName(Name name) {
@@ -173,6 +179,14 @@ public class EditCommand extends Command {
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
+        }
+
+        public void setSchool(School school) {
+            this.school = school;
+        }
+
+        public Optional<School> getSchool() {
+            return Optional.ofNullable(school);
         }
 
         public void setLevel(Level level) {
@@ -225,6 +239,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
+                    && getSchool().equals(e.getSchool())
                     && getLevel().equals(e.getLevel())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());

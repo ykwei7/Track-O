@@ -22,6 +22,7 @@ public class Tutee {
     // Identity fields
     private final Name name;
     private final Phone phone;
+    private final School school;
     private final Level level;
 
     // Data fields
@@ -35,11 +36,12 @@ public class Tutee {
      * Every field must be present and not null.
      */
 
-    public Tutee(Name name, Phone phone, Level level, Address address, Payment payment, Remark remark,
+    public Tutee(Name name, Phone phone, School school, Level level, Address address, Payment payment, Remark remark,
                  Set<Tag> tags, List<Lesson> lessons) {
         requireAllNonNull(name, phone, level, address, tags, lessons);
         this.name = name;
         this.phone = phone;
+        this.school = school;
         this.level = level;
         this.address = address;
         this.remark = remark;
@@ -62,6 +64,10 @@ public class Tutee {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public School getSchool() {
+        return school;
     }
 
     public Level getLevel() {
@@ -126,6 +132,7 @@ public class Tutee {
         Tutee otherTutee = (Tutee) other;
         return otherTutee.getName().equals(getName())
                 && otherTutee.getPhone().equals(getPhone())
+                && otherTutee.getSchool().equals(getSchool())
                 && otherTutee.getLevel().equals(getLevel())
                 && otherTutee.getAddress().equals(getAddress())
                 && otherTutee.getPayment().equals(getPayment())
@@ -135,7 +142,7 @@ public class Tutee {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, level, address, payment,
+        return Objects.hash(name, phone, school, level, address, payment,
                             remark, tags, lessons);
     }
 
@@ -145,6 +152,8 @@ public class Tutee {
         builder.append(getName())
                 .append("\nPhone: ")
                 .append(getPhone())
+                .append("\nSchool: ")
+                .append(getSchool())
                 .append("\nLevel: ")
                 .append(getLevel())
                 .append("\nAddress: ")

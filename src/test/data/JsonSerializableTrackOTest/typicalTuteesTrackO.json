@@ -3,6 +3,7 @@
   "tutees" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
+    "school": "Tao Nan School",
     "level" : "p1",
     "address" : "123, Jurong West Ave 6, #08-111",
     "remark" : "",
@@ -14,6 +15,7 @@
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
+    "school": "Riverside Primary School",
     "level" : "p2",
     "address" : "311, Clementi Ave 2, #02-25",
     "remark" : "",
@@ -25,6 +27,7 @@
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
+    "school": "acs primary",
     "level" : "p3",
     "address" : "wall street",
     "remark" : "",
@@ -36,6 +39,7 @@
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
+    "school": "henry park primary school",
     "level" : "p4",
     "address" : "10th street",
     "remark" : "",
@@ -47,6 +51,7 @@
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
+    "school": "scgs",
     "level" : "p5",
     "address" : "michegan ave",
     "remark" : "",
@@ -58,6 +63,7 @@
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
+    "school": "South View Primary School",
     "level" : "p6",
     "address" : "little tokyo",
     "remark" : "",
@@ -69,6 +75,7 @@
   }, {
     "name" : "George Best",
     "phone" : "9482442",
+    "school": "Temasek Primary School",
     "level" : "p5",
     "address" : "4th street",
     "remark" : "",

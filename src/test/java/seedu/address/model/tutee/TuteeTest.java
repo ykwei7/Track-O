@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.ALICE;
@@ -42,8 +43,8 @@ public class TuteeTest {
         assertFalse(ALICE.isSameTutee(null));
 
         // same name, all other attributes different -> returns true
-        Tutee editedAlice = new TuteeBuilder(ALICE).withPhone(VALID_PHONE_BOB).withLevel(VALID_LEVEL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Tutee editedAlice = new TuteeBuilder(ALICE).withPhone(VALID_PHONE_BOB).withSchool(VALID_SCHOOL_BOB)
+                .withLevel(VALID_LEVEL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameTutee(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -86,7 +87,11 @@ public class TuteeTest {
         editedAlice = new TuteeBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
+        // different school -> returns false
+        editedAlice = new TuteeBuilder(ALICE).withSchool(VALID_SCHOOL_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different level -> returns false
         editedAlice = new TuteeBuilder(ALICE).withLevel(VALID_LEVEL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
