@@ -84,6 +84,33 @@ public class Schedule {
         return sortedLessonsMap.remove(lesson, tuteeName);
     }
 
+    /**
+     * Removes all the lessons in the lesson list from the map.
+     * Precondition: Every lesson in the lesson list must be in the map.
+     *
+     * @param lessons The list of keys to be removed one-by-one from the map.
+     */
+    public void removeAll(List<Lesson> lessons) {
+        for (Lesson lesson: lessons) {
+            assert sortedLessonsMap.containsKey(lesson);
+            sortedLessonsMap.remove(lesson);
+        }
+    }
+
+    /**
+     * Sets the value of the lessons stored in the map to a new value.
+     * Precondition: Every lesson in the lesson list must be in the map.
+     *
+     * @param lessons The list of keys to be updated one-by-one in the map.
+     * @param tuteeName The new value to be assigned to each of the given keys.
+     */
+    public void updateWithNewTuteeName(List<Lesson> lessons, String tuteeName) {
+        for (Lesson lesson: lessons) {
+            assert sortedLessonsMap.containsKey(lesson);
+            sortedLessonsMap.put(lesson, tuteeName);
+        }
+    }
+
     @Override
     public String toString() {
         Set<Map.Entry<Lesson, String>> entrySet = sortedLessonsMap.entrySet();

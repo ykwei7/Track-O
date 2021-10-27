@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Schedule;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
@@ -82,6 +83,12 @@ public class EditCommand extends Command {
 
         if (!tuteeToEdit.isSameTutee(editedTutee) && model.hasTutee(editedTutee)) {
             throw new CommandException(MESSAGE_DUPLICATE_TUTEE);
+        }
+
+        if (editTuteeDescriptor.getName().isPresent()) {
+            // update schedule to reflect the edited tutee's name
+            Schedule schedule = model.getSchedule();
+            schedule.updateWithNewTuteeName(editedTutee.getLessons(), editedTutee.getName().toString());
         }
 
         model.setTutee(tuteeToEdit, editedTutee);
