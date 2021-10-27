@@ -26,9 +26,8 @@ public class Payment {
 
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final String TODAY_DATE_AS_STRING = LocalDate.now().format(FORMATTER);
-
-    public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$";
-
+    public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
+            .replaceFirst("^0+", "");
     public final String value;
     public final LocalDate payByDate;
     public final String payByDateAsString;
@@ -114,9 +113,21 @@ public class Payment {
     @Override
     public String toString() {
         return String.format("$%s (Last paid on: %s)\nOverdue: %s",
-                value,
-                paymentHistory.get(paymentHistory.size() - 1),
-                isOverdue ? "Yes (on " + payByDateAsString + ")" : "No (by " + payByDateAsString + ")");
+                value, paymentHistory.get(paymentHistory.size() - 1), getOverdueStatus());
+    }
+
+    /**
+     * Provides the String representation of the payment's overdue status
+     * @return the status of the payment as a String
+     */
+    public String getOverdueStatus() {
+        if (isOverdue) {
+            return "Yes (on " + payByDateAsString + ")";
+        } else if (payByDateAsString.equals("-")) {
+            return "No (Pay-by date not set)";
+        } else {
+            return "No (by " + payByDateAsString + ")";
+        }
     }
 
     @Override

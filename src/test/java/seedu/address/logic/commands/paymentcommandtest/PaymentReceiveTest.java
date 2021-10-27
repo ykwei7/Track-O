@@ -193,6 +193,4 @@ public class PaymentReceiveTest {
         Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
     }
-
-
 }

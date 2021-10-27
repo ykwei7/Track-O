@@ -73,7 +73,6 @@ public class PaymentReceiveCommand extends PaymentCommand {
         LocalDate existingPayByDate = existingPayment.getPayByDate();
         Tutee editedTutee;
 
-
         if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == null && existingPayByDate == null) {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
         } else if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == null) {
