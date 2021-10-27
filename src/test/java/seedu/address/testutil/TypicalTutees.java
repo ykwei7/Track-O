@@ -45,8 +45,7 @@ public class TypicalTutees {
     public static final Tutee ALICE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLevel("p1")
             .withPhone("94351253")
-            .withTags("friends")
-            .withPayment("0", LocalDate.of(2023, 10, 20)).build();
+            .withTags("friends").build();
     public static final Tutee BENSON = new TuteeBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withLevel("p2").withPhone("98765432")

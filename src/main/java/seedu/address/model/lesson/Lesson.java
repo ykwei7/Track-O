@@ -16,6 +16,8 @@ public class Lesson implements Comparable<Lesson> {
                     + "either no decimal places or two decimal places with the last decimal place being 0 or 5, "
                     + "and it should not be blank.";
 
+    public static final String MESSAGE_INDEX_CONSTRAINTS = "Lesson index should be positive and "
+            + "within index boundaries of lesson list.";
     /*
      * The first character has to a digit that is not zero.
      * Only 0 or 2 decimal places of a number is allowed.
