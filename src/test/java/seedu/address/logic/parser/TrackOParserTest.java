@@ -4,13 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-<<<<<<< HEAD
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
-=======
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
->>>>>>> f5f75cdac129f2412fe7fc72ae460e62085fc48e
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -128,7 +125,6 @@ public class TrackOParserTest {
     }
 
     @Test
-<<<<<<< HEAD
     public void parseCommand_deleteLesson() throws Exception {
         Index tuteeIndex = Index.fromOneBased(1);
         Index lessonIndex = Index.fromOneBased(1);
@@ -137,7 +133,8 @@ public class TrackOParserTest {
                 + " " + tuteeIndex.getOneBased() + " " + PREFIX_LESSON + lessonIndex.getOneBased());
 
         assertEquals(new DeleteLessonCommand(tuteeIndex, lessonIndex), command);
-=======
+    }
+
     public void parseCommand_addLesson() throws Exception {
         final Subject subject = new Subject("Biology");
         final DayOfWeek dayOfWeek = DayOfWeek.THURSDAY;
@@ -160,7 +157,6 @@ public class TrackOParserTest {
     public void parseCommand_schedule() throws Exception {
         assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
         assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD + " 3") instanceof ScheduleCommand);
->>>>>>> f5f75cdac129f2412fe7fc72ae460e62085fc48e
     }
 
     @Test
