@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Payment payment = Payment.initializePayment(); // add command does not allow adding fees straight away
-        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
+        Remark remark = new Remark("-"); // add command does not allow adding remarks straight away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         List<Lesson> lessons = new ArrayList<>(); // add command does not allow adding lessons straight away
 

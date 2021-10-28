@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearRemarkCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -78,6 +79,9 @@ public class TrackOParser {
 
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
+
+        case ClearRemarkCommand.COMMAND_WORD:
+            return new ClearRemarkCommandParser().parse(arguments);
 
         case PaymentCommand.COMMAND_WORD:
             return new PaymentCommandParser().parse(arguments);

@@ -28,7 +28,7 @@ import seedu.address.model.tutee.Tutee;
  */
 public class SampleDataUtil {
 
-    public static final Remark EMPTY_REMARK = new Remark("");
+    public static final Remark EMPTY_REMARK = new Remark("-");
 
     public static final LocalDate STANDARD_PAYMENT_DATE = LocalDate.now();
 

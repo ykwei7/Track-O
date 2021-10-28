@@ -54,23 +54,24 @@ public class RemarkCommand extends Command {
         }
 
         Tutee tuteeToEdit = lastShownList.get(index.getZeroBased());
-        Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
-                                      tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), remark,
-                                      tuteeToEdit.getTags(), tuteeToEdit.getLessons());
+        Remark tuteeRemark = tuteeToEdit.getRemark();
+        Tutee editedTutee;
+        if (!tuteeRemark.value.equals("-")) {
+            editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
+                    tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
+                    tuteeRemark.appendRemark(remark), tuteeToEdit.getTags(),
+                    tuteeToEdit.getLessons());
+        } else {
+            editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
+                    tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
+                    remark, tuteeToEdit.getTags(),
+                    tuteeToEdit.getLessons());
+        }
 
         model.setTutee(tuteeToEdit, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
 
-        return new CommandResult(generateSuccessMessage(editedTutee));
-    }
-
-    /**
-     * Generates a command execution success message based on whether the remark is added to or removed from
-     * {@code tuteeToEdit}.
-     */
-    private String generateSuccessMessage(Tutee tuteeToEdit) {
-        String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, tuteeToEdit);
+        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, editedTutee));
     }
 
     @Override
