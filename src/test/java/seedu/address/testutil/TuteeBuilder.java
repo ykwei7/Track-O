@@ -14,6 +14,7 @@ import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 import seedu.address.model.tutee.Remark;
+import seedu.address.model.tutee.School;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,6 +25,7 @@ public class TuteeBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_SCHOOL = "SCGS";
     public static final String DEFAULT_LEVEL = "p1";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FEE = "0";
@@ -31,6 +33,7 @@ public class TuteeBuilder {
 
     private Name name;
     private Phone phone;
+    private School school;
     private Level level;
     private Address address;
     private Payment payment;
@@ -44,6 +47,7 @@ public class TuteeBuilder {
     public TuteeBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
+        school = new School(DEFAULT_SCHOOL);
         level = new Level(DEFAULT_LEVEL);
         address = new Address(DEFAULT_ADDRESS);
         payment = new Payment(DEFAULT_FEE, null);
@@ -58,6 +62,7 @@ public class TuteeBuilder {
     public TuteeBuilder(Tutee tuteeToCopy) {
         name = tuteeToCopy.getName();
         phone = tuteeToCopy.getPhone();
+        school = tuteeToCopy.getSchool();
         level = tuteeToCopy.getLevel();
         address = tuteeToCopy.getAddress();
         payment = tuteeToCopy.getPayment();
@@ -115,7 +120,15 @@ public class TuteeBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Tutee} that we are building.
+     * Sets the {@code School} of the {@code Tutee} that we are building.
+     */
+    public TuteeBuilder withSchool(String school) {
+        this.school = new School(school);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Level} of the {@code Tutee} that we are building.
      */
     public TuteeBuilder withLevel(String level) {
         this.level = new Level(level);
@@ -131,7 +144,7 @@ public class TuteeBuilder {
     }
 
     public Tutee build() {
-        return new Tutee(name, phone, level, address, payment, remark, tags, lessons);
+        return new Tutee(name, phone, school, level, address, payment, remark, tags, lessons);
     }
 
 }

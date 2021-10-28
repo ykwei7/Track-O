@@ -41,7 +41,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_DAY_OF_WEEK, PREFIX_START_TIME, PREFIX_END_TIME)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_DAY_OF_WEEK,
+                PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_HOURLY_RATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
 
