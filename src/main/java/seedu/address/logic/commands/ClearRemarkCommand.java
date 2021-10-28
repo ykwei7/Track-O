@@ -45,9 +45,9 @@ public class ClearRemarkCommand extends Command {
         }
 
         Tutee tuteeToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
-                    tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), new Remark("-"), tuteeToEdit.getTags(),
-                    tuteeToEdit.getLessons());
+        Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
+                    tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), new Remark("-"),
+                    tuteeToEdit.getTags(), tuteeToEdit.getLessons());
 
         model.setTutee(tuteeToEdit, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
