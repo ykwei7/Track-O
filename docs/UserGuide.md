@@ -45,9 +45,9 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
+* Items with `…` after them can be used multiple times.<br>
+e.g. `[t/TAG]…` tags are optional can be added multiple times: `t/friend`, `t/friend t/family` etc.<br>
+e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple keyword search: `subject/English Math Science`
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -237,16 +237,15 @@ Examples:
 
 Filters the tutee list to display matches according to keywords.
  
-Format: `find [n/...NAME] [subject/...SUBJECT] [l/LEVEL] [overdue/OVERDUE_STATUS]`
+Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
 
-* A valid `find` command must have at least 1 filter.
+* A valid `find` command must have at least 1 of the 4 filters.
 * Keywords are case-insensitive.
 * The returned tutee list contains matches that fulfills all the keywords.
 * `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
-* `level` filter can only take **1 keyword** in the form of abbreviation. 
-
-    e.g. `p5` for Primary 5, `s2` for Secondary 2
+* `level` filter can only take **1 keyword** in the form of abbreviation.<br>
+e.g. `p5` for Primary 5, `s2` for Secondary 2
 * `overdue` filter can only take **1 keyword**, either `yes` or `no`.
 
 Example:
