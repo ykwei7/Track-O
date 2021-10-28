@@ -108,7 +108,7 @@ Examples:
 
 ### Adding a lesson to a tutee : `addlesson`
 
-Adds a lesson to the specified tutee from our list of tutees.
+Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
 
 Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
 
@@ -121,9 +121,15 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`. 
 
 Examples:
-* `addlesson 1 subject/Principles of Accounting d/4 s/11:30 e/13:30 rate/40.50`
+* `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
+
+### Tracking lesson schedule : `schedule`
+
+Retrieves the user's schedule of lessons.
+
+Format: `schedule`
 
 ### Tracking tutee payments : `payment`
 
@@ -218,7 +224,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -230,6 +236,8 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Get** | `get INDEX`<br> e.g. `get 2`
 **List** | `list`
+**Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
+**View schedule** | `schedule`
 **View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
 **Add lesson's fees to tutee's payment amount due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
 **Edit tutee's payment amount due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
