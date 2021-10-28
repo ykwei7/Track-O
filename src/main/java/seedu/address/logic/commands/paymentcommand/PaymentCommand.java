@@ -36,10 +36,8 @@ public class PaymentCommand extends Command {
     public static final String COMMAND_WORD = "payment";
 
     public static final String MESSAGE_DEFAULT_USAGE = COMMAND_WORD
-            + ": View payment details of the tutee identified "
-            + "by the index number used in the displayed tutee list.\n"
-            + "Required Parameters: TUTEE_INDEX (must be a positive integer)\n"
-            + "Example: payment 1\n\n";
+            + ": View payment details of the tutee identified by the index number used in the displayed tutee list.\n"
+            + "Required Parameters: TUTEE_INDEX (must be a positive integer)\n" + "Example: payment 1\n\n";
 
     public static final String MESSAGE_USAGE_ALL = "Payment command has the following functionalities and"
             + " is to only include up to 1 parameter:\n\n"
