@@ -25,11 +25,11 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
    * **`list`** : Lists all tutees.
 
-   * **`add`**`n/John Doe l/P5: Adds a contact named John Doe of level P5` to the tutee list.
+   * **`add`**`n/John Doe l/p5: Adds a contact named John Doe of level Primary 5` to the tutee list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the tutee list.
+   * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
 
-   * **`clear`** : Deletes all contacts.  [To be released]
+   * **`clear`** : Deletes all tutees in the tutee list.
 
    * **`exit`** : Exits the app.
 
@@ -71,8 +71,8 @@ Adds a tutee to the existing list of tutees.
 Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 
 Examples:
-* `add n/John Doe p/93456789 sch/Temasek Jc l/J2 a/135 Rivervale Link`
-* `add n/Betsy Crowe l/P5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/North-east region`
+* `add n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link`
+* `add n/Betsy Crowe l/p5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/North-east region`
 
 ### Listing all tutees : `list`
 
