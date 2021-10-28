@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
         List<Lesson> lessonList = tuteeToDelete.getLessons();
 
         Schedule schedule = model.getSchedule();
-        schedule.removeAll(lessonList);
+        schedule.removeLessons(lessonList);
 
         model.deleteTutee(tuteeToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_TUTEE_SUCCESS, tuteeToDelete));

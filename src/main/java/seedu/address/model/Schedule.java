@@ -90,7 +90,7 @@ public class Schedule {
      *
      * @param lessons The list of keys to be removed one-by-one from the map.
      */
-    public void removeAll(List<Lesson> lessons) {
+    public void removeLessons(List<Lesson> lessons) {
         for (Lesson lesson: lessons) {
             assert sortedLessonsMap.containsKey(lesson);
             sortedLessonsMap.remove(lesson);
