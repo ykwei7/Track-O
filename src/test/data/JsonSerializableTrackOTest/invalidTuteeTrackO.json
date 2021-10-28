@@ -2,6 +2,7 @@
   "tutees": [ {
     "name": "Hans Muster",
     "phone": "9482424",
+    "school": "anglo-chinese school (junior)",
     "level": "p8",
     "address": "4th street",
     "remark" : ""
