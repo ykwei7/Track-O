@@ -98,6 +98,7 @@ public class PaymentCommand extends Command {
         }
 
         Tutee tuteeToGet = lastShownList.get(targetIndex.getZeroBased());
+        List<Lesson> lessons = tuteeToGet.getLessons();
 
         //Edit this portion to link payment details instead of tutee
         String tuteePaymentDetails = getPaymentDetailsMessage(tuteeToGet);

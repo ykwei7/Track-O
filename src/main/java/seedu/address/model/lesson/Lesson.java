@@ -62,7 +62,7 @@ public class Lesson implements Comparable<Lesson> {
     /**
      * Converts lesson list to a formatted String output for easier viewing.
      * @param lessonList List of lessons to be converted
-     * @return List of lessons with indexing in string format
+     * @return List of lessons with indexing in string 
      */
     public static String lessonListToString(List<Lesson> lessonList) {
         StringBuilder builder = new StringBuilder();
