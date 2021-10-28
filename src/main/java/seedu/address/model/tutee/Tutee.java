@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
@@ -54,6 +55,14 @@ public class Tutee {
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
         this.lessons.add(lesson);
+    }
+
+    /**
+     * Deletes a lesson from the tutee.
+     */
+    public void deleteLesson(Index lessonIndex) {
+        requireNonNull(lessonIndex);
+        this.lessons.remove(lessonIndex.getZeroBased());
     }
 
     public Name getName() {
