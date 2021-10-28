@@ -19,6 +19,11 @@ public class Remark {
         value = remark;
     }
 
+    /**
+     * Appends a new remark to the tutee's existing remarks.
+     * @param newRemark new remark inputted by user
+     * @return the appended remark
+     */
     public Remark appendRemark(Remark newRemark) {
         assert newRemark != null;
         String newRemarkStr = value + "\n" + newRemark.value;

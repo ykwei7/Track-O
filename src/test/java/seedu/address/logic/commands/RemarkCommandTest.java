@@ -53,7 +53,7 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_addRemarkUnfilteredList_emptyRemark_success() throws ScheduleClashException {
+    public void execute_addRemarkUnfilteredListEmptyRemark_success() throws ScheduleClashException {
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Tutee editedTutee = new TuteeBuilder(firstTutee).build();
 
@@ -86,7 +86,7 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_filteredList_emptyRemark_success() throws ScheduleClashException {
+    public void execute_filteredListEmptyRemark_success() throws ScheduleClashException {
         showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
 
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
