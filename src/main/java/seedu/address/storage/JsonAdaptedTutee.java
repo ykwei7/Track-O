@@ -23,6 +23,7 @@ import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 import seedu.address.model.tutee.Remark;
+import seedu.address.model.tutee.School;
 import seedu.address.model.tutee.Tutee;
 
 
@@ -35,6 +36,7 @@ class JsonAdaptedTutee {
 
     private final String name;
     private final String phone;
+    private final String school;
     private final String level;
     private final String address;
     private final String remark;
@@ -49,6 +51,7 @@ class JsonAdaptedTutee {
      */
     @JsonCreator
     public JsonAdaptedTutee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                            @JsonProperty("school") String school,
                             @JsonProperty("level") String level, @JsonProperty("address") String address,
                             @JsonProperty("remark") String remark,
                             @JsonProperty("payment") String payment,
@@ -58,6 +61,7 @@ class JsonAdaptedTutee {
                             @JsonProperty("lessons") List<String> lessons) {
         this.name = name;
         this.phone = phone;
+        this.school = school;
         this.level = level;
         this.address = address;
         this.remark = remark;
@@ -78,6 +82,7 @@ class JsonAdaptedTutee {
     public JsonAdaptedTutee(Tutee source) throws JsonProcessingException {
         name = source.getName().fullName;
         phone = source.getPhone().value;
+        school = source.getSchool().value;
         level = source.getLevel().value;
         address = source.getAddress().value;
         remark = source.getRemark().value;
@@ -124,6 +129,14 @@ class JsonAdaptedTutee {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(phone);
+
+        if (school == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
+        }
+        if (!School.isValidSchool(school)) {
+            throw new IllegalValueException(School.MESSAGE_CONSTRAINTS);
+        }
+        final School modelSchool = new School(school);
 
         if (level == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Level.class.getSimpleName()));
@@ -173,7 +186,7 @@ class JsonAdaptedTutee {
 
         final List<Lesson> modelLessons = new ArrayList<>(tuteeLessons);
 
-        return new Tutee(modelName, modelPhone, modelLevel, modelAddress, modelPayment,
+        return new Tutee(modelName, modelPhone, modelSchool, modelLevel, modelAddress, modelPayment,
                          modelRemark, modelTags, modelLessons);
     }
 
