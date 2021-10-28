@@ -142,7 +142,7 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withSchool(VALID_SCHOOL_AMY).withLevel(VALID_LEVEL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditTuteeDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withSchool(VALID_SCHOOL_AMY).withLevel(VALID_LEVEL_BOB)
+                .withPhone(VALID_PHONE_BOB).withSchool(VALID_SCHOOL_BOB).withLevel(VALID_LEVEL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
