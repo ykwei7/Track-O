@@ -226,8 +226,8 @@ Format: `find [n/...NAME] [subject/...SUBJECT] [l/LEVEL] [overdue/OVERDUE_STATUS
 * A valid `find` command must have at least 1 filter.
 * Keywords are case-insensitive.
 * The returned tutee list contains matches that fulfills all the keywords.
-* `name` filter can take **multiple keywords** to be matched and can only alphanumeric characters.
-* `subject` filter can take **multiple keywords** to be matched and can only alphanumeric characters.
+* `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `level` filter can only take **1 keyword** in the form of abbreviation. 
 
     e.g. `p5` for Primary 5, `s2` for Secondary 2
