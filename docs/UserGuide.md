@@ -223,7 +223,7 @@ Filters the tutee list to display matches according to keywords.
  
 Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
 
-* A valid `find` command must have at least 1 of the 4 filter.
+* A valid `find` command must have at least 1 of the 4 filters.
 * Keywords are case-insensitive.
 * The returned tutee list contains matches that fulfills all the keywords.
 * `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
