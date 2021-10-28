@@ -74,12 +74,6 @@ Examples:
 * `add n/John Doe l/J2`
 * `add n/Betsy Crowe l/P5`
 
-### Listing all tutees : `list`
-
-Shows the current list of tutees.
-
-Format: `list`
-
 ### Deleting a tutee : `delete`
 
 Deletes the specified tutee from our list of tutees.
@@ -92,6 +86,12 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd tutee in the address book.
+
+### Listing all tutees : `list`
+
+Shows the current list of tutees.
+
+Format: `list`
 
 ### Viewing a tutee : `get`
 
@@ -106,6 +106,30 @@ Format: `get INDEX`
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the address book.
 
+### Managing remarks of tutees : `remark`
+
+#### To write a new remark in tutee:
+
+Format: `remark INDEX r/TEXT`
+
+* Clears existing remarks and adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `remark 1 r/Went through Organic Chemistry`
+
+#### To clear all remarks in tutee:
+
+Format: `remark INDEX r/`
+
+* Clears all existing remarks of tutee at the specified `INDEX`.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `remark 1 r/`
+
 ### Adding a lesson to a tutee : `addlesson`
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
@@ -118,7 +142,7 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * The lesson occurs on the specified `DAY_OF_WEEK`, from the specified `START_TIME` to the specified `END_TIME`, costing `HOURLY_RATE` dollars per hour.
 * `DAY_OF_WEEK` **must be an integer in the range [1, 7]** where `1` to `7` corresponds to Monday to Sunday.
 * `START_TIME` and `END_TIME` must be specified in an `HH:MM` format.
-* `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`. 
+* `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 
 Examples:
 * `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
@@ -234,12 +258,14 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME l/LEVEL` <br> e.g. `add n/James Ho l/S4`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
-**Get** | `get INDEX`<br> e.g. `get 2`
 **List** | `list`
+**Get** | `get INDEX`<br> e.g. `get 2`
+**Add remark** | `remark INDEX r/TEXT` <br> e.g `remark 1 r/Good progress.`
+**Clear remarks** | `remark INDEX r/` <br> e.g `remark 1 r/`
 **Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 **View schedule** | `schedule`
-**View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
 **Add lesson's fees to tutee's payment amount due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
+**View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
 **Edit tutee's payment amount due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
 **Set payment due date for tutee** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
 **Receive tutee's payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
