@@ -113,7 +113,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return String.format("$%s (Last paid on: %s)\nOverdue: %s",
+        return String.format("Fees incurred: $%s (Last paid on: %s)\nOverdue: %s",
                 value,
                 paymentHistory.get(paymentHistory.size() - 1),
                 isOverdue ? "Yes (on " + payByDateAsString + ")" : "No (by " + payByDateAsString + ")");

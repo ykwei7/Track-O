@@ -74,4 +74,18 @@ public class PaymentCommandTest {
         // different tutee -> returns false
         assertFalse(getFirstCommand.equals(getSecondCommand));
     }
+
+    @Test
+    public void execute_paymentCommand_success() throws ScheduleClashException {
+        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+        Index inBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size());
+        PaymentCommand paymentCommand = new PaymentCommand(inBoundIndex);
+        Tutee tuteeToGet = model.getFilteredTuteeList().get(inBoundIndex.getZeroBased());
+
+
+        String tuteePaymentDetails = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, tuteeToGet.getName(),
+                tuteeToGet.getPayment());
+
+        assertCommandSuccess(paymentCommand, model, tuteePaymentDetails, model);
+    }
 }
