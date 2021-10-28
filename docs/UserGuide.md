@@ -106,6 +106,28 @@ Format: `get INDEX`
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the address book.
 
+### Finding tutee by fields : `find`
+
+Filters the tutee list to display matches according to keywords.
+ 
+Format: `find [n/...NAME] [subject/...SUBJECT] [l/LEVEL] [overdue/OVERDUE_STATUS]`
+
+* A valid `find` command must have at least 1 filter.
+* Keywords are case-insensitive.
+* The returned tutee list contains matches that fulfills all the keywords.
+* `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `level` filter can only take **1 keyword** in the form of abbreviation. 
+
+    e.g. `p5` for Primary 5, `s2` for Secondary 2
+* `overdue` filter can only take **1 keyword**, either `yes` or `no`.
+
+Example:
+* Find all `David` in the tutee list: `find n/david`.
+* Find `David Lee` in the tutee list: `find n/david lee`.
+* Find all `Secondary 4` tutees: `find l/s4`.
+* Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
+
 ### Managing remarks of tutees : `remark`
 
 #### To write a new remark in tutee:
@@ -148,6 +170,22 @@ Examples:
 * `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
+
+### Deleting a lesson to a tutee : `deletelesson`
+
+Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
+
+Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
+
+* The tutee's index is the number displayed beside tutee's name in the filtered tutee's list.
+* The lesson index is the number displayed beside the subject name after using `get` command on the tutee.
+* `TUTEE_INDEX` and `LESSON_INDEX` are compulsory fields, an error message is produced if either one is missing.
+
+Examples:
+* Deleting **lesson 2** from **tutee 3**:
+  `deletelesson 3 lesson/2`
+* Deleting **lesson 3** from **tutee 1**:
+  `deletelesson 1 lesson/3`
 
 ### Tracking lesson schedule : `schedule`
 
@@ -231,8 +269,6 @@ Exits from the application.
 
 ### Editing a tutee :  `[coming in v2.0]`
 
-### Locating tutees by name:  `[coming in v2.0]`
-
 ### Clearing all entries : `[coming in v2.0]`
 
 ### Saving the data `[coming in v2.0]`
@@ -260,9 +296,11 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **List** | `list`
 **Get** | `get INDEX`<br> e.g. `get 2`
+**Find** | `find [n/...NAME] [l/LEVEL] [subject/...SUBJECT] [overdue/OVERDUE]`<br> e.g `find n/david subject/math` 
 **Add remark** | `remark INDEX r/TEXT` <br> e.g `remark 1 r/Good progress.`
 **Clear remarks** | `remark INDEX r/` <br> e.g `remark 1 r/`
 **Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
+**Delete Lesson** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
 **View schedule** | `schedule`
 **Add lesson's fees to tutee's payment amount due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
 **View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
