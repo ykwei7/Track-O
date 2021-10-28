@@ -26,6 +26,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearRemarkCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -122,6 +123,13 @@ public class TrackOParserTest {
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_TUTEE.getOneBased() + " " + PREFIX_REMARK + remark.value);
         assertEquals(new RemarkCommand(INDEX_FIRST_TUTEE, remark), command);
+    }
+
+    @Test
+    public void parseCommand_clearRemark() throws Exception {
+        ClearRemarkCommand command = (ClearRemarkCommand) parser.parseCommand(
+                ClearRemarkCommand.COMMAND_WORD + " " + INDEX_FIRST_TUTEE.getOneBased());
+        assertEquals(new ClearRemarkCommand(INDEX_FIRST_TUTEE), command);
     }
 
     @Test

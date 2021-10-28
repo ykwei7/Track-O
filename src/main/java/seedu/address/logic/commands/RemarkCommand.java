@@ -55,6 +55,7 @@ public class RemarkCommand extends Command {
         Tutee tuteeToEdit = lastShownList.get(index.getZeroBased());
         Remark tuteeRemark = tuteeToEdit.getRemark();
         Tutee editedTutee;
+
         if (!tuteeRemark.value.equals("-")) {
             editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
                     tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),

@@ -25,7 +25,6 @@ public class Remark {
      * @return the appended remark
      */
     public Remark appendRemark(Remark newRemark) {
-        assert newRemark != null;
         String newRemarkStr = value + "\n" + newRemark.value;
         return new Remark(newRemarkStr);
     }

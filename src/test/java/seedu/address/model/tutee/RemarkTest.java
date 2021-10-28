@@ -31,9 +31,6 @@ public class RemarkTest {
         Remark expectedEmptyRemarkBack = new Remark("What's up\n");
 
         assertTrue(appendedEmptyRemarkBack.equals(expectedEmptyRemarkBack));
-
-        //Assertion thrown when a null object is put as a parameter
-        assertThrows(AssertionError.class, () -> existingRemark.appendRemark(null));
     }
 
     @Test

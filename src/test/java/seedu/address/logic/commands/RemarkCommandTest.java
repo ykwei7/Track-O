@@ -53,13 +53,15 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_addRemarkUnfilteredListEmptyRemark_success() throws ScheduleClashException {
-        Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+    public void execute_addRemarkUnfilteredListExistingRemark_success() throws ScheduleClashException {
+        Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_SECOND_TUTEE.getZeroBased());
         Tutee editedTutee = new TuteeBuilder(firstTutee).build();
+        String existingRemark = firstTutee.getRemark().value + "\n";
+        Tutee furtherEditedTutee = new TuteeBuilder(firstTutee).withRemark(existingRemark + REMARK_STUB).build();
 
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_TUTEE, new Remark(editedTutee.getRemark().value));
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_SECOND_TUTEE, new Remark(REMARK_STUB));
 
-        String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedTutee);
+        String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, furtherEditedTutee);
 
         Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
         expectedModel.setTutee(firstTutee, editedTutee);
@@ -74,24 +76,6 @@ public class RemarkCommandTest {
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Tutee editedTutee = new TuteeBuilder(model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased()))
                 .withRemark(REMARK_STUB).build();
-
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_TUTEE, new Remark(editedTutee.getRemark().value));
-
-        String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedTutee);
-
-        Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
-        expectedModel.setTutee(firstTutee, editedTutee);
-
-        assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_filteredListEmptyRemark_success() throws ScheduleClashException {
-        showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
-
-        Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        Tutee editedTutee = new TuteeBuilder(model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased()))
-                .build();
 
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_TUTEE, new Remark(editedTutee.getRemark().value));
 
