@@ -143,9 +143,16 @@ public class ParserUtil {
         String[] isOverdueSplitBySpace = trimmedIsOverdue.split("\\s+");
 
         if (isOverdueSplitBySpace.length != 1
-                || !(isOverdueSplitBySpace[0].equals("true")
-                || isOverdueSplitBySpace[0].equals("false"))) {
-            throw new ParseException("Overdue flag can only be true or false.");
+                || !(isOverdueSplitBySpace[0].equalsIgnoreCase("yes")
+                || isOverdueSplitBySpace[0].equalsIgnoreCase("no"))) {
+            throw new ParseException("Overdue flag can only be yes or no.");
+        }
+
+        if (isOverdueSplitBySpace[0].equalsIgnoreCase("yes")) {
+            isOverdueSplitBySpace[0] = "true";
+        } else {
+            assert isOverdueSplitBySpace[0].equals("no");
+            isOverdueSplitBySpace[0] = "false";
         }
 
         return isOverdueSplitBySpace;

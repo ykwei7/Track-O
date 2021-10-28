@@ -37,7 +37,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_SUBJECT = "Chemistry";
     private static final String VALID_SUBJECT_2 = "Math";
-    private static final String VALID_OVERDUE = "true";
+    private static final String VALID_OVERDUE = "yes";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -154,6 +154,43 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseMultipleSubjects_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMultipleSubjects((String) null));
+    }
+
+    @Test
+    public void parseMultipleSubjects_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleSubjects(INVALID_SUBJECT));
+    }
+
+    @Test
+    public void parseMultipleSubjects_validValueWithoutWhitespace_returnsLevel() throws Exception {
+        assertEquals(VALID_SUBJECT, ParserUtil.parseMultipleSubjects(VALID_SUBJECT)[0]);
+    }
+
+    @Test
+    public void parseMultipleSubjects_validValueWithWhitespace_returnsTrimmedLevel() throws Exception {
+        String levelWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE;
+        assertEquals(VALID_SUBJECT, ParserUtil.parseMultipleSubjects(levelWithWhitespace)[0]);
+    }
+
+    @Test
+    public void parseMultipleSubjects_multipleValidValuesWithWhitespace_returnsTrimmedLevel() throws Exception {
+        String levelWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE + VALID_SUBJECT_2;
+        // 1st Subject
+        assertEquals(VALID_SUBJECT, ParserUtil.parseMultipleSubjects(levelWithWhitespace)[0]);
+
+        // 2nd Subject
+        assertEquals(VALID_SUBJECT_2, ParserUtil.parseMultipleSubjects(levelWithWhitespace)[1]);
+    }
+
+    @Test
+    public void parseMultipleSubjects_multipleValidValuesWithInvalidValue_throwsParseException() {
+        String levelWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE + INVALID_SUBJECT;
+        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleSubjects(levelWithWhitespace));
+    }
+
+    @Test
     public void parseIsOverdue_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIsOverdue(INVALID_OVERDUE));
     }
@@ -166,12 +203,17 @@ public class ParserUtilTest {
     @Test
     public void parseIsOverdue_validValueWithWhitespace_returnsTrimmedOverdue() throws Exception {
         String overdueWithWhiteSpace = WHITESPACE + VALID_OVERDUE + WHITESPACE;
-        assertEquals(VALID_OVERDUE, ParserUtil.parseIsOverdue(overdueWithWhiteSpace)[0]);
+        assertEquals("true", ParserUtil.parseIsOverdue(overdueWithWhiteSpace)[0]);
     }
 
     @Test
-    public void parseIsOverdue_validValueWithoutWhitespace_returnsOverdue() throws Exception {
-        assertEquals(VALID_OVERDUE, ParserUtil.parseIsOverdue(VALID_OVERDUE)[0]);
+    public void parseIsOverdue_yesWithoutWhitespace_returnsOverdue() throws Exception {
+        assertEquals("true", ParserUtil.parseIsOverdue(VALID_OVERDUE)[0]);
+    }
+
+    @Test
+    public void parseIsOverdue_noWithoutWhitespace_returnsNotOverdue() throws Exception {
+        assertEquals("false", ParserUtil.parseIsOverdue("no")[0]);
     }
 
     @Test
