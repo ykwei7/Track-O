@@ -37,6 +37,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.paymentcommand.PaymentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.tutee.CollectivePredicate;
@@ -105,6 +106,13 @@ public class TrackOParserTest {
     }
 
     @Test
+    public void parseCommand_payment() throws Exception {
+        PaymentCommand command = (PaymentCommand) parser.parseCommand(
+                PaymentCommand.COMMAND_WORD + " " + "1");
+        assertEquals(new PaymentCommand(Index.fromOneBased(1)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -135,6 +143,7 @@ public class TrackOParserTest {
         assertEquals(new DeleteLessonCommand(tuteeIndex, lessonIndex), command);
     }
 
+    @Test
     public void parseCommand_addLesson() throws Exception {
         final Subject subject = new Subject("Biology");
         final DayOfWeek dayOfWeek = DayOfWeek.THURSDAY;
