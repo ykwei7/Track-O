@@ -96,6 +96,7 @@ public class PaymentCommand extends Command {
      * @param payByDate Date that tutee is to pay amount by
      * @return A new tutee object with the updated payment details
      */
+
     public static Tutee createEditedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate) {
         assert tuteeToEdit != null;
 

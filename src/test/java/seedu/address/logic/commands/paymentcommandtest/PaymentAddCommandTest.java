@@ -84,9 +84,23 @@ public class PaymentAddCommandTest {
         assertFalse(getFirstCommand.equals(getSecondCommand));
     }
 
-    // To be done when decimal system is integrated
-    @Test
-    public void execute_changeInPayment_success() {
-        return;
-    }
+    // To be completed once lesson cost calculation is finalized
+    /*@Test
+    public void execute_changeInPayment_success() throws CommandException {
+
+        // Creates tutee with specified payment details
+        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        Payment retrievedTuteePayment = retrievedTutee.getPayment();
+        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, payByDate);
+
+        PaymentAddCommand paymentAddCommand = new PaymentAddCommand(INDEX_FIRST_TUTEE,
+                NEW_PAYMENT_VAL_STUB_2);
+
+        paymentAddCommand.execute(model);
+        Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, NEW_PAYMENT_VAL_STUB_2,
+                payByDate);
+        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
+    }*/
 }

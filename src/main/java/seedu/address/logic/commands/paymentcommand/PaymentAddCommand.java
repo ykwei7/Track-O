@@ -71,6 +71,7 @@ public class PaymentAddCommand extends PaymentCommand {
 
         // Gets the indexed lesson in tutee's lesson list
         List<Lesson> lessonList = tuteeToGet.getLessons();
+
         if (lessonIndex.getZeroBased() >= lessonList.size()) {
             throw new CommandException(MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS);
         }
