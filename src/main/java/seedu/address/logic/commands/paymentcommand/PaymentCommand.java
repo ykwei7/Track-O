@@ -61,7 +61,7 @@ public class PaymentCommand extends Command {
 
     public static final String SEPARATOR_TITLE = "Command usages to manage the payment details of tutee:\n";
 
-    public static final String MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS = "Payment details of %s:\n%s\n\n"
+    public static final String MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS = "Payment details of %s:\n%s%s\n"
             + SEPARATOR_TITLE
             + MESSAGE_PAYMENT_MANAGEMENT_USAGE;
 
@@ -81,10 +81,11 @@ public class PaymentCommand extends Command {
         }
 
         Tutee tuteeToGet = lastShownList.get(targetIndex.getZeroBased());
+        List<Lesson> lessons = tuteeToGet.getLessons();
 
         //Edit this portion to link payment details instead of tutee
         String tuteePaymentDetails = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, tuteeToGet.getName(),
-                tuteeToGet.getPayment());
+                tuteeToGet.getPayment(), Lesson.lessonListToString(lessons));
         return new CommandResult(tuteePaymentDetails);
     }
 
