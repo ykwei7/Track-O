@@ -184,7 +184,8 @@ Examples:
 
 Format: `payment INDEX receive/[DUE_DATE]`
 
-* Resets the payment due date of the specified tutee at `INDEX` to `-` or `DUE_DATE` if specified.
+* Resets the payment amount due of the specified tutee to `0`.
+* Resets the payment due date of the specified tutee at `INDEX` to `-`, or `DUE_DATE` if specified.
 * Updates the specified tutee's last paid date in their payment details to the current date.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
 * `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
@@ -229,5 +230,10 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Get** | `get INDEX`<br> e.g. `get 2`
 **List** | `list`
+**View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
+**Add lesson's fees to tutee's payment amount due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
+**Edit tutee's payment amount due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
+**Set payment due date for tutee** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
+**Receive tutee's payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
 **Help** | `help`
 **Exit** | `exit`
