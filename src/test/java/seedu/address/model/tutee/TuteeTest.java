@@ -112,6 +112,7 @@ public class TuteeTest {
 
         Tutee bensonWithoutLesson = new TuteeBuilder()
                 .withName(bensonCopy.getName().fullName)
+                .withSchool(bensonCopy.getSchool().value)
                 .withLevel(bensonCopy.getLevel().value)
                 .withPhone(bensonCopy.getPhone().toString())
                 .withAddress(bensonCopy.getAddress().toString())
