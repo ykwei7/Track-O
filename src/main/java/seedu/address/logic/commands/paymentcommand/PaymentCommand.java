@@ -62,7 +62,7 @@ public class PaymentCommand extends Command {
 
     public static final String SEPARATOR_TITLE = "Command usages to manage the payment details of tutee:\n";
 
-    public static final String MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS = "Payment details of %s:\n%s\n\n"
+    public static final String MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS = "Payment details of %s:\n%s%s\n"
             + SEPARATOR_TITLE
             + MESSAGE_PAYMENT_MANAGEMENT_USAGE;
 
@@ -70,6 +70,22 @@ public class PaymentCommand extends Command {
 
     public PaymentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+    }
+
+    /**
+     * Gets payment details and lesson fee details
+     * @param tutee Updated payment details of tutee
+     * @return
+     */
+    public static String getPaymentDetailsMessage(Tutee tutee) {
+        Name name = tutee.getName();
+        Payment payment = tutee.getPayment();
+        List<Lesson> lessons = tutee.getLessons();
+        String lessonsToString = Lesson.lessonListToString(lessons);
+        String paymentDetails = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, name,
+                payment, lessonsToString);
+
+        return paymentDetails;
     }
 
     @Override
@@ -84,10 +100,10 @@ public class PaymentCommand extends Command {
         Tutee tuteeToGet = lastShownList.get(targetIndex.getZeroBased());
 
         //Edit this portion to link payment details instead of tutee
-        String tuteePaymentDetails = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, tuteeToGet.getName(),
-                tuteeToGet.getPayment());
+        String tuteePaymentDetails = getPaymentDetailsMessage(tuteeToGet);
         return new CommandResult(tuteePaymentDetails);
     }
+
 
     /**
      * Uses the information of an existing tutee and creates a new tutee with the updated payment details.

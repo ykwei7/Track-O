@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.paymentcommand.PaymentCommand.MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
@@ -36,8 +35,7 @@ public class PaymentCommandTest {
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_TUTEE);
 
-        String expectedMessage = String.format(MESSAGE_VIEW_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(),
-                retrievedTutee.getPayment());
+        String expectedMessage = PaymentCommand.getPaymentDetailsMessage(retrievedTutee);
 
         ModelManager expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
 
@@ -73,5 +71,17 @@ public class PaymentCommandTest {
 
         // different tutee -> returns false
         assertFalse(getFirstCommand.equals(getSecondCommand));
+    }
+
+    @Test
+    public void execute_paymentCommand_success() throws ScheduleClashException {
+        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+        Index inBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size());
+        PaymentCommand paymentCommand = new PaymentCommand(inBoundIndex);
+        Tutee tuteeToGet = model.getFilteredTuteeList().get(inBoundIndex.getZeroBased());
+
+        String tuteePaymentDetails = PaymentCommand.getPaymentDetailsMessage(tuteeToGet);
+
+        assertCommandSuccess(paymentCommand, model, tuteePaymentDetails, model);
     }
 }
