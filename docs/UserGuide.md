@@ -220,16 +220,15 @@ Examples:
 
 Filters the tutee list to display matches according to keywords.
  
-Format: `find [n/...NAME] [subject/...SUBJECT] [l/LEVEL] [overdue/OVERDUE_STATUS]`
+Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
 
-* A valid `find` command must have at least 1 filter.
+* A valid `find` command must have at least 1 of the 4 filter.
 * Keywords are case-insensitive.
 * The returned tutee list contains matches that fulfills all the keywords.
 * `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
-* `level` filter can only take **1 keyword** in the form of abbreviation. 
-
-    e.g. `p5` for Primary 5, `s2` for Secondary 2
+* `level` filter can only take **1 keyword** in the form of abbreviation.<br>
+e.g. `p5` for Primary 5, `s2` for Secondary 2
 * `overdue` filter can only take **1 keyword**, either `yes` or `no`.
 
 Example:
