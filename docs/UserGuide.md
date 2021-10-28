@@ -132,14 +132,14 @@ Deletes an existing lesson from the specific tutee's lesson list and user's sche
 Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
 
 * The tutee's index is the number displayed beside tutee's name in the filtered tutee's list.
-* The lesson index is the number displayed beside the subject name after using `get` command on the tutee
+* The lesson index is the number displayed beside the subject name after using `get` command on the tutee.
 * `TUTEE_INDEX` and `LESSON_INDEX` are compulsory fields, an error message is produced if either one is missing.
 
 Examples:
 * Deleting **lesson 2** from **tutee 3**:
   `deletelesson 3 lesson/2`
 * Deleting **lesson 3** from **tutee 1**:
-  `deletelesson 1 lesson 3`
+  `deletelesson 1 lesson/3`
 
 ### Tracking tutee payments : `payment`
 
