@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,9 +16,6 @@ public class Lesson implements Comparable<Lesson> {
             "Hourly rate should only contain numbers expressed strictly in "
                     + "either no decimal places or two decimal places with the last decimal place being 0 or 5, "
                     + "and it should not be blank.";
-
-    public static final String MESSAGE_INDEX_CONSTRAINTS = "Lesson index should be positive and "
-            + "within index boundaries of lesson list.";
     /*
      * The first character has to a digit that is not zero.
      * Only 0 or 2 decimal places of a number is allowed.
@@ -59,6 +57,22 @@ public class Lesson implements Comparable<Lesson> {
     public static boolean isValidHourlyRate(String hourlyRate) {
         return hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_NO_DECIMAL_PLACES)
                 || hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_TWO_DECIMAL_PLACES);
+    }
+
+    /**
+     * Converts lesson list to a formatted String output for easier viewing.
+     * @param lessonList List of lessons to be converted
+     * @return List of lessons with indexing in string format
+     */
+    public static String lessonListToString(List<Lesson> lessonList) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("\n\nLessons: \n");
+        for (int i = 0; i < lessonList.size(); i++) {
+            builder.append(i + 1)
+                    .append(". ")
+                    .append(lessonList.get(i));
+        }
+        return builder.toString();
     }
 
     public Subject getSubject() {

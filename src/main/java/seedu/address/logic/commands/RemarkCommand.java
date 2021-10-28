@@ -56,13 +56,13 @@ public class RemarkCommand extends Command {
         Remark tuteeRemark = tuteeToEdit.getRemark();
         Tutee editedTutee;
         if (!tuteeRemark.value.equals("-")) {
-            editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
-                    tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
+            editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
+                    tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
                     tuteeRemark.appendRemark(remark), tuteeToEdit.getTags(),
                     tuteeToEdit.getLessons());
         } else {
-            editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
-                    tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
+            editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
+                    tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
                     remark, tuteeToEdit.getTags(),
                     tuteeToEdit.getLessons());
         }

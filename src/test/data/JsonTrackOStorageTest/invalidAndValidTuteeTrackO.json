@@ -2,12 +2,14 @@
   "tutees": [ {
     "name": "Valid Tutee",
     "phone": "9482424",
-    "email": "hans@example.com",
+    "school": "nanyang primary school",
+    "level": "p5",
     "address": "4th street"
   }, {
     "name": "Tutee With Invalid Phone Field",
     "phone": "948asdf2424",
-    "email": "hans@example.com",
+    "school": "nanyang primary school",
+    "level": "p5",
     "address": "4th street"
   } ]
 }
