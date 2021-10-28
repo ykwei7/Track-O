@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -294,7 +295,7 @@ public class ParserUtil {
         requireNonNull(lessonIndex);
         String trimmedLessonIndex = lessonIndex.trim();
         if (!Payment.isValidPayment(trimmedLessonIndex)) {
-            throw new ParseException(Lesson.MESSAGE_INDEX_CONSTRAINTS);
+            throw new ParseException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 
         Index parsedLessonIndex = ParserUtil.parseIndex(trimmedLessonIndex);
