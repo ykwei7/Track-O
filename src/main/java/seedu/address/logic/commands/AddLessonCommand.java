@@ -99,9 +99,9 @@ public class AddLessonCommand extends Command {
             throw new CommandException(sce.getMessage());
         }
 
-        Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getLevel(),
-                tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), tuteeToEdit.getRemark(), tuteeToEdit.getTags(),
-                tuteeToEdit.getLessons());
+        Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
+                tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), tuteeToEdit.getRemark(),
+                tuteeToEdit.getTags(), tuteeToEdit.getLessons());
         editedTutee.addLesson(lesson);
 
         model.setTutee(tuteeToEdit, editedTutee);

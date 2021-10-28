@@ -8,6 +8,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Schedule;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -40,6 +42,11 @@ public class DeleteCommand extends Command {
         }
 
         Tutee tuteeToDelete = lastShownList.get(targetIndex.getZeroBased());
+        List<Lesson> lessonList = tuteeToDelete.getLessons();
+
+        Schedule schedule = model.getSchedule();
+        schedule.removeLessons(lessonList);
+
         model.deleteTutee(tuteeToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_TUTEE_SUCCESS, tuteeToDelete));
     }
