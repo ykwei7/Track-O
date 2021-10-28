@@ -16,14 +16,18 @@ import java.util.List;
  */
 public class Payment {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Payments should only contain numbers, and it should be at least 1 digit long";
+            "Payment values should only contain numbers, and it should be at least 1 digit long.";
     public static final String DATE_CONSTRAINTS =
-            "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-Oct-2021";
+            "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-10-2021 and must equal to or after"
+                    + " today's date.";
     public static final String PAYMENT_HISTORY_CONSTRAINTS =
-            "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-Oct-2021, and 'Never'";
-    public static final String VALIDATION_REGEX = "\\d{1,}";
+            "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-10-2021, and 'Never'.";
+
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final String TODAY_DATE_AS_STRING = LocalDate.now().format(FORMATTER);
+    public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
+            .replaceFirst("^0+", "");
     public final String value;
     public final LocalDate payByDate;
     public final String payByDateAsString;
@@ -58,7 +62,7 @@ public class Payment {
      * Returns true if a given string is a valid payment amount.
      */
     public static boolean isValidPayment(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES);
     }
 
     /**
@@ -109,9 +113,21 @@ public class Payment {
     @Override
     public String toString() {
         return String.format("$%s (Last paid on: %s)\nOverdue: %s",
-                value,
-                paymentHistory.get(paymentHistory.size() - 1),
-                isOverdue ? "Yes (on " + payByDateAsString + ")" : "No");
+                value, paymentHistory.get(paymentHistory.size() - 1), getOverdueStatus());
+    }
+
+    /**
+     * Provides the String representation of the payment's overdue status
+     * @return the status of the payment as a String
+     */
+    public String getOverdueStatus() {
+        if (isOverdue) {
+            return "Yes (on " + payByDateAsString + ")";
+        } else if (payByDateAsString.equals("-")) {
+            return "No (Pay-by date not set)";
+        } else {
+            return "No (by " + payByDateAsString + ")";
+        }
     }
 
     @Override
@@ -119,6 +135,14 @@ public class Payment {
         return other == this // short circuit if same object
                 || (other instanceof Payment // instanceof handles nulls
                 && value.equals(((Payment) other).value)); // state check
+    }
+
+    public LocalDate getPayByDate() {
+        return this.payByDate;
+    }
+
+    public String getValue() {
+        return this.value;
     }
 
     @Override

@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -21,10 +22,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTuteeDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -96,7 +99,7 @@ public class TrackOParserTest {
         List<String> subjectKeywords = Collections.singletonList("Math");
         List<String> overdueKeywords = Collections.singletonList("true");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + "n/Alice l/p5 subject/Math overdue/true");
+                FindCommand.COMMAND_WORD + " " + "n/Alice l/p5 subject/Math overdue/yes");
         assertEquals(new FindCommand(new CollectivePredicate(nameKeywords,
                 levelKeywords, subjectKeywords, overdueKeywords)), command);
     }
@@ -122,6 +125,16 @@ public class TrackOParserTest {
     }
 
     @Test
+    public void parseCommand_deleteLesson() throws Exception {
+        Index tuteeIndex = Index.fromOneBased(1);
+        Index lessonIndex = Index.fromOneBased(1);
+
+        DeleteLessonCommand command = (DeleteLessonCommand) parser.parseCommand(DeleteLessonCommand.COMMAND_WORD
+                + " " + tuteeIndex.getOneBased() + " " + PREFIX_LESSON + lessonIndex.getOneBased());
+
+        assertEquals(new DeleteLessonCommand(tuteeIndex, lessonIndex), command);
+    }
+
     public void parseCommand_addLesson() throws Exception {
         final Subject subject = new Subject("Biology");
         final DayOfWeek dayOfWeek = DayOfWeek.THURSDAY;

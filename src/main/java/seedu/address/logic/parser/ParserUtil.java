@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -23,8 +24,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
-
+import seedu.address.model.tutee.School;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -74,6 +76,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String school} into an {@code School}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static School parseSchool(String school) throws ParseException {
+        requireNonNull(school);
+        String trimmedSchool = school.trim();
+        if (!School.isValidSchool(trimmedSchool)) {
+            throw new ParseException(School.MESSAGE_CONSTRAINTS);
+        }
+        return new School(trimmedSchool);
     }
 
     /**
@@ -142,9 +159,16 @@ public class ParserUtil {
         String[] isOverdueSplitBySpace = trimmedIsOverdue.split("\\s+");
 
         if (isOverdueSplitBySpace.length != 1
-                || !(isOverdueSplitBySpace[0].equals("true")
-                || isOverdueSplitBySpace[0].equals("false"))) {
-            throw new ParseException("Overdue flag can only be true or false.");
+                || !(isOverdueSplitBySpace[0].equalsIgnoreCase("yes")
+                || isOverdueSplitBySpace[0].equalsIgnoreCase("no"))) {
+            throw new ParseException("Overdue flag can only be yes or no.");
+        }
+
+        if (isOverdueSplitBySpace[0].equalsIgnoreCase("yes")) {
+            isOverdueSplitBySpace[0] = "true";
+        } else {
+            assert isOverdueSplitBySpace[0].equals("no");
+            isOverdueSplitBySpace[0] = "false";
         }
 
         return isOverdueSplitBySpace;
@@ -241,5 +265,70 @@ public class ParserUtil {
             throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
         }
         return Double.parseDouble(hourlyRate);
+    }
+
+    /**
+     * Trims input by user and checks if it is a positive number represented as a string.
+     *
+     * @param paymentValue Payment value inputted by user
+     * @return Trimmed string of payment value
+     * @throws ParseException
+     */
+    public static String parsePaymentValue(String paymentValue) throws ParseException {
+        requireNonNull(paymentValue);
+        String trimmedPayment = paymentValue.trim();
+        if (!Payment.isValidPayment(trimmedPayment)) {
+            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedPayment;
+    }
+
+    /**
+     * Trims input by user and checks if index is a positive number represented as a string.
+     *
+     * @param lessonIndex Payment value inputted by user
+     * @return Trimmed string of payment value
+     * @throws ParseException
+     */
+    public static Index parseLessonIndex(String lessonIndex) throws ParseException {
+        requireNonNull(lessonIndex);
+        String trimmedLessonIndex = lessonIndex.trim();
+        if (!Payment.isValidPayment(trimmedLessonIndex)) {
+            throw new ParseException(Lesson.MESSAGE_INDEX_CONSTRAINTS);
+        }
+
+        Index parsedLessonIndex = ParserUtil.parseIndex(trimmedLessonIndex);
+        return parsedLessonIndex;
+    }
+
+    /**
+     * Trims string by user and parses into a LocalDate format of dd-mm-yyyy.
+     *
+     * @param payByDate Date to make payment by inputted by user
+     * @return LocalDate of formatted string
+     * @throws ParseException
+     */
+    public static LocalDate parsePayByDate(String payByDate) throws ParseException {
+        String trimmedPayByDate = payByDate.trim();
+        LocalDate formattedPayByDate;
+        LocalDate dateToday = LocalDate.now();
+        if (trimmedPayByDate.equals("")) {
+            return null;
+        }
+
+        if (!Payment.isValidPayByDate(trimmedPayByDate)) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS);
+        }
+
+        try {
+            formattedPayByDate = LocalDate.parse(trimmedPayByDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS);
+        }
+
+        if (!formattedPayByDate.isAfter(dateToday) && !formattedPayByDate.equals(dateToday)) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS);
+        }
+        return formattedPayByDate;
     }
 }

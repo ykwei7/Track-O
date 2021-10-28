@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -41,6 +42,10 @@ public class EditTuteeDescriptorTest {
 
         // different phone -> returns false
         editedAmy = new EditTuteeDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different school -> returns false
+        editedAmy = new EditTuteeDescriptorBuilder(DESC_AMY).withSchool(VALID_SCHOOL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different level -> returns false

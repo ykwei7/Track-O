@@ -7,17 +7,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.ALICE;
+import static seedu.address.testutil.TypicalTutees.BENSON;
 import static seedu.address.testutil.TypicalTutees.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.testutil.TuteeBuilder;
 
 public class TuteeTest {
-
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Tutee tutee = new TuteeBuilder().build();
@@ -42,8 +44,8 @@ public class TuteeTest {
         assertFalse(ALICE.isSameTutee(null));
 
         // same name, all other attributes different -> returns true
-        Tutee editedAlice = new TuteeBuilder(ALICE).withPhone(VALID_PHONE_BOB).withLevel(VALID_LEVEL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Tutee editedAlice = new TuteeBuilder(ALICE).withPhone(VALID_PHONE_BOB).withSchool(VALID_SCHOOL_BOB)
+                .withLevel(VALID_LEVEL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameTutee(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -86,7 +88,11 @@ public class TuteeTest {
         editedAlice = new TuteeBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
+        // different school -> returns false
+        editedAlice = new TuteeBuilder(ALICE).withSchool(VALID_SCHOOL_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different level -> returns false
         editedAlice = new TuteeBuilder(ALICE).withLevel(VALID_LEVEL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
@@ -97,5 +103,25 @@ public class TuteeTest {
         // different tags -> returns false
         editedAlice = new TuteeBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void deleteLesson() {
+        // same tutee after deleting lesson
+        Tutee bensonCopy = new TuteeBuilder(BENSON).build();
+
+        Tutee bensonWithoutLesson = new TuteeBuilder()
+                .withName(bensonCopy.getName().fullName)
+                .withSchool(bensonCopy.getSchool().value)
+                .withLevel(bensonCopy.getLevel().value)
+                .withPhone(bensonCopy.getPhone().toString())
+                .withAddress(bensonCopy.getAddress().toString())
+                .withRemark(bensonCopy.getRemark().toString())
+                .withTags(bensonCopy.getTags().stream().map(tag -> tag.tagName).toArray(String[]::new))
+                .withPayment(bensonCopy.getPayment().value, bensonCopy.getPayment().payByDate)
+                .build();
+
+        bensonCopy.deleteLesson(Index.fromOneBased(1));
+        assertTrue(bensonCopy.equals(bensonWithoutLesson));
     }
 }

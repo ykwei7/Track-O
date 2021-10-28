@@ -108,7 +108,7 @@ Examples:
 
 ### Adding a lesson to a tutee : `addlesson`
 
-Adds a lesson to the specified tutee from our list of tutees.
+Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
 
 Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
 
@@ -121,9 +121,85 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`. 
 
 Examples:
-* `addlesson 1 subject/Principles of Accounting d/4 s/11:30 e/13:30 rate/40.50`
+* `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
+
+### Tracking lesson schedule : `schedule`
+
+Retrieves the user's schedule of lessons.
+
+Format: `schedule`
+
+### Tracking tutee payments : `payment`
+
+Retrieves tutee payment details and access to other payment-related commands
+
+#### To retrieve a specified tutee's payment details:
+
+Format: `payment INDEX`
+
+* Retrieves the payment details of the tutee at the specified `INDEX`.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `payment 1`
+
+#### To add a specified lesson's fees to a specified tutee:
+
+Format: `payment INDEX lesson/LESSON_INDEX`
+
+* Adds the fees of the specified lesson at `LESSON_INDEX` to the specified tutee's payment details at `INDEX`.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* `LESSON_INDEX` must be within the size of the tutee's lesson list and **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `payment 1 lesson/1`
+* `payment 1 lesson/2`
+
+#### To edit a specified tutee's payment amount:
+
+Format: `payment INDEX amount/AMOUNT`
+
+* Changes the payment amount due by the specified tutee at `INDEX` to `AMOUNT`.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* `AMOUNT` **must be greater than or equal to 0** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
+
+Examples:
+* `payment 1 amount/0`
+* `payment 1 amount/80.50`
+* `payment 2 amount/100`
+
+#### To set a specified tutee's payment due date:
+
+Format: `payment INDEX by/DUE_DATE`
+
+* Changes the payment due date of the specified tutee at `INDEX` to `DUE_DATE`.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* `DUE_DATE` **must be later than or on the current date** expressed in the `dd-MM-YYYY` format.
+
+Examples:
+* `payment 1 by/25-12-2021`
+* `payment 2 by/01-01-2022`
+
+#### To receive a tutee's payment (and set a next payment due date):
+
+Format: `payment INDEX receive/[DUE_DATE]`
+
+* Resets the payment amount due of the specified tutee to `0`.
+* Resets the payment due date of the specified tutee at `INDEX` to `-`, or `DUE_DATE` if specified.
+* Updates the specified tutee's last paid date in their payment details to the current date.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* `DUE_DATE` **must be later than or on the current date** expressed in the `dd-MM-YYYY` format, if specified.
+
+Examples:
+* `payment 1 receive/`
+* `payment 2 receive/01-01-2022`
 
 ### Exiting application : `exit`
 
@@ -148,7 +224,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -160,5 +236,12 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Get** | `get INDEX`<br> e.g. `get 2`
 **List** | `list`
+**Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
+**View schedule** | `schedule`
+**View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
+**Add lesson's fees to tutee's payment amount due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
+**Edit tutee's payment amount due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
+**Set payment due date for tutee** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
+**Receive tutee's payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
 **Help** | `help`
 **Exit** | `exit`

@@ -13,7 +13,7 @@ import seedu.address.model.tutee.CollectivePredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-
+    
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tutees who satisfies the criteria specified "
             + "and displays them as a list with index numbers. "
             + "You can include multiple keywords for name and subject,"
