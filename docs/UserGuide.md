@@ -25,7 +25,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
    * **`list`** : Lists all tutees.
 
-   * **`add`**`n/John Doe l/P5: Adds a contact named John Doe of level P5` to the Address Book.
+   * **`add`**`n/John Doe l/P5: Adds a contact named John Doe of level P5` to the tutee list.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the tutee list.
 
@@ -54,7 +54,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `schedule`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 
@@ -68,17 +68,33 @@ Format: `help`
 
 Adds a tutee to the existing list of tutees.
 
-Format: `add n/NAME l/LEVEL`
+Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 
 Examples:
-* `add n/John Doe l/J2`
-* `add n/Betsy Crowe l/P5`
+* `add n/John Doe p/93456789 sch/Temasek Jc l/J2 a/135 Rivervale Link`
+* `add n/Betsy Crowe l/P5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/North-east region`
 
 ### Listing all tutees : `list`
 
 Shows the current list of tutees.
 
 Format: `list`
+
+### Editing a tutee :  `edit`
+
+Edits an existing tutee in the tutee list.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed tutee list. The index **must be a positive integer** 1, 2, 3, … 
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the tutee will be removed i.e adding of tags is not cumulative.
+* You can remove all the tutee’s tags by typing `t/` without specifying any tags after it.
+
+Examples:
+* `edit 1 p/91234567 a/345 Bedok North Ave 3` Edits the phone number and address of the 1st tutee to be `91234567` and `345 Bedok North Ave 3` respectively.
+* `edit 2 n/Betty Chan t/` Edits the name of the 2nd tutee to be `Betty Chan` and clears all existing tags.
 
 ### Deleting a tutee : `delete`
 
@@ -195,15 +211,17 @@ Examples:
 * `payment 1 receive/`
 * `payment 2 receive/01-01-2022`
 
+### Clearing all entries : `clear`
+
+Clears the tutee list and the user's schedule.
+
+Format: `clear`
+
 ### Exiting application : `exit`
 
 Exits from the application.
 
-### Editing a tutee :  `[coming in v2.0]`
-
-### Locating tutees by name:  `[coming in v2.0]`
-
-### Clearing all entries : `[coming in v2.0]`
+Format: `exit`
 
 ### Saving the data `[coming in v2.0]`
 
@@ -218,7 +236,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -226,7 +244,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME l/LEVEL` <br> e.g. `add n/James Ho l/S4`
+**Add** | `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…` <br> e.g. `add n/James Ho p/87652345 sch/Anderson sec l/S4 a/200 Yio Chu Kang Road`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…` <br> e.g. `edit 2 sch/Victoria Jc l/j1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Get** | `get INDEX`<br> e.g. `get 2`
 **List** | `list`
