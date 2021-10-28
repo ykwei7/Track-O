@@ -25,11 +25,11 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
    * **`list`** : Lists all tutees.
 
-   * **`add`**`n/John Doe l/P5: Adds a contact named John Doe of level P5` to the Address Book.
+   * **`add`**`n/John Doe l/p5` : Adds a tutee named John Doe of level Primary 5 to the tutee list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the tutee list.
+   * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
 
-   * **`clear`** : Deletes all contacts.  [To be released]
+   * **`clear`** : Deletes all tutees in the tutee list.
 
    * **`exit`** : Exits the app.
 
@@ -45,16 +45,16 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
+* Items with `…` after them can be used multiple times.<br>
+e.g. `[t/TAG]…` tags are optional can be added multiple times: `t/friend`, `t/friend t/family` etc.<br>
+e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple keyword search: `subject/English Math Science`
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `schedule`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 
@@ -68,11 +68,27 @@ Format: `help`
 
 Adds a tutee to the existing list of tutees.
 
-Format: `add n/NAME l/LEVEL`
+Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 
 Examples:
-* `add n/John Doe l/J2`
-* `add n/Betsy Crowe l/P5`
+* `add n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link`
+* `add n/Betsy Crowe l/p5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/North-east region`
+
+### Editing a tutee :  `edit`
+
+Edits an existing tutee in the tutee list.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed tutee list. The index **must be a positive integer** 1, 2, 3, … 
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the tutee will be removed i.e adding of tags is not cumulative.
+* You can remove all the tutee’s tags by typing `t/` without specifying any tags after it.
+
+Examples:
+* `edit 1 p/91234567 a/345 Bedok North Ave 3` Edits the phone number and address of the 1st tutee to be `91234567` and `345 Bedok North Ave 3` respectively.
+* `edit 2 n/Betty Chan t/` Edits the name of the 2nd tutee to be `Betty Chan` and clears all existing tags.
 
 ### Deleting a tutee : `delete`
 
@@ -105,6 +121,33 @@ Format: `get INDEX`
 
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the address book.
+
+### Finding tutee by fields : `find`
+
+Filters the tutee list to display matches according to keywords.
+
+Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
+
+* A valid `find` command must have at least 1 of the 4 filters.
+* Keywords are case-insensitive.
+* The returned tutee list contains matches that fulfills all the keywords.
+* `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `level` filter can only take **1 keyword** in the form of abbreviation.<br>
+  e.g. `p5` for Primary 5, `s2` for Secondary 2
+* `overdue` filter can only take **1 keyword**, either `yes` or `no`.
+
+Example:
+* Find all `David` in the tutee list: `find n/david`.
+* Find `David Lee` in the tutee list: `find n/david lee`.
+* Find all `Secondary 4` tutees: `find l/s4`.
+* Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
+
+### Clearing all entries : `clear`
+
+Clears the tutee list and the user's schedule.
+
+Format: `clear`
 
 ### Managing remarks of tutees : `remark`
 
@@ -148,6 +191,22 @@ Examples:
 * `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
+
+### Deleting a lesson to a tutee : `deletelesson`
+
+Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
+
+Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
+
+* The tutee's index is the number displayed beside tutee's name in the filtered tutee's list.
+* The lesson index is the number displayed beside the subject name after using `get` command on the tutee.
+* `TUTEE_INDEX` and `LESSON_INDEX` are compulsory fields, an error message is produced if either one is missing.
+
+Examples:
+* Deleting **lesson 2** from **tutee 3**:
+  `deletelesson 3 lesson/2`
+* Deleting **lesson 3** from **tutee 1**:
+  `deletelesson 1 lesson/3`
 
 ### Tracking lesson schedule : `schedule`
 
@@ -229,11 +288,7 @@ Examples:
 
 Exits from the application.
 
-### Editing a tutee :  `[coming in v2.0]`
-
-### Locating tutees by name:  `[coming in v2.0]`
-
-### Clearing all entries : `[coming in v2.0]`
+Format: `exit`
 
 ### Saving the data `[coming in v2.0]`
 
@@ -256,7 +311,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME l/LEVEL` <br> e.g. `add n/James Ho l/S4`
+**Add** | `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…` <br> e.g. `add n/James Ho p/87652345 sch/Anderson sec l/s4 a/200 Yio Chu Kang Road`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…` <br> e.g. `edit 2 sch/Victoria Jc l/j1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **List** | `list`
 **Get** | `get INDEX`<br> e.g. `get 2`
@@ -264,7 +320,8 @@ Action | Format, Examples
 **Clear remarks** | `remark INDEX r/` <br> e.g `remark 1 r/`
 **Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 **View schedule** | `schedule`
-**Add lesson's fees to tutee's payment amount due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
+**Find** | `find [n/...NAME] [l/LEVEL] [subject/...SUBJECT] [overdue/OVERDUE]`<br> e.g `find n/david subject/math` 
+**Delete Lesson** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
 **View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
 **Edit tutee's payment amount due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
 **Set payment due date for tutee** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`

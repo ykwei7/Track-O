@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OVERDUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
@@ -43,7 +44,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             try {
-                levelNames = new String[] {ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()).getValue()};
+                levelNames = new String[] {ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()
+                        .toLowerCase(Locale.ROOT)).getValue()};
             } catch (ParseException pe) {
                 throw new ParseException(FindCommand.MESSAGE_LEVEL_CONSTRAINT + "\n\n" + pe.getMessage());
             }

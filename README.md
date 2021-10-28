@@ -4,7 +4,6 @@
 
 # Track-O
 A tracking application catered towards private tutors, built upon AddressBook Level 3<br>
-
 Example usage:
   * as a digital list of my tutees' information, including their names and education levels.
 
