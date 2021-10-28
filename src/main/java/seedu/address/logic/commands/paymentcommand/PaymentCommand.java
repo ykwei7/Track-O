@@ -35,14 +35,15 @@ public class PaymentCommand extends Command {
 
     public static final String COMMAND_WORD = "payment";
 
-    public static final String MESSAGE_DEFAULT_USAGE = COMMAND_WORD + ":\n"
-            + "View payment details of the tutee identified "
+    public static final String MESSAGE_DEFAULT_USAGE = COMMAND_WORD
+            + ": View payment details of the tutee identified "
             + "by the index number used in the displayed tutee list.\n"
             + "Required Parameters: TUTEE_INDEX (must be a positive integer)\n"
-            + "Example: payment 1";
+            + "Example: payment 1\n\n";
 
-    public static final String ALL_INSTRUCTIONS = "Payment command has following functionalities and"
-            + " is to only include up to 1 parameter.\n\n"
+    public static final String MESSAGE_USAGE_ALL = "Payment command has the following functionalities and"
+            + " is to only include up to 1 parameter:\n\n"
+            + MESSAGE_DEFAULT_USAGE
             + PaymentAddCommand.MESSAGE_USAGE
             + PaymentSetAmountCommand.MESSAGE_USAGE
             + PaymentSetDateCommand.MESSAGE_USAGE
@@ -55,10 +56,6 @@ public class PaymentCommand extends Command {
             + COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_DATE + "PAYMENT_DATE\n"
             + COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_RECEIVED_DATE + "[DATE_RECEIVED]\n\n"
             + "For more details on payment commands: payment";
-
-    public static final String MESSAGE_USAGE_ALL = MESSAGE_DEFAULT_USAGE
-            + "\n\n"
-            + ALL_INSTRUCTIONS;
 
     public static final String SEPARATOR_TITLE = "Command usages to manage the payment details of tutee:\n";
 

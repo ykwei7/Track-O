@@ -4,10 +4,10 @@
 
 # Track-O
 A tracking application catered towards private tutors, built upon AddressBook Level 3<br>
-  
+
 Example usage:
   * as a digital list of my tutees' information, including their names and education levels.
-    
+
 The project is built upon an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.

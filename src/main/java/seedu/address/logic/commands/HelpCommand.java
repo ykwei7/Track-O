@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.commands.paymentcommand.PaymentCommand;
 import seedu.address.model.Model;
 
 /**
@@ -15,14 +16,16 @@ public class HelpCommand extends Command {
     public static final String SHOWING_HELP_MESSAGE = "Here are the usages of the commands:\n\n"
             + ClearCommand.MESSAGE_USAGE + "\n\n"
             + AddCommand.MESSAGE_USAGE + "\n\n"
-            + AddLessonCommand.MESSAGE_USAGE + "\n\n"
-            + RemarkCommand.MESSAGE_USAGE + "\n\n"
             + ListCommand.MESSAGE_USAGE + "\n\n"
             + FindCommand.MESSAGE_USAGE + "\n\n"
             + GetCommand.MESSAGE_USAGE + "\n\n"
             + EditCommand.MESSAGE_USAGE + "\n\n"
             + DeleteCommand.MESSAGE_USAGE + "\n\n"
+            + RemarkCommand.MESSAGE_USAGE + "\n\n"
             + ScheduleCommand.MESSAGE_USAGE + "\n\n"
+            + AddLessonCommand.MESSAGE_USAGE + "\n\n"
+            + DeleteLessonCommand.MESSAGE_USAGE + "\n\n"
+            + PaymentCommand.MESSAGE_USAGE_ALL + "\n\n"
             + ExitCommand.MESSAGE_USAGE;
 
     @Override
