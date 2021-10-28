@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -32,6 +33,7 @@ public class TuteeUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + tutee.getName().fullName + " ");
         sb.append(PREFIX_PHONE + tutee.getPhone().value + " ");
+        sb.append(PREFIX_SCHOOL + tutee.getSchool().value + " ");
         sb.append(PREFIX_LEVEL + tutee.getLevel().value + " ");
         sb.append(PREFIX_ADDRESS + tutee.getAddress().value + " ");
         tutee.getTags().stream().forEach(
@@ -47,6 +49,7 @@ public class TuteeUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
+        descriptor.getSchool().ifPresent(school -> sb.append(PREFIX_SCHOOL).append(school.value).append(" "));
         descriptor.getLevel().ifPresent(level -> sb.append(PREFIX_LEVEL).append(level.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {

@@ -10,6 +10,7 @@ import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
 import seedu.address.model.tutee.Phone;
+import seedu.address.model.tutee.School;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -34,6 +35,7 @@ public class EditTuteeDescriptorBuilder {
         descriptor = new EditTuteeDescriptor();
         descriptor.setName(tutee.getName());
         descriptor.setPhone(tutee.getPhone());
+        descriptor.setSchool(tutee.getSchool());
         descriptor.setLevel(tutee.getLevel());
         descriptor.setAddress(tutee.getAddress());
         descriptor.setTags(tutee.getTags());
@@ -52,6 +54,14 @@ public class EditTuteeDescriptorBuilder {
      */
     public EditTuteeDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code School} of the {@code EditTuteeDescriptor} that we are building.
+     */
+    public EditTuteeDescriptorBuilder withSchool(String school) {
+        descriptor.setSchool(new School(school));
         return this;
     }
 
