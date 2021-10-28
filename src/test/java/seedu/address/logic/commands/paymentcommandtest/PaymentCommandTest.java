@@ -79,7 +79,6 @@ public class PaymentCommandTest {
         Index inBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size());
         PaymentCommand paymentCommand = new PaymentCommand(inBoundIndex);
         Tutee tuteeToGet = model.getFilteredTuteeList().get(inBoundIndex.getZeroBased());
-
         String tuteePaymentDetails = PaymentCommand.getPaymentDetailsMessage(tuteeToGet);
 
         assertCommandSuccess(paymentCommand, model, tuteePaymentDetails, model);
