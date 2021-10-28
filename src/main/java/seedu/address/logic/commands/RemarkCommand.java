@@ -29,7 +29,6 @@ public class RemarkCommand extends Command {
             + PREFIX_REMARK + "Made good progress last week";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to tutee: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from tutee: %1$s";
 
     private final Index index;
     private final Remark remark;

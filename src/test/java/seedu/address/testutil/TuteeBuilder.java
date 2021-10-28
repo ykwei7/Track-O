@@ -27,7 +27,7 @@ public class TuteeBuilder {
     public static final String DEFAULT_LEVEL = "p1";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FEE = "0";
-    public static final String DEFAULT_REMARK = "";
+    public static final String DEFAULT_REMARK = "-";
 
     private Name name;
     private Phone phone;

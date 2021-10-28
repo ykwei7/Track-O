@@ -53,14 +53,13 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_deleteRemarkUnfilteredList_success() throws ScheduleClashException {
+    public void execute_addRemarkUnfilteredList_emptyRemark_success() throws ScheduleClashException {
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        Tutee editedTutee = new TuteeBuilder(firstTutee).withRemark("").build();
+        Tutee editedTutee = new TuteeBuilder(firstTutee).build();
 
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_TUTEE,
-                new Remark(editedTutee.getRemark().toString()));
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_TUTEE, new Remark(editedTutee.getRemark().value));
 
-        String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedTutee);
+        String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedTutee);
 
         Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
         expectedModel.setTutee(firstTutee, editedTutee);
@@ -75,6 +74,24 @@ public class RemarkCommandTest {
         Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Tutee editedTutee = new TuteeBuilder(model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased()))
                 .withRemark(REMARK_STUB).build();
+
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_TUTEE, new Remark(editedTutee.getRemark().value));
+
+        String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedTutee);
+
+        Model expectedModel = new ModelManager(new TrackO(model.getTrackO()), new UserPrefs());
+        expectedModel.setTutee(firstTutee, editedTutee);
+
+        assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_filteredList_emptyRemark_success() throws ScheduleClashException {
+        showTuteeAtIndex(model, INDEX_FIRST_TUTEE);
+
+        Tutee firstTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        Tutee editedTutee = new TuteeBuilder(model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased()))
+                .build();
 
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_TUTEE, new Remark(editedTutee.getRemark().value));
 

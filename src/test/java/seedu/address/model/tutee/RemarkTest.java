@@ -1,11 +1,40 @@
 package seedu.address.model.tutee;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class RemarkTest {
+
+    @Test
+    public void appendRemark() {
+        Remark existingRemark = new Remark("What's up");
+        Remark newRemark = new Remark("Not much");
+        Remark emptyRemark = new Remark("");
+
+        //Both remarks have text
+        Remark appendedRemark = existingRemark.appendRemark(newRemark);
+        Remark expectedRemark = new Remark("What's up\nNot much");
+
+        assertTrue(appendedRemark.equals(expectedRemark));
+
+        //Empty remark at the front
+        Remark appendedEmptyRemarkFront = emptyRemark.appendRemark(newRemark);
+        Remark expectedEmptyRemarkFront = new Remark("\nNot much");
+
+        assertTrue(appendedEmptyRemarkFront.equals(expectedEmptyRemarkFront));
+
+        //Empty remark at the back
+        Remark appendedEmptyRemarkBack = existingRemark.appendRemark(emptyRemark);
+        Remark expectedEmptyRemarkBack = new Remark("What's up\n");
+
+        assertTrue(appendedEmptyRemarkBack.equals(expectedEmptyRemarkBack));
+
+        //Assertion thrown when a null object is put as a parameter
+        assertThrows(AssertionError.class, () -> existingRemark.appendRemark(null));
+    }
 
     @Test
     public void equals() {
