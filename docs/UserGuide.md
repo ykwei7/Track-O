@@ -125,6 +125,22 @@ Examples:
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
 
+### Deleting a lesson to a tutee : `deletelesson`
+
+Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
+
+Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
+
+* The tutee's index is the number displayed beside tutee's name in the filtered tutee's list.
+* The lesson index is the number displayed beside the subject name after using `get` command on the tutee
+* `TUTEE_INDEX` and `LESSON_INDEX` are compulsory fields, an error message is produced if either one is missing.
+
+Examples:
+* Deleting **lesson 2** from **tutee 3**:
+  `deletelesson 3 lesson/2`
+* Deleting **lesson 3** from **tutee 1**:
+  `deletelesson 1 lesson 3`
+
 ### Tracking tutee payments : `payment`
 
 Retrieves tutee payment details and access to other payment-related commands
@@ -194,22 +210,6 @@ Format: `payment INDEX receive/[DUE_DATE]`
 Examples:
 * `payment 1 receive/`
 * `payment 2 receive/01-01-2022`
-
-### Deleting a lesson to a tutee : `deletelesson`
-
-Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
-
-Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
-
-* The tutee's index is the number displayed beside tutee's name in the filtered tutee's list.
-* The lesson index is the number displayed beside the subject name after using `get` command on the tutee
-* `TUTEE_INDEX` and `LESSON_INDEX` are compulsory fields, an error message is produced if either one is missing.
-
-Examples:
-* Deleting **lesson 2** from **tutee 3**:
-`deletelesson 3 lesson/2`
-* Deleting **lesson 3** from **tutee 1**:
-`deletelesson 1 lesson 3`
 
 ### Finding tutee by fields : `find`
 
