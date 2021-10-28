@@ -191,7 +191,7 @@ and `PaymentCommandParser`[Proposed].
 * `isOverdue` — a boolean flag which denotes if the payment is overdue
 
 Parsing the user's input through `PaymentCommand`, the user may:
-* `Payment#addPayment(Lesson, int)`  — Adds the cost of `Lesson` to total fees incurred, `int` times 
+* `Payment#addPayment(Lesson, int)`  — Adds the cost of `Lesson` to total fees incurred, `int` times
 * `Payment#editPayment(float)`  — Updates the total fees incurred to the specified `float` amount
 * `Payment#setPayByDate(LocalDate)`  — Updates the pay-by date for the Tutee to the specified `LocalDate`
 * `Payment#receivePayment()`  — Resets the Tutee's incurred fees and updates their payment history
@@ -266,12 +266,12 @@ The tutor's schedule can be accessed via the `schedule` command. The `ArrayList<
 
 * **Option 2:** Retrieves the schedule from another JSON file (e.g: `schedule.json`)
     * Pros: The tutor can view their schedule directly on their hard disk without starting up Track-O.
-    * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out. 
+    * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out.
 
 ### Education Level of tutees
 
-Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`, 
-followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters: 
+Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`,
+followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
 the first letter of the education level in lowercase, followed by the year of study.
 
 #### Supported Education Levels
@@ -281,14 +281,14 @@ the first letter of the education level in lowercase, followed by the year of st
 * Junior College: 1 to 2
 
 #### Design
-The `value` field of education level in Tutee class is in the abbreviation form. 
-In `TuteeCard`, the string displayed is `stringRepresentation`, 
-which is the returned value of the `parse` method in Level class, using `value` as the parameter. 
-For example, `stringRepresentation` of `p5` is `Primary 5`. 
+The `value` field of education level in Tutee class is in the abbreviation form.
+In `TuteeCard`, the string displayed is `stringRepresentation`,
+which is the returned value of the `parse` method in Level class, using `value` as the parameter.
+For example, `stringRepresentation` of `p5` is `Primary 5`.
 
 Both `value` and `stringRepresentation` are fields belonging to Level.
 This is designed for better readability in displaying tutees. Having two fields ensures that the
-abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back 
+abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
 to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
 education level.
 
@@ -300,7 +300,7 @@ Due to the regex validation when creating tutee, the first char will be a valid 
 1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
 2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
 
-Failing either restriction will result in the constraint message showing up in the console component, 
+Failing either restriction will result in the constraint message showing up in the console component,
 and the tutee will not be created/modified.
 
 

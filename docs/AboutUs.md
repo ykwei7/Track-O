@@ -40,7 +40,7 @@ You can reach us at our respective emails as shown below.
 [[portfolio](team/nhjryan.md)]
 
 * Role: Team Lead
-* Responsibilities: Be most familiar with documentation and tracks deadlines, ensuring quality of deliverables 
+* Responsibilities: Be most familiar with documentation and tracks deadlines, ensuring quality of deliverables
 
 ### Ong Ting Rui, Brandon
 

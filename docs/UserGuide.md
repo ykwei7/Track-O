@@ -74,19 +74,14 @@ Examples:
 * `add n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link`
 * `add n/Betsy Crowe l/p5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/North-east region`
 
-### Listing all tutees : `list`
-
-Shows the current list of tutees.
-
-Format: `list`
-
 ### Editing a tutee :  `edit`
 
 Edits an existing tutee in the tutee list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed tutee list. The index **must be a positive integer** 1, 2, 3, … 
+* Edits the person at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the tutee will be removed i.e adding of tags is not cumulative.
@@ -109,6 +104,12 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd tutee in the address book.
 
+### Listing all tutees : `list`
+
+Shows the current list of tutees.
+
+Format: `list`
+
 ### Viewing a tutee : `get`
 
 Gets details of the specified tutee from our list of tutees.
@@ -122,6 +123,57 @@ Format: `get INDEX`
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the address book.
 
+### Finding tutee by fields : `find`
+
+Filters the tutee list to display matches according to keywords.
+
+Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
+
+* A valid `find` command must have at least 1 of the 4 filters.
+* Keywords are case-insensitive.
+* The returned tutee list contains matches that fulfills all the keywords.
+* `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `level` filter can only take **1 keyword** in the form of abbreviation.<br>
+  e.g. `p5` for Primary 5, `s2` for Secondary 2
+* `overdue` filter can only take **1 keyword**, either `yes` or `no`.
+
+Example:
+* Find all `David` in the tutee list: `find n/david`.
+* Find `David Lee` in the tutee list: `find n/david lee`.
+* Find all `Secondary 4` tutees: `find l/s4`.
+* Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
+
+### Clearing all entries : `clear`
+
+Clears the tutee list and the user's schedule.
+
+Format: `clear`
+
+### Managing remarks of tutees : `remark`
+
+#### To write a new remark in tutee:
+
+Format: `remark INDEX r/TEXT`
+
+* Clears existing remarks and adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `remark 1 r/Went through Organic Chemistry`
+
+#### To clear all remarks in tutee:
+
+Format: `remark INDEX r/`
+
+* Clears all existing remarks of tutee at the specified `INDEX`.
+* `INDEX` refers to the index number tagged to each tutee in the tutee list.
+* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `remark 1 r/`
+
 ### Adding a lesson to a tutee : `addlesson`
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
@@ -134,7 +186,7 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * The lesson occurs on the specified `DAY_OF_WEEK`, from the specified `START_TIME` to the specified `END_TIME`, costing `HOURLY_RATE` dollars per hour.
 * `DAY_OF_WEEK` **must be an integer in the range [1, 7]** where `1` to `7` corresponds to Monday to Sunday.
 * `START_TIME` and `END_TIME` must be specified in an `HH:MM` format.
-* `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`. 
+* `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 
 Examples:
 * `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
@@ -233,33 +285,6 @@ Examples:
 * `payment 1 receive/`
 * `payment 2 receive/01-01-2022`
 
-### Finding tutee by fields : `find`
-
-Filters the tutee list to display matches according to keywords.
- 
-Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
-
-* A valid `find` command must have at least 1 of the 4 filters.
-* Keywords are case-insensitive.
-* The returned tutee list contains matches that fulfills all the keywords.
-* `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
-* `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
-* `level` filter can only take **1 keyword** in the form of abbreviation.<br>
-e.g. `p5` for Primary 5, `s2` for Secondary 2
-* `overdue` filter can only take **1 keyword**, either `yes` or `no`.
-
-Example:
-* Find all `David` in the tutee list: `find n/david`.
-* Find `David Lee` in the tutee list: `find n/david lee`.
-* Find all `Secondary 4` tutees: `find l/s4`.
-* Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
-
-### Clearing all entries : `clear`
-
-Clears the tutee list and the user's schedule.
-
-Format: `clear`
-
 ### Exiting application : `exit`
 
 Exits from the application.
@@ -290,14 +315,15 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…` <br> e.g. `add n/James Ho p/87652345 sch/Anderson sec l/s4 a/200 Yio Chu Kang Road`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…` <br> e.g. `edit 2 sch/Victoria Jc l/j1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
-**Get** | `get INDEX`<br> e.g. `get 2`
 **List** | `list`
+**Get** | `get INDEX`<br> e.g. `get 2`
+**Add remark** | `remark INDEX r/TEXT` <br> e.g `remark 1 r/Good progress.`
+**Clear remarks** | `remark INDEX r/` <br> e.g `remark 1 r/`
 **Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 **View schedule** | `schedule`
 **Find** | `find [n/...NAME] [l/LEVEL] [subject/...SUBJECT] [overdue/OVERDUE]`<br> e.g `find n/david subject/math` 
 **Delete Lesson** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
 **View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
-**Add lesson's fees to tutee's payment amount due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
 **Edit tutee's payment amount due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
 **Set payment due date for tutee** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
 **Receive tutee's payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
