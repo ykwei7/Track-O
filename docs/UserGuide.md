@@ -12,9 +12,9 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. 
 
-2. Download the latest `tracko.jar` from here.
+2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.3.1/v1.3.1.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ to run Track-O.
 
@@ -23,9 +23,9 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will prompt the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all tutees.
+   * **`add`**`n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link` : Adds a tutee named John Doe with all his relevant information in the tutee list.
 
-   * **`add`**`n/John Doe l/p5` : Adds a tutee named John Doe of level Primary 5 to the tutee list.
+   * **`list`** : Lists all tutees.
 
    * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
 
@@ -68,6 +68,8 @@ Format: `help`
 
 Adds a tutee to the existing list of tutees.
 
+![add_ug.png](add_ug.png)
+
 Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 
 Examples:
@@ -77,6 +79,8 @@ Examples:
 ### Editing a tutee :  `edit`
 
 Edits an existing tutee in the tutee list.
+
+![edit_ug.png](edit_ug.png)
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
 
@@ -94,6 +98,8 @@ Examples:
 ### Deleting a tutee : `delete`
 
 Deletes the specified tutee from our list of tutees.
+
+![](delete_ug.png)
 
 Format: `delete INDEX`
 
@@ -114,6 +120,8 @@ Format: `list`
 
 Gets details of the specified tutee from our list of tutees.
 
+![](get_ug.png)
+
 Format: `get INDEX`
 
 * Gets the tutee at the specified `INDEX` in the format `Name: John Doe Level: P5`
@@ -126,6 +134,8 @@ Examples:
 ### Finding tutee by fields : `find`
 
 Filters the tutee list to display matches according to keywords.
+
+![](find_ug.png)
 
 Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
 
@@ -154,6 +164,8 @@ Format: `clear`
 
 Adds a remark to the specified tutee with the provided `TEXT` input. New remarks will be appended to existing ones and will not overwrite them.
 
+![](remark_ug.png)
+
 Format: `remark INDEX r/TEXT`
 
 * Adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
@@ -164,6 +176,10 @@ Examples:
 * `remark 1 r/Went through Organic Chemistry`
 
 ### Clearing all remarks of a tutee: `clearremark`
+
+Clears all remarks of the specified tutee.
+
+![](clearremark_ug.png)
 
 Format: `clearremark INDEX`
 
@@ -177,6 +193,8 @@ Examples:
 ### Adding a lesson to a tutee : `addlesson`
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
+
+![](addlesson_ug.png)
 
 Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
 
@@ -197,6 +215,8 @@ Examples:
 
 Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
 
+![](deletelesson_ug.png)
+
 Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
 
 * The tutee's index is the number displayed beside tutee's name in the filtered tutee's list.
@@ -213,6 +233,8 @@ Examples:
 
 Retrieves the user's schedule of lessons.
 
+![](schedule_ug.png)
+
 Format: `schedule`
 
 ### Tracking tutee payments : `payment`
@@ -222,6 +244,8 @@ Retrieves tutee payment details and access to other payment-related commands
 #### To retrieve a specified tutee's payment details:
 
 Format: `payment INDEX`
+
+![](payment_ug.png)
 
 * Retrieves the payment details of the tutee at the specified `INDEX`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -233,6 +257,8 @@ Examples:
 #### To add a specified lesson's fees to a specified tutee:
 
 Format: `payment INDEX lesson/LESSON_INDEX`
+
+![](payment_lesson.png)
 
 * Adds the fees of the specified lesson at `LESSON_INDEX` to the specified tutee's payment details at `INDEX`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -246,6 +272,8 @@ Examples:
 #### To edit a specified tutee's payment amount:
 
 Format: `payment INDEX amount/AMOUNT`
+
+![](payment_amount.png)
 
 * Changes the payment amount due by the specified tutee at `INDEX` to `AMOUNT`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -261,6 +289,8 @@ Examples:
 
 Format: `payment INDEX by/DUE_DATE`
 
+![](payment_due.png)
+
 * Changes the payment due date of the specified tutee at `INDEX` to `DUE_DATE`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
 * `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
@@ -273,6 +303,8 @@ Examples:
 #### To receive a tutee's payment (and set a next payment due date):
 
 Format: `payment INDEX receive/[DUE_DATE]`
+
+![](payment_receive.png)
 
 * Resets the payment amount due of the specified tutee to `0`.
 * Resets the payment due date of the specified tutee at `INDEX` to `-`, or `DUE_DATE` if specified.
@@ -290,14 +322,6 @@ Examples:
 Exits from the application.
 
 Format: `exit`
-
-### Saving the data `[coming in v2.0]`
-
-### Editing the data file `[coming in v2.0]`
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -318,14 +342,14 @@ Action | Format, Examples
 **List** | `list`
 **Get** | `get INDEX`<br> e.g. `get 2`
 **Add remark** | `remark INDEX r/TEXT` <br> e.g `remark 1 r/Good progress.`
-**Clear remarks** | `remark INDEX r/` <br> e.g `remark 1 r/`
+**Clear remarks** | `clearremark INDEX` <br> e.g `clearremark 1`
 **Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 **View schedule** | `schedule`
 **Find** | `find [n/...NAME] [l/LEVEL] [subject/...SUBJECT] [overdue/OVERDUE]`<br> e.g `find n/david subject/math` 
 **Delete Lesson** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
-**View tutee's payment details** | `payment INDEX` <br> e.g `payment 1`
-**Edit tutee's payment amount due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
-**Set payment due date for tutee** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
-**Receive tutee's payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
+**View payment details** | `payment INDEX` <br> e.g `payment 1`
+**Edit payment due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
+**Set payment date** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
+**Receive payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
 **Help** | `help`
 **Exit** | `exit`
