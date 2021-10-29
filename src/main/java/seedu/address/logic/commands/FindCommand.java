@@ -8,18 +8,17 @@ import seedu.address.model.tutee.CollectivePredicate;
 
 /**
  * Finds and lists all tutees in Track-O whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tutees who satisfies all the criteria and "
-            + "displays them as a list with index numbers."
-            + "\nThe specified keywords are case-insensitive and works for name, level, subject and overdue status .\n"
-            + "\nPossible parameters: \nl/[...level] \nn/[...name] \nsubject/[...subject] \noverdue/[yes/no]\n"
-            + "\nName and subject can take in multiple keywords, "
-            + "the returned result satisfies all the keywords provided."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tutees who satisfies the criteria specified "
+            + "and displays them as a list with index numbers. "
+            + "You can include multiple keywords for name and subject,"
+            + " and the tutees found must satisfy all the keywords.\n"
+            + "Parameters: [l/LEVEL] [n/...NAME] [subject/...SUBJECT] [overdue/TRUE or FALSE]\n"
             + "Example: " + COMMAND_WORD + " l/p5 subject/math chinese";
 
     public static final String MESSAGE_LEVEL_CONSTRAINT = "Find by level requires 1 level keyword to search for.";
