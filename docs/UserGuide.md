@@ -345,7 +345,7 @@ Action | Format, Examples
 **Clear remarks** | `clearremark INDEX` <br> e.g `clearremark 1`
 **Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 **View schedule** | `schedule`
-**Find** | `find [n/...NAME] [l/LEVEL] [subject/...SUBJECT] [overdue/OVERDUE]`<br> e.g `find n/david subject/math` 
+**Find** | `find [n/NAME…] [l/LEVEL] [subject/SUBJECT…] [overdue/OVERDUE]`<br> e.g `find n/david subject/math` 
 **Delete Lesson** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
 **View payment details** | `payment INDEX` <br> e.g `payment 1`
 **Edit payment due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
