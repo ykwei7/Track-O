@@ -150,29 +150,29 @@ Clears the tutee list and the user's schedule.
 
 Format: `clear`
 
-### Managing remarks of tutees : `remark`
+### Adding a remark to a tutee: `remark`
 
-#### To write a new remark in tutee:
+Adds a remark to the specified tutee with the provided `TEXT` input. New remarks will be appended to existing ones and will not overwrite them.
 
 Format: `remark INDEX r/TEXT`
 
-* Clears existing remarks and adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* Adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
+* The index refers to the index number tagged to each tutee in the tutee list.
+* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
 
-#### To clear all remarks in tutee:
+### Clearing all remarks of a tutee: `clearremark`
 
-Format: `remark INDEX r/`
+Format: `clearremark INDEX`
 
-* Clears all existing remarks of tutee at the specified `INDEX`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* Clears all remarks of the tutee specified at the specified `INDEX`.
+* The index refers to the index number tagged to each tutee in the tutee list.
+* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `remark 1 r/`
+* `clearremark 1`
 
 ### Adding a lesson to a tutee : `addlesson`
 

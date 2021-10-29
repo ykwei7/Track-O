@@ -22,6 +22,7 @@ public class HelpCommand extends Command {
             + EditCommand.MESSAGE_USAGE + "\n\n"
             + DeleteCommand.MESSAGE_USAGE + "\n\n"
             + RemarkCommand.MESSAGE_USAGE + "\n\n"
+            + ClearRemarkCommand.MESSAGE_USAGE + "\n\n"
             + ScheduleCommand.MESSAGE_USAGE + "\n\n"
             + AddLessonCommand.MESSAGE_USAGE + "\n\n"
             + DeleteLessonCommand.MESSAGE_USAGE + "\n\n"

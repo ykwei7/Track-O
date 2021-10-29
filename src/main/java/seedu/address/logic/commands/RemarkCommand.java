@@ -20,9 +20,9 @@ public class RemarkCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the tutee identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a remark of the tutee identified "
             + "by the index number used in the last tutee listing. "
-            + "Existing remark will be overwritten by the input.\n"
+            + "New remarks will be appended to existing ones.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_REMARK + "[REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
