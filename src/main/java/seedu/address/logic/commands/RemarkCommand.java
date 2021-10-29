@@ -29,7 +29,6 @@ public class RemarkCommand extends Command {
             + PREFIX_REMARK + "Made good progress last week";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to tutee: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from tutee: %1$s";
 
     private final Index index;
     private final Remark remark;
@@ -54,23 +53,25 @@ public class RemarkCommand extends Command {
         }
 
         Tutee tuteeToEdit = lastShownList.get(index.getZeroBased());
-        Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
-                tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), remark,
-                tuteeToEdit.getTags(), tuteeToEdit.getLessons());
+        Remark tuteeRemark = tuteeToEdit.getRemark();
+        Tutee editedTutee;
+
+        if (!tuteeRemark.value.equals("-")) {
+            editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
+                    tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
+                    tuteeRemark.appendRemark(remark), tuteeToEdit.getTags(),
+                    tuteeToEdit.getLessons());
+        } else {
+            editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
+                    tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
+                    remark, tuteeToEdit.getTags(),
+                    tuteeToEdit.getLessons());
+        }
 
         model.setTutee(tuteeToEdit, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
 
-        return new CommandResult(generateSuccessMessage(editedTutee));
-    }
-
-    /**
-     * Generates a command execution success message based on whether the remark is added to or removed from
-     * {@code tuteeToEdit}.
-     */
-    private String generateSuccessMessage(Tutee tuteeToEdit) {
-        String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, tuteeToEdit);
+        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, editedTutee));
     }
 
     @Override

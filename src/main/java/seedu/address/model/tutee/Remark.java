@@ -7,6 +7,7 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
+
     public final String value;
 
     /**
@@ -16,6 +17,16 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         value = remark;
+    }
+
+    /**
+     * Appends a new remark to the tutee's existing remarks.
+     * @param newRemark new remark inputted by user
+     * @return the appended remark
+     */
+    public Remark appendRemark(Remark newRemark) {
+        String newRemarkStr = value + "\n" + newRemark.value;
+        return new Remark(newRemarkStr);
     }
 
     @Override
