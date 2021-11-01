@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
 import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Phone;
 import seedu.address.model.tutee.School;
 
@@ -29,6 +31,8 @@ public class ParserUtilTest {
     private static final String INVALID_LEVEL = "@2 ";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SUBJECT = "Chemistry%";
+    private static final String INVALID_PAYMENT_DECIMALS = "500.1";
+    private static final String INVALID_PAYMENT = "5a00";
     private static final String INVALID_OVERDUE = "nope";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -40,6 +44,9 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_SUBJECT = "Chemistry";
     private static final String VALID_SUBJECT_2 = "Math";
+    private static final String VALID_PAYMENT = "500";
+    private static final String VALID_PAYMENT_DECIMALS = "500.50";
+    private static final LocalDate VALID_PAYMENT_DATE = LocalDate.of(2021, 11, 1);
     private static final String VALID_OVERDUE = "yes";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -108,6 +115,45 @@ public class ParserUtilTest {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    }
+
+    @Test
+    public void parsePaymentValue_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePaymentValue((String) null));
+    }
+
+    @Test
+    public void parsePaymentValue_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, Payment.MESSAGE_CONSTRAINTS, () ->
+                ParserUtil.parsePaymentValue(INVALID_PAYMENT));
+    }
+
+    @Test
+    public void parsePaymentValue_invalidValueWithDecimals_throwsParseException() {
+        assertThrows(ParseException.class, Payment.DECIMAL_CONSTRAINTS, () ->
+                ParserUtil.parsePaymentValue(INVALID_PAYMENT_DECIMALS));
+    }
+
+    @Test
+    public void parsePaymentValue_validValue_returnsPayment() throws ParseException {
+        Payment expectedPayment = new Payment(VALID_PAYMENT, VALID_PAYMENT_DATE);
+        String expectedPaymentValue = expectedPayment.getValue();
+        assertEquals(expectedPaymentValue, ParserUtil.parsePaymentValue(VALID_PAYMENT));
+    }
+
+    @Test
+    public void parsePaymentValue_validValueWithDecimals_returnsPayment() throws ParseException {
+        Payment expectedPayment = new Payment(VALID_PAYMENT_DECIMALS, VALID_PAYMENT_DATE);
+        String expectedPaymentValue = expectedPayment.getValue();
+        assertEquals(expectedPaymentValue, ParserUtil.parsePaymentValue(VALID_PAYMENT_DECIMALS));
+    }
+
+    @Test
+    public void parsePaymentValue_validValueWithWhitespace_returnsTrimmedPayment() throws Exception {
+        String paymentWithWhitespace = WHITESPACE + VALID_PAYMENT + WHITESPACE;
+        Payment expectedPayment = new Payment(VALID_PAYMENT, VALID_PAYMENT_DATE);
+        String expectedPaymentValue = expectedPayment.getValue();
+        assertEquals(expectedPaymentValue, ParserUtil.parsePaymentValue(paymentWithWhitespace));
     }
 
     @Test
