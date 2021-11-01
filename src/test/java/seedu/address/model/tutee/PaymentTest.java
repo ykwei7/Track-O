@@ -48,6 +48,31 @@ public class PaymentTest {
     }
 
     @Test
+    public void isPaymentWithAnyDecimalsTest() {
+        // null payment
+        assertThrows(NullPointerException.class, () -> Payment.isPaymentWithAnyDecimals(null));
+
+        // invalid payment amounts
+        assertFalse(Payment.isPaymentWithAnyDecimals("")); // empty string
+        assertFalse(Payment.isPaymentWithAnyDecimals(" ")); // spaces only
+        assertFalse(Payment.isPaymentWithAnyDecimals("-91")); // // non-numeric
+        assertFalse(Payment.isPaymentWithAnyDecimals("9011p041")); // alphabets within digits
+        assertFalse(Payment.isPaymentWithAnyDecimals("9312 1534")); // spaces within digits
+        assertFalse(Payment.isPaymentWithAnyDecimals("90.")); // decimal point with no decimal value
+
+
+        // valid payment amounts
+        assertTrue(Payment.isPaymentWithAnyDecimals("90.33")); // any number for decimal places allowed
+        assertTrue(Payment.isPaymentWithAnyDecimals("90.333")); // any number of decimals allowed
+        assertTrue(Payment.isPaymentWithAnyDecimals("90.123456789")); // any number of decimals allowed
+        assertTrue(Payment.isPaymentWithAnyDecimals("911"));
+        assertTrue(Payment.isPaymentWithAnyDecimals("93121534"));
+        assertTrue(Payment.isPaymentWithAnyDecimals("124293842033123"));
+        assertTrue(Payment.isPaymentWithAnyDecimals("90.50"));
+        assertTrue(Payment.isPaymentWithAnyDecimals("90.00"));
+    }
+
+    @Test
     public void isValidPayByDate() {
         assertThrows(NullPointerException.class, () -> Payment.isValidPayByDate(null));
 

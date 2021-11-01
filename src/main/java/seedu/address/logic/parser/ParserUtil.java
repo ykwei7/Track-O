@@ -279,7 +279,10 @@ public class ParserUtil {
         requireNonNull(paymentValue);
         String trimmedPayment = paymentValue.trim();
         if (!Payment.isValidPayment(trimmedPayment)) {
-            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
+            if (!Payment.isPaymentWithAnyDecimals(trimmedPayment)) {
+                throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
+            }
+            throw new ParseException(Payment.DECIMAL_CONSTRAINTS);
         }
         return trimmedPayment;
     }
