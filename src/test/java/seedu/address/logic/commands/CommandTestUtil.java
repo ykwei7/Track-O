@@ -47,8 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_LEVEL_BOB = "s2";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_HUSBAND = "practical";
+    public static final String VALID_TAG_FRIEND = "rescheduled";
     public static final String VALID_REMARK_AMY = "Good progress";
     public static final String VALID_REMARK_BOB = "Need to work on Math";
 

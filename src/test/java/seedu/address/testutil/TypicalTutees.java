@@ -47,19 +47,19 @@ public class TypicalTutees {
     public static final Tutee ALICE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLevel("p1")
             .withSchool("Tao Nan School").withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("rescheduled").build();
     public static final Tutee BENSON = new TuteeBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withSchool("Riverside Primary School")
             .withLevel("p2").withPhone("98765432")
             .withRemark("Good progress")
-            .withTags("owesMoney", "friends").withPayment("90",
+            .withTags("practical").withPayment("90",
                     LocalDate.of(2023, 10, 20)).withLesson(LESSON_2).build();
 
     public static final Tutee CARL = new TuteeBuilder().withName("Carl Kurz").withPhone("95352563")
             .withSchool("acs primary").withLevel("p3").withAddress("wall street").withPayment("80",
                     LocalDate.of(2023, 10, 20)).withLesson(LESSON).withLesson(LESSON_1).build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withSchool("henry park primary school").withLevel("p4").withAddress("10th street").withTags("friends")
+            .withSchool("henry park primary school").withLevel("p4").withAddress("10th street").withTags("language")
             .withPayment("85", LocalDate.of(2023, 10, 20)).build();
     public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("9482224")
             .withSchool("scgs").withLevel("p5").withAddress("michegan ave").withPayment("75",
