@@ -61,13 +61,13 @@ public class TypicalTutees {
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
             .withSchool("henry park primary school").withLevel("p4").withAddress("10th street").withTags("language")
             .withPayment("85", LocalDate.of(2023, 10, 20)).build();
-    public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("94822244")
             .withSchool("scgs").withLevel("p5").withAddress("michegan ave").withPayment("75",
                     LocalDate.of(2023, 10, 20)).build();
-    public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("94824277")
             .withSchool("South View Primary School").withLevel("p6").withAddress("little tokyo").withPayment("70",
                     LocalDate.of(2023, 10, 20)).build();
-    public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
+    public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("94824422")
             .withSchool("Temasek Primary School").withLevel("p5").withAddress("4th street").withPayment("65",
                     LocalDate.of(2023, 10, 20)).build();
     public static final Tutee TUTEE_WITHOUT_TAGS_AND_LESSONS = new TuteeBuilder().withName("Test Tutee")
@@ -75,10 +75,10 @@ public class TypicalTutees {
                     LocalDate.of(2023, 10, 20)).build();
 
     // Manually added
-    public static final Tutee HOON = new TuteeBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Tutee HOON = new TuteeBuilder().withName("Hoon Meier").withPhone("84824244")
             .withSchool("Tao Nan School").withLevel("p5").withAddress("little india").withPayment("100",
                     LocalDate.of(2023, 10, 20)).build();
-    public static final Tutee IDA = new TuteeBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Tutee IDA = new TuteeBuilder().withName("Ida Mueller").withPhone("84821311")
             .withSchool("RGPS").withLevel("p4").withAddress("chicago ave").withPayment("110",
                     LocalDate.of(2023, 10, 20)).build();
 
