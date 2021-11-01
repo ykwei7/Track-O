@@ -26,8 +26,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRACTICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_RESCHEDULED;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalTutees.AMY;
@@ -50,7 +50,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Tutee expectedTutee = new TuteeBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Tutee expectedTutee = new TuteeBuilder(BOB).withTags(VALID_TAG_RESCHEDULED).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + SCHOOL_DESC_BOB
@@ -77,7 +77,7 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedTutee));
 
         // multiple tags - all accepted
-        Tutee expectedTuteeMultipleTags = new TuteeBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Tutee expectedTuteeMultipleTags = new TuteeBuilder(BOB).withTags(VALID_TAG_RESCHEDULED, VALID_TAG_PRACTICAL)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + SCHOOL_DESC_BOB + LEVEL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedTuteeMultipleTags));
@@ -145,7 +145,7 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + SCHOOL_DESC_BOB + LEVEL_DESC_BOB
-                + ADDRESS_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_RESCHEDULED, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + SCHOOL_DESC_BOB + LEVEL_DESC_BOB

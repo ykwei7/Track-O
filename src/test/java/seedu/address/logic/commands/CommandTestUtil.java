@@ -47,8 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_LEVEL_BOB = "s2";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "practical";
-    public static final String VALID_TAG_FRIEND = "rescheduled";
+    public static final String VALID_TAG_PRACTICAL = "practical";
+    public static final String VALID_TAG_RESCHEDULED = "rescheduled";
     public static final String VALID_REMARK_AMY = "Good progress";
     public static final String VALID_REMARK_BOB = "Need to work on Math";
 
@@ -83,8 +83,8 @@ public class CommandTestUtil {
     public static final String LEVEL_DESC_BOB = " " + PREFIX_LEVEL + VALID_LEVEL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_RESCHEDULED;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_PRACTICAL;
 
     public static final String LESSON_SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_LESSON_SUBJECT_AMY;
     public static final String LESSON_SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_LESSON_SUBJECT_BOB;
@@ -143,10 +143,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditTuteeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withSchool(VALID_SCHOOL_AMY).withLevel(VALID_LEVEL_AMY)
-                .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_RESCHEDULED).build();
         DESC_BOB = new EditTuteeDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withSchool(VALID_SCHOOL_BOB).withLevel(VALID_LEVEL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_PRACTICAL, VALID_TAG_RESCHEDULED).build();
     }
 
     /**

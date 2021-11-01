@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRACTICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_RESCHEDULED;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -85,10 +85,10 @@ public class TypicalTutees {
     // Manually added - Tutee's details found in {@code CommandTestUtil}
     public static final Tutee AMY = new TuteeBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withSchool(VALID_SCHOOL_AMY).withLevel(VALID_LEVEL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_RESCHEDULED).build();
     public static final Tutee BOB = new TuteeBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withSchool(VALID_SCHOOL_BOB).withLevel(VALID_LEVEL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_PRACTICAL, VALID_TAG_RESCHEDULED).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
