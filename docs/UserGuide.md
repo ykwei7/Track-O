@@ -39,6 +39,26 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 --------------------------------------------------------------------------------------------------------------------
 
+## About
+
+This section explains the terms used in the user guide.
+
+If you are an intermediate user, you can hop over to the [Features](#features) section for the details of each command.
+
+If you are an advanced user, you can see all the commands at a glance at the [Command Summary](#command-summary) section.
+
+### Terms
+
+Terms | Explanation
+--------|------------------
+prefix | A word or letter that ends with `/`. e.g. `sch/`
+parameter | A value that is defined based on your input. e.g. For the `PHONE` parameter, if you input `98765432`, the `PHONE` parameter now holds a value of `98765432`.
+command | The text that you enter in the command box. Different commands have different formats.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km` 
+integer | A number that has strictly no decimal places.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
