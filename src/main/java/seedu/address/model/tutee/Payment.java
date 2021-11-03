@@ -126,7 +126,7 @@ public class Payment {
         } else if (payByDateAsString.equals("-")) {
             return "No (Pay-by date not set)";
         } else {
-            return "No (by " + payByDateAsString + ")";
+            return "No (Next payment date by: " + payByDateAsString + ")";
         }
     }
 

@@ -26,6 +26,9 @@ public class PaymentSetAmountCommand extends PaymentCommand {
 
     public static final String COMMAND_WORD = "payment";
 
+    public static final String BASIC_USAGE = COMMAND_WORD + " TUTEE_INDEX "
+            + PREFIX_PAYMENT_AMOUNT + "PAYMENT_AMOUNT\n";
+
     public static final String MESSAGE_USAGE = "Update payment value owed by the tutee identified "
             + "by the index number used in the displayed tutee list to new specified value.\n"
             + "Required Parameters: TUTEE_INDEX (must be a positive integer), "

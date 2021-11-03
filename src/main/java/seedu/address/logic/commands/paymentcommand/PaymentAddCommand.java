@@ -20,6 +20,8 @@ public class PaymentAddCommand extends PaymentCommand {
 
     public static final String COMMAND_WORD = "payment";
 
+    public static final String BASIC_USAGE = COMMAND_WORD + " TUTEE_INDEX " + PREFIX_LESSON + "LESSON_INDEX\n";
+
     public static final String MESSAGE_USAGE = "Obtains tutee identified "
             + "by the index number used in the displayed tutee list and lesson identified in tutee's lesson list. "
             + "Fees of the indexed lesson are then added to the payment value owed by tutee.\n"
@@ -29,8 +31,7 @@ public class PaymentAddCommand extends PaymentCommand {
 
     public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
 
-    public static final String MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS = "Lesson index provided is out of bounds.";
-
+    public static final String MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS = "Lesson index provided is invalid.";
 
     private final Index targetIndex;
     private final Index lessonIndex;
@@ -48,7 +49,36 @@ public class PaymentAddCommand extends PaymentCommand {
     }
 
     /**
-     * Creates a duplicate tutee with the updated payment value to replace the existing tutee
+     * Obtains the lesson fees and adds it to existing payment value.
+     *
+     * @param lessonIndex Index of lesson in tutee's lesson list
+     * @param tutee Current tutee
+     * @return New payment value owed by tutee
+     * @throws CommandException If an error occurs during command execution.
+     */
+    private String addLessonCostToValue(Index lessonIndex, Tutee tutee) throws CommandException {
+
+        Payment existingPayment = tutee.getPayment();
+        String existingPaymentValue = existingPayment.getValue();
+
+        List<Lesson> lessonList = tutee.getLessons();
+
+        if (lessonIndex.getZeroBased() >= lessonList.size()) {
+            throw new CommandException(MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS);
+        }
+
+        // Gets the indexed lesson in tutee's lesson list
+        Lesson lessonRetrieved = lessonList.get(lessonIndex.getZeroBased());
+        Double lessonCost = lessonRetrieved.getCost();
+        Double updatedPaymentVal = Double.parseDouble(existingPaymentValue) + lessonCost;
+        String updatedPaymentAsString = String.format("%.2f", updatedPaymentVal);
+
+        return updatedPaymentAsString;
+    }
+
+
+    /**
+     * Adds the fees of a lesson to tutee's existing fees.
      *
      * @param model {@code Model} which the command should operate on.
      * @return feedback message of the operation result for display
@@ -66,20 +96,10 @@ public class PaymentAddCommand extends PaymentCommand {
 
         Tutee tuteeToGet = lastShownList.get(targetIndex.getZeroBased());
         Payment existingPayment = tuteeToGet.getPayment();
-        String existingPaymentValue = existingPayment.getValue();
         LocalDate existingPayByDate = existingPayment.getPayByDate();
 
-        // Gets the indexed lesson in tutee's lesson list
-        List<Lesson> lessonList = tuteeToGet.getLessons();
+        String updatedPaymentAsString = addLessonCostToValue(lessonIndex, tuteeToGet);
 
-        if (lessonIndex.getZeroBased() >= lessonList.size()) {
-            throw new CommandException(MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS);
-        }
-
-        Lesson lessonRetrieved = lessonList.get(lessonIndex.getZeroBased());
-        Double lessonCost = lessonRetrieved.getCost();
-        Double updatedPaymentVal = Double.parseDouble(existingPaymentValue) + lessonCost;
-        String updatedPaymentAsString = String.format("%.2f", updatedPaymentVal);
         Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, updatedPaymentAsString, existingPayByDate);
 
         model.setTutee(tuteeToGet, editedTutee);

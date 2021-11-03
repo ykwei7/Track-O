@@ -20,6 +20,9 @@ public class PaymentReceiveCommand extends PaymentCommand {
 
     public static final String COMMAND_WORD = "payment";
 
+    public static final String BASIC_USAGE = COMMAND_WORD + " TUTEE_INDEX "
+            + PREFIX_PAYMENT_RECEIVED_DATE + "[DATE_RECEIVED]\n";
+
     public static final String MESSAGE_USAGE = "Sets payment value owed by the tutee identified "
             + "by the index number used in the displayed tutee list to 0 and "
             + "has an optional date field to update the date to make next payment by. If no date is set, "
@@ -30,12 +33,16 @@ public class PaymentReceiveCommand extends PaymentCommand {
 
     public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
 
-    public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE = "Payment value owed by tutee "
+    public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE = "Current payment value owed by tutee "
             + "is already 0 and date to make payment by had no change.";
+
+
+    private static final String ZERO_PAYMENT_VAL = "0";
+    private static final LocalDate NULL_PAY_BY_DATE = null;
+
+
     private final Index targetIndex;
     private final LocalDate newPayByDate;
-    private final String zeroPaymentVal = "0";
-    private final LocalDate nullPayByDate = null;
 
 
     /**
@@ -73,18 +80,18 @@ public class PaymentReceiveCommand extends PaymentCommand {
         LocalDate existingPayByDate = existingPayment.getPayByDate();
         Tutee editedTutee;
 
-        if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == null && existingPayByDate == null) {
+        if (ZERO_PAYMENT_VAL.equals(existingPaymentValue) && newPayByDate == null && existingPayByDate == null) {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
-        } else if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == null) {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal,
-                    nullPayByDate, TODAY_DATE_AS_STRING);
-        } else if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate.equals(existingPayByDate)) {
+        } else if (ZERO_PAYMENT_VAL.equals(existingPaymentValue) && newPayByDate == null) {
+            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, ZERO_PAYMENT_VAL,
+                    NULL_PAY_BY_DATE, TODAY_DATE_AS_STRING);
+        } else if (ZERO_PAYMENT_VAL.equals(existingPaymentValue) && newPayByDate.equals(existingPayByDate)) {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
         } else if (newPayByDate == null && existingPayByDate != null) {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal,
-                    nullPayByDate, TODAY_DATE_AS_STRING);
+            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, ZERO_PAYMENT_VAL,
+                    NULL_PAY_BY_DATE, TODAY_DATE_AS_STRING);
         } else {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal,
+            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, ZERO_PAYMENT_VAL,
                     newPayByDate, TODAY_DATE_AS_STRING);
         }
 
