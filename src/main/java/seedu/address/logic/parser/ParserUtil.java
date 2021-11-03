@@ -81,7 +81,7 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException, IndexOutOfBoundsException {
         String trimmedIndex = oneBasedIndex.trim();
-
+        requireNonNull(trimmedIndex);
         if (!isAllDigits(trimmedIndex) || trimmedIndex.equals("0") || trimmedIndex.equals("")) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
