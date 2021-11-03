@@ -37,7 +37,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index provided is invalid";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index provided is invalid.";
 
     /**
      * Returns true if string has length less than or equal to 9 after trimming leading zeroes.
@@ -60,18 +60,12 @@ public class ParserUtil {
     }
 
     /**
-     * Returns true is string contains all digits from 0 to 9
-     * @param s
-     * @return
+     * Returns true if string contains only digits from 0 to 9
+     * @param s string to check
+     * @return true if string includes only digits from 0 to 9
      */
     private static boolean isAllDigits(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (!(c >= '0' && c <= '9')) {
-                return false;
-            }
-        }
-        return true;
+        return s.matches("^\\d+$");
     }
 
     /**
@@ -82,7 +76,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException, IndexOutOfBoundsException {
         String trimmedIndex = oneBasedIndex.trim();
         requireNonNull(trimmedIndex);
-        if (!isAllDigits(trimmedIndex) || trimmedIndex.equals("0") || trimmedIndex.equals("")) {
+        if (!isAllDigits(trimmedIndex) || trimmedIndex.equals("0")) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
 
