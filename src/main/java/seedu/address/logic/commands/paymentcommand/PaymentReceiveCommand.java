@@ -80,20 +80,22 @@ public class PaymentReceiveCommand extends PaymentCommand {
         LocalDate existingPayByDate = existingPayment.getPayByDate();
         Tutee editedTutee;
 
-        if (ZERO_PAYMENT_VAL.equals(existingPaymentValue) && newPayByDate == null && existingPayByDate == null) {
-            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
-        } else if (ZERO_PAYMENT_VAL.equals(existingPaymentValue) && newPayByDate == null) {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, ZERO_PAYMENT_VAL,
-                    NULL_PAY_BY_DATE, TODAY_DATE_AS_STRING);
-        } else if (ZERO_PAYMENT_VAL.equals(existingPaymentValue) && newPayByDate.equals(existingPayByDate)) {
-            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
-        } else if (newPayByDate == null && existingPayByDate != null) {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, ZERO_PAYMENT_VAL,
-                    NULL_PAY_BY_DATE, TODAY_DATE_AS_STRING);
-        } else {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, ZERO_PAYMENT_VAL,
-                    newPayByDate, TODAY_DATE_AS_STRING);
+        boolean hasZeroPaymentValue = ZERO_PAYMENT_VAL.equals(existingPaymentValue);
+        boolean hasNullExistingDate = existingPayByDate == null;
+        boolean hasNullNewPayByDate = newPayByDate == null;
+        boolean hasSameExistingAndNewDate = false;
+
+        if (!hasNullNewPayByDate) {
+            hasSameExistingAndNewDate = newPayByDate.equals(existingPayByDate);
         }
+        // Case where current payment value is currently zero, existing date is not set, user input does not set date
+        if (hasZeroPaymentValue && hasNullNewPayByDate && hasNullExistingDate) {
+            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
+        } else if (hasZeroPaymentValue && hasSameExistingAndNewDate) {
+            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
+        }
+
+        editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, ZERO_PAYMENT_VAL, newPayByDate, TODAY_DATE_AS_STRING);
 
         model.setTutee(tuteeToGet, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
