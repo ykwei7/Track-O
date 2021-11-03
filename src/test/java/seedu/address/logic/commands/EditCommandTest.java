@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRACTICAL;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTuteeAtIndex;
@@ -59,10 +59,10 @@ public class EditCommandTest {
 
         TuteeBuilder tuteeInList = new TuteeBuilder(lastTutee);
         Tutee editedTutee = tuteeInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_PRACTICAL).build();
 
         EditTuteeDescriptor descriptor = new EditTuteeDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_PRACTICAL).build();
         EditCommand editCommand = new EditCommand(indexLastTutee, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TUTEE_SUCCESS, editedTutee);

@@ -85,7 +85,7 @@ public class CollectivePredicateTest {
         // Keywords match phone, email and address, but does not match name
         CollectivePredicate predicate2 = new CollectivePredicate(Arrays.asList("Street"),
                 EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST, EMPTY_KEYWORD_LIST);
-        assertFalse(predicate2.test(new TuteeBuilder().withName("Alice").withPhone("12345")
+        assertFalse(predicate2.test(new TuteeBuilder().withName("Alice").withPhone("12345678")
                 .withLevel("p2").withAddress("Main Street").build()));
 
         // Only one matching keyword

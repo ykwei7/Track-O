@@ -10,7 +10,7 @@
     "payment" : "0",
     "payByDateAsString" : "20-10-2021",
     "paymentHistory" : [ "Never" ],
-    "tagged" : [ "friends" ],
+    "tagged" : [ "rescheduled" ],
     "lessons" : [ ]
   }, {
     "name" : "Benson Meier",
@@ -22,7 +22,7 @@
     "payment" : "90",
     "payByDateAsString" : "20-10-2021",
     "paymentHistory" : [ "Never" ],
-    "tagged" : [ "owesMoney", "friends" ],
+    "tagged" : [ "practical" ],
     "lessons" : [ "{\r\n  \"subject\" : {\r\n    \"value\" : \"Physics\"\r\n  },\r\n  \"time\" : {\r\n    \"dayOfOccurrence\" : \"SUNDAY\",\r\n    \"startTime\" : \"12:30\",\r\n    \"endTime\" : \"14:30\",\r\n    \"duration\" : 2.0\r\n  },\r\n  \"hourlyRate\" : 40.0,\r\n  \"cost\" : 80.0\r\n}" ]
   }, {
     "name" : "Carl Kurz",
@@ -46,11 +46,11 @@
     "payment" : "85",
     "payByDateAsString" : "20-10-2021",
     "paymentHistory" : [ "Never" ],
-    "tagged" : [ "friends" ],
+    "tagged" : [ "language" ],
     "lessons" : [ ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822244",
     "school": "scgs",
     "level" : "p5",
     "address" : "michegan ave",
@@ -62,7 +62,7 @@
     "lessons" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824277",
     "school": "South View Primary School",
     "level" : "p6",
     "address" : "little tokyo",
@@ -74,7 +74,7 @@
     "lessons" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824422",
     "school": "Temasek Primary School",
     "level" : "p5",
     "address" : "4th street",
