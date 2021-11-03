@@ -152,7 +152,8 @@ Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS
 
 * A valid `find` command must have at least 1 of the 4 filters.
 * Keywords are case-insensitive.
-* The returned tutee list contains matches that fulfills all the keywords.
+* The returned tutee list contains matches that fulfills **all** the filters. If the filter has multiple keywords,
+only tutees which fulfills **all** keywords will be returned.
 * `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `level` filter can only take **1 keyword** in the form of abbreviation.<br>
@@ -160,9 +161,10 @@ Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS
 * `overdue` filter can only take **1 keyword**, either `yes` or `no`.
 
 Example:
-* Find all `David` in the tutee list: `find n/david`.
-* Find `David Lee` in the tutee list: `find n/david lee`.
-* Find all `Secondary 4` tutees: `find l/s4`.
+* Find all tutees with name containing `David` in the tutee list: `find n/david`.
+* Find all tutees with name containing `David` and  `Lee` in the tutee list: `find n/david lee`.
+* Find all tutees of level `Secondary 4`: `find l/s4`.
+* Find all tutees taking `math` and `physics` classes: `find subject/math physics`.
 * Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
 
 ### Clearing all entries : `clear`
