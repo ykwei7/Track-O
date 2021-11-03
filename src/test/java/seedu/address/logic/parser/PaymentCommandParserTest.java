@@ -30,6 +30,7 @@ import seedu.address.logic.commands.paymentcommand.PaymentCommand;
 import seedu.address.logic.commands.paymentcommand.PaymentReceiveCommand;
 import seedu.address.logic.commands.paymentcommand.PaymentSetAmountCommand;
 import seedu.address.logic.commands.paymentcommand.PaymentSetDateCommand;
+import seedu.address.logic.parser.exceptions.IndexOutOfBoundsException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tutee.Payment;
 
@@ -126,7 +127,7 @@ public class PaymentCommandParserTest {
     }
 
     @Test
-    public void parse_addPaymentCommand_success() throws ParseException {
+    public void parse_addPaymentCommand_success() throws ParseException, IndexOutOfBoundsException {
         Index targetIndex = INDEX_SECOND_TUTEE;
         Index lessonIndex = ParserUtil.parseIndex(VALID_LESSON_INDEX_AMY);
         String userInput = targetIndex.getOneBased() + PAYMENT_LESSON_INDEX_AMY;

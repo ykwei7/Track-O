@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.paymentcommand.PaymentCommand;
 import seedu.address.logic.commands.paymentcommand.PaymentReceiveCommand;
 import seedu.address.logic.commands.paymentcommand.PaymentSetAmountCommand;
 import seedu.address.logic.commands.paymentcommand.PaymentSetDateCommand;
+import seedu.address.logic.parser.exceptions.IndexOutOfBoundsException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tutee.Payment;
 
@@ -42,6 +44,8 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PaymentCommand.MESSAGE_USAGE_ALL), pe);
+        } catch (IndexOutOfBoundsException ie) {
+            throw new ParseException(MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX, ie);
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {

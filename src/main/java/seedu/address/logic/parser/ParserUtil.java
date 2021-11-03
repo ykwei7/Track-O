@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_INDEX;
 
 import java.time.DateTimeException;
 import java.time.DayOfWeek;
@@ -16,7 +17,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.exceptions.IndexOutOfBoundsException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
@@ -36,16 +37,59 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index provided is invalid";
+
+    /**
+     * Returns true if string has length less than or equal to 9 after trimming leading zeroes.
+     *
+     * @param trimmedIndex trimmedIndex
+     * @return whether index is within the acceptable range
+     */
+    private static boolean isWithinIndexRange(String trimmedIndex) {
+        int currIndex = 0;
+        for (int i = 0; i < trimmedIndex.length(); i++) {
+            char c = trimmedIndex.charAt(i);
+            if (c != '0') {
+                break;
+            } else {
+                currIndex += 1;
+            }
+        }
+        String removedLeadingZeros = trimmedIndex.substring(currIndex);
+        return !(removedLeadingZeros.length() > 9);
+    }
+
+    /**
+     * Returns true is string contains all digits from 0 to 9
+     * @param s
+     * @return
+     */
+    private static boolean isAllDigits(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!(c >= '0' && c <= '9')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseIndex(String oneBasedIndex) throws ParseException, IndexOutOfBoundsException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+
+        if (!isAllDigits(trimmedIndex) || trimmedIndex.equals("0")) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
+
+        if (!isWithinIndexRange(trimmedIndex)) {
+            throw new IndexOutOfBoundsException(MESSAGE_INDEX_OUT_OF_BOUNDS);
+        }
+
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
@@ -298,7 +342,13 @@ public class ParserUtil {
             throw new ParseException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 
-        Index parsedLessonIndex = ParserUtil.parseIndex(trimmedLessonIndex);
+        Index parsedLessonIndex;
+
+        try {
+            parsedLessonIndex = ParserUtil.parseIndex(trimmedLessonIndex);
+        } catch (IndexOutOfBoundsException ie) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_INDEX, ie);
+        }
         return parsedLessonIndex;
     }
 
