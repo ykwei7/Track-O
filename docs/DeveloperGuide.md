@@ -154,6 +154,40 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Education Level of tutees
+
+Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`,
+followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
+the first letter of the education level in lowercase, followed by the year of study.
+
+#### Supported Education Levels
+
+* Primary: 1 to 6
+* Secondary: 1 to 5
+* Junior College: 1 to 2
+
+#### Design
+The `value` field of education level in Tutee class is in the abbreviation form.
+In `TuteeCard`, the string displayed is `stringRepresentation`,
+which is the returned value of the `parse` method in Level class, using `value` as the parameter.
+For example, `stringRepresentation` of `p5` is `Primary 5`.
+
+Both `value` and `stringRepresentation` are fields belonging to Level.
+This is designed for better readability in displaying tutees. Having two fields ensures that the
+abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
+to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
+education level.
+
+#### Parse method
+The `parse` method splits the string parameter into a charArray and switches case according to the first char.
+Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
+
+#### Restrictions
+1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
+2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
+
+Failing either restriction will result in the constraint message showing up in the console component,
+and the tutee will not be created/modified.
 
 ### Get feature
 
@@ -229,7 +263,6 @@ The following sequence diagram shows how the add payment operation works, which 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-
 ### Schedule
 
 `Schedule` helps to list the weekly lessons of the tutor.
@@ -275,20 +308,20 @@ includes: `name`, `level`, `subject`, `overdue`.
 #### Rationale
 Track-O aims to solve problems that arises when he teaches multiple tutees. Tutors may find it difficult to look for a
 tutee within the long list. A `find` feature helps to shrink the list down to display only the tutee of interest, giving
-them the ability to quickly identify specific tutees and getting information as required
+them the ability to quickly identify specific tutees and getting information as required.
 
 #### Current implementation
 `FindCommandParser` uses `parserUtil` to get the keywords used in the command.
-The keywords are supplied to the `find` command, and they follow after the flags. Supported flags are `n/` `l/` 
+The keywords are supplied after the flags when tutors enter the command. Supported flags are `n/` `l/` 
 `subject/` and `overdue/`.<br><br>
-`FindCommandParser` is initialised with 4 empty string arrays, each represents one of the 4 fields. The keywords
+`FindCommandParser` then initialises 4 empty string arrays, each represents one of the 4 fields. The keywords
 obtained by `parserUtil` will be added to the respective arrays. If the field does not contain any keywords, the array
 for that field remains empty.<br><br>
 A `CollectivePredicate` object will be created using these arrays of keywords, which serves as our filter test. It
 converts each arrays into streams and does an `allmatch` method call, which returns true if the tutee's information 
 matches all the keywords of that field. However, if the keyword stream is empty, the returned result will also be
 `true`. To address this issue, we used an `activeTests` array and only add the result of `allmatch` to the array 
-if the stream contains keywords. `CollectivePredicate#test` therefore returns true if `activeTests` is a non-zero length
+if the stream contains keywords. `CollectivePredicate#test` finally returns true if `activeTests` is a non-zero length
 array and all the booleans are `true`. The following activity diagram shows an example of the flow of`CollectivePredicate#test`
 executed on a `Tutee` Bob.
 
@@ -305,127 +338,6 @@ We had 2 design ideas of the `find` command:
 We decided on the 2nd implementation due to the reasons:
 * everytime a new keyword is supplied, the returned tutee list will equals to or smaller than without the new keyword.
 * able to find a specific tutee by adding additional keywords if many tutees share the same name.
-
-### Education Level of tutees
-
-Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`,
-followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
-the first letter of the education level in lowercase, followed by the year of study.
-
-#### Supported Education Levels
-
-* Primary: 1 to 6
-* Secondary: 1 to 5
-* Junior College: 1 to 2
-
-#### Design
-The `value` field of education level in Tutee class is in the abbreviation form.
-In `TuteeCard`, the string displayed is `stringRepresentation`,
-which is the returned value of the `parse` method in Level class, using `value` as the parameter.
-For example, `stringRepresentation` of `p5` is `Primary 5`.
-
-Both `value` and `stringRepresentation` are fields belonging to Level.
-This is designed for better readability in displaying tutees. Having two fields ensures that the
-abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
-to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
-education level.
-
-#### Parse method
-The `parse` method splits the string parameter into a charArray and switches case according to the first char.
-Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
-
-#### Restrictions
-1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
-2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
-
-Failing either restriction will result in the constraint message showing up in the console component,
-and the tutee will not be created/modified.
-
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th tutee in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new tutee. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the tutee was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the tutee being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
