@@ -35,8 +35,6 @@ public class PaymentSetAmountCommand extends PaymentCommand {
             + "PAYMENT_VALUE (must be a positive value up to 2 decimal places)\n"
             + "Example: payment 1 " + PREFIX_PAYMENT_AMOUNT + "150\n\n";
 
-    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
-
     public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE = "Payment value provided is the same"
             + " as the existing payment value of tutee.";
 
@@ -75,7 +73,7 @@ public class PaymentSetAmountCommand extends PaymentCommand {
         Payment existingPayment = tuteeToGet.getPayment();
         String existingPaymentValue = existingPayment.getValue();
         LocalDate existingPayByDate = existingPayment.getPayByDate();
-        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, paymentValueToSet, existingPayByDate);
+        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, paymentValueToSet, existingPayByDate, null);
 
         // If existing value is same as input value
         if (paymentValueToSet.equals(existingPaymentValue)) {

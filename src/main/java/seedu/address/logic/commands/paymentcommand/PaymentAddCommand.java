@@ -29,8 +29,6 @@ public class PaymentAddCommand extends PaymentCommand {
             + "LESSON_INDEX (must be a positive integer)\n"
             + "Example: payment 1 " + PREFIX_LESSON + "1\n\n";
 
-    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
-
     public static final String MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS = "Lesson index provided is invalid.";
 
     private final Index targetIndex;
@@ -56,7 +54,7 @@ public class PaymentAddCommand extends PaymentCommand {
      * @return New payment value owed by tutee
      * @throws CommandException If an error occurs during command execution.
      */
-    private String addLessonCostToValue(Index lessonIndex, Tutee tutee) throws CommandException {
+    public static String addLessonCostToValue(Index lessonIndex, Tutee tutee) throws CommandException {
 
         Payment existingPayment = tutee.getPayment();
         String existingPaymentValue = existingPayment.getValue();
@@ -100,7 +98,8 @@ public class PaymentAddCommand extends PaymentCommand {
 
         String updatedPaymentAsString = addLessonCostToValue(lessonIndex, tuteeToGet);
 
-        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, updatedPaymentAsString, existingPayByDate);
+        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, updatedPaymentAsString, existingPayByDate,
+                null);
 
         model.setTutee(tuteeToGet, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);

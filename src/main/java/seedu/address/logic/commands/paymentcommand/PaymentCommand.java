@@ -62,6 +62,8 @@ public class PaymentCommand extends Command {
             + SEPARATOR_TITLE
             + MESSAGE_BASIC_USAGE_ALL;
 
+    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
+
     private final Index targetIndex;
 
     public PaymentCommand(Index targetIndex) {
@@ -99,43 +101,15 @@ public class PaymentCommand extends Command {
         return new CommandResult(tuteePaymentDetails);
     }
 
-
-    /**
-     * Uses the information of an existing tutee and creates a new tutee with the updated payment details.
-     *
-     * @param tuteeToEdit Existing tutee
-     * @param payment Payment amount to set
-     * @param payByDate Date that tutee is to pay amount by
-     * @return A new tutee object with the updated payment details
-     */
-
-    public static Tutee createEditedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate) {
-        assert tuteeToEdit != null;
-
-        Name updatedName = tuteeToEdit.getName();
-        Phone updatedPhone = tuteeToEdit.getPhone();
-        School updatedSchool = tuteeToEdit.getSchool();
-        Level updatedLevel = tuteeToEdit.getLevel();
-        Address updatedAddress = tuteeToEdit.getAddress();
-        Payment existingPayment = tuteeToEdit.getPayment();
-        Payment updatedPayment = new Payment(payment, payByDate);
-        updatedPayment.copyPaymentHistory(existingPayment.paymentHistory);
-        Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
-        Set<Tag> updatedTags = tuteeToEdit.getTags();
-        List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
-
-        return new Tutee(updatedName, updatedPhone, updatedSchool, updatedLevel, updatedAddress,
-                updatedPayment, updatedRemark, updatedTags, updatedLessons);
-    }
-
     /**
      * Uses the information of an existing tutee and creates a new tutee with the updated payment details and
-     * updates the last paid date of tutee (when the receive command is used)
+     * updates the last paid date of tutee (only when the receive command is used). In cases where other commands are
+     * used, lastPaidDate will be null.
      *
      * @param tuteeToEdit Existing tutee
      * @param payment Payment amount to set
      * @param payByDate Date that tutee is to pay amount by
-     * @param lastPaidDate Date that tutee paid
+     * @param lastPaidDate Date that tutee paid, to be only initialized when receive command is used
      * @return
      */
     public static Tutee createEditedPaymentDetailsTutee(Tutee tuteeToEdit, String payment, LocalDate payByDate,
@@ -147,8 +121,14 @@ public class PaymentCommand extends Command {
         School updatedSchool = tuteeToEdit.getSchool();
         Level updatedLevel = tuteeToEdit.getLevel();
         Address updatedAddress = tuteeToEdit.getAddress();
+        Payment existingPayment = tuteeToEdit.getPayment();
         Payment updatedPayment = new Payment(payment, payByDate);
-        updatedPayment.paymentHistory.add(lastPaidDate);
+        if (lastPaidDate != null) {
+            updatedPayment.paymentHistory.add(lastPaidDate);
+        } else {
+            List<String> existingPaymentHist = existingPayment.paymentHistory;
+            updatedPayment.copyPaymentHistory(existingPaymentHist);
+        }
         Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = tuteeToEdit.getTags();
         List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons

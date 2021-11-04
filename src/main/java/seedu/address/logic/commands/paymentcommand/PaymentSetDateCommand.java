@@ -28,8 +28,6 @@ public class PaymentSetDateCommand extends PaymentCommand {
             + "PAY_BY_DATE (in the format of dd-mm-yyyy)\n"
             + "Example: payment 1 " + PREFIX_PAYMENT_DATE + "15-10-2021\n\n";
 
-    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
-
     public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_DATE = "Payment date owed by tutee "
             + "is the same as existing payment date";
 
@@ -76,7 +74,7 @@ public class PaymentSetDateCommand extends PaymentCommand {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_DATE);
         }
 
-        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, existingPaymentValue, newPayByDate);
+        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, existingPaymentValue, newPayByDate, null);
 
         model.setTutee(tuteeToGet, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
