@@ -20,7 +20,8 @@ public class Payment {
             "Payment values should only contain positive numbers with at least 1 digit, allowing 0 or 2 decimals i.e"
                     + " 100 or 74.50";
     public static final String DECIMAL_CONSTRAINTS =
-            "Payment values must have either 0 or 2 decimal places and end with either a 0 or 5, i.e 40.50 or 40.55.";
+            "Payment values must have either 0 or 2 decimal places. If it has 2 decimal places, it must "
+                    + "end with either a 0 or 5, i.e 40.50 or 40.55.";
     public static final String AMOUNT_CONSTRAINTS = "Payment value should not exceed $10,000";
     public static final String DATE_CONSTRAINTS =
             "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-10-2021 and must equal to or after"
@@ -85,7 +86,8 @@ public class Payment {
 
     /**
      * Checks if the amount to set is less than or equal to the maximum allowed.
-     * @return Whether the amount is a valid payment amount
+     * @param test The string to test on
+     * @return Whether the string matches the regex and is less than the maximum allowed
      */
     public static boolean isValidPaymentAmount(String test) {
         assert test.matches(VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES)
@@ -95,6 +97,8 @@ public class Payment {
 
     /**
      * Returns true if a given string is a valid pay by date.
+     * @param payByDateAsString The string to check
+     * @return Whether the given string follows the correct format
      */
     public static boolean isValidPayByDate(String payByDateAsString) {
         if (!payByDateAsString.equals("-")) {
@@ -109,6 +113,8 @@ public class Payment {
 
     /**
      * Returns true if a given list is a valid payment history.
+     * @param paymentHistory The List to check
+     * @return Whether the given List follows the correct format for payment histories
      */
     public static boolean isValidPaymentHistory(List<String> paymentHistory) {
         if (!paymentHistory.get(0).equals("Never")) {
@@ -123,7 +129,7 @@ public class Payment {
     }
 
     /**
-     * Copies a payment history to the current Payment
+     * Copies a payment history to the current Payment.
      * @param historyToCopy The payment history to copy
      */
     public void copyPaymentHistory(List<String> historyToCopy) {
@@ -145,8 +151,8 @@ public class Payment {
     }
 
     /**
-     * Provides the String representation of the payment's overdue status
-     * @return the status of the payment as a String
+     * Provides the String representation of the payment's overdue status.
+     * @return The status of the payment as a String
      */
     public String getOverdueStatus() {
         if (isOverdue) {

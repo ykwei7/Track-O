@@ -278,19 +278,16 @@ public class ParserUtil {
     public static String parsePaymentValue(String paymentValue) throws ParseException {
         requireNonNull(paymentValue);
         String trimmedPayment = paymentValue.trim();
-        // If trimmedPayment is not a number with 0 or 2 decimal places
-        if (!Payment.isValidPaymentFormat(trimmedPayment)) {
-            // If trimmedPayment is not a valid number
-            if (!Payment.isNumberWithAnyDecimals(trimmedPayment)) {
-                throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
-            }
-            // trimmedPayment is a number with incorrect decimal places
+        if (!Payment.isNumberWithAnyDecimals(trimmedPayment)) {
+            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
+        } else if (!Payment.isValidPaymentFormat(trimmedPayment)) {
             throw new ParseException(Payment.DECIMAL_CONSTRAINTS);
         } else if (!Payment.isValidPaymentAmount(trimmedPayment)) {
             // Payment amount is greater than maximum allowed
             throw new ParseException(Payment.AMOUNT_CONSTRAINTS);
+        } else {
+            return trimmedPayment;
         }
-        return trimmedPayment;
     }
 
     /**

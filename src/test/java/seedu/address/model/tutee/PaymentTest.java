@@ -18,7 +18,7 @@ public class PaymentTest {
     }
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
+    public void constructor_invalidPayment_throwsIllegalArgumentException() {
         String invalidPayment = "";
         assertThrows(IllegalArgumentException.class, () -> new Payment(invalidPayment, null));
     }
@@ -40,11 +40,9 @@ public class PaymentTest {
 
 
         // valid payment formats
-        assertTrue(Payment.isValidPaymentFormat("911"));
-        assertTrue(Payment.isValidPaymentFormat("93121534"));
-        assertTrue(Payment.isValidPaymentFormat("124293842033123"));
-        assertTrue(Payment.isValidPaymentFormat("90.50"));
-        assertTrue(Payment.isValidPaymentFormat("90.00"));
+        assertTrue(Payment.isValidPaymentFormat("911")); // 0 decimal places
+        assertTrue(Payment.isValidPaymentFormat("90.50")); // 2 decimal places ending with 0
+        assertTrue(Payment.isValidPaymentFormat("90.05")); // 2 decimal places ending with 5
     }
 
     @Test
@@ -53,8 +51,6 @@ public class PaymentTest {
         assertThrows(NullPointerException.class, () -> Payment.isValidPaymentAmount(null));
 
         // invalid payment formats
-        assertThrows(AssertionError.class, () ->
-                Payment.isValidPaymentAmount(""));
         assertThrows(AssertionError.class, () ->
                 Payment.isValidPaymentAmount("")); // empty string
         assertThrows(AssertionError.class, () ->
@@ -79,9 +75,9 @@ public class PaymentTest {
         // valid payment amounts
         assertTrue(Payment.isValidPaymentAmount("10000")); // upper boundary value
         assertTrue(Payment.isValidPaymentAmount("0")); // lower boundary value
-        assertTrue(Payment.isValidPaymentAmount("911"));
-        assertTrue(Payment.isValidPaymentAmount("90.50"));
-        assertTrue(Payment.isValidPaymentAmount("90.00"));
+        assertTrue(Payment.isValidPaymentAmount("911")); // whole number with 0 decimal places
+        assertTrue(Payment.isValidPaymentAmount("90.50")); // 2 decimal places ending with 0
+        assertTrue(Payment.isValidPaymentAmount("90.05")); // 2 decimal places ending with 5
     }
 
     @Test
@@ -99,14 +95,10 @@ public class PaymentTest {
 
 
         // valid payment amounts
-        assertTrue(Payment.isNumberWithAnyDecimals("90.33")); // any number for decimal places allowed
-        assertTrue(Payment.isNumberWithAnyDecimals("90.333")); // any number of decimals allowed
-        assertTrue(Payment.isNumberWithAnyDecimals("90.123456789")); // any number of decimals allowed
-        assertTrue(Payment.isNumberWithAnyDecimals("911"));
-        assertTrue(Payment.isNumberWithAnyDecimals("93121534"));
-        assertTrue(Payment.isNumberWithAnyDecimals("124293842033123"));
-        assertTrue(Payment.isNumberWithAnyDecimals("90.50"));
-        assertTrue(Payment.isNumberWithAnyDecimals("90.00"));
+        assertTrue(Payment.isNumberWithAnyDecimals("90.33")); // 2 decimal places allowed
+        assertTrue(Payment.isNumberWithAnyDecimals("90.333")); // 3 decimal places allowed
+        assertTrue(Payment.isNumberWithAnyDecimals("90.123456789")); // any number of decimal places allowed
+        assertTrue(Payment.isNumberWithAnyDecimals("124293842033123")); // whole number with 0 decimals
     }
 
     @Test
@@ -121,9 +113,9 @@ public class PaymentTest {
         assertFalse(Payment.isValidPayByDate("01-13-2021")); // Impossible month
 
         // valid payment dates
-        assertTrue(Payment.isValidPayByDate("20-10-2021"));
-        assertTrue(Payment.isValidPayByDate("01-01-2022"));
-        assertTrue(Payment.isValidPayByDate("25-12-2021"));
+        assertTrue(Payment.isValidPayByDate("20-10-2021")); // 20th October 2021
+        assertTrue(Payment.isValidPayByDate("01-01-2022")); // 1st January 2022
+        assertTrue(Payment.isValidPayByDate("25-12-2021")); // 25 December 2021
     }
 
     @Test
