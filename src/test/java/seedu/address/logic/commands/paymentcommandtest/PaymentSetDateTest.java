@@ -1,10 +1,12 @@
 package seedu.address.logic.commands.paymentcommandtest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.paymentcommand.PaymentSetDateCommand.MESSAGE_NO_CHANGE_IN_PAYMENT_DATE;
+import static seedu.address.logic.commands.paymentcommand.PaymentSetDateCommand.UPDATE_TUTEE_PAYMENT_SUCCESS;
+import static seedu.address.logic.commands.paymentcommandtest.PaymentCommandTest.modifyPaymentOfTutee;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
@@ -15,8 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.paymentcommand.PaymentCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.paymentcommand.PaymentSetDateCommand;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -38,16 +39,6 @@ public class PaymentSetDateTest {
     private static final LocalDate NULL_DATE = null;
 
     private Model model;
-
-    private Model modifyPaymentOfTutee(Index index, String newPaymentValue,
-                                       LocalDate newPayByDate) throws ScheduleClashException {
-        Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
-        Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
-        Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
-                newPayByDate);
-        model.setTutee(retrievedTutee, editedTutee);
-        return model;
-    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws ParseException,
@@ -88,6 +79,7 @@ public class PaymentSetDateTest {
         assertFalse(getFirstCommand.equals(getSecondCommand));
     }
 
+    // Input date is same as existing date
     @Test
     public void execute_noChangeInPaymentDate_throwsCommandException() throws ParseException, ScheduleClashException {
 
@@ -98,7 +90,7 @@ public class PaymentSetDateTest {
         String retrievedPaymentVal = retrievedTuteePayment.getValue();
         LocalDate payByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
 
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, retrievedPaymentVal , payByDate);
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, retrievedPaymentVal , payByDate, null);
 
         PaymentSetDateCommand paymentSetDateCommand = new PaymentSetDateCommand(INDEX_FIRST_TUTEE,
                 payByDate);
@@ -108,7 +100,7 @@ public class PaymentSetDateTest {
 
     // Tutee with null date to initialized date
     @Test
-    public void execute_changeInPaymentDate_success() throws CommandException, ParseException, ScheduleClashException {
+    public void execute_changeInPaymentDate_success() throws ParseException, ScheduleClashException {
 
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         LocalDate newPayByDate2 = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
@@ -117,22 +109,22 @@ public class PaymentSetDateTest {
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
         String retrievedPaymentVal = retrievedTuteePayment.getValue();
 
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, retrievedPaymentVal, NULL_DATE);
-
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, retrievedPaymentVal, NULL_DATE, null);
+        Model expectedModel = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, retrievedPaymentVal, newPayByDate2, null);
         PaymentSetDateCommand paymentSetDateCommand = new PaymentSetDateCommand(INDEX_FIRST_TUTEE,
                 newPayByDate2);
 
-        paymentSetDateCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, retrievedPaymentVal,
-                newPayByDate2);
-        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
+        String successMsg = String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(),
+                new Payment(retrievedPaymentVal, newPayByDate2));
+
+        CommandResult expectedMsg = new CommandResult(successMsg);
+
+        assertCommandSuccess(paymentSetDateCommand, model, expectedMsg, expectedModel);
     }
 
-    // Tutee with initalized date to new initialized different date
+    // Tutee with date initialized to new different date
     @Test
-    public void execute_changeInPaymentDate2_success() throws CommandException, ParseException,
-            ScheduleClashException {
+    public void execute_changeInPaymentDate2_success() throws ParseException, ScheduleClashException {
 
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         LocalDate newPayByDate2 = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
@@ -141,14 +133,15 @@ public class PaymentSetDateTest {
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
         String retrievedPaymentVal = retrievedTuteePayment.getValue();
 
+        Model expectedModel = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, retrievedPaymentVal, newPayByDate2, null);
         PaymentSetDateCommand paymentSetDateCommand = new PaymentSetDateCommand(INDEX_FIRST_TUTEE,
                 newPayByDate2);
 
-        paymentSetDateCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, retrievedPaymentVal,
-                newPayByDate2);
-        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
-    }
+        String successMsg = String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(),
+                new Payment(retrievedPaymentVal, newPayByDate2));
 
+        CommandResult expectedMsg = new CommandResult(successMsg);
+
+        assertCommandSuccess(paymentSetDateCommand, model, expectedMsg, expectedModel);
+    }
 }
