@@ -18,8 +18,8 @@ import java.util.List;
 public class Payment {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Payment values should only contain positive numbers with at least 1 digit, allowing 0 or 2 decimals i.e"
-                    + " 100 or 74.50";
+            "Payment values should only contain non-negative numbers with at least 1 digit, allowing 0 or 2 decimals "
+                    + "i.e 0, 100 or 74.50";
     public static final String DECIMAL_CONSTRAINTS =
             "Payment values must have either 0 or 2 decimal places. If it has 2 decimal places, it must "
                     + "end with either a 0 or 5, i.e 40.50 or 40.55.";
