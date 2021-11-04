@@ -20,20 +20,27 @@ public class LessonTest {
         // invalid hourly rates
         assertFalse(Lesson.isValidHourlyRate("")); // empty string
         assertFalse(Lesson.isValidHourlyRate(" ")); // spaces only
-        assertFalse(Lesson.isValidHourlyRate("015")); // starts with 0
         assertFalse(Lesson.isValidHourlyRate("15a")); // contains non-numeric characters
 
         assertFalse(Lesson.isValidHourlyRate("15.")); // no decimal places
         assertFalse(Lesson.isValidHourlyRate("15.1")); // only 1 decimal place
         assertFalse(Lesson.isValidHourlyRate("15.133")); // exceeds 2 decimal places
 
+        // zero hourly rate is not allowed
+        assertFalse(Lesson.isValidHourlyRate("0"));
+        assertFalse(Lesson.isValidHourlyRate("00000.00"));
+
         // last decimal place does not end with 0 or 5
         assertFalse(Lesson.isValidHourlyRate("155.09"));
         assertFalse(Lesson.isValidHourlyRate("123.44"));
         assertFalse(Lesson.isValidHourlyRate("143.87"));
 
-        // valid hourly rates
-        assertTrue(Lesson.isValidHourlyRate("3"));
+        // valid hourly rates with leading zeroes
+        assertTrue(Lesson.isValidHourlyRate("015"));
+        assertTrue(Lesson.isValidHourlyRate("0000000.30"));
+        assertTrue(Lesson.isValidHourlyRate("0000012.45"));
+
+        // valid hourly rates with no leading zeroes
         assertTrue(Lesson.isValidHourlyRate("40"));
         assertTrue(Lesson.isValidHourlyRate("4.05"));
         assertTrue(Lesson.isValidHourlyRate("400.70"));
