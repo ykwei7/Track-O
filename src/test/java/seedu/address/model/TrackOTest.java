@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRACTICAL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.ALICE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
@@ -46,7 +46,7 @@ public class TrackOTest {
     @Test
     public void resetData_withDuplicateTutees_throwsDuplicateTuteeException() {
         // Two tutees with the same identity fields
-        Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_PRACTICAL)
                 .build();
         List<Tutee> newTutees = Arrays.asList(ALICE, editedAlice);
         TrackOStub newData = new TrackOStub(newTutees);
@@ -73,7 +73,7 @@ public class TrackOTest {
     @Test
     public void hasTutee_tuteeWithSameIdentityFieldsInTrackO_returnsTrue() {
         trackO.addTutee(ALICE);
-        Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_PRACTICAL)
                 .build();
         assertTrue(trackO.hasTutee(editedAlice));
     }

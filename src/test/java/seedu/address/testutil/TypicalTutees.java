@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRACTICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_RESCHEDULED;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -47,27 +47,27 @@ public class TypicalTutees {
     public static final Tutee ALICE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLevel("p1")
             .withSchool("Tao Nan School").withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("rescheduled").build();
     public static final Tutee BENSON = new TuteeBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withSchool("Riverside Primary School")
             .withLevel("p2").withPhone("98765432")
             .withRemark("Good progress")
-            .withTags("owesMoney", "friends").withPayment("90",
+            .withTags("practical").withPayment("90",
                     LocalDate.of(2023, 10, 20)).withLesson(LESSON_2).build();
 
     public static final Tutee CARL = new TuteeBuilder().withName("Carl Kurz").withPhone("95352563")
             .withSchool("acs primary").withLevel("p3").withAddress("wall street").withPayment("80",
                     LocalDate.of(2023, 10, 20)).withLesson(LESSON).withLesson(LESSON_1).build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withSchool("henry park primary school").withLevel("p4").withAddress("10th street").withTags("friends")
+            .withSchool("henry park primary school").withLevel("p4").withAddress("10th street").withTags("language")
             .withPayment("85", LocalDate.of(2023, 10, 20)).build();
-    public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("94822244")
             .withSchool("scgs").withLevel("p5").withAddress("michegan ave").withPayment("75",
                     LocalDate.of(2023, 10, 20)).build();
-    public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("94824277")
             .withSchool("South View Primary School").withLevel("p6").withAddress("little tokyo").withPayment("70",
                     LocalDate.of(2023, 10, 20)).build();
-    public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
+    public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("94824422")
             .withSchool("Temasek Primary School").withLevel("p5").withAddress("4th street").withPayment("65",
                     LocalDate.of(2023, 10, 20)).build();
     public static final Tutee TUTEE_WITHOUT_TAGS_AND_LESSONS = new TuteeBuilder().withName("Test Tutee")
@@ -75,20 +75,20 @@ public class TypicalTutees {
                     LocalDate.of(2023, 10, 20)).build();
 
     // Manually added
-    public static final Tutee HOON = new TuteeBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Tutee HOON = new TuteeBuilder().withName("Hoon Meier").withPhone("84824244")
             .withSchool("Tao Nan School").withLevel("p5").withAddress("little india").withPayment("100",
                     LocalDate.of(2023, 10, 20)).build();
-    public static final Tutee IDA = new TuteeBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Tutee IDA = new TuteeBuilder().withName("Ida Mueller").withPhone("84821311")
             .withSchool("RGPS").withLevel("p4").withAddress("chicago ave").withPayment("110",
                     LocalDate.of(2023, 10, 20)).build();
 
     // Manually added - Tutee's details found in {@code CommandTestUtil}
     public static final Tutee AMY = new TuteeBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withSchool(VALID_SCHOOL_AMY).withLevel(VALID_LEVEL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_RESCHEDULED).build();
     public static final Tutee BOB = new TuteeBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withSchool(VALID_SCHOOL_BOB).withLevel(VALID_LEVEL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_PRACTICAL, VALID_TAG_RESCHEDULED).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

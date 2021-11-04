@@ -20,13 +20,13 @@ public class PaymentSetDateCommand extends PaymentCommand {
 
     public static final String COMMAND_WORD = "payment";
 
+    public static final String BASIC_USAGE = COMMAND_WORD + " TUTEE_INDEX " + PREFIX_PAYMENT_DATE + "PAYMENT_DATE\n";
+
     public static final String MESSAGE_USAGE = "Update the date to pay by for tutee identified "
             + "by the index number used in the displayed tutee list to new specified date.\n"
             + "Required Parameters: TUTEE_INDEX (must be a positive integer), "
             + "PAY_BY_DATE (in the format of dd-mm-yyyy)\n"
             + "Example: payment 1 " + PREFIX_PAYMENT_DATE + "15-10-2021\n\n";
-
-    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
 
     public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_DATE = "Payment date owed by tutee "
             + "is the same as existing payment date";
@@ -68,14 +68,13 @@ public class PaymentSetDateCommand extends PaymentCommand {
         Payment existingPayment = tuteeToGet.getPayment();
         String existingPaymentValue = existingPayment.getValue();
         LocalDate existingPayByDate = existingPayment.getPayByDate();
-        Tutee editedTutee;
 
         // If existing pay by value is same as input date value
         if (newPayByDate.equals(existingPayByDate)) {
             throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_DATE);
         }
 
-        editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, existingPaymentValue, newPayByDate);
+        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, existingPaymentValue, newPayByDate, null);
 
         model.setTutee(tuteeToGet, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);

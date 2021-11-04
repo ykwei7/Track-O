@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class Payment {
     public static final String MESSAGE_CONSTRAINTS =
             "Payment values should only contain numbers, and it should be at least 1 digit long.";
     public static final String DATE_CONSTRAINTS =
-            "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-10-2021 and must equal to or after"
-                    + " today's date.";
+            "Payment due dates should be a valid date in the format of dd-MM-yyyy, i.e 20-10-2021 and"
+                    + " must equal to or after today's date.";
     public static final String PAYMENT_HISTORY_CONSTRAINTS =
             "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-10-2021, and 'Never'.";
 
@@ -71,7 +72,9 @@ public class Payment {
     public static boolean isValidPayByDate(String payByDateAsString) {
         if (!payByDateAsString.equals("-")) {
             try {
-                LocalDate.parse(payByDateAsString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                LocalDate.parse(payByDateAsString, DateTimeFormatter
+                        .ofPattern("dd-MM-uuuu")
+                        .withResolverStyle(ResolverStyle.STRICT));
             } catch (DateTimeParseException e) {
                 return false;
             }
@@ -126,7 +129,7 @@ public class Payment {
         } else if (payByDateAsString.equals("-")) {
             return "No (Pay-by date not set)";
         } else {
-            return "No (by " + payByDateAsString + ")";
+            return "No (Next payment date by: " + payByDateAsString + ")";
         }
     }
 

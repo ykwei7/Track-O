@@ -13,16 +13,16 @@ import java.util.Objects;
 public class Lesson implements Comparable<Lesson> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Hourly rate should only contain numbers expressed strictly in "
+            "Hourly rate should only contain positive numbers expressed strictly in "
                     + "either no decimal places or two decimal places with the last decimal place being 0 or 5, "
                     + "and it should not be blank.";
     /*
-     * The first character has to a digit that is not zero.
      * Only 0 or 2 decimal places of a number is allowed.
      * For 2 decimal places, the last decimal place has to end in either 0 or 5.
      */
-    public static final String VALIDATION_REGEX_HOURLY_RATE_NO_DECIMAL_PLACES = "^[1-9][\\d]*$";
-    public static final String VALIDATION_REGEX_HOURLY_RATE_TWO_DECIMAL_PLACES = "^[1-9][\\d]*[.][0-9][0|5]$";
+    public static final String VALIDATION_REGEX_HOURLY_RATE_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
+            .replaceFirst("^0+", "");
+    public static final String VALIDATION_REGEX_HOURLY_RATE_ALL_ZEROES = "^[0]*([.][0][0])?$";
 
     private Subject subject;
     private Time time;
@@ -55,8 +55,8 @@ public class Lesson implements Comparable<Lesson> {
      * Returns true if a given string is a valid hourly rate.
      */
     public static boolean isValidHourlyRate(String hourlyRate) {
-        return hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_NO_DECIMAL_PLACES)
-                || hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_TWO_DECIMAL_PLACES);
+        return hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_NO_OR_TWO_DECIMAL_PLACES)
+                && !hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_ALL_ZEROES);
     }
 
     /**
@@ -133,7 +133,8 @@ public class Lesson implements Comparable<Lesson> {
 
     @Override
     public String toString() {
-        return String.format("%s    %s \n(Hourly rate: $%.2f/h, Total cost: $%.2f)\n", subject, time, hourlyRate, cost);
+        return String.format("%s  -  %s \n(Hourly rate: $%.2f/h, Total cost: $%.2f)\n",
+                subject, time, hourlyRate, cost);
     }
 
     /**

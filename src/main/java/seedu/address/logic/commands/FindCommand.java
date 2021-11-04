@@ -18,7 +18,7 @@ public class FindCommand extends Command {
             + "and displays them as a list with index numbers. "
             + "You can include multiple keywords for name and subject,"
             + " and the tutees found must satisfy all the keywords.\n"
-            + "Parameters: [l/LEVEL] [n/...NAME] [subject/...SUBJECT] [overdue/TRUE or FALSE]\n"
+            + "Parameters: [l/LEVEL] [n/...NAME] [subject/...SUBJECT] [overdue/yes or no]\n"
             + "Example: " + COMMAND_WORD + " l/p5 subject/math chinese";
 
     public static final String MESSAGE_LEVEL_CONSTRAINT = "Find by level requires 1 level keyword to search for.";
