@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class Payment {
                     + "end with either a 0 or 5, i.e 40.50 or 40.55.";
     public static final String AMOUNT_CONSTRAINTS = "Payment value should not exceed $10,000";
     public static final String DATE_CONSTRAINTS =
-            "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-10-2021 and must equal to or after"
-                    + " today's date.";
+            "Payment due dates should be a valid date in the format of dd-MM-yyyy, i.e 20-10-2021 and"
+                    + " must equal to or after today's date.";
     public static final String PAYMENT_HISTORY_CONSTRAINTS =
             "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-10-2021, and 'Never'.";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -103,7 +104,9 @@ public class Payment {
     public static boolean isValidPayByDate(String payByDateAsString) {
         if (!payByDateAsString.equals("-")) {
             try {
-                LocalDate.parse(payByDateAsString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                LocalDate.parse(payByDateAsString, DateTimeFormatter
+                        .ofPattern("dd-MM-uuuu")
+                        .withResolverStyle(ResolverStyle.STRICT));
             } catch (DateTimeParseException e) {
                 return false;
             }

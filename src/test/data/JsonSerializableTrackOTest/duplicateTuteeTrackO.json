@@ -9,7 +9,7 @@
     "payment" : "0",
     "payByDateAsString" : "-",
     "paymentHistory" : [ "Never" ],
-    "tagged": [ "friends" ],
+    "tagged": [ "rescheduled" ],
     "lessons" : [ ]
   }, {
     "name": "Alice Pauline",

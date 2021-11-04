@@ -133,7 +133,8 @@ public class Lesson implements Comparable<Lesson> {
 
     @Override
     public String toString() {
-        return String.format("%s    %s \n(Hourly rate: $%.2f/h, Total cost: $%.2f)\n", subject, time, hourlyRate, cost);
+        return String.format("%s  -  %s \n(Hourly rate: $%.2f/h, Total cost: $%.2f)\n",
+                subject, time, hourlyRate, cost);
     }
 
     /**

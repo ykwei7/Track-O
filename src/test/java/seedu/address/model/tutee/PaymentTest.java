@@ -112,10 +112,17 @@ public class PaymentTest {
         assertFalse(Payment.isValidPayByDate("32-12-2021")); // Impossible day
         assertFalse(Payment.isValidPayByDate("01-13-2021")); // Impossible month
 
+        // possible day, possible month, but impossible day and month
+        assertFalse(Payment.isValidPayByDate("29-02-2022"));
+        assertFalse(Payment.isValidPayByDate("30-02-2022"));
+        assertFalse(Payment.isValidPayByDate("31-02-2022"));
+        assertFalse(Payment.isValidPayByDate("31-11-2021"));
+
         // valid payment dates
-        assertTrue(Payment.isValidPayByDate("20-10-2021")); // 20th October 2021
-        assertTrue(Payment.isValidPayByDate("01-01-2022")); // 1st January 2022
-        assertTrue(Payment.isValidPayByDate("25-12-2021")); // 25 December 2021
+        assertTrue(Payment.isValidPayByDate("20-10-2021"));
+        assertTrue(Payment.isValidPayByDate("01-01-2022"));
+        assertTrue(Payment.isValidPayByDate("25-12-2021"));
+        assertTrue(Payment.isValidPayByDate("29-02-2024")); // leap day
     }
 
     @Test

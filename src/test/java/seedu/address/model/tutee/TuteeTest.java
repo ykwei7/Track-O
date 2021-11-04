@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRACTICAL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.ALICE;
 import static seedu.address.testutil.TypicalTutees.BENSON;
@@ -45,7 +45,7 @@ public class TuteeTest {
 
         // same name, all other attributes different -> returns true
         Tutee editedAlice = new TuteeBuilder(ALICE).withPhone(VALID_PHONE_BOB).withSchool(VALID_SCHOOL_BOB)
-                .withLevel(VALID_LEVEL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withLevel(VALID_LEVEL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_PRACTICAL).build();
         assertTrue(ALICE.isSameTutee(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -101,7 +101,7 @@ public class TuteeTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new TuteeBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new TuteeBuilder(ALICE).withTags(VALID_TAG_PRACTICAL).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

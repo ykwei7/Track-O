@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRACTICAL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.ALICE;
 import static seedu.address.testutil.TypicalTutees.BOB;
@@ -42,7 +42,7 @@ public class UniqueTuteeListTest {
     @Test
     public void contains_tuteeWithSameIdentityFieldsInList_returnsTrue() {
         uniqueTuteeList.add(ALICE);
-        Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_PRACTICAL)
                 .build();
         assertTrue(uniqueTuteeList.contains(editedAlice));
     }
@@ -85,7 +85,7 @@ public class UniqueTuteeListTest {
     @Test
     public void setTutee_editedTuteeHasSameIdentity_success() {
         uniqueTuteeList.add(ALICE);
-        Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Tutee editedAlice = new TuteeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_PRACTICAL)
                 .build();
         uniqueTuteeList.setTutee(ALICE, editedAlice);
         UniqueTuteeList expectedUniqueTuteeList = new UniqueTuteeList();
