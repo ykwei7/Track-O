@@ -303,93 +303,6 @@ Due to the regex validation when creating tutee, the first char will be a valid 
 Failing either restriction will result in the constraint message showing up in the console component,
 and the tutee will not be created/modified.
 
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th tutee in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new tutee. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the tutee was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the tutee being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -408,19 +321,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Private tutors who have many different tutees of different educational levels, teaching different subjects and/or in various different groups.
+Private tutors who have many tutees of different educational levels, teaching different subjects.
 
 **Value proposition**:
 
-The product manages the information of tutees on a collated digital platform, as opposed to storing it physically. Information specific to the progress of individual students can be tracked
+The product manages the information of tutees on a collated digital platform, as opposed to storing it physically. Information specific to the progress of individual students can be tracked.
 
 Tutors will have an overview of each individual tutee’s progress. As such, they would not have to manually keep track of all the information, which could lead to errors and be difficult to maintain.
 
-The platform is personalized for private tutors as opposed to other audiences (like tuition centres) as the app tracks the progress of individual tutees more closely and specific relevant information (e.g exam dates of particular student)
-
-The application does not offer functionality for contacting tutees.
-
-
+The platform is personalized for private tutors as opposed to other audiences (like tuition centres) as the app tracks the progress of individual tutees more closely and allows for automatic calculation of tuition fees.
 
 ### User stories
 
@@ -428,34 +337,25 @@ The application does not offer functionality for contacting tutees.
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | first-time user                            | view all the commands I need to learn  | start using the app right away. |
 | `* * *`  | private tutor with many students           | list out my tutee's information in an overview | plan my lessons effectively. |
-| `* * *`  | private tutor                              | add information about my tutees easily | keep track of which education level they are at. |
-| `* * *`  | private tutor with many students           | get information about one specific student by his name. | |
-| `* * *`  | recently fired tutor                       | delete or archive all the data of a particular student. | |
-| `* * *`  | tutor with two conflicting events          | cancel the class and reschedule it to a different day   | get a reminder. |
-| `* * *`  | forgetful tutor                            | know where I am teaching my tutee | find my way to the correct location. |
+| `* * *`  | private tutor                              | add information about my tutees easily | keep track of their progress. |
+| `* * *`  | private tutor with many students           | find information of one specific student through his name. | |
+| `* * *`  | recently fired tutor                       | delete all the data of a particular student. | |
+| `* * *`  | tutor with many existing tuition classes   | add a class that does not clash with existing classes   | plan my time more effectively. |
+| `* * *`  | forgetful tutor                            | know where my tutee stays | find my way to the correct location. |
 | `* * *`  | private tutor who teaches tutees of various subjects and at various levels | tag the tutees by level and/or subject (e.g: P5 Math) | search for all tutees related to the level/subject easily. |
 | `* * *`  | private tutor                              | delete all data at one go (maybe with reconfirmation before clearing everything) | start afresh. |
-| `* *`    | first-time user                            | import all my existing data into the app when I first start it up | quickly set-up the app. |
 | `* *`    | careless user                              | edit each portion easily | minimize mistakes in storing data. |
 | `* *`    | careless user                              | know what I typed wrongly when I enter a wrong command. | |
 | `* *`    | organized tutor                            | know which students I will be teaching later | prepare materials accordingly. |
 | `* *`    | disorganized tutor                         | see my schedule for the week | plan for unconfirmed tuition time slots. |
 | `* *`    | forgetful tutor                            | see the status of each student’s payment beforehand | remind them about payment collection during the class. |
-| `* *`    | private tutor teaching students in groups  | take note of questions asked during a lesson | address them afterwards. |
-| `* *`    | private tutor                              | find a student's parents' contact | let them know if a student fails to turn up or shows misconduct. |
-| `* *`    | private tutor                              | make changes on the schedule of my classes when a tutee requires a make-up class. | |
+| `* *`    | private tutor                              | add and delete lessons for my tutee | cater for last minute changes to plans |
 | `* *`    | disorganized tutor                         | keep track of the (contact numbers of) students that have not paid for this month’s payment | contact them to pay up. |
-| `* *`    | private tutor                              | retrieve an ex-student's data back into the database | update their progress if they wish to return to class. |
-| `* *`    | private tutor                              | track the progress of each student in terms of their grades | adapt my methods of teaching. |
 | `*`      | first-time user                            | experiment with the basic commands with sample data | familiarise myself with the commands in a safe space. |
 | `*`      | first-time user                            | clear all sample data | start adding in my own data. |
-| `*`      | hardworking tutor                          | see the preparation tasks listed out over the weekends | refer to it at the end of the week. |
-| `*`      | forgetful tutor                            | have a reminder some time before my class | know when it starts. |
 | `*`      | forgetful tutor                            | know what's the current upcoming tuition session | plan for it. |
-| `*`      | private tutor with an increasing number of students | sort my students by specific fields, such as lesson date or level and school of student. | |
-| `*`      | tutor teaching students in groups          | “group” these students together | type a single command for the entire group (e.g. change lesson timing, create notes, weekly preparation). |
-| `*`      | up-and-coming private tutor                | see the improvements that my students and ex-students have made due to the tuition | use it to promote my services to others. |
-| `*`      | private tutor                              | see my monthly earnings. | |
+| `*`      | private tutor with an increasing number of students | sort my students by specific fields, such as lesson date or level and school of student. | so that I can find them easily |
+| `*`      | first-time user                            | import all my existing data into the app when I first start it up | quickly set-up the app. |
 
 
 
@@ -518,7 +418,7 @@ The application does not offer functionality for contacting tutees.
 **UC05: Delete a tutee**
 
 **MSS**
-1. User requests to list tutees
+1. User requests to list tutees (UC04)
 2. System shows a list of tutees
 3. User requests to delete a specific tutee in the list
 4. System deletes the tutee
@@ -526,9 +426,6 @@ The application does not offer functionality for contacting tutees.
    Use case ends.
 
 **Extensions**
-* 2a. The list is empty.
-
-  Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. System shows an error message.
@@ -540,7 +437,7 @@ The application does not offer functionality for contacting tutees.
 **UC06: View a specific tutee**
 
 **MSS**
-1. User requests to list tutees.
+1. User requests to list tutees. (UC04)
 2. System shows a list of tutees.
 3. User requests to view a specific tutee.
 4. System shows that specific tutee.
@@ -548,9 +445,6 @@ The application does not offer functionality for contacting tutees.
    Use case ends.
 
 **Extensions**
-* 2a. The list is empty.
-
-  Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. System shows an error message.
@@ -562,28 +456,22 @@ The application does not offer functionality for contacting tutees.
 **UC07: Search for tutees by their name**
 
 **MSS**
-1. User requests to list tutees.
+1. User requests to list tutees. (UC04)
 2. System shows a list of tutees.
 3. User requests to search for tutees by their name.
-4. System shows a list of tutees found.
+4. System shows a list of tutees matching this name.
 
    Use case ends.
 
-**Extensions**
-* 3a. The given query is empty.
-    * 3a1. System shows an error message.
-
-      Use case resumes at step 2.
-
 <br>
 
-**UC08: Sort tutees by their level, subject or date of lesson**
+**UC08: Filter tutees by their level or subject**
 
 **MSS**
-1. User requests to list tutees.
+1. User requests to list tutees. (UC04)
 2. System shows a list of tutees.
-3. User requests to sort tutees by their level, subject or date of lesson.
-4. System shows a sorted list of tutees.
+3. User requests to filter tutees by their level or subject.
+4. System shows a filtered list of tutees.
 
    Use case ends.
 
@@ -592,7 +480,7 @@ The application does not offer functionality for contacting tutees.
 **UC09: Edit a specific tutee**
 
 **MSS**
-1. User requests to list tutees.
+1. User requests to list tutees. (UC04)
 2. System shows a list of tutees.
 3. User requests to edit a specific tutee.
 4. System edits that specific tutee.
@@ -600,9 +488,6 @@ The application does not offer functionality for contacting tutees.
    Use case ends.
 
 **Extensions**
-* 2a. The list is empty.
-
-  Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. System shows an error message.
@@ -626,126 +511,104 @@ The application does not offer functionality for contacting tutees.
 
 <br>
 
-**UC11: Create a group**
+**UC11: View existing payment details of tutee**
 
 **MSS**
-1. User requests to create a group.
-2. System creates the group.
-
-**Extensions**
-* 1a. No group name is provided.
-    * 1a1. System shows an error message.
-
-      Use case resumes at step 1.
-
-* 1b. The group name provided has already been used.
-    * 1b1. System shows an error message.
-
-      Use case resumes at step 1.
-
-<br>
-
-**UC12: Add a tutee to a group**
-
-**MSS**
-1. User requests to list tutees.
+1. User requests to list tutees. (UC04)
 2. System shows a list of tutees.
-3. User requests to add a specific tutee in the list to a group.
-4. System adds the tutee to the group.
+3. User requests to view payment details of a specific tutee.
 
    Use case ends.
 
-**Extensions**
-* 2a. The list is empty.
-
-  Use case ends.
+   **Extensions**
 
 * 3a. The given index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+<br>
 
-* 3b. No group name is provided.
-    * 3b1. System shows an error message.
+**UC12: Add lesson fees to payment owed by tutee**
+
+**MSS**
+1. User requests to list tutees. (UC04)
+2. System shows a list of tutees.
+3. User requests to view payment details of tutee. (UC11)
+4. User selects lesson and adds fees of lesson to existing fees.
+5. System shows new updated payment details.
+
+   Use case ends.
+
+   **Extensions**
+
+* 4a. The given lesson index is invalid.
+    * 4a1. System shows an error message.
 
       Use case resumes at step 2.
 
-* 3c. There is no group with the group name provided.
-    * 3c1. System shows an error message.
+* 4b. The given lesson index is wrong.
+    * 4b1. System shows incorrect updated payment details.
+    * 4b2. User manually edits data to revert payment details. (UC13)
+
+      Use case resumes at step 2.
+<br>
+
+**UC13: Manually update payment fees owed by tutee**
+
+**MSS**
+1. User requests to list tutees. (UC04)
+2. System shows a list of tutees.
+3. User requests to view payment details of tutee. (UC11)
+4. User updates fees to new desired amount.
+5. System shows new updated payment details.
+
+   Use case ends.
+
+   **Extensions**
+
+* 5a. The given amount is invalid.
+    * 5a1. System shows an error message.
 
       Use case resumes at step 2.
 
-<br>
+* 5b. The given amount is wrong.
+    * 5b1. System shows incorrect updated payment details.
+    * 5b2. User manually updates payment fees to new correct amount.
 
-**UC13: View tutees that belong to a group**
+      Use case resumes at step 4.
+      <br>
 
-**MSS**
-1. User requests to view all tutees belonging to a group.
-2. System shows a list of tutees in the group.
-
-**Extensions**
-* 1a. No group name is provided.
-    * 1a1. System shows an error message.
-
-      Use case resumes at step 1.
-
-* 1b. There is no group with the group name provided.
-    * 1b1. System shows an error message.
-
-      Use case resumes at step 1.
-
-<br>
-
-**UC14: Remove a tutee from a group**
+**UC14: Receive payment fees owed by tutee**
 
 **MSS**
-1. User requests to remove a tutee from a group.
-2. System removes the tutee from the group.
+1. User requests to list tutees. (UC04)
+2. System shows a list of tutees.
+3. User requests to view payment details of tutee. (UC11)
+4. User sets fees of tutee as received.
+5. System shows new updated payment details.
 
-**Extensions**
-* 1a. The given index is invalid.
-    * 1a1. System shows an error message.
+   Use case ends.
 
-      Use case resumes at step 1.
+   **Extensions**
 
-* 1b. No group name is provided.
-    * 1b1. System shows an error message.
+* 4a. Date is provided.
+    * 4a1. System updates and shows the new date to make payment by.
 
-      Use case resumes at step 1.
+* 4b. Date is not provided.
+    * 4a1. System updates and removes the date to make payment by.
 
-* 1c. There is no group with the group name provided.
-    * 1c1. System shows an error message.
+      Use case resumes at step 4.
+      <br>
 
-      Use case resumes at step 1.
-
-* 1d. The tutee does not belong to the group.
-    * 1d1. System shows an error message.
-
-      Use case resumes at step 1.
-
-<br>
-
-**UC15: Delete a group**
-
-**Guarantees**
-* All tutees that were previously in the group are removed from the group.
+**UC15: Find tutees with overdue payment**
 
 **MSS**
-1. User requests to delete a group.
-2. System deletes the group.
+1. User requests to list tutees. (UC04)
+2. System shows a list of tutees.
+3. User requests to find tutees with overdue payment.
+5. System shows list of tutees that are overdue.
 
-**Extensions**
-* 1a. No group name is provided.
-    * 1a1. System shows an error message.
-
-      Use case resumes at step 1.
-
-* 1b. There is no group with the group name provided.
-    * 1b1. System shows an error message.
-
-      Use case resumes at step 1.
-
-<br>
+   Use case ends.
 
 **UC16: Clear all data**
 
@@ -766,9 +629,8 @@ The application does not offer functionality for contacting tutees.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Education level**: Education level of an individual in the context of Singapore. For instance, `P5` refers to Primary 5, `JC2` refers to Junior College Year 2
+* **Education level**: Education level of an individual in the context of Singapore. Supported education levels are contextualized to the primary, secondary and JC level. For instance, `P5` refers to Primary 5, `JC2` refers to Junior College Year 2
 * **Database**: Storage on local system
-* **Group**: A collection of tutees. Any tutee can be part of any group, and any group can have any number of tutees.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -819,6 +681,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Application will launch with an empty file
+    2. Update the file as necessary to include the relevant tutee information.
 
-1. _{ more test cases …​ }_
