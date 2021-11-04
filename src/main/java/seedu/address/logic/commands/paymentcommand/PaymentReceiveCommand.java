@@ -37,7 +37,6 @@ public class PaymentReceiveCommand extends PaymentCommand {
 
     private static final String ZERO_PAYMENT_VAL = "0";
 
-
     private final Index targetIndex;
     private final LocalDate newPayByDate;
 
@@ -76,7 +75,7 @@ public class PaymentReceiveCommand extends PaymentCommand {
         String existingPaymentValue = existingPayment.getValue();
         LocalDate existingPayByDate = existingPayment.getPayByDate();
 
-        boolean hasZeroPaymentValue = ZERO_PAYMENT_VAL.equals(existingPaymentValue);
+        boolean hasZeroPaymentValue = Double.parseDouble(existingPaymentValue) == 0;
         boolean hasNullExistingDate = existingPayByDate == null;
         boolean hasNullNewPayByDate = newPayByDate == null;
         boolean hasSameExistingAndNewDate = false;
