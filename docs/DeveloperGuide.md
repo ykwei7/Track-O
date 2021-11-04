@@ -336,8 +336,11 @@ We had 2 design ideas of the `find` command:
 2. Allow `find` to search with multiple keywords, and return tutees that fulfills **all** keywords
 
 We decided on the 2nd implementation due to the reasons:
-* everytime a new keyword is supplied, the returned tutee list will equals to or smaller than without the new keyword.
-* able to find a specific tutee by adding additional keywords if many tutees share the same name.
+* Everytime a new keyword is supplied, the returned tutee list will be equals to or smaller than without the new keyword,
+as opposed to design 1, where the tutee list is equals to or longer than the without the keyword. 
+* We want the find feature to address the issue of tutee list being to cluttered when number of tutees increases, so
+design 2 fits our requirement better.
+* In addition, it enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
 
 
 --------------------------------------------------------------------------------------------------------------------
