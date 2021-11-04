@@ -39,6 +39,27 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 --------------------------------------------------------------------------------------------------------------------
 
+## About
+
+This section explains the terms used in the user guide.
+
+If you are an intermediate user, you can hop over to the [Features](#features) section for the details of each command.
+
+If you are an advanced user, you can see all the commands at a glance at the [Command Summary](#command-summary) section.
+
+### Glossary
+
+Terms | Explanation
+--------|------------------
+command | The text that you enter in the command box. Different commands have different formats.
+prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km` 
+integer | A number that has strictly no decimal places.
+level | Refers to the education level of a student in the context of Singapore's education system.  
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -152,7 +173,8 @@ Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS
 
 * A valid `find` command must have at least 1 of the 4 filters.
 * Keywords are case-insensitive.
-* The returned tutee list contains matches that fulfills all the keywords.
+* The returned tutee list contains matches that fulfills **all** the filters. If the filter has multiple keywords,
+only tutees which fulfills **all** keywords will be returned.
 * `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `level` filter can only take **1 keyword** in the form of abbreviation.<br>
@@ -160,9 +182,10 @@ Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS
 * `overdue` filter can only take **1 keyword**, either `yes` or `no`.
 
 Example:
-* Find all `David` in the tutee list: `find n/david`.
-* Find `David Lee` in the tutee list: `find n/david lee`.
-* Find all `Secondary 4` tutees: `find l/s4`.
+* Find all tutees with name containing `David` in the tutee list: `find n/david`.
+* Find all tutees with name containing `David` and  `Lee` in the tutee list: `find n/david lee`.
+* Find all tutees of level `Secondary 4`: `find l/s4`.
+* Find all tutees taking `math` and `physics` classes: `find subject/math physics`.
 * Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
 
 ### Clearing all entries : `clear`

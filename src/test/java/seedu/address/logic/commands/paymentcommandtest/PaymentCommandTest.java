@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -28,6 +30,17 @@ import seedu.address.model.tutee.Tutee;
 public class PaymentCommandTest {
 
     private Model model;
+
+
+    public static Model modifyPaymentOfTutee(Index index, String newPaymentValue,
+                                       LocalDate newPayByDate, String lastPaidDate) throws ScheduleClashException {
+        Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+        Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
+        Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
+                newPayByDate, lastPaidDate);
+        model.setTutee(retrievedTutee, editedTutee);
+        return model;
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws ScheduleClashException {

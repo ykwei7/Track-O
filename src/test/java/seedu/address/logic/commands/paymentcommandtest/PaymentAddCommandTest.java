@@ -3,11 +3,16 @@ package seedu.address.logic.commands.paymentcommandtest;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.paymentcommand.PaymentAddCommand.MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS;
+import static seedu.address.logic.commands.paymentcommand.PaymentAddCommand.addLessonCostToValue;
+import static seedu.address.logic.commands.paymentcommand.PaymentCommand.UPDATE_TUTEE_PAYMENT_SUCCESS;
+import static seedu.address.logic.commands.paymentcommandtest.PaymentCommandTest.modifyPaymentOfTutee;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TUTEE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import java.time.LocalDate;
@@ -16,33 +21,23 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.paymentcommand.PaymentAddCommand;
-import seedu.address.logic.commands.paymentcommand.PaymentCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Tutee;
 
 public class PaymentAddCommandTest {
 
-    private static final String NEW_PAYMENT_VAL_STUB_1 = "100";
-    private static final String NEW_PAYMENT_VAL_STUB_2 = "200";
     private Model model;
 
     public PaymentAddCommandTest() throws ScheduleClashException {
         this.model = new ModelManager(getTypicalTrackO(), new UserPrefs());
-    }
-
-    private Model modifyPaymentOfTutee(Index index, String newPaymentValue,
-                                       LocalDate newPayByDate) throws ScheduleClashException {
-        Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
-        Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
-        Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
-                newPayByDate);
-        model.setTutee(retrievedTutee, editedTutee);
-        return model;
     }
 
     @Test
@@ -84,23 +79,29 @@ public class PaymentAddCommandTest {
         assertFalse(getFirstCommand.equals(getSecondCommand));
     }
 
-    // To be completed once lesson cost calculation is finalized
-    /*@Test
-    public void execute_changeInPayment_success() throws CommandException {
+    @Test
+    public void execute_addLessonFees_success() throws CommandException, ScheduleClashException {
 
-        // Creates tutee with specified payment details
-        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+        Tutee thirdTutee = model.getFilteredTuteeList().get(INDEX_THIRD_TUTEE.getZeroBased());
+        Index firstLessonIndex = Index.fromOneBased(1);
+
+        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_THIRD_TUTEE.getZeroBased());
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
-        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, payByDate);
+        LocalDate existingPayByDate = retrievedTuteePayment.getPayByDate();
 
-        PaymentAddCommand paymentAddCommand = new PaymentAddCommand(INDEX_FIRST_TUTEE,
-                NEW_PAYMENT_VAL_STUB_2);
+        PaymentAddCommand paymentAddCommand = new PaymentAddCommand(INDEX_THIRD_TUTEE,
+                firstLessonIndex);
 
-        paymentAddCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.editedPaymentDetailsTutee(retrievedTutee, NEW_PAYMENT_VAL_STUB_2,
-                payByDate);
-        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
-    }*/
+        String newPaymentVal = addLessonCostToValue(firstLessonIndex, thirdTutee);
+
+        Model expectedModel = modifyPaymentOfTutee(INDEX_THIRD_TUTEE, newPaymentVal, existingPayByDate, null);
+
+        String successMsg = String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(),
+                new Payment(newPaymentVal, existingPayByDate));
+
+        CommandResult expectedMsg = new CommandResult(successMsg);
+
+        assertCommandSuccess(paymentAddCommand, model, expectedMsg, expectedModel);
+    }
 }
