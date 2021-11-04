@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Represents a Tutee's payment details in Track-O.
- * Guarantees: immutable; is valid as declared in {@link #isValidPayment(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPaymentFormat(String)}
  */
 public class Payment {
 
@@ -21,6 +21,7 @@ public class Payment {
                     + " 100 or 74.50";
     public static final String DECIMAL_CONSTRAINTS =
             "Payment values must have either 0 or 2 decimal places and end with either a 0 or 5, i.e 40.50 or 40.55.";
+    public static final String AMOUNT_CONSTRAINTS = "Payment value should not exceed $10,000";
     public static final String DATE_CONSTRAINTS =
             "Payment due dates should be in the format of dd-MM-yyyy, i.e 20-10-2021 and must equal to or after"
                     + " today's date.";
@@ -32,6 +33,7 @@ public class Payment {
             .replaceFirst("^0+", "");
     public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
             .replaceFirst("^0+", "");
+    public static final Double MAXIMUM_AMOUNT = 10000.00;
     public final String value;
     public final LocalDate payByDate;
     public final String payByDateAsString;
@@ -46,7 +48,7 @@ public class Payment {
      */
     public Payment(String payment, LocalDate payByDate) {
         requireNonNull(payment);
-        checkArgument(isValidPayment(payment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPaymentFormat(payment), MESSAGE_CONSTRAINTS);
         value = payment;
         this.payByDate = payByDate;
         this.paymentHistory.add("Never");
@@ -67,19 +69,28 @@ public class Payment {
      * @param test The string to test on
      * @return Whether the string matches the regex
      */
-    public static boolean isValidPayment(String test) {
+    public static boolean isValidPaymentFormat(String test) {
         return test.matches(VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES);
     }
 
 
     /**
-     * Returns true if a given string is a payment amount with any number of decimal places,
-     * which may or may not be valid.
+     * Returns true if a given string is a number any number of decimal places which may or may not be a valid payment.
      * @param test The string to test on
      * @return Whether the string matches the regex
      */
-    public static boolean isPaymentWithAnyDecimals(String test) {
+    public static boolean isNumberWithAnyDecimals(String test) {
         return test.matches(VALIDATION_REGEX_NUMERICAL_FRONT_ANY_DECIMALS);
+    }
+
+    /**
+     * Checks if the amount to set is less than or equal to the maximum allowed.
+     * @return Whether the amount is a valid payment amount
+     */
+    public static boolean isValidPaymentAmount(String test) {
+        assert test.matches(VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES)
+                : "isValidPaymentAmount() only called after isValidPaymentFormat() regex check";
+        return Double.parseDouble(test) <= MAXIMUM_AMOUNT;
     }
 
     /**

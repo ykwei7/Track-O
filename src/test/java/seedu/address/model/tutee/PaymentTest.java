@@ -24,52 +24,89 @@ public class PaymentTest {
     }
 
     @Test
-    public void isValidPayment() {
+    public void isValidPaymentFormatTest() {
         // null payment
-        assertThrows(NullPointerException.class, () -> Payment.isValidPayment(null));
+        assertThrows(NullPointerException.class, () -> Payment.isValidPaymentFormat(null));
+
+        // invalid payment formats
+        assertFalse(Payment.isValidPaymentFormat("")); // empty string
+        assertFalse(Payment.isValidPaymentFormat(" ")); // spaces only
+        assertFalse(Payment.isValidPaymentFormat("-91")); // // negative number
+        assertFalse(Payment.isValidPaymentFormat("9011p041")); // alphabets within digits
+        assertFalse(Payment.isValidPaymentFormat("9312 1534")); // spaces within digits
+        assertFalse(Payment.isValidPaymentFormat("90.1")); // 1 decimal place
+        assertFalse(Payment.isValidPaymentFormat("90.33")); // second decimal place non-0 and non-5
+        assertFalse(Payment.isValidPaymentFormat("90.333")); // more than 2 decimal places
+
+
+        // valid payment formats
+        assertTrue(Payment.isValidPaymentFormat("911"));
+        assertTrue(Payment.isValidPaymentFormat("93121534"));
+        assertTrue(Payment.isValidPaymentFormat("124293842033123"));
+        assertTrue(Payment.isValidPaymentFormat("90.50"));
+        assertTrue(Payment.isValidPaymentFormat("90.00"));
+    }
+
+    @Test
+    public void isValidPaymentAmountTest() {
+        // null payment
+        assertThrows(NullPointerException.class, () -> Payment.isValidPaymentAmount(null));
+
+        // invalid payment formats
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount(""));
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount("")); // empty string
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount(" ")); // spaces only
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount("-91")); // // negative number
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount("9011p041")); // alphabets within digits
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount("9312 1534")); // spaces within digits
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount("90.1")); // 1 decimal place
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount("90.33")); // second decimal place non-0 and non-5
+        assertThrows(AssertionError.class, () ->
+                Payment.isValidPaymentAmount("90.333")); // more than 2 decimal places
 
         // invalid payment amounts
-        assertFalse(Payment.isValidPayment("")); // empty string
-        assertFalse(Payment.isValidPayment(" ")); // spaces only
-        assertFalse(Payment.isValidPayment("-91")); // // non-numeric
-        assertFalse(Payment.isValidPayment("9011p041")); // alphabets within digits
-        assertFalse(Payment.isValidPayment("9312 1534")); // spaces within digits
-        assertFalse(Payment.isValidPayment("90.1")); // 1 decimal place
-        assertFalse(Payment.isValidPayment("90.33")); // second decimal place non-0 and non-5
-        assertFalse(Payment.isValidPayment("90.333")); // more than 2 decimal places
-
+        assertFalse(Payment.isValidPaymentAmount("10001")); // exceeds 10000
+        assertFalse(Payment.isValidPaymentAmount(String.valueOf(Integer.MAX_VALUE))); // MAX_INT
 
         // valid payment amounts
-        assertTrue(Payment.isValidPayment("911"));
-        assertTrue(Payment.isValidPayment("93121534"));
-        assertTrue(Payment.isValidPayment("124293842033123"));
-        assertTrue(Payment.isValidPayment("90.50"));
-        assertTrue(Payment.isValidPayment("90.00"));
+        assertTrue(Payment.isValidPaymentAmount("10000")); // upper boundary value
+        assertTrue(Payment.isValidPaymentAmount("0")); // lower boundary value
+        assertTrue(Payment.isValidPaymentAmount("911"));
+        assertTrue(Payment.isValidPaymentAmount("90.50"));
+        assertTrue(Payment.isValidPaymentAmount("90.00"));
     }
 
     @Test
     public void isPaymentWithAnyDecimalsTest() {
         // null payment
-        assertThrows(NullPointerException.class, () -> Payment.isPaymentWithAnyDecimals(null));
+        assertThrows(NullPointerException.class, () -> Payment.isNumberWithAnyDecimals(null));
 
         // invalid payment amounts
-        assertFalse(Payment.isPaymentWithAnyDecimals("")); // empty string
-        assertFalse(Payment.isPaymentWithAnyDecimals(" ")); // spaces only
-        assertFalse(Payment.isPaymentWithAnyDecimals("-91")); // // non-numeric
-        assertFalse(Payment.isPaymentWithAnyDecimals("9011p041")); // alphabets within digits
-        assertFalse(Payment.isPaymentWithAnyDecimals("9312 1534")); // spaces within digits
-        assertFalse(Payment.isPaymentWithAnyDecimals("90.")); // decimal point with no decimal value
+        assertFalse(Payment.isNumberWithAnyDecimals("")); // empty string
+        assertFalse(Payment.isNumberWithAnyDecimals(" ")); // spaces only
+        assertFalse(Payment.isNumberWithAnyDecimals("-91")); // // negative number
+        assertFalse(Payment.isNumberWithAnyDecimals("9011p041")); // alphabets within digits
+        assertFalse(Payment.isNumberWithAnyDecimals("9312 1534")); // spaces within digits
+        assertFalse(Payment.isNumberWithAnyDecimals("90.")); // decimal point with no decimal value
 
 
         // valid payment amounts
-        assertTrue(Payment.isPaymentWithAnyDecimals("90.33")); // any number for decimal places allowed
-        assertTrue(Payment.isPaymentWithAnyDecimals("90.333")); // any number of decimals allowed
-        assertTrue(Payment.isPaymentWithAnyDecimals("90.123456789")); // any number of decimals allowed
-        assertTrue(Payment.isPaymentWithAnyDecimals("911"));
-        assertTrue(Payment.isPaymentWithAnyDecimals("93121534"));
-        assertTrue(Payment.isPaymentWithAnyDecimals("124293842033123"));
-        assertTrue(Payment.isPaymentWithAnyDecimals("90.50"));
-        assertTrue(Payment.isPaymentWithAnyDecimals("90.00"));
+        assertTrue(Payment.isNumberWithAnyDecimals("90.33")); // any number for decimal places allowed
+        assertTrue(Payment.isNumberWithAnyDecimals("90.333")); // any number of decimals allowed
+        assertTrue(Payment.isNumberWithAnyDecimals("90.123456789")); // any number of decimals allowed
+        assertTrue(Payment.isNumberWithAnyDecimals("911"));
+        assertTrue(Payment.isNumberWithAnyDecimals("93121534"));
+        assertTrue(Payment.isNumberWithAnyDecimals("124293842033123"));
+        assertTrue(Payment.isNumberWithAnyDecimals("90.50"));
+        assertTrue(Payment.isNumberWithAnyDecimals("90.00"));
     }
 
     @Test

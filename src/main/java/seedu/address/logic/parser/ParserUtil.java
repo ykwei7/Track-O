@@ -278,11 +278,17 @@ public class ParserUtil {
     public static String parsePaymentValue(String paymentValue) throws ParseException {
         requireNonNull(paymentValue);
         String trimmedPayment = paymentValue.trim();
-        if (!Payment.isValidPayment(trimmedPayment)) {
-            if (!Payment.isPaymentWithAnyDecimals(trimmedPayment)) {
+        // If trimmedPayment is not a number with 0 or 2 decimal places
+        if (!Payment.isValidPaymentFormat(trimmedPayment)) {
+            // If trimmedPayment is not a valid number
+            if (!Payment.isNumberWithAnyDecimals(trimmedPayment)) {
                 throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
             }
+            // trimmedPayment is a number with incorrect decimal places
             throw new ParseException(Payment.DECIMAL_CONSTRAINTS);
+        } else if (!Payment.isValidPaymentAmount(trimmedPayment)) {
+            // Payment amount is greater than maximum allowed
+            throw new ParseException(Payment.AMOUNT_CONSTRAINTS);
         }
         return trimmedPayment;
     }
@@ -297,7 +303,7 @@ public class ParserUtil {
     public static Index parseLessonIndex(String lessonIndex) throws ParseException {
         requireNonNull(lessonIndex);
         String trimmedLessonIndex = lessonIndex.trim();
-        if (!Payment.isValidPayment(trimmedLessonIndex)) {
+        if (!Payment.isValidPaymentFormat(trimmedLessonIndex)) {
             throw new ParseException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 

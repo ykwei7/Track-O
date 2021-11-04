@@ -33,6 +33,7 @@ public class ParserUtilTest {
     private static final String INVALID_SUBJECT = "Chemistry%";
     private static final String INVALID_PAYMENT_DECIMALS = "500.1";
     private static final String INVALID_PAYMENT = "5a00";
+    private static final String INVALID_PAYMENT_EXCEED_MAXIMUM = "10001";
     private static final String INVALID_OVERDUE = "nope";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -154,6 +155,12 @@ public class ParserUtilTest {
         Payment expectedPayment = new Payment(VALID_PAYMENT, VALID_PAYMENT_DATE);
         String expectedPaymentValue = expectedPayment.getValue();
         assertEquals(expectedPaymentValue, ParserUtil.parsePaymentValue(paymentWithWhitespace));
+    }
+
+    @Test
+    public void parsePaymentValue_exceedMaximumValue_throwsParseException() {
+        assertThrows(ParseException.class, Payment.AMOUNT_CONSTRAINTS, () ->
+                ParserUtil.parsePaymentValue(INVALID_PAYMENT_EXCEED_MAXIMUM));
     }
 
     @Test
