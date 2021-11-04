@@ -175,7 +175,7 @@ of the second tutee found on the list. The information to be listed is based on
 
 **Aspect: How `get` executes:**
 
-* **Current execution** Prints information of tutee to output.
+* **Current execution** Prints information of tutee to output terminal.
     * Pros: Displays information on output terminal.
     * Cons: May be less aesthetic compared to initial implementation.
 
@@ -356,8 +356,6 @@ The platform is personalized for private tutors as opposed to other audiences (l
 | `*`      | forgetful tutor                            | know what's the current upcoming tuition session | plan for it. |
 | `*`      | private tutor with an increasing number of students | sort my students by specific fields, such as lesson date or level and school of student. | so that I can find them easily |
 | `*`      | first-time user                            | import all my existing data into the app when I first start it up | quickly set-up the app. |
-
-
 
 ### Use cases
 

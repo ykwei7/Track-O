@@ -34,7 +34,7 @@ public class PaymentReceiveCommand extends PaymentCommand {
             + "is already 0 and date to make payment by had no change.";
     private final Index targetIndex;
     private final LocalDate newPayByDate;
-    private final String zeroPaymentVal = "0";
+    private final String zeroPaymentVal = "0.00";
     private final LocalDate nullPayByDate = null;
 
 
