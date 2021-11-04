@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TrackOParser" as TrackOParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "predicate:CollectivePredicate" as CollectivePredicate LOGIC_COLOR
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find n/david l/p2")
+activate LogicManager
+
+LogicManager -> TrackOParser : parseCommand("find n/david l/p2")
+activate TrackOParser
+
+TrackOParser -> FindCommandParser : parse("find n/david l/p2")
+activate FindCommandParser
+
+create CollectivePredicate
+FindCommandParser -> CollectivePredicate
+activate CollectivePredicate
+
+CollectivePredicate --> FindCommandParser
+deactivate CollectivePredicate
+
+create FindCommand
+FindCommandParser -> FindCommand
+activate FindCommand
+
+FindCommand --> FindCommandParser
+deactivate FindCommand
+
+FindCommandParser --> TrackOParser
+deactivate FindCommandParser
+
+TrackOParser --> LogicManager
+deactivate TrackOParser
+
+LogicManager -> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> Model : updateFilteredTuteeList(predicate)
+
+Model --> FindCommand
+FindCommand --> LogicManager
+deactivate FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+
+start
+:CollectivePredicate test method is called using Bob as parameter ;
+:Convert nameKeywords into stream and execute allmatch test on Bob;
+:Convert levelKeywords into stream and execute allmatch test on Bob;
+:Convert subjectKeywords into stream and execute allmatch test on Bob;
+:Convert overdueKeyword into stream and execute allmatch test on Bob;
+if () then ([nameKeywords array is not empty])
+    :Add the allmatch result to activeTests;
+else ([else])
+endif
+
+if () then ([levelKeywords array is not empty])
+    :Add the allmatch result to activeTests;
+else ([else])
+endif
+
+if () then ([subjectKeywords array is not empty])
+    :Add the allmatch result to activeTests;
+else ([else])
+endif
+
+if () then ([overdueKeyword array is not empty])
+    :Add the allmatch result to activeTests;
+else ([else])
+endif
+
+:Return true if all booleans in activeTests are true;
+stop
+
+@enduml

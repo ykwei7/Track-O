@@ -1,46 +1,65 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Keng I's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Track-O
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Track-O is a desktop address book application used by private tutors to schedule lessons and track payments.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has 
+about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added a `level` field to `Tutee`.
+  * What it does: Tutors can now save the education level of `tutees` when adding them to Track-O. When the tutor 
+  provides the abbreviation of the education level, Track-O parses it into the full title.<br>
+  e.g `p4` parses into `Primary 4`<br>
+  e.g `s2` parses into `Secondary 2`<br>
+  e.g `j1` parses into `JC1`
+  * Justification: We want tutors to be able to recall the current academic progress of a tutee just by
+  looking at the tutee list. Having the information of the education level allows tutors to quickly identify the topics
+  are relevant.<br>
+  Instead of creating a completely new field for that, we decided to replace the existing `email` field with education
+  level because email would not be relevant if tutors are teaching younger tutees in the primary level and do not use 
+  email for communication.
+  * Highlights: This enhancement affects existing commands such as `add` and `edit` as the `email` field now contains 
+  different information and parameter constraints.
+  * Credits: *-*
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
-
-* **Code contributed**: [RepoSense link]()
+* **New Feature**: Added the ability to delete lessons from a tutee.
+  * What it does: the `deletelesson` command identifies the lesson to be deleted and removes it from the user's schedule
+  as well as the lessonlist of the tutee.
+  * Justification: Track-O supports adding lesson to individual tutees. If the tutee decides to quit the tuition lesson 
+  permanently, the user has the ability to free up his schedule and remove the lesson.
+  * Credits: *-*
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Managed the deadline and closure of milestones v1.3 - v1.3b (2 milestones) on GitHub.
 
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+* **Enhancements to existing features**: Modified the `find` command to work like a filter
+  * What it does: `Find` command supports keyword search for `name`, `level`, `subjects` and `overdue` status.
+  * Justification: The previous `find` function returns matched tutees whose name fulfils any of the keyword supplied.
+    However, we felt that the feature is not very helpful for tutors if we wanted to extend it to support `level`,
+    `subject` and `overdue` status as well.<br><br>
+    For example, if the tutor wants to search up all secondary 4 students taking math classes, using
+    `find l/p4 subject/math` will return tutees who are **either** primary 4 or tutee's taking math classes.
+    The tutor would then have to sieve through the results once again to find the tutee of interest.<br><br>
+    Hence, we modified the implementation to work just like a filter placed sequentially: a matched tutee has to pass all
+    the filters to be returned as a matched tutee.
+  * Highlights: This enhancement did not affect existing commands and commands to be added in future, but the old
+    test cases using the old implementation had to be modified to align with our new design of the `find` command.
+  * Credits: *-*
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the features `deleteLesson` and `find`.
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added implementation details of the `deleteLesson` and `find` feature.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+* PRs reviewed (with non-trivial review comments):
+[\#39](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/39),
+[\#74](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/74),
+[\#155](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/155),
+[\#159](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/159),

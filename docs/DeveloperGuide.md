@@ -268,6 +268,44 @@ The tutor's schedule can be accessed via the `schedule` command. The `ArrayList<
     * Pros: The tutor can view their schedule directly on their hard disk without starting up Track-O.
     * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out.
 
+### Find 
+`find` command allows tutors to filter the tuteelist according to the keywords supplied. The supported fields for `find`
+includes: `name`, `level`, `subject`, `overdue`.
+
+#### Rationale
+Track-O aims to solve problems that arises when he teaches multiple tutees. Tutors may find it difficult to look for a
+tutee within the long list. A `find` feature helps to shrink the list down to display only the tutee of interest, giving
+them the ability to quickly identify specific tutees and getting information as required
+
+#### Current implementation
+`FindCommandParser` uses `parserUtil` to get the keywords used in the command.
+The keywords are supplied to the `find` command, and they follow after the flags. Supported flags are `n/` `l/` 
+`subject/` and `overdue/`.<br><br>
+`FindCommandParser` is initialised with 4 empty string arrays, each represents one of the 4 fields. The keywords
+obtained by `parserUtil` will be added to the respective arrays. If the field does not contain any keywords, the array
+for that field remains empty.<br><br>
+A `CollectivePredicate` object will be created using these arrays of keywords, which serves as our filter test. It
+converts each arrays into streams and does an `allmatch` method call, which returns true if the tutee's information 
+matches all the keywords of that field. However, if the keyword stream is empty, the returned result will also be
+`true`. To address this issue, we used an `activeTests` array and only add the result of `allmatch` to the array 
+if the stream contains keywords. `CollectivePredicate#test` therefore returns true if `activeTests` is a non-zero length
+array and all the booleans are `true`. The following activity diagram shows an example of the flow of`CollectivePredicate#test`
+executed on a `Tutee` Bob.
+
+![CollectivePredicateActivityDiagram](images/CollectivePredicateActivityDiagram.png)
+
+The following sequence diagram shows the workflow of how a FindCommand is used.
+![FindCommandParserSequenceDiagram](images/FindCommandParserSequenceDiagram.png)
+
+#### Design Considerations
+We had 2 design ideas of the `find` command:
+1. Allow `find` to search with multiple keywords, and return tutees that fulfills **either** keywords
+2. Allow `find` to search with multiple keywords, and return tutees that fulfills **all** keywords
+
+We decided on the 2nd implementation due to the reasons:
+* everytime a new keyword is supplied, the returned tutee list will equals to or smaller than without the new keyword.
+* able to find a specific tutee by adding additional keywords if many tutees share the same name.
+
 ### Education Level of tutees
 
 Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`,
