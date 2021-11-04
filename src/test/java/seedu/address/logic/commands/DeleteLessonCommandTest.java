@@ -172,7 +172,7 @@ public class DeleteLessonCommandTest {
         }
     }
 
-    private static class LessonMock {
+    public static class LessonMock {
         public static Lesson getLesson() throws ParseException {
             Subject subject = ParserUtil.parseSubject(VALID_LESSON_SUBJECT_BOB);
             DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(VALID_LESSON_DAY_OF_WEEK_BOB);
