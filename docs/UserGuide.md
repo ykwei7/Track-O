@@ -47,15 +47,16 @@ If you are an intermediate user, you can hop over to the [Features](#features) s
 
 If you are an advanced user, you can see all the commands at a glance at the [Command Summary](#command-summary) section.
 
-### Terms
+### Glossary
 
 Terms | Explanation
 --------|------------------
-prefix | A word or letter that ends with `/`. e.g. `sch/`
-parameter | A value that is defined based on your input. e.g. For the `PHONE` parameter, if you input `98765432`, the `PHONE` parameter now holds a value of `98765432`.
 command | The text that you enter in the command box. Different commands have different formats.
+prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
 alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km` 
 integer | A number that has strictly no decimal places.
+level | Refers to the education level of a student in the context of Singapore's education system.  
 
 --------------------------------------------------------------------------------------------------------------------
 
