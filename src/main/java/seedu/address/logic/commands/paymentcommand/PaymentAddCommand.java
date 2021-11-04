@@ -29,7 +29,12 @@ public class PaymentAddCommand extends PaymentCommand {
             + "LESSON_INDEX (must be a positive integer)\n"
             + "Example: payment 1 " + PREFIX_LESSON + "1\n\n";
 
+    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
+
     public static final String MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS = "Lesson index provided is invalid.";
+
+    public static final String MESSAGE_AMOUNT_EXCEED_MAXIMUM = "Adding this lesson's fees is not allowed."
+            + "\n(Payment value will exceed $10,000)";
 
     private final Index targetIndex;
     private final Index lessonIndex;

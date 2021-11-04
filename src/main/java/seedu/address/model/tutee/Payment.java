@@ -13,22 +13,29 @@ import java.util.List;
 
 /**
  * Represents a Tutee's payment details in Track-O.
- * Guarantees: immutable; is valid as declared in {@link #isValidPayment(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPaymentFormat(String)}
  */
 public class Payment {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Payment values should only contain numbers, and it should be at least 1 digit long.";
+            "Payment values should only contain non-negative numbers with at least 1 digit, allowing 0 or 2 decimals "
+                    + "i.e 0, 100 or 74.50";
+    public static final String DECIMAL_CONSTRAINTS =
+            "Payment values must have either 0 or 2 decimal places. If it has 2 decimal places, it must "
+                    + "end with either a 0 or 5, i.e 40.50 or 40.55.";
+    public static final String AMOUNT_CONSTRAINTS = "Payment value should not exceed $10,000";
     public static final String DATE_CONSTRAINTS =
             "Payment due dates should be a valid date in the format of dd-MM-yyyy, i.e 20-10-2021 and"
                     + " must equal to or after today's date.";
     public static final String PAYMENT_HISTORY_CONSTRAINTS =
             "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-10-2021, and 'Never'.";
-
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final String TODAY_DATE_AS_STRING = LocalDate.now().format(FORMATTER);
+    public static final String VALIDATION_REGEX_NUMERICAL_FRONT_ANY_DECIMALS = "^[0-9][\\d]*([.][0-9]+)?$"
+            .replaceFirst("^0+", "");
     public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
             .replaceFirst("^0+", "");
+    public static final Double MAXIMUM_AMOUNT = 10000.00;
     public final String value;
     public final LocalDate payByDate;
     public final String payByDateAsString;
@@ -43,7 +50,7 @@ public class Payment {
      */
     public Payment(String payment, LocalDate payByDate) {
         requireNonNull(payment);
-        checkArgument(isValidPayment(payment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPaymentFormat(payment), MESSAGE_CONSTRAINTS);
         value = payment;
         this.payByDate = payByDate;
         this.paymentHistory.add("Never");
@@ -61,13 +68,38 @@ public class Payment {
 
     /**
      * Returns true if a given string is a valid payment amount.
+     * @param test The string to test on
+     * @return Whether the string matches the regex
      */
-    public static boolean isValidPayment(String test) {
+    public static boolean isValidPaymentFormat(String test) {
         return test.matches(VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES);
+    }
+
+
+    /**
+     * Returns true if a given string is a number any number of decimal places which may or may not be a valid payment.
+     * @param test The string to test on
+     * @return Whether the string matches the regex
+     */
+    public static boolean isNumberWithAnyDecimals(String test) {
+        return test.matches(VALIDATION_REGEX_NUMERICAL_FRONT_ANY_DECIMALS);
+    }
+
+    /**
+     * Checks if the amount to set is less than or equal to the maximum allowed.
+     * @param test The string to test on
+     * @return Whether the string matches the regex and is less than the maximum allowed
+     */
+    public static boolean isValidPaymentAmount(String test) {
+        assert test.matches(VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES)
+                : "isValidPaymentAmount() only called after isValidPaymentFormat() regex check";
+        return Double.parseDouble(test) <= MAXIMUM_AMOUNT;
     }
 
     /**
      * Returns true if a given string is a valid pay by date.
+     * @param payByDateAsString The string to check
+     * @return Whether the given string follows the correct format
      */
     public static boolean isValidPayByDate(String payByDateAsString) {
         if (!payByDateAsString.equals("-")) {
@@ -84,6 +116,8 @@ public class Payment {
 
     /**
      * Returns true if a given list is a valid payment history.
+     * @param paymentHistory The List to check
+     * @return Whether the given List follows the correct format for payment histories
      */
     public static boolean isValidPaymentHistory(List<String> paymentHistory) {
         if (!paymentHistory.get(0).equals("Never")) {
@@ -98,7 +132,7 @@ public class Payment {
     }
 
     /**
-     * Copies a payment history to the current Payment
+     * Copies a payment history to the current Payment.
      * @param historyToCopy The payment history to copy
      */
     public void copyPaymentHistory(List<String> historyToCopy) {
@@ -120,8 +154,8 @@ public class Payment {
     }
 
     /**
-     * Provides the String representation of the payment's overdue status
-     * @return the status of the payment as a String
+     * Provides the String representation of the payment's overdue status.
+     * @return The status of the payment as a String
      */
     public String getOverdueStatus() {
         if (isOverdue) {
