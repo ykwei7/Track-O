@@ -47,10 +47,6 @@ public class ClearRemarkCommand extends Command {
 
         Tutee tuteeToEdit = lastShownList.get(targetIndex.getZeroBased());
 
-        if (tuteeToEdit.getRemark().value.equals("-")) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
-        }
-
         Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
                     tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), new Remark("-"),
                     tuteeToEdit.getTags(), tuteeToEdit.getLessons());
@@ -58,7 +54,11 @@ public class ClearRemarkCommand extends Command {
         model.setTutee(tuteeToEdit, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedTutee));
+        if (tuteeToEdit.getRemark().value.equals("-")) {
+            throw new CommandException(String.format(MESSAGE_NOT_EDITED, editedTutee));
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, editedTutee));
+        }
     }
 
 
