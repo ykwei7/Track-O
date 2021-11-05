@@ -57,6 +57,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             Index lessonIndex = ParserUtil.parseLessonIndex(argMultimap.getValue(PREFIX_LESSON).get());
             return new PaymentAddCommand(index, lessonIndex);
         }
+
         if (argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_LESSON , PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_RECEIVED_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -67,6 +68,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             String paymentValueToSetWithDecimals = String.format("%.2f", paymentValueToSetValue);
             return new PaymentSetAmountCommand(index, paymentValueToSetWithDecimals);
         }
+
         if (argMultimap.getValue(PREFIX_PAYMENT_DATE).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_LESSON, PREFIX_PAYMENT_RECEIVED_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -80,6 +82,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             }
             return new PaymentSetDateCommand(index, paymentPayByDateToSet);
         }
+
         if (argMultimap.getValue(PREFIX_PAYMENT_RECEIVED_DATE).isPresent()) {
             if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE, PREFIX_LESSON)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

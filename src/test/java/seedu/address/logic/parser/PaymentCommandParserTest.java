@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PAYMENT_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PAYMENT_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PAYMENT_RECV_DATE_DESC;
@@ -17,6 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_RECV_DA
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TUTEE;
 
@@ -50,6 +52,7 @@ public class PaymentCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
+
         // negative index
         assertParseFailure(parser, "-5" , MESSAGE_INVALID_FORMAT);
 
@@ -65,6 +68,9 @@ public class PaymentCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // integer out of bounds
+        assertParseFailure(parser, INDEX_OUT_OF_BOUNDS, MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
+
         assertParseFailure(parser, "1" + INVALID_PAYMENT_AMOUNT_DESC,
                 Payment.MESSAGE_CONSTRAINTS); // invalid payment amount
         // assertParseFailure(parser, "1" + INVALID_LESSON_INDEX_DESC,
