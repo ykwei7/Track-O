@@ -14,28 +14,15 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 1. Ensure you have Java `11` or above installed in your Computer. 
 
-2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.3.1/v1.3.1.jar) <-- need to change this.
+2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.4/tracko.jar)
 
 3. Copy the file to the folder you want to use as the _home folder_ to run Track-O.
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds as shown in the image below. Note how the app contains some sample data.<br>
 
-![sample_ug.png](sample_ug.png)
+![](sample_ug.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will prompt the help window.<br>
-   Some example commands you can try:
-
-   * **`add`**`n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link` : Adds a tutee named John Doe with all his relevant information in the tutee list.
-
-   * **`list`** : Lists all tutees.
-
-   * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
-
-   * **`clear`** : Deletes all tutees in the tutee list.
-
-   * **`exit`** : Exits the app.
-
-7. Refer to the [Features](#features) below for details of each command.
+5. Refer to [Setting up your first tutee](#Setting up your first tutee) to get started using Track-O.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -65,38 +52,43 @@ level | Refers to the education level of a student in the context of Singapore's
 ## Setting up your first tutee
 
 This section provides a quick guide to adding your first tutee and carrying out your first lesson. For more information
-on each command, it can found under the [Features](#Features) section of our guide. To run a command, simply type the command in the command box and hit the `enter` key on your keyboard.
+on each command, it can found under the [Features](#Features) section of our guide. To run a command, simply type the command in the command box and hit the Enter key on your keyboard.
 
 ### Before your lesson
 1. Let's clear the existing sample data first. Run `clear` to remove the existing tutees.
-2. To add in a new tutee, run `add n/John Tan l/p5 a/Hougang Ave 246 sch/Rosyth p/84567890`.
-This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth`, living in `Hougang Ave 246` who can be contacted at `84567890`.
-3. To add a lesson for this tutee, run `addlesson 1 subject/Chemistry d/7 s/14:00 e/16:00 rate/30`.
-This will add a `Chemistry` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
+2. To add in a new tutee, run `add n/John Tan l/p5 a/246 Hougang Ave sch/Rosyth School p/84567890`.
+This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, living in `246 Hougang Ave` who can be contacted at `84567890`.
+3. To add a lesson for this tutee, run `addlesson 1 subject/English d/7 s/14:00 e/16:00 rate/30`.
+This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
 4. To state a date to receive payment by, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
 the 5th of January 2022.
 <br>
 5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+
+![](john_ug.png)
 
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
 the rate was `$30` per hour over 2 hours, the final fees adds up to `$60.00`.
 2. To add in any remarks for the lesson, run `remark 1 r/Good Progress!` and this set the comments `Good Progress!`
 under the remarks for John.
-3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00` and
-the pay-by date used in step 4 under **Before your lesson**.
+3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00`,
+the pay-by date used in step 4 under [Before your lesson](#Before your lesson), and updates John's last paid date to today's date.
+4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-### Tracking your payment of a tutee
+![](john_2_ug.png)
+
+### Managing your payments
 1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John. 
 2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
 `$100.00`.
-4. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
+3. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
 This resets the value owed by John to `0` and sets the next date to pay by to `05-02-2022`.
 
-### Managing lessons of tutees
+### Managing your lessons
 1. To view your schedule for the week, run `schedule` and this displays your upcoming lessons for the week.
-2. To add in a new lesson to John, run `addlesson 1 subject/Physics d/6 s/10:00 e/12:00 rate/40`. This will add a `Physics` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
-3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Physics` lesson previously added. 
+2. To add in a new lesson to John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
+3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Math` lesson previously added. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -137,7 +129,7 @@ Format: `help`
 
 Adds a tutee to the existing list of tutees.
 
-![add_ug.png](add_ug.png)
+![](add_ug.png)
 
 Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
@@ -236,6 +228,8 @@ Example:
 ### Clearing all entries : `clear`
 
 Clears the tutee list and the user's schedule.
+
+![](clear_ug.png)
 
 Format: `clear`
 
@@ -337,7 +331,7 @@ Examples:
 
 Format: `payment INDEX lesson/LESSON_INDEX`
 
-![](payment_lesson.png)
+![](payment_lesson_ug.png)
 
 * Adds the fees of the specified lesson at `LESSON_INDEX` to the specified tutee's payment details at `INDEX`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -352,7 +346,7 @@ Examples:
 
 Format: `payment INDEX amount/AMOUNT`
 
-![](payment_amount.png)
+![](payment_amount_ug.png)
 
 * Changes the payment amount due by the specified tutee at `INDEX` to `AMOUNT`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -368,7 +362,7 @@ Examples:
 
 Format: `payment INDEX by/DUE_DATE`
 
-![](payment_due.png)
+![](payment_due_ug.png)
 
 * Changes the payment due date of the specified tutee at `INDEX` to `DUE_DATE`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -383,7 +377,7 @@ Examples:
 
 Format: `payment INDEX receive/[DUE_DATE]`
 
-![](payment_receive.png)
+![](payment_receive_ug.png)
 
 * Resets the payment amount due of the specified tutee to `0`.
 * Resets the payment due date of the specified tutee at `INDEX` to `-`, or `DUE_DATE` if specified.
