@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRACTICAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +57,7 @@ public class EditTuteeDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditTuteeDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditTuteeDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_PRACTICAL).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }
