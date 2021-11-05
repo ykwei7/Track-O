@@ -46,17 +46,9 @@ public class ParserUtil {
      * @return whether index is within the acceptable range
      */
     private static boolean isWithinIndexRange(String trimmedIndex) {
-        int currIndex = 0;
-        for (int i = 0; i < trimmedIndex.length(); i++) {
-            char c = trimmedIndex.charAt(i);
-            if (c != '0') {
-                break;
-            } else {
-                currIndex += 1;
-            }
-        }
-        String removedLeadingZeros = trimmedIndex.substring(currIndex);
-        return !(removedLeadingZeros.length() > 9);
+        String strPattern = "^0+(?!$)";
+        trimmedIndex = trimmedIndex.replaceAll(strPattern, "");
+        return !(trimmedIndex.length() > 9);
     }
 
     /**
