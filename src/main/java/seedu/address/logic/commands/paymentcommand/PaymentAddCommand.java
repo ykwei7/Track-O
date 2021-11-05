@@ -34,7 +34,7 @@ public class PaymentAddCommand extends PaymentCommand {
     public static final String MESSAGE_LESSON_INDEX_OUT_OF_BOUNDS = "Lesson index provided is invalid.";
 
     public static final String MESSAGE_AMOUNT_EXCEED_MAXIMUM = "Adding this lesson's fees is not allowed."
-            + "\n(Payment value will exceed $10,000)";
+            + "\n(Payment value will exceed $100,000)";
 
     private final Index targetIndex;
     private final Index lessonIndex;
@@ -102,7 +102,9 @@ public class PaymentAddCommand extends PaymentCommand {
         LocalDate existingPayByDate = existingPayment.getPayByDate();
 
         String updatedPaymentAsString = addLessonCostToValue(lessonIndex, tuteeToGet);
-
+        if (!Payment.isValidPaymentAmount(updatedPaymentAsString)) {
+            throw new CommandException(MESSAGE_AMOUNT_EXCEED_MAXIMUM);
+        }
         Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, updatedPaymentAsString, existingPayByDate,
                 null);
 

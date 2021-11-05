@@ -69,11 +69,11 @@ public class PaymentTest {
                 Payment.isValidPaymentAmount("90.333")); // more than 2 decimal places
 
         // invalid payment amounts
-        assertFalse(Payment.isValidPaymentAmount("10001")); // exceeds 10000
+        assertFalse(Payment.isValidPaymentAmount("100001")); // exceeds 100000
         assertFalse(Payment.isValidPaymentAmount(String.valueOf(Integer.MAX_VALUE))); // MAX_INT
 
         // valid payment amounts
-        assertTrue(Payment.isValidPaymentAmount("10000")); // upper boundary value
+        assertTrue(Payment.isValidPaymentAmount("100000")); // upper boundary value
         assertTrue(Payment.isValidPaymentAmount("0")); // lower boundary value
         assertTrue(Payment.isValidPaymentAmount("911")); // whole number with 0 decimal places
         assertTrue(Payment.isValidPaymentAmount("90.50")); // 2 decimal places ending with 0
