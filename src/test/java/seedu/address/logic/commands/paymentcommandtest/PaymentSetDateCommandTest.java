@@ -32,7 +32,7 @@ import seedu.address.model.tutee.Tutee;
  * Contains integration tests (interaction with the Model) and unit tests for
  *  * {@code PaymentReceiveTest}.
  */
-public class PaymentSetDateTest {
+public class PaymentSetDateCommandTest {
 
     private static final String NEW_PAYBYDATE_VAL_STUB_1 = "15-10-2022";
     private static final String NEW_PAYBYDATE_VAL_STUB_2 = "20-10-2022";
