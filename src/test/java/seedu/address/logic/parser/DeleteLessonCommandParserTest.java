@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_INDEX;
@@ -55,6 +56,9 @@ public class DeleteLessonCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, INDEX_OUT_OF_BOUNDS, MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
+
+        assertParseFailure(parser, "1" + LESSON_INDEX + INDEX_OUT_OF_BOUNDS,
+                MESSAGE_INVALID_LESSON_INDEX);
 
         assertParseFailure(parser,
                 "1" + INVALID_LESSON_INDEX, MESSAGE_INVALID_INDEX); // invalid subject
