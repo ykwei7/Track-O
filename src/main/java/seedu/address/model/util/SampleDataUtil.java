@@ -3,7 +3,6 @@ package seedu.address.model.util;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -34,7 +33,7 @@ public class SampleDataUtil {
     public static final LocalDate STANDARD_PAYMENT_DATE = LocalDate.now().plusYears(1);
 
     public static final LocalDate OVERDUE_PAYMENT_DATE = LocalDate.now().minusDays(1);
-    
+
     public static final List<Lesson> LESSONS_ALEX = List.of(
             new Lesson(new Subject("Chinese"),
                     new Time(DayOfWeek.SATURDAY, LocalTime.parse("08:00"), LocalTime.parse("09:00")),
