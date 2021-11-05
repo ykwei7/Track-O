@@ -33,7 +33,7 @@ import seedu.address.model.tutee.Tutee;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- *  * {@code PaymentReceiveTest}.
+ *  * {@code PaymentReceiveCommand}.
  */
 public class PaymentReceiveCommandTest {
 
