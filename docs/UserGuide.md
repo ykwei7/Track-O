@@ -245,6 +245,7 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * The lesson occurs on the specified `DAY_OF_WEEK`, from the specified `START_TIME` to the specified `END_TIME`, costing `HOURLY_RATE` dollars per hour.
 * `DAY_OF_WEEK` **must be an integer in the range [1, 7]** where `1` to `7` corresponds to Monday to Sunday.
 * `START_TIME` and `END_TIME` must be specified in an `HH:MM` format.
+* The supported duration for a lesson is **30 min — 23 h 59 min**
 * `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 * If the lesson that is being added conflicts with an existing lesson belonging to any tutee, Track-O feedbacks that there is a schedule conflict,
 and re-displays the information of the lesson that the user inputs.
