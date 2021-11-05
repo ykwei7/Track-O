@@ -156,7 +156,7 @@ class JsonAdaptedTutee {
         if (payment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName()));
         }
-        if (!Payment.isValidPayment(payment)) {
+        if (!Payment.isValidPaymentFormat(payment)) {
             throw new IllegalValueException(Payment.MESSAGE_CONSTRAINTS);
         }
 

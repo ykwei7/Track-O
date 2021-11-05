@@ -6,7 +6,7 @@ title: User Guide
 Track-O is a **desktop app for private tutors to manage their tutees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Track-O lets you track an assortment of data, from grades to home addresses to lesson timings. You can easily access the many functions of Track-O using simple commands, such as add and get. Hop over to our Quick Start section to get started.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -25,15 +25,15 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will prompt the help window.<br>
    Some example commands you can try:
 
-    * **`add`**`n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link` : Adds a tutee named John Doe with all his relevant information in the tutee list.
+   * **`add`**`n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link` : Adds a tutee named John Doe with all his relevant information in the tutee list.
 
-    * **`list`** : Lists all tutees.
+   * **`list`** : Lists all tutees.
 
-    * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
+   * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
 
-    * **`clear`** : Deletes all tutees in the tutee list.
+   * **`clear`** : Deletes all tutees in the tutee list.
 
-    * **`exit`** : Exits the app.
+   * **`exit`** : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -54,13 +54,17 @@ Terms | Explanation
 command | The text that you enter in the command box. Different commands have different formats.
 prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
 parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km`
+alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km` 
 integer | A number that has strictly no decimal places.
-level | Refers to the education level of a student in the context of Singapore's education system.
+level | Refers to the education level of a student in the context of Singapore's education system.  
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -69,8 +73,8 @@ level | Refers to the education level of a student in the context of Singapore's
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times.<br>
-  e.g. `[t/TAG]…` tags are optional can be added multiple times: `t/friend`, `t/friend t/family` etc.<br>
-  e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple keyword search: `subject/English Math Science`
+e.g. `[t/TAG]…` tags are optional can be added multiple times: `t/friend`, `t/friend t/family` etc.<br>
+e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple keyword search: `subject/English Math Science`
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -81,6 +85,7 @@ level | Refers to the education level of a student in the context of Singapore's
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `schedule`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+</div>
 
 ### Viewing help : `help`
 
@@ -154,8 +159,8 @@ Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS
 
 * At least one of the optional filters must be provided.
 * Keywords are case-insensitive.
-* The returned tutee list contains matches that fulfills **all** the filters provided. If a filter has multiple keywords,
-  only tutees which fulfills **all** keywords will be returned.
+* The returned tutee list contains matches that fulfills **all** the filters. If the filter has multiple keywords,
+only tutees which fulfills **all** keywords will be returned.
 * `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
 * `level` filter can only take **1 keyword** in the form of abbreviation.<br>
@@ -386,7 +391,7 @@ Action | Format, Examples
 **Delete tutee** | `delete INDEX`<br> e.g. `delete 3`
 **Edit tutee** | `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…` <br> e.g. `edit 2 sch/Victoria Jc l/j1`
 **Find tutee** | `find [n/NAME…] [l/LEVEL] [subject/SUBJECT…] [overdue/OVERDUE]`<br> e.g `find n/david subject/math`
-**List tutees** | `list`
+**List all tutees** | `list`
 **Get tutee information** | `get INDEX`<br> e.g. `get 2`
 **Add remark** | `remark INDEX r/TEXT` <br> e.g `remark 1 r/Good progress.`
 **Clear remarks** | `clearremark INDEX` <br> e.g `clearremark 1`
