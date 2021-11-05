@@ -83,7 +83,7 @@ public class PaymentAddCommandTest {
     }
 
     @Test
-    public void execute_addLessonFees_success() throws CommandException, ScheduleClashException {
+    public void execute_validInput_success() throws CommandException, ScheduleClashException {
 
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee thirdTutee = model.getFilteredTuteeList().get(INDEX_THIRD_TUTEE.getZeroBased());

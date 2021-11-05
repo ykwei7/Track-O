@@ -35,11 +35,10 @@ public class PaymentReceiveCommand extends PaymentCommand {
             + "is already 0 and date to make payment by had no change.";
 
 
-    private static final String ZERO_PAYMENT_VAL = "0";
+    private static final String ZERO_PAYMENT_VAL = "0.00";
 
     private final Index targetIndex;
     private final LocalDate newPayByDate;
-
 
     /**
      * Creates a command to set the payment value owed by tutee to 0 and
