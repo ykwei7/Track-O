@@ -1,46 +1,45 @@
-johndoe.md---
+ykwei7.md---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Yangken' Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Track-O
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Track-O is a desktop address book application used by private tutors to schedule lessons and track payments. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **Tracking payments**: Added the ability to track payments for Tutees.
+  * What it does: allows the user to store payment amounts due by their tutees and keep track of the due date.
+  * Justification: This feature implements a core functionality for the application as tutors need not rely on manual bookkeeping, reducing mistakes in calculations and providing more convenience to the users.
+  * Highlights: This enhancement affects existing commands and commands to be added in future, such as `PaymentAddCommand` and `PaymentSetAmountCommand`.
+    It required an in-depth analysis of design alternatives, especially in regard to how the payment amount would be accumulated by the tutee and how the user would track it.
+    <br><br>
+    For example, initial plans involved having a fixed payment due date of 1 week since a payment was made, to be calculated automatically using `LocalDate`, but considering not all tutors collect their fees weekly, the final design let them set their own payment due dates.
+  * The implementation was challenging to utilize `payment` as a parent command and parse it into 5 separate functionalities.
+  * Credits: *-*
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **Get**: Added the ability to view more information.
+  * What it does: allows the user to keep track of additional information without it clogging existing GUI tutee panel.
+  * Justification: Information of tutee may span multiple lines, especially to track progress of the tutee. If it were displayed on the GUI tutee panel, this would reduce readability. Hence, the `get` command allows for information to be displayed without affected general overview of GUI.
+  * Highlights: This enhancement allowed for more fields to be added such as lesson information and remarks which takes up more space, compared to shorter information like address.
+  * Credits: *-*
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=ykwei7&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabAuthor=atyhamos&tabRepo=AY2122S1-CS2103T-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&tabType=zoom&zA=ykwei7&zR=AY2122S1-CS2103T-F12-3%2Ftp%5Bmaster%5D&zACS=238.5&zS=2021-09-17&zFS=ykwei7&zU=2021-11-05&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Assigned and tracked tasks and feature implementations
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Fixed issue to synchronize error message output when index exceeds max integer range
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added the `Setting up your first tutee` portion of the UG for users to get started
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added the use cases for `payment` feature for different scenarios
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#107](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/107),
+  [\#159](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/159),
+    [\#162](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/162)
