@@ -23,7 +23,7 @@ public class Payment {
     public static final String DECIMAL_CONSTRAINTS =
             "Payment values must have either 0 or 2 decimal places. If it has 2 decimal places, it must "
                     + "end with either a 0 or 5, i.e 40.50 or 40.55.";
-    public static final String AMOUNT_CONSTRAINTS = "Payment value should not exceed $10,000";
+    public static final String AMOUNT_CONSTRAINTS = "Payment value should not exceed $100,000";
     public static final String DATE_CONSTRAINTS =
             "Payment due dates should be a valid date in the format of dd-MM-yyyy, i.e 20-10-2021 and"
                     + " must equal to or after today's date.";
@@ -35,7 +35,7 @@ public class Payment {
             .replaceFirst("^0+", "");
     public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
             .replaceFirst("^0+", "");
-    public static final Double MAXIMUM_AMOUNT = 10000.00;
+    public static final Double MAXIMUM_AMOUNT = 100000.00;
     public final String value;
     public final LocalDate payByDate;
     public final String payByDateAsString;

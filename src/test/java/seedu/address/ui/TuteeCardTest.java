@@ -3,8 +3,8 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutees.BENSON;
-import static seedu.address.testutil.TypicalTutees.TUTEE_WITHOUT_TAGS_AND_LESSONS;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Tutee;
+import seedu.address.testutil.TuteeBuilder;
 
 
 public class TuteeCardTest {
@@ -21,7 +22,9 @@ public class TuteeCardTest {
     private static final int VALID_INDEX = 1;
 
     private static final Tutee VALID_TUTEE = BENSON;
-    private static final Tutee VALID_TUTEE_NO_TAGS = TUTEE_WITHOUT_TAGS_AND_LESSONS;
+    private static final Tutee VALID_TUTEE_NO_TAGS = new TuteeBuilder().withName("Test Tutee")
+            .withPhone("94824423").withSchool("acsj").withLevel("p1").withAddress("3rd street").withPayment("65",
+                    LocalDate.of(2023, 10, 20)).build();
 
     // Singleton pattern ensures no multiple initialisations of JavaFX toolkit
     private static boolean isJavaFxCompatible = true;
