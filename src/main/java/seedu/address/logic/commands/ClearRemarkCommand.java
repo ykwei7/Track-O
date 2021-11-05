@@ -25,6 +25,9 @@ public class ClearRemarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Remark cleared from tutee: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "Message has already been cleared!";
+
+    private static final String EMPTY_REMARK = "-";
 
     private final Index targetIndex;
 
@@ -45,14 +48,19 @@ public class ClearRemarkCommand extends Command {
         }
 
         Tutee tuteeToEdit = lastShownList.get(targetIndex.getZeroBased());
+
         Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
-                    tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), new Remark("-"),
-                    tuteeToEdit.getTags(), tuteeToEdit.getLessons());
+                    tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
+                    new Remark(EMPTY_REMARK), tuteeToEdit.getTags(), tuteeToEdit.getLessons());
 
         model.setTutee(tuteeToEdit, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedTutee));
+        if (tuteeToEdit.getRemark().value.equals(EMPTY_REMARK)) {
+            throw new CommandException(String.format(MESSAGE_NOT_EDITED, editedTutee));
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, editedTutee));
+        }
     }
 
 

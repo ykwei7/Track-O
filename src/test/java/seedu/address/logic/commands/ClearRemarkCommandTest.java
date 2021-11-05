@@ -17,6 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.tutee.Tutee;
+import seedu.address.testutil.TuteeBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -30,15 +31,23 @@ public class ClearRemarkCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredList_success() throws ScheduleClashException {
-        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        ClearRemarkCommand clearRemarkCommand = new ClearRemarkCommand(INDEX_FIRST_TUTEE);
+    public void execute_validIndexUnfilteredListNonEmptyRemark_success() throws ScheduleClashException {
+        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_SECOND_TUTEE.getZeroBased());
+        Tutee clearedTutee = new TuteeBuilder(retrievedTutee).withRemark("-").build();
+        ClearRemarkCommand clearRemarkCommand = new ClearRemarkCommand(INDEX_SECOND_TUTEE);
 
-        String expectedMessage = String.format(ClearRemarkCommand.MESSAGE_SUCCESS, retrievedTutee);
+        String expectedMessage = String.format(ClearRemarkCommand.MESSAGE_SUCCESS, clearedTutee);
 
         ModelManager expectedModel = new ModelManager(model.getTrackO(), new UserPrefs());
 
         assertCommandSuccess(clearRemarkCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListEmptyRemark_throwsCommandException() {
+        ClearRemarkCommand clearRemarkCommand = new ClearRemarkCommand(INDEX_FIRST_TUTEE);
+
+        assertCommandFailure(clearRemarkCommand, model, ClearRemarkCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test

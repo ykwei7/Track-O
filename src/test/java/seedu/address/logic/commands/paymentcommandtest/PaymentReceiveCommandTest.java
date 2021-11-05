@@ -35,9 +35,9 @@ import seedu.address.model.tutee.Tutee;
  * Contains integration tests (interaction with the Model) and unit tests for
  *  * {@code PaymentReceiveTest}.
  */
-public class PaymentReceiveTest {
+public class PaymentReceiveCommandTest {
 
-    private static final String ZERO_PAYMENT_VAL_STUB = "0";
+    private static final String ZERO_PAYMENT_VAL_STUB = "0.00";
     private static final String NEW_PAYMENT_VAL_STUB_1 = "100";
     private static final String NEW_PAYBYDATE_VAL_STUB_1 = "15-10-2022";
     private static final String NEW_PAYBYDATE_VAL_STUB_2 = "20-10-2022";

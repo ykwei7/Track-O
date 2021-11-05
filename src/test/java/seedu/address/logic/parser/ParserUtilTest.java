@@ -33,7 +33,7 @@ public class ParserUtilTest {
     private static final String INVALID_SUBJECT = "Chemistry%";
     private static final String INVALID_PAYMENT_DECIMALS = "500.1";
     private static final String INVALID_PAYMENT = "5a00";
-    private static final String INVALID_PAYMENT_EXCEED_MAXIMUM = "10001";
+    private static final String INVALID_PAYMENT_EXCEED_MAXIMUM = "100001";
     private static final String INVALID_OVERDUE = "nope";
 
     private static final String VALID_NAME = "Rachel Walker";

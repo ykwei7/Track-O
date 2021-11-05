@@ -8,11 +8,13 @@ import static seedu.address.logic.commands.paymentcommand.PaymentAddCommand.MESS
 import static seedu.address.logic.commands.paymentcommand.PaymentAddCommand.addLessonCostToValue;
 import static seedu.address.logic.commands.paymentcommand.PaymentCommand.UPDATE_TUTEE_PAYMENT_SUCCESS;
 import static seedu.address.logic.commands.paymentcommandtest.PaymentCommandTest.modifyPaymentOfTutee;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TUTEE;
+import static seedu.address.testutil.TypicalTutees.LESSON;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import java.time.LocalDate;
@@ -31,6 +33,7 @@ import seedu.address.model.exceptions.ScheduleClashException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Tutee;
+import seedu.address.testutil.TuteeBuilder;
 
 public class PaymentAddCommandTest {
 
@@ -80,7 +83,7 @@ public class PaymentAddCommandTest {
     }
 
     @Test
-    public void execute_addLessonFees_success() throws CommandException, ScheduleClashException {
+    public void execute_validInput_success() throws CommandException, ScheduleClashException {
 
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee thirdTutee = model.getFilteredTuteeList().get(INDEX_THIRD_TUTEE.getZeroBased());
@@ -103,5 +106,15 @@ public class PaymentAddCommandTest {
         CommandResult expectedMsg = new CommandResult(successMsg);
 
         assertCommandSuccess(paymentAddCommand, model, expectedMsg, expectedModel);
+    }
+
+    @Test
+    public void addLessonCostToValue_invalidAmount_throwsCommandException() {
+        Tutee testTuteeWithMaxPayment = new TuteeBuilder().withName("John").withPhone("94824422").withSchool("acsp")
+                .withLevel("p2").withAddress("3rd street").withPayment(String.format("%.2f", Payment.MAXIMUM_AMOUNT),
+                        LocalDate.of(2023, 10, 20)).withLesson(LESSON).build();
+        Index firstLessonIndex = Index.fromOneBased(1);
+        assertThrows(CommandException.class, () -> addLessonCostToValue(firstLessonIndex,
+                testTuteeWithMaxPayment));
     }
 }

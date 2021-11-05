@@ -54,9 +54,49 @@ Terms | Explanation
 command | The text that you enter in the command box. Different commands have different formats.
 prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
 parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km` 
+alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km`
 integer | A number that has strictly no decimal places.
-level | Refers to the education level of a student in the context of Singapore's education system.  
+level | Refers to the education level of a student in the context of Singapore's education system.
+
+### Application layout
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Setting up your first tutee
+
+This section provides a quick guide to adding your first tutee and carrying out your first lesson. For more information
+on each command, it can found under the [Features](#Features) section of our guide. To run a command, simply type the command in the command box and hit the `enter` key on your keyboard.
+
+### Before your lesson
+1. Let's clear the existing sample data first. Run `clear` to remove the existing tutees.
+2. To add in a new tutee, run `add n/John Tan l/p5 a/Hougang Ave 246 sch/Rosyth p/84567890`.
+This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth`, living in `Hougang Ave 246` who can be contacted at `84567890`.
+3. To add a lesson for this tutee, run `addlesson 1 subject/Chemistry d/7 s/14:00 e/16:00 rate/30`.
+This will add a `Chemistry` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
+4. To state a date to receive payment by, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
+the 5th of January 2022.
+<br>
+5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+
+### After your lesson
+1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
+the rate was `$30` per hour over 2 hours, the final fees adds up to `$60.00`.
+2. To add in any remarks for the lesson, run `remark 1 r/Good Progress!` and this set the comments `Good Progress!`
+under the remarks for John.
+3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00` and
+the pay-by date used in step 4 under **Before your lesson**.
+
+### Tracking your payment of a tutee
+1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John.
+2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
+`$100.00`.
+4. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
+This resets the value owed by John to `0` and sets the next date to pay by to `05-02-2022`.
+
+### Managing lessons of tutees
+1. To view your schedule for the week, run `schedule` and this displays your upcoming lessons for the week.
+2. To add in a new lesson to John, run `addlesson 1 subject/Physics d/6 s/10:00 e/12:00 rate/40`. This will add a `Physics` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.
+3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Physics` lesson previously added.
 
 --------------------------------------------------------------------------------------------------------------------
 
