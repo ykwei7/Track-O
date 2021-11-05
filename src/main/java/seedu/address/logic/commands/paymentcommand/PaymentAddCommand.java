@@ -76,6 +76,10 @@ public class PaymentAddCommand extends PaymentCommand {
         Double updatedPaymentVal = Double.parseDouble(existingPaymentValue) + lessonCost;
         String updatedPaymentAsString = String.format("%.2f", updatedPaymentVal);
 
+        if (!Payment.isValidPaymentAmount(updatedPaymentAsString)) {
+            throw new CommandException(MESSAGE_AMOUNT_EXCEED_MAXIMUM);
+        }
+
         return updatedPaymentAsString;
     }
 
@@ -102,9 +106,7 @@ public class PaymentAddCommand extends PaymentCommand {
         LocalDate existingPayByDate = existingPayment.getPayByDate();
 
         String updatedPaymentAsString = addLessonCostToValue(lessonIndex, tuteeToGet);
-        if (!Payment.isValidPaymentAmount(updatedPaymentAsString)) {
-            throw new CommandException(MESSAGE_AMOUNT_EXCEED_MAXIMUM);
-        }
+
         Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, updatedPaymentAsString, existingPayByDate,
                 null);
 
