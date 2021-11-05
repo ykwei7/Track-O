@@ -43,6 +43,7 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
@@ -278,10 +279,16 @@ public class ParserUtil {
     public static String parsePaymentValue(String paymentValue) throws ParseException {
         requireNonNull(paymentValue);
         String trimmedPayment = paymentValue.trim();
-        if (!Payment.isValidPayment(trimmedPayment)) {
+        if (!Payment.isNumberWithAnyDecimals(trimmedPayment)) {
             throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
+        } else if (!Payment.isValidPaymentFormat(trimmedPayment)) {
+            throw new ParseException(Payment.DECIMAL_CONSTRAINTS);
+        } else if (!Payment.isValidPaymentAmount(trimmedPayment)) {
+            // Payment amount is greater than maximum allowed
+            throw new ParseException(Payment.AMOUNT_CONSTRAINTS);
+        } else {
+            return trimmedPayment;
         }
-        return trimmedPayment;
     }
 
     /**
@@ -294,7 +301,7 @@ public class ParserUtil {
     public static Index parseLessonIndex(String lessonIndex) throws ParseException {
         requireNonNull(lessonIndex);
         String trimmedLessonIndex = lessonIndex.trim();
-        if (!Payment.isValidPayment(trimmedLessonIndex)) {
+        if (!Payment.isValidPaymentFormat(trimmedLessonIndex)) {
             throw new ParseException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 

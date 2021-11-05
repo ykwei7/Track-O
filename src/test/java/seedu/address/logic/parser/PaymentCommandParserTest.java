@@ -80,7 +80,7 @@ public class PaymentCommandParserTest {
     @Test
     public void parse_multipleValues_failure() {
         String failureMsg = String.format(MESSAGE_INVALID_FORMAT,
-                PaymentCommand.MESSAGE_PAYMENT_MANAGEMENT_USAGE);
+                PaymentCommand.MESSAGE_BASIC_USAGE_ALL);
         assertParseFailure(parser, "1" + PAYMENT_LESSON_INDEX_AMY
                 + PAYMENT_AMOUNT_DESC_AMY, failureMsg);
         assertParseFailure(parser, "1" + PAYMENT_DATE_DESC_AMY

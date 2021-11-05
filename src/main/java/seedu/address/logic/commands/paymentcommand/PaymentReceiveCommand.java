@@ -20,6 +20,9 @@ public class PaymentReceiveCommand extends PaymentCommand {
 
     public static final String COMMAND_WORD = "payment";
 
+    public static final String BASIC_USAGE = COMMAND_WORD + " TUTEE_INDEX "
+            + PREFIX_PAYMENT_RECEIVED_DATE + "[DATE_RECEIVED]\n";
+
     public static final String MESSAGE_USAGE = "Sets payment value owed by the tutee identified "
             + "by the index number used in the displayed tutee list to 0 and "
             + "has an optional date field to update the date to make next payment by. If no date is set, "
@@ -28,15 +31,14 @@ public class PaymentReceiveCommand extends PaymentCommand {
             + "Optional Parameters: PAY_BY_DATE (in the format of dd-mm-yyyy)\n"
             + "Example: payment 1 " + PREFIX_PAYMENT_RECEIVED_DATE + "15-10-2021\n\n";
 
-    public static final String UPDATE_TUTEE_PAYMENT_SUCCESS = "Updated Payment details of %s:\n%s";
-
-    public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE = "Payment value owed by tutee "
+    public static final String MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE = "Current payment value owed by tutee "
             + "is already 0 and date to make payment by had no change.";
+
+
+    private static final String ZERO_PAYMENT_VAL = "0";
+
     private final Index targetIndex;
     private final LocalDate newPayByDate;
-    private final String zeroPaymentVal = "0.00";
-    private final LocalDate nullPayByDate = null;
-
 
     /**
      * Creates a command to set the payment value owed by tutee to 0 and
@@ -71,22 +73,24 @@ public class PaymentReceiveCommand extends PaymentCommand {
         Payment existingPayment = tuteeToGet.getPayment();
         String existingPaymentValue = existingPayment.getValue();
         LocalDate existingPayByDate = existingPayment.getPayByDate();
-        Tutee editedTutee;
 
-        if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == null && existingPayByDate == null) {
-            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
-        } else if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate == null) {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal,
-                    nullPayByDate, TODAY_DATE_AS_STRING);
-        } else if (zeroPaymentVal.equals(existingPaymentValue) && newPayByDate.equals(existingPayByDate)) {
-            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
-        } else if (newPayByDate == null && existingPayByDate != null) {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal,
-                    nullPayByDate, TODAY_DATE_AS_STRING);
-        } else {
-            editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, zeroPaymentVal,
-                    newPayByDate, TODAY_DATE_AS_STRING);
+        boolean hasZeroPaymentValue = Double.parseDouble(existingPaymentValue) == 0;
+        boolean hasNullExistingDate = existingPayByDate == null;
+        boolean hasNullNewPayByDate = newPayByDate == null;
+        boolean hasSameExistingAndNewDate = false;
+
+        if (!hasNullNewPayByDate) {
+            hasSameExistingAndNewDate = newPayByDate.equals(existingPayByDate);
         }
+        // Cases where current payment value is currently zero and dates have no change
+        if (hasZeroPaymentValue && hasNullNewPayByDate && hasNullExistingDate) {
+            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
+        } else if (hasZeroPaymentValue && hasSameExistingAndNewDate) {
+            throw new CommandException(MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
+        }
+
+        Tutee editedTutee = createEditedPaymentDetailsTutee(tuteeToGet, ZERO_PAYMENT_VAL,
+                newPayByDate, TODAY_DATE_AS_STRING);
 
         model.setTutee(tuteeToGet, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);

@@ -39,6 +39,60 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 --------------------------------------------------------------------------------------------------------------------
 
+## About
+
+This section explains the terms used in the user guide.
+
+If you are an intermediate user, you can hop over to the [Features](#features) section for the details of each command.
+
+If you are an advanced user, you can see all the commands at a glance at the [Command Summary](#command-summary) section.
+
+### Glossary
+
+Terms | Explanation
+--------|------------------
+command | The text that you enter in the command box. Different commands have different formats.
+prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km` 
+integer | A number that has strictly no decimal places.
+level | Refers to the education level of a student in the context of Singapore's education system.  
+
+### Application layout
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Setting up your first tutee
+Insert brief intro
+
+### Before your lesson
+1. If you wish to input in a fresh set of data, [clear](#Clearing all entries) the
+existing data with `clear`. Otherwise, skip this step.
+2. Adding a tutee 
+3. Adding a lesson
+4. Tracking the payment date for your tutee
+<br>
+
+`payment 1 by/25-01-2022`
+5. picture of end result
+
+### After your lesson
+1. payment 1 lesson/1
+2. remark 1 r/Good progress
+3. payment 1 receive/
+
+### Managing your lesson
+1. payment 1 lesson/1
+2. remark 1 r/Good progress
+3. payment 1 receive/
+
+### Tracking your payment
+1. payment
+2. payment amount
+3. payment 1 receive/25-01-2022
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>

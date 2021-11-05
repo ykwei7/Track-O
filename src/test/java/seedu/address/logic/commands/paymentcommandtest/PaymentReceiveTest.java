@@ -1,22 +1,26 @@
 package seedu.address.logic.commands.paymentcommandtest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.paymentcommand.PaymentCommand.UPDATE_TUTEE_PAYMENT_SUCCESS;
 import static seedu.address.logic.commands.paymentcommand.PaymentReceiveCommand.MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE;
+import static seedu.address.logic.commands.paymentcommandtest.PaymentCommandTest.modifyPaymentOfTutee;
+import static seedu.address.model.tutee.Payment.TODAY_DATE_AS_STRING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 import static seedu.address.testutil.TypicalTutees.getTypicalTrackO;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.paymentcommand.PaymentCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.paymentcommand.PaymentReceiveCommand;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -37,19 +41,11 @@ public class PaymentReceiveTest {
     private static final String NEW_PAYMENT_VAL_STUB_1 = "100";
     private static final String NEW_PAYBYDATE_VAL_STUB_1 = "15-10-2022";
     private static final String NEW_PAYBYDATE_VAL_STUB_2 = "20-10-2022";
+    private static final List<String> TODAY_DATE_AS_LIST = Arrays.asList("Never", TODAY_DATE_AS_STRING);
     private static final LocalDate NULL_DATE = null;
 
     private Model model;
 
-    private Model modifyPaymentOfTutee(Index index, String newPaymentValue,
-                                       LocalDate newPayByDate) throws ScheduleClashException {
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
-        Tutee retrievedTutee = model.getFilteredTuteeList().get(index.getZeroBased());
-        Tutee editedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, newPaymentValue,
-                newPayByDate);
-        model.setTutee(retrievedTutee, editedTutee);
-        return model;
-    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws ParseException,
@@ -90,107 +86,137 @@ public class PaymentReceiveTest {
         assertFalse(getFirstCommand.equals(getSecondCommand));
     }
 
+    // Initial tutee has (0, null) and receive command is run without date
     @Test
     public void execute_noChangeInPaymentVal_throwsCommandException() throws ScheduleClashException {
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
-        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        Payment retrievedTuteePayment = retrievedTutee.getPayment();
-        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
-
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, payByDate);
+        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, NULL_DATE, TODAY_DATE_AS_STRING);
 
         PaymentReceiveCommand paymentReceiveCommand = new PaymentReceiveCommand(INDEX_FIRST_TUTEE,
-                payByDate);
+                NULL_DATE);
 
         assertCommandFailure(paymentReceiveCommand, model, MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
     }
 
-    // When provided date is null e.g (200, payByDate) -> (0, payByDate)
+    // Initial tutee has (0, date1) and receive command is run with date1
     @Test
-    public void execute_changeInPaymentVal_success() throws CommandException, ScheduleClashException {
-
+    public void execute_sameDatesGiven_throwsCommandException() throws ScheduleClashException,
+            ParseException {
+        // Creates model with specified payment details
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
-        // Creates tutee with specified payment details
-        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        Payment retrievedTuteePayment = retrievedTutee.getPayment();
-        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, payByDate);
+        LocalDate samePayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, samePayByDate, TODAY_DATE_AS_STRING);
 
         PaymentReceiveCommand paymentReceiveCommand = new PaymentReceiveCommand(INDEX_FIRST_TUTEE,
-                payByDate);
+                samePayByDate);
 
-        paymentReceiveCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
-                payByDate);
-        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
+        assertCommandFailure(paymentReceiveCommand, model, MESSAGE_NO_CHANGE_IN_PAYMENT_VALUE);
     }
 
-    // When provided date is null e.g (200, payByDate) -> (0, null)
+    // Initial tutee has (100, date1) and receive command is run with null, expected tutee => (0, null)
     @Test
-    public void execute_changeInPaymentVal2_success() throws CommandException, ScheduleClashException {
+    public void execute_changeInPaymentVal_success() throws ScheduleClashException {
 
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
-        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, payByDate);
+        LocalDate existingPayByDate = retrievedTuteePayment.getPayByDate();
 
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, existingPayByDate,
+                null);
+        Model expectedModel = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, NULL_DATE,
+                TODAY_DATE_AS_STRING);
         PaymentReceiveCommand paymentReceiveCommand = new PaymentReceiveCommand(INDEX_FIRST_TUTEE,
                 NULL_DATE);
 
-        paymentReceiveCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
-                payByDate);
-        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
+        Payment expectedPayment = new Payment(ZERO_PAYMENT_VAL_STUB, NULL_DATE);
+        expectedPayment.copyPaymentHistory(TODAY_DATE_AS_LIST);
+        String successMsg = String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(),
+                expectedPayment);
+
+        CommandResult expectedMsg = new CommandResult(successMsg);
+
+        assertCommandSuccess(paymentReceiveCommand, model, expectedMsg, expectedModel);
     }
 
-    // When both dates provided are null e.g (200, null) -> (0, null)
+    // Initial tutee has (100, date1) and receive command is run with date2, expected tutee => (0, date2)
     @Test
-    public void execute_changeInPaymentVal3_success() throws CommandException, ScheduleClashException {
+    public void execute_changeInPaymentVal2_success() throws ScheduleClashException, ParseException {
 
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        LocalDate existingPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_1);
+        LocalDate newPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
 
-        Model expectedModel = model;
-        Payment retrievedTuteePayment = retrievedTutee.getPayment();
-        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, NULL_DATE);
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, existingPayByDate,
+                null);
 
+        PaymentReceiveCommand paymentReceiveCommand = new PaymentReceiveCommand(INDEX_FIRST_TUTEE,
+                newPayByDate);
+
+        Payment expectedPayment = new Payment(ZERO_PAYMENT_VAL_STUB, newPayByDate);
+        expectedPayment.copyPaymentHistory(TODAY_DATE_AS_LIST);
+        Model expectedModel = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, newPayByDate,
+                TODAY_DATE_AS_STRING);
+
+        String successMsg = String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(), expectedPayment);
+        CommandResult expectedMsg = new CommandResult(successMsg);
+
+        assertCommandSuccess(paymentReceiveCommand, model, expectedMsg, expectedModel);
+    }
+
+    // Initial tutee has (0, date1) and receive command is run with null, expected tutee => (0, null)
+    @Test
+    public void execute_changeInPaymentVal3_success() throws ScheduleClashException, ParseException {
+
+        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+        // Creates tutee with specified payment details
+        Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        LocalDate existingPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_1);
+
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, existingPayByDate,
+                null);
+        Model expectedModel = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, NULL_DATE,
+                TODAY_DATE_AS_STRING);
         PaymentReceiveCommand paymentReceiveCommand = new PaymentReceiveCommand(INDEX_FIRST_TUTEE,
                 NULL_DATE);
 
-        paymentReceiveCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
-                payByDate);
+        Payment expectedPayment = new Payment(ZERO_PAYMENT_VAL_STUB, NULL_DATE);
+        expectedPayment.copyPaymentHistory(TODAY_DATE_AS_LIST);
+        String successMsg = String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(),
+                expectedPayment);
 
-        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
+        CommandResult expectedMsg = new CommandResult(successMsg);
 
-        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
+        assertCommandSuccess(paymentReceiveCommand, model, expectedMsg, expectedModel);
     }
 
-    // When initial date is null, and changed to non-null date e.g (200, null) -> (0, payByDate)
+    // Initial tutee has (0, null) and receive command is run with date1, expected tutee => (0, date1)
     @Test
-    public void execute_changeInPaymentVal4_success() throws CommandException, ScheduleClashException {
+    public void execute_changeInPaymentVal4_success() throws ScheduleClashException, ParseException {
 
         model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        Payment retrievedTuteePayment = retrievedTutee.getPayment();
-        LocalDate payByDate = retrievedTuteePayment.getPayByDate();
-        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, NEW_PAYMENT_VAL_STUB_1, NULL_DATE);
+        LocalDate newPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
 
+        model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, NULL_DATE,
+                null);
+        Model expectedModel = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, NULL_DATE,
+                TODAY_DATE_AS_STRING);
         PaymentReceiveCommand paymentReceiveCommand = new PaymentReceiveCommand(INDEX_FIRST_TUTEE,
-                payByDate);
+                newPayByDate);
 
-        paymentReceiveCommand.execute(model);
-        Tutee expectedTutee = PaymentCommand.createEditedPaymentDetailsTutee(retrievedTutee, ZERO_PAYMENT_VAL_STUB,
-                payByDate);
-        Tutee actualTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
-        assertEquals(expectedTutee.getPayment(), actualTutee.getPayment());
+        Payment expectedPayment = new Payment(ZERO_PAYMENT_VAL_STUB, newPayByDate);
+        expectedPayment.copyPaymentHistory(TODAY_DATE_AS_LIST);
+        String successMsg = String.format(UPDATE_TUTEE_PAYMENT_SUCCESS, retrievedTutee.getName(),
+                expectedPayment);
+
+        CommandResult expectedMsg = new CommandResult(successMsg);
+
+        assertCommandSuccess(paymentReceiveCommand, model, expectedMsg, expectedModel);
     }
 }
