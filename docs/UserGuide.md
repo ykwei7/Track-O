@@ -6,13 +6,13 @@ title: User Guide
 Track-O is a **desktop app for private tutors to manage their tutees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Track-O lets you track an assortment of data, from grades to home addresses to lesson timings. You can easily access the many functions of Track-O using simple commands, such as add and get. Hop over to our Quick Start section to get started.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. 
+1. Ensure you have Java `11` or above installed in your Computer.
 
 2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.3.1/v1.3.1.jar) <-- need to change this.
 
@@ -25,17 +25,38 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will prompt the help window.<br>
    Some example commands you can try:
 
-   * **`add`**`n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link` : Adds a tutee named John Doe with all his relevant information in the tutee list.
+    * **`add`**`n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link` : Adds a tutee named John Doe with all his relevant information in the tutee list.
 
-   * **`list`** : Lists all tutees.
+    * **`list`** : Lists all tutees.
 
-   * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
+    * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
 
-   * **`clear`** : Deletes all tutees in the tutee list.
+    * **`clear`** : Deletes all tutees in the tutee list.
 
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## About
+
+This section explains the terms used in the user guide.
+
+If you are an intermediate user, you can hop over to the [Features](#features) section for the details of each command.
+
+If you are an advanced user, you can see all the commands at a glance at the [Command Summary](#command-summary) section.
+
+### Glossary
+
+Terms | Explanation
+--------|------------------
+command | The text that you enter in the command box. Different commands have different formats.
+prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km`
+integer | A number that has strictly no decimal places.
+level | Refers to the education level of a student in the context of Singapore's education system.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -48,8 +69,8 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times.<br>
-e.g. `[t/TAG]…` tags are optional can be added multiple times: `t/friend`, `t/friend t/family` etc.<br>
-e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple keyword search: `subject/English Math Science`
+  e.g. `[t/TAG]…` tags are optional can be added multiple times: `t/friend`, `t/friend t/family` etc.<br>
+  e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple keyword search: `subject/English Math Science`
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -67,7 +88,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a tutee: `add`
+### Managing tutee's information
+
+#### Adding a tutee: `add`
 
 Adds a tutee to the existing list of tutees.
 
@@ -76,37 +99,14 @@ Adds a tutee to the existing list of tutees.
 Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
 * `p/PHONE` should only take in 8-digit phone numbers.
-* `l/LEVEL` should only take in `p1` to `p6`, `s1` to `p5`, `j1` to `j2`.
+* `l/LEVEL` should only take in `p1` to `p6`, `s1` to `s5`, `j1` to `j2`.
 * All entries should **not be blank**.
 
 Examples:
 * `add n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link`
 * `add n/Betsy Crowe l/p5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/Northeast region`
 
-### Editing a tutee :  `edit`
-
-Edits an existing tutee in the tutee list.
-
-![edit_ug.png](edit_ug.png)
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
-
-* Edits the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed tutee list and **must be a positive integer** 1, 2, 3, …
-* At least one of the optional fields must be provided.
-* `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
-* `p/PHONE` should only take in 8-digit phone numbers.
-* `l/LEVEL` should only take in `p1` to `p6`, `s1` to `p5`, `j1` to `j2`.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the tutee will be removed i.e adding of tags is not cumulative.
-* You can remove all the tutee’s tags by typing `t/` without specifying any tags after it.
-* All entries should **not be blank**.
-
-Examples:
-* `edit 1 p/91234567 a/345 Bedok North Ave 3` Edits the phone number and address of the 1st tutee to be `91234567` and `345 Bedok North Ave 3` respectively.
-* `edit 2 n/Betty Chan t/` Edits the name of the 2nd tutee to be `Betty Chan` and clears all existing tags.
-
-### Deleting a tutee : `delete`
+#### Deleting a tutee : `delete`
 
 Deletes the specified tutee from our list of tutees.
 
@@ -119,17 +119,66 @@ Format: `delete INDEX`
 * The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd tutee in the address book.
+* `delete 2` deletes the 2nd tutee in the tutee list.
 
-### Listing all tutees : `list`
+#### Editing a tutee :  `edit`
 
-Shows the current list of tutees.
+Edits an existing tutee in the tutee list.
+
+![edit_ug.png](edit_ug.png)
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
+
+* Edits the person at the specified `INDEX`.
+* The index refers to the index number shown in the tutee list and **must be a positive integer** 1, 2, 3, …
+* At least one of the optional fields must be provided.
+* `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
+* `p/PHONE` should only take in 8-digit phone numbers.
+* `l/LEVEL` should only take in `p1` to `p6`, `s1` to `s5`, `j1` to `j2`.
+* Existing values will be updated to the input values while all other values without input values remains unchanged.
+* When editing tags, the existing tags of the tutee will be removed i.e adding of tags is not cumulative.
+* You can remove all the tutee’s tags by typing `t/` without specifying any tags after it.
+* All entries should **not be blank**.
+
+Examples:
+* `edit 1 p/91234567 a/345 Bedok North Ave 3` Edits the phone number and address of the 1st tutee to be `91234567` and `345 Bedok North Ave 3` respectively.
+* `edit 2 n/Betty Chan t/` Edits the name of the 2nd tutee to be `Betty Chan` and clears all existing tags.
+
+#### Finding tutee by fields : `find`
+
+Filters the tutee list to display matches according to keywords.
+
+![](find_ug.png)
+
+Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
+
+* At least one of the optional filters must be provided.
+* Keywords are case-insensitive.
+* The returned tutee list contains matches that fulfills **all** the filters provided. If a filter has multiple keywords,
+  only tutees which fulfills **all** keywords will be returned.
+* `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
+* `level` filter can only take **1 keyword** in the form of abbreviation.<br>
+  e.g. `p5` for Primary 5, `s2` for Secondary 2
+* `overdue` filter can only take **1 keyword**, either `yes` or `no`.
+
+Example:
+* Find all tutees with name containing `David` in the tutee list: `find n/david`.
+* Find all tutees with name containing `David` and  `Lee` in the tutee list: `find n/david lee`.
+* Find all tutees of level `Secondary 4`: `find l/s4`.
+* Find all tutees taking `math` and `physics` classes: `find subject/math physics`.
+* Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
+
+
+#### Listing all tutees : `list`
+
+Shows the full list of tutees stored.
 
 Format: `list`
 
-### Viewing a tutee : `get`
+#### Get tutee's information : `get`
 
-Gets details of the specified tutee from our list of tutees.
+Gets the details of a specified tutee from the tutee list.
 
 ![](get_ug.png)
 
@@ -140,40 +189,14 @@ Format: `get INDEX`
 * The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `get 2` shows the 2nd tutee in the address book.
+* `list` followed by `get 2` shows the 2nd tutee in the tutee list.
 
-### Finding tutee by fields : `find`
+### Managing Remarks
 
-Filters the tutee list to display matches according to keywords.
+#### Adding a remark to a tutee: `remark`
 
-![](find_ug.png)
-
-Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
-
-* A valid `find` command must have at least 1 of the 4 filters.
-* Keywords are case-insensitive.
-* The returned tutee list contains matches that fulfills all the keywords.
-* `name` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
-* `subject` filter can take **multiple keywords** to be matched and can only be alphanumeric characters.
-* `level` filter can only take **1 keyword** in the form of abbreviation.<br>
-  e.g. `p5` for Primary 5, `s2` for Secondary 2
-* `overdue` filter can only take **1 keyword**, either `yes` or `no`.
-
-Example:
-* Find all `David` in the tutee list: `find n/david`.
-* Find `David Lee` in the tutee list: `find n/david lee`.
-* Find all `Secondary 4` tutees: `find l/s4`.
-* Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
-
-### Clearing all entries : `clear`
-
-Clears the tutee list and the user's schedule.
-
-Format: `clear`
-
-### Adding a remark to a tutee: `remark`
-
-Adds a remark to the specified tutee with the provided `TEXT` input. New remarks will be appended to existing ones and will not overwrite them.
+Adds a remark to the specified tutee with the provided `TEXT` input. New remarks will be appended to existing ones on 
+a new line and will not overwrite them.
 
 ![](remark_ug.png)
 
@@ -186,7 +209,7 @@ Format: `remark INDEX r/TEXT`
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
 
-### Clearing all remarks of a tutee: `clearremark`
+#### Clearing all remarks of a tutee: `clearremark`
 
 Clears all remarks of the specified tutee.
 
@@ -201,7 +224,9 @@ Format: `clearremark INDEX`
 Examples:
 * `clearremark 1`
 
-### Adding a lesson to a tutee : `addlesson`
+### Managing Lessons
+
+#### Adding a lesson to a tutee : `addlesson`
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
 
@@ -216,13 +241,15 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * `DAY_OF_WEEK` **must be an integer in the range [1, 7]** where `1` to `7` corresponds to Monday to Sunday.
 * `START_TIME` and `END_TIME` must be specified in an `HH:MM` format.
 * `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
+* If the lesson that is being added conflicts with an existing lesson belonging to any tutee, Track-O feedbacks that there is a schedule conflict,
+and re-displays the information of the lesson that the user inputs.
 
 Examples:
 * `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
 
-### Deleting a lesson to a tutee : `deletelesson`
+#### Deleting a lesson to a tutee : `deletelesson`
 
 Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
 
@@ -240,7 +267,7 @@ Examples:
 * Deleting **lesson 3** from **tutee 1**:
   `deletelesson 1 lesson/3`
 
-### Tracking lesson schedule : `schedule`
+#### Tracking lesson schedule : `schedule`
 
 Retrieves the user's schedule of lessons.
 
@@ -248,9 +275,10 @@ Retrieves the user's schedule of lessons.
 
 Format: `schedule`
 
-### Tracking tutee payments : `payment`
+### Tracking Payments
 
-Retrieves tutee payment details and access to other payment-related commands
+Entering `payment` shows you all the payment-related commands available.<br>
+Note that Track-O keeps track of fees up to $100,000, any payment command that results in the fees exceeding the amount will return an error.
 
 #### To retrieve a specified tutee's payment details:
 
@@ -275,7 +303,7 @@ Format: `payment INDEX lesson/LESSON_INDEX`
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
 * `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
 * `LESSON_INDEX` must be within the size of the tutee's lesson list and **must be a positive integer** 1, 2, 3, …
-
+* If the payment amount exceeds $100,000 after adding the lesson fees, Track-O returns and error message.
 Examples:
 * `payment 1 lesson/1`
 * `payment 1 lesson/2`
@@ -289,7 +317,7 @@ Format: `payment INDEX amount/AMOUNT`
 * Changes the payment amount due by the specified tutee at `INDEX` to `AMOUNT`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
 * `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
-* `AMOUNT` **must be greater than or equal to 0** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
+* `AMOUNT` **must be from 0 to 100,000** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 
 Examples:
 * `payment 1 amount/0`
@@ -328,6 +356,12 @@ Examples:
 * `payment 1 receive/`
 * `payment 2 receive/01-01-2022`
 
+### Clearing all entries : `clear`
+
+Clears the tutee list and the user's schedule.
+
+Format: `clear`
+
 ### Exiting application : `exit`
 
 Exits from the application.
@@ -347,22 +381,22 @@ Format: `exit`
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…` <br> e.g. `add n/James Ho p/87652345 sch/Anderson sec l/s4 a/200 Yio Chu Kang Road`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…` <br> e.g. `edit 2 sch/Victoria Jc l/j1`
-**Delete** | `delete INDEX`<br> e.g. `delete 3`
-**List** | `list`
-**Get** | `get INDEX`<br> e.g. `get 2`
+**Help** | `help`
+**Add tutee** | `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…` <br> e.g. `add n/James Ho p/87652345 sch/Anderson sec l/s4 a/200 Yio Chu Kang Road`
+**Delete tutee** | `delete INDEX`<br> e.g. `delete 3`
+**Edit tutee** | `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…` <br> e.g. `edit 2 sch/Victoria Jc l/j1`
+**Find tutee** | `find [n/NAME…] [l/LEVEL] [subject/SUBJECT…] [overdue/OVERDUE]`<br> e.g `find n/david subject/math`
+**List tutees** | `list`
+**Get tutee information** | `get INDEX`<br> e.g. `get 2`
 **Add remark** | `remark INDEX r/TEXT` <br> e.g `remark 1 r/Good progress.`
 **Clear remarks** | `clearremark INDEX` <br> e.g `clearremark 1`
-**Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 **View schedule** | `schedule`
-**Find** | `find [n/NAME…] [l/LEVEL] [subject/SUBJECT…] [overdue/OVERDUE]`<br> e.g `find n/david subject/math` 
-**Clear** | `clear`
-**Delete Lesson** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
+**Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
+**Delete Lesson from tutee** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
 **View payment details** | `payment INDEX` <br> e.g `payment 1`
 **Add payment due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
 **Edit payment due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
 **Set payment date** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
 **Receive payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
-**Help** | `help`
+**Clear** | `clear`
 **Exit** | `exit`
