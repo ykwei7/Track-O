@@ -30,7 +30,7 @@ import seedu.address.model.tutee.Tutee;
  * Contains integration tests (interaction with the Model) and unit tests for
  *  * {@code PaymentSetAmountTest}.
  */
-public class PaymentSetAmountTest {
+public class PaymentSetAmountCommandTest {
 
     private static final String NEW_PAYMENT_VAL_STUB_1 = "100";
     private static final String NEW_PAYMENT_VAL_STUB_2 = "200";
