@@ -12,7 +12,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. 
+1. Ensure you have Java `11` or above installed in your Computer.
 
 2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.3.1/v1.3.1.jar) <-- need to change this.
 
@@ -54,9 +54,9 @@ Terms | Explanation
 command | The text that you enter in the command box. Different commands have different formats.
 prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
 parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km` 
+alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km`
 integer | A number that has strictly no decimal places.
-level | Refers to the education level of a student in the context of Singapore's education system.  
+level | Refers to the education level of a student in the context of Singapore's education system.
 
 ### Application layout
 
@@ -87,7 +87,7 @@ under the remarks for John.
 the pay-by date used in step 4 under **Before your lesson**.
 
 ### Tracking your payment of a tutee
-1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John. 
+1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John.
 2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
 `$100.00`.
 4. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
@@ -95,8 +95,8 @@ This resets the value owed by John to `0` and sets the next date to pay by to `0
 
 ### Managing lessons of tutees
 1. To view your schedule for the week, run `schedule` and this displays your upcoming lessons for the week.
-2. To add in a new lesson to John, run `addlesson 1 subject/Physics d/6 s/10:00 e/12:00 rate/40`. This will add a `Physics` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
-3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Physics` lesson previously added. 
+2. To add in a new lesson to John, run `addlesson 1 subject/Physics d/6 s/10:00 e/12:00 rate/40`. This will add a `Physics` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.
+3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Physics` lesson previously added.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -424,7 +424,7 @@ Action | Format, Examples
 **Clear remarks** | `clearremark INDEX` <br> e.g `clearremark 1`
 **Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
 **View schedule** | `schedule`
-**Find** | `find [n/NAME…] [l/LEVEL] [subject/SUBJECT…] [overdue/OVERDUE]`<br> e.g `find n/david subject/math` 
+**Find** | `find [n/NAME…] [l/LEVEL] [subject/SUBJECT…] [overdue/OVERDUE]`<br> e.g `find n/david subject/math`
 **Clear** | `clear`
 **Delete Lesson** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
 **View payment details** | `payment INDEX` <br> e.g `payment 1`

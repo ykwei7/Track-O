@@ -12,10 +12,10 @@ Given below are my contributions to the project.
 * **Tracking payments**: Added the ability to track payments for Tutees.
   * What it does: allows the user to store payment amounts due by their tutees and keep track of the due date.
   * Justification: This feature implements a core functionality for the application as tutors need not rely on manual bookkeeping, reducing mistakes in calculations and providing more convenience to the users.
-  * Highlights: This enhancement affects existing commands and commands to be added in future, such as `PaymentAddCommand` and `PaymentSetAmountCommand`. 
+  * Highlights: This enhancement affects existing commands and commands to be added in future, such as `PaymentAddCommand` and `PaymentSetAmountCommand`.
   It required an in-depth analysis of design alternatives, especially in regard to how the payment amount would be accumulated by the tutee and how the user would track it.
   <br><br>
-  For example, initial plans involved having a fixed payment due date of 1 week since a payment was made, to be calculated automatically using `LocalDate`, but considering not all tutors collect their fees weekly, the final design let them set their own payment due dates. 
+  For example, initial plans involved having a fixed payment due date of 1 week since a payment was made, to be calculated automatically using `LocalDate`, but considering not all tutors collect their fees weekly, the final design let them set their own payment due dates.
   * The implementation was challenging too as it required changes to existing commands, such as `AddCommand`, and modifications to the `JsonAdaptedTutee` to store payment information in the .json file.
   * Credits: *-*
 
@@ -33,7 +33,7 @@ Given below are my contributions to the project.
   <br> `TuteeCardTest` was created to improve code coverage and testing for the `TuteeCard` class, where most of the changes took place.
   Difficulties arose as testing the `TuteeCard` class required JavaFX, but a workaround was used after researching on the Internet.
   * Credits: *https://stackoverflow.com/a/38883519*
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=atyhamos&tabRepo=AY2122S1-CS2103T-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
@@ -51,9 +51,9 @@ Given below are my contributions to the project.
       <br>![](../images/PaymentTracking6.png)
       * Sequence diagram of how a `PaymentCommand` is parsed from the user's input and executed to facilitate payment tracking
       <br>![](../images/PaymentSequenceDiagram.png)
-      
+
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#58](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/58), 
+  * PRs reviewed (with non-trivial review comments): [\#58](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/58),
   [\#71](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/71),
   [\#74](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/74),
   [\#88](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/88),
@@ -61,4 +61,4 @@ Given below are my contributions to the project.
   * Designed team's application icon:
     * For Application tray: ![Application tray](../../src/main/resources/images/tracko_logo.png)
     * For website viewing:![For website](../images/tracko_logo_docs.png)
-    
+

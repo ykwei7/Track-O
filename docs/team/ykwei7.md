@@ -38,7 +38,7 @@ Given below are my contributions to the project.
     * Added the `Setting up your first tutee` portion of the UG for users to get started
   * Developer Guide:
     * Added the use cases for `payment` feature for different scenarios
-  
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#107](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/107),
   [\#159](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/159),
