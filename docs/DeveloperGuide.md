@@ -181,8 +181,15 @@ of the second tutee found on the list. The information to be listed is based on
 
 ### Payment tracking feature
 
-The payment tracking feature is facilitated by `Payment`, `PaymentCommand`[Proposed]
-and `PaymentCommandParser`[Proposed].
+`Payment` keeps track of the payment details of the tutee, such as the amount of fees incurred, the payment due date and the payment history.
+
+#### Rationale
+
+A tutor may miscalculate fees, forget payment due dates, or have too many tutees to keep track of their payment information manually.
+
+#### Current Implementation
+
+The payment tracking feature is facilitated by `Payment`, `PaymentCommandParser`, `PaymentAddCommand` `PaymentSetAmountCommand`, `PaymentSetDateCommand` and `PaymentReceiveCommand`.
 
 `Payment` contains:
 * `value`  — the amount of fees incurred by the Tutee since the last payment date
@@ -190,44 +197,64 @@ and `PaymentCommandParser`[Proposed].
 * `paymentHistory`  — a list of dates which the Tutee previously paid on
 * `isOverdue` — a boolean flag which denotes if the payment is overdue
 
-Parsing the user's input through `PaymentCommand`, the user may:
-* `Payment#addPayment(Lesson, int)`  — Adds the cost of `Lesson` to total fees incurred, `int` times
-* `Payment#editPayment(float)`  — Updates the total fees incurred to the specified `float` amount
-* `Payment#setPayByDate(LocalDate)`  — Updates the pay-by date for the Tutee to the specified `LocalDate`
-* `Payment#receivePayment()`  — Resets the Tutee's incurred fees and updates their payment history
+Parsing the user's input through `PaymentCommandParser`, the user may generate any one of the following commands:
+* `PaymentAddCommand`  — Adds the cost of the lesson's fees to the tutee's current payment amount due
+* `PaymentSetAmoutnCommand`  — Sets the payment amount due for the tutee to the specified amount
+* `PaymentSetDateCommand`  — Sets the pay-by date for the tutee to the specified date
+* `PaymentReceiveCommand`  — Resets the tutee's incurred fees and pay-by-date, and updates their payment history
 
-[Proposed] Given below is an example scenario of how payments may be tracked.
+
+The following steps showcase how a tutee's payment details are managed by the user.
 
 Step 1. The user adds a new `Tutee` John to Track-O and the `Payment` object is initialized with default values.
 
-![PaymentTracking1](images/PaymentTracking1.png)
+<p align="center">
+    <img alt="PaymentTracking1" src="images/PaymentTracking1.png"/>
+</p>
 
-Step 2. After adding lessons to John, the user executes "payment 1 add/2 l/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` set.
+Step 2. After adding lessons to John, the user executes "payment 1 lesson/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` set.
 
-![PaymentTracking2](images/PaymentTracking2.png)
+<p align="center">
+    <img alt="PaymentTracking2" src="images/PaymentTracking2.png"/>
+</p>
 
-Step 3. The user executes "payment 1 edit/180" after accidentally overcharging fees previously.
+Step 3. The user executes "payment 1 amount/90" after accidentally overcharging fees previously.
 
-![PaymentTracking3](images/PaymentTracking3.png)
+<p align="center">
+    <img alt="PaymentTracking3" src="images/PaymentTracking3.png"/>
+</p>
 
-Step 4. The user executes "payment 1 by/25-10-2021", updating the `Payment#payByDate` for John.
+Step 4. The user executes "payment 1 by/01-01-2022", updating the `Payment#payByDate` for John.
 
-![PaymentTracking4](images/PaymentTracking4.png)
+<p align="center">
+    <img alt="PaymentTracking4" src="images/PaymentTracking4.png"/>
+</p>
 
 Step 5. In the event that the current date passes the `Payment#payByDate`, the `Payment#isOverdue` flag will turn `true`.
 
-![PaymentTracking5](images/PaymentTracking5.png)
+<p align="center">
+    <img alt="PaymentTracking5" src="images/PaymentTracking5.png"/>
+</p>
 
 Step 6. The user executes `payment 1 receive` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
 
-![PaymentTracking6](images/PaymentTracking6.png)
+<p align="center">
+    <img alt="PaymentTracking6" src="images/PaymentTracking6.png"/>
+</p>
 
+#### Design considerations
 
-The following sequence diagram shows how the add payment operation works, which is similar to how the other payment functions work as well:
+**Aspect: How payments are updated**
 
-![PaymentSequenceDiagram](images/PaymentSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+* **Option 1 (current choice):** Add a tutee's lesson's cost to their current payment amount due.
+    * Pros: Easy to implement and command would be short.
+    * Pros: Would be commonly used to increment tutee's payments directly after a lesson.
+    * Cons: Adding multiples of a lesson's cost requires multiple copies of the same command (i.e adding 3 lesson's worth of fees at once).
+
+* **Option 2:** Add a tutee's lesson's cost multiplied by an integer parameter to their current payment amount due
+    * Pros: The tutor can easily add multiples of a lesson's cost to a tutee.
+    * Cons: The additional integer parameter would require another layer of parsing and validation checking.
+    * Cons: Command would be more lengthy as it requires 3 keywords to execute (payment, lesson, integer).
 
 
 ### Schedule
