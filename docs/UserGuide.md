@@ -20,7 +20,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds as shown in the image below. Note how the app contains some sample data.<br>
 
-![](sample_ug.png)
+<img src="sample_ug.png" width="85%"/>
 
 5. Refer to [Setting up your first tutee](#setting-up-your-first-tutee) to get started using Track-O.
 
@@ -68,7 +68,7 @@ This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30
 the 5th of January 2022.
 5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-![](john_ug.png)
+<img src="john_ug.png" width="85%"/>
 
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
@@ -79,7 +79,7 @@ under the remarks for John.
 the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
 4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-![](john_2_ug.png)
+<img src="john_2_ug.png" width="85%"/>
 
 ### Managing your payments
 1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John. 
@@ -132,7 +132,7 @@ Format: `help`
 
 Adds a tutee to the existing list of tutees.
 
-![](add_ug.png)
+<img src="add_ug.png" width="85%"/>
 
 Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
@@ -148,7 +148,7 @@ Examples:
 
 Edits an existing tutee in the tutee list.
 
-![edit_ug.png](edit_ug.png)
+<img src="edit_ug.png" width="85%"/>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
 
@@ -171,7 +171,7 @@ Examples:
 
 Deletes the specified tutee from our list of tutees.
 
-![](delete_ug.png)
+<img src="delete_ug.png" width="85%"/>
 
 Format: `delete INDEX`
 
@@ -192,7 +192,7 @@ Format: `list`
 
 Gets details of the specified tutee from our list of tutees.
 
-![](get_ug.png)
+<img src="get_ug.png" width="85%"/>
 
 Format: `get INDEX`
 
@@ -207,7 +207,7 @@ Examples:
 
 Filters the tutee list to display matches according to keywords.
 
-![](find_ug.png)
+<img src="find_ug.png" width="85%"/>
 
 Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
 
@@ -232,7 +232,7 @@ Example:
 
 Clears the tutee list and the user's schedule.
 
-![](clear_ug.png)
+<img src="clear_ug.png" width="85%"/>
 
 Format: `clear`
 
@@ -240,7 +240,7 @@ Format: `clear`
 
 Adds a remark to the specified tutee with the provided `TEXT` input. New remarks will be appended to existing ones and will not overwrite them.
 
-![](remark_ug.png)
+<img src="remark_ug.png" width="85%"/>
 
 Format: `remark INDEX r/TEXT`
 
@@ -255,7 +255,7 @@ Examples:
 
 Clears all remarks of the specified tutee.
 
-![](clearremark_ug.png)
+<img src="clearremark_ug.png" width="85%"/>
 
 Format: `clearremark INDEX`
 
@@ -270,7 +270,7 @@ Examples:
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
 
-![](addlesson_ug.png)
+<img src="addlesson_ug.png" width="85%"/>
 
 Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
 
@@ -291,7 +291,7 @@ Examples:
 
 Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
 
-![](deletelesson_ug.png)
+<img src="deletelesson_ug.png" width="85%"/>
 
 Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
 
@@ -309,7 +309,7 @@ Examples:
 
 Retrieves the user's schedule of lessons.
 
-![](schedule_ug.png)
+<img src="schedule_ug.png" width="85%"/>
 
 Format: `schedule`
 
@@ -321,7 +321,7 @@ Retrieves tutee payment details and access to other payment-related commands
 
 Format: `payment INDEX`
 
-![](payment_ug.png)
+<img src="payment_ug.png" width="85%"/>
 
 * Retrieves the payment details of the tutee at the specified `INDEX`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -334,7 +334,7 @@ Examples:
 
 Format: `payment INDEX lesson/LESSON_INDEX`
 
-![](payment_lesson_ug.png)
+<img src="payment_lesson_ug.png" width="85%"/>
 
 * Adds the fees of the specified lesson at `LESSON_INDEX` to the specified tutee's payment details at `INDEX`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -349,7 +349,7 @@ Examples:
 
 Format: `payment INDEX amount/AMOUNT`
 
-![](payment_amount_ug.png)
+<img src="payment_amount_ug.png" width="85%"/>
 
 * Changes the payment amount due by the specified tutee at `INDEX` to `AMOUNT`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -365,7 +365,7 @@ Examples:
 
 Format: `payment INDEX by/DUE_DATE`
 
-![](payment_due_ug.png)
+<img src="payment_due_ug.png" width="85%"/>
 
 * Changes the payment due date of the specified tutee at `INDEX` to `DUE_DATE`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -380,7 +380,7 @@ Examples:
 
 Format: `payment INDEX receive/[DUE_DATE]`
 
-![](payment_receive_ug.png)
+<img src="payment_receive_ug.png" width="85%"/>
 
 * Resets the payment amount due of the specified tutee to `0`.
 * Resets the payment due date of the specified tutee at `INDEX` to `-`, or `DUE_DATE` if specified.
@@ -416,7 +416,7 @@ If you do not have Java 11 installed and are unsure of which version to download
 1. Visit the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11).
 2. Scroll down until you see **Java SE Development Kit 11.0.13**. You should see something similar to the image below.
 
-![](download_java.png)
+<img src="download_java.png" width="110%"/>
 
 3. Click on **Java 11**.
 4. Select your own Operating System. If you are using a Mac or a MacBook, your Operating System is macOS. Otherwise, your Operating System is likely Windows. You may check your computer's [System Information](https://kb.wisc.edu/helpdesk/page.php?id=8208) to verify this.
@@ -431,18 +431,19 @@ If you do not have Java 11 installed and are unsure of which version to download
 
 For macOS users, you may receive an error similar to the one below when double-clicking **tracko.jar** for the first time.
 
-![](download_1.png)
+<img src="download_1.png" width="35%"/>
 
 Refer to the following steps to get started using Track-O:
 1. Click on the **OK** to close the pop-up window.
 2. Run **Spotlight** by pressing the Command key and Space Bar at the same time.
 3. Type "Security & Privacy" and hit Enter. You should see a window similar to the one below:
 
-![](download_2.png)
+<img src="download_2.png" width="70%"/>
 
 5. Click on "Open Anyway" and a new window similar to the one below will pop up. 
 
-![](download_3.png)
+<img src="download_3.png" width="35%"/>
+
 6. Click on "Open" and Track-O will start.
 
 
