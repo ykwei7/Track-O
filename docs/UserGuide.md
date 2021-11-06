@@ -22,7 +22,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 ![](sample_ug.png)
 
-5. Refer to [Setting up your first tutee](#Setting up your first tutee) to get started using Track-O.
+5. Refer to [Setting up your first tutee](#setting-up-your-first-tutee) to get started using Track-O.
 
 If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
 
@@ -66,7 +66,6 @@ This will add in a tutee with the name `John Tan`, a `Primary 5` student from `R
 This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
 4. To state a date to receive payment by, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
 the 5th of January 2022.
-<br>
 5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
 ![](john_ug.png)
@@ -77,7 +76,7 @@ the rate was `$30` per hour over 2 hours, the final fees adds up to `$60.00`.
 2. To add in any remarks for the lesson, run `remark 1 r/Good Progress!` and this set the comments `Good Progress!`
 under the remarks for John.
 3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00`,
-the pay-by date used in step 4 under [Before your lesson](#Before your lesson), and updates John's last paid date to today's date.
+the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
 4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
 ![](john_2_ug.png)
