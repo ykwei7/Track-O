@@ -24,9 +24,9 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds as shown in the image below. Note how the app contains some sample data.<br>
 
-<p align="center">
-    <img src="sample_ug.png" width="85%"/>
-</p>
+    <p align="center">
+        <img src="sample_ug.png" width="85%"/>
+    </p>
 
 5. Refer to [Setting up your first tutee](#setting-up-your-first-tutee) to get started using Track-O.
 
@@ -422,7 +422,7 @@ If you do not have Java 11 installed and are unsure of which version to download
 1. Visit the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11).
 2. Scroll down until you see **Java SE Development Kit 11.0.13**. You should see something similar to the image below.
 
-<img src="download_java.png" width="120%"/>
+    <img src="download_java.png" width="120%"/>
 
 3. Click on **Java 11**.
 4. Select your own Operating System. If you are using a Mac or a MacBook, your Operating System is macOS. Otherwise, your Operating System is likely Windows. You may check your computer's [System Information](https://kb.wisc.edu/helpdesk/page.php?id=8208) to verify this.
@@ -446,15 +446,15 @@ Refer to the following steps to get started using Track-O:
 2. Run **Spotlight** by pressing the Command key and Space Bar at the same time.
 3. Type "Security & Privacy" and hit Enter. You should see a window similar to the one below:
 
-<p align="center">
-    <img src="download_2.png" width="70%"/>
-</p>
+    <p align="center">
+        <img src="download_2.png" width="70%"/>
+    </p>
 
 5. Click on "Open Anyway" and a new window similar to the one below will pop up. 
 
-<p align="center">
-    <img src="download_3.png" width="35%"/>
-</p>
+    <p align="center">
+        <img src="download_3.png" width="35%"/>
+    </p>
 
 6. Click on "Open" and Track-O will start.
 
