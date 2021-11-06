@@ -12,30 +12,21 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
-
-2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.3.1/v1.3.1.jar) <-- need to change this.
+1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+ 
+2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.4/tracko.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ to run Track-O.
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds as shown in the image below. Note how the app contains some sample data.<br>
 
-![sample_ug.png](sample_ug.png)
+<img src="sample_ug.png" width="85%"/>
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will prompt the help window.<br>
-   Some example commands you can try:
+5. Refer to [Setting up your first tutee](#setting-up-your-first-tutee) to get started using Track-O.
 
-   * **`add`**`n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link` : Adds a tutee named John Doe with all his relevant information in the tutee list.
+If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
 
-   * **`list`** : Lists all tutees.
 
-   * **`delete`**`3` : Deletes the 3rd tutee shown in the tutee list.
-
-   * **`clear`** : Deletes all tutees in the tutee list.
-
-   * **`exit`** : Exits the app.
-
-7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -65,38 +56,42 @@ level | Refers to the education level of a student in the context of Singapore's
 ## Setting up your first tutee
 
 This section provides a quick guide to adding your first tutee and carrying out your first lesson. For more information
-on each command, it can found under the [Features](#Features) section of our guide. To run a command, simply type the command in the command box and hit the `enter` key on your keyboard.
+on each command, it can found under the [Features](#Features) section of our guide. To run a command, simply type the command in the command box and hit the Enter key on your keyboard.
 
 ### Before your lesson
 1. Let's clear the existing sample data first. Run `clear` to remove the existing tutees.
-2. To add in a new tutee, run `add n/John Tan l/p5 a/Hougang Ave 246 sch/Rosyth p/84567890`.
-This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth`, living in `Hougang Ave 246` who can be contacted at `84567890`.
-3. To add a lesson for this tutee, run `addlesson 1 subject/Chemistry d/7 s/14:00 e/16:00 rate/30`.
-This will add a `Chemistry` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
+2. To add in a new tutee, run `add n/John Tan l/p5 a/246 Hougang Ave sch/Rosyth School p/84567890`.
+This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, living in `246 Hougang Ave` who can be contacted at `84567890`.
+3. To add a lesson for this tutee, run `addlesson 1 subject/English d/7 s/14:00 e/16:00 rate/30`.
+This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
 4. To state a date to receive payment by, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
 the 5th of January 2022.
-<br>
 5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+
+<img src="john_ug.png" width="85%"/>
 
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
 the rate was `$30` per hour over 2 hours, the final fees adds up to `$60.00`.
 2. To add in any remarks for the lesson, run `remark 1 r/Good Progress!` and this set the comments `Good Progress!`
 under the remarks for John.
-3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00` and
-the pay-by date used in step 4 under **Before your lesson**.
+3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00`,
+the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
+4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-### Tracking your payment of a tutee
-1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John.
+<img src="john_2_ug.png" width="85%"/>
+
+### Managing your payments
+1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John. 
 2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
 `$100.00`.
-4. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
+3. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
 This resets the value owed by John to `0` and sets the next date to pay by to `05-02-2022`.
 
-### Managing lessons of tutees
+### Managing your lessons
 1. To view your schedule for the week, run `schedule` and this displays your upcoming lessons for the week.
-2. To add in a new lesson to John, run `addlesson 1 subject/Physics d/6 s/10:00 e/12:00 rate/40`. This will add a `Physics` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.
-3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Physics` lesson previously added.
+2. To add in a new lesson to John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
+3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Math` lesson previously added. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -137,7 +132,7 @@ Format: `help`
 
 Adds a tutee to the existing list of tutees.
 
-![add_ug.png](add_ug.png)
+<img src="add_ug.png" width="85%"/>
 
 Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
@@ -153,7 +148,7 @@ Examples:
 
 Edits an existing tutee in the tutee list.
 
-![edit_ug.png](edit_ug.png)
+<img src="edit_ug.png" width="85%"/>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
 
@@ -176,7 +171,7 @@ Examples:
 
 Deletes the specified tutee from our list of tutees.
 
-![](delete_ug.png)
+<img src="delete_ug.png" width="85%"/>
 
 Format: `delete INDEX`
 
@@ -197,7 +192,7 @@ Format: `list`
 
 Gets details of the specified tutee from our list of tutees.
 
-![](get_ug.png)
+<img src="get_ug.png" width="85%"/>
 
 Format: `get INDEX`
 
@@ -212,7 +207,7 @@ Examples:
 
 Filters the tutee list to display matches according to keywords.
 
-![](find_ug.png)
+<img src="find_ug.png" width="85%"/>
 
 Format: `find [n/NAME…] [subject/SUBJECT…] [l/LEVEL] [overdue/OVERDUE_STATUS]`
 
@@ -237,13 +232,15 @@ Example:
 
 Clears the tutee list and the user's schedule.
 
+<img src="clear_ug.png" width="85%"/>
+
 Format: `clear`
 
 ### Adding a remark to a tutee: `remark`
 
 Adds a remark to the specified tutee with the provided `TEXT` input. New remarks will be appended to existing ones and will not overwrite them.
 
-![](remark_ug.png)
+<img src="remark_ug.png" width="85%"/>
 
 Format: `remark INDEX r/TEXT`
 
@@ -258,7 +255,7 @@ Examples:
 
 Clears all remarks of the specified tutee.
 
-![](clearremark_ug.png)
+<img src="clearremark_ug.png" width="85%"/>
 
 Format: `clearremark INDEX`
 
@@ -273,7 +270,7 @@ Examples:
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
 
-![](addlesson_ug.png)
+<img src="addlesson_ug.png" width="85%"/>
 
 Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
 
@@ -294,7 +291,7 @@ Examples:
 
 Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
 
-![](deletelesson_ug.png)
+<img src="deletelesson_ug.png" width="85%"/>
 
 Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
 
@@ -312,7 +309,7 @@ Examples:
 
 Retrieves the user's schedule of lessons.
 
-![](schedule_ug.png)
+<img src="schedule_ug.png" width="85%"/>
 
 Format: `schedule`
 
@@ -324,7 +321,7 @@ Retrieves tutee payment details and access to other payment-related commands
 
 Format: `payment INDEX`
 
-![](payment_ug.png)
+<img src="payment_ug.png" width="85%"/>
 
 * Retrieves the payment details of the tutee at the specified `INDEX`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -337,7 +334,7 @@ Examples:
 
 Format: `payment INDEX lesson/LESSON_INDEX`
 
-![](payment_lesson.png)
+<img src="payment_lesson_ug.png" width="85%"/>
 
 * Adds the fees of the specified lesson at `LESSON_INDEX` to the specified tutee's payment details at `INDEX`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -352,7 +349,7 @@ Examples:
 
 Format: `payment INDEX amount/AMOUNT`
 
-![](payment_amount.png)
+<img src="payment_amount_ug.png" width="85%"/>
 
 * Changes the payment amount due by the specified tutee at `INDEX` to `AMOUNT`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -368,7 +365,7 @@ Examples:
 
 Format: `payment INDEX by/DUE_DATE`
 
-![](payment_due.png)
+<img src="payment_due_ug.png" width="85%"/>
 
 * Changes the payment due date of the specified tutee at `INDEX` to `DUE_DATE`.
 * `INDEX` refers to the index number tagged to each tutee in the tutee list.
@@ -383,7 +380,7 @@ Examples:
 
 Format: `payment INDEX receive/[DUE_DATE]`
 
-![](payment_receive.png)
+<img src="payment_receive_ug.png" width="85%"/>
 
 * Resets the payment amount due of the specified tutee to `0`.
 * Resets the payment due date of the specified tutee at `INDEX` to `-`, or `DUE_DATE` if specified.
@@ -410,6 +407,48 @@ Format: `exit`
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Troubleshooting
+
+### Installing Java 11
+
+If you do not have Java 11 installed and are unsure of which version to download, refer to the follow steps:
+1. Visit the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11).
+2. Scroll down until you see **Java SE Development Kit 11.0.13**. You should see something similar to the image below.
+
+<img src="download_java.png" width="110%"/>
+
+3. Click on **Java 11**.
+4. Select your own Operating System. If you are using a Mac or a MacBook, your Operating System is macOS. Otherwise, your Operating System is likely Windows. You may check your computer's [System Information](https://kb.wisc.edu/helpdesk/page.php?id=8208) to verify this.
+5. Download the respective file. (You may need to register for an Oracle account) 
+   1. For macOS users, download the file that ends with **.dmg**.
+   2. For Windows users, download the file that ends with **.exe**.
+   3. For Linux users, follow the instructions [here](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html#GUID-4907E1A6-7B4B-4E98-9DA5-BF2A4D01AA57)
+   to download Java 11.
+6. For macOS and Windows users, once the **.dmg** or **.exe** file has been installed, double-click the file and follow the instructions provided to complete the installation.
+
+### Installing Track-O (macOS)
+
+For macOS users, you may receive an error similar to the one below when double-clicking **tracko.jar** for the first time.
+
+<img src="download_1.png" width="35%"/>
+
+Refer to the following steps to get started using Track-O:
+1. Click on the **OK** to close the pop-up window.
+2. Run **Spotlight** by pressing the Command key and Space Bar at the same time.
+3. Type "Security & Privacy" and hit Enter. You should see a window similar to the one below:
+
+<img src="download_2.png" width="70%"/>
+
+5. Click on "Open Anyway" and a new window similar to the one below will pop up. 
+
+<img src="download_3.png" width="35%"/>
+
+6. Click on "Open" and Track-O will start.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Command summary
 
