@@ -12,9 +12,9 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. 
-
-2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.4/tracko.jar)
+1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+ 
+2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.4/tracko.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ to run Track-O.
 
@@ -23,6 +23,10 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 ![](sample_ug.png)
 
 5. Refer to [Setting up your first tutee](#Setting up your first tutee) to get started using Track-O.
+
+If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -404,6 +408,47 @@ Format: `exit`
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Troubleshooting
+
+### Installing Java 11
+
+If you do not have Java 11 installed and are unsure of which version to download, refer to the follow steps:
+1. Visit the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11).
+2. Scroll down until you see **Java SE Development Kit 11.0.13**. You should see something similar to the image below.
+
+![](download_java.png)
+
+3. Click on **Java 11**.
+4. Select your own Operating System. If you are using a Mac or a MacBook, your Operating System is macOS. Otherwise, your Operating System is likely Windows. You may check your computer's [System Information](https://kb.wisc.edu/helpdesk/page.php?id=8208) to verify this.
+5. Download the respective file. (You may need to register for an Oracle account) 
+   1. For macOS users, download the file that ends with **.dmg**.
+   2. For Windows users, download the file that ends with **.exe**.
+   3. For Linux users, follow the instructions [here](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html#GUID-4907E1A6-7B4B-4E98-9DA5-BF2A4D01AA57)
+   to download Java 11.
+6. For macOS and Windows users, once the **.dmg** or **.exe** file has been installed, double-click the file and follow the instructions provided to complete the installation.
+
+### Installing Track-O (macOS)
+
+For macOS users, you may receive an error similar to the one below when double-clicking **tracko.jar** for the first time.
+
+![](download_1.png)
+
+Refer to the following steps to get started using Track-O:
+1. Click on the **OK** to close the pop-up window.
+2. Run **Spotlight** by pressing the Command key and Space Bar at the same time.
+3. Type "Security & Privacy" and hit Enter. You should see a window similar to the one below:
+
+![](download_2.png)
+
+5. Click on "Open Anyway" and a new window similar to the one below will pop up. 
+
+![](download_3.png)
+6. Click on "Open" and Track-O will start.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Command summary
 
