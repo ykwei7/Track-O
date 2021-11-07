@@ -7,7 +7,7 @@ title: User Guide
     <img src="images/tracko_logo_docs.png" width="90%"/>
 </p>
 
-Track-O is a **desktop app for private tutors to manage their tutees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Track-O lets you track an assortment of data, from grades to home addresses to lesson timings. You can easily access the many functions of Track-O using simple commands, such as add and get. Hop over to our Quick Start section to get started.
+Track-O is a **desktop app for private tutors to manage their tutees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Track-O lets you track an assortment of data, from payment details to home addresses to lesson timings. You can easily access the many functions of Track-O using simple commands, such as add and get. Hop over to our Quick Start section to get started.
 
 * Table of Contents
 {:toc}
@@ -51,7 +51,7 @@ Terms | Explanation
 command | The text that you enter in the command box. Different commands have different formats.
 prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
 parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km`
+alphanumeric characters | Words that consist of only English alphabets and/or numbers e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
 integer | A number that has strictly no decimal places.
 level | Refers to the education level of a student in the context of Singapore's education system.
 
@@ -171,8 +171,8 @@ Deletes the specified tutee from our list of tutees.
 Format: `delete INDEX`
 
 * Deletes the tutee at the specified `INDEX`.
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `delete 2` deletes the 2nd tutee in the tutee list.
@@ -186,7 +186,8 @@ Edits an existing tutee in the tutee list.
 Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
 
 * Edits the person at the specified `INDEX`.
-* The index refers to the index number shown in the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
 * `p/PHONE` should only take in 8-digit phone numbers.
@@ -241,12 +242,9 @@ Gets the details of a specified tutee from the tutee list.
 Format: `get INDEX`
 
 * Gets the tutee at the specified `INDEX` in the format `Name: John Doe Level: P5`
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
-<img src="clear_ug.png" width="95%"/>
-
-Format: `clear`
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the tutee list.
 
@@ -262,8 +260,8 @@ a new line and will not overwrite them.
 Format: `remark INDEX r/TEXT`
 
 * Adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
@@ -277,8 +275,8 @@ Clears all remarks of the specified tutee.
 Format: `clearremark INDEX`
 
 * Clears all remarks of the tutee specified at the specified `INDEX`.
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `clearremark 1`
@@ -294,15 +292,16 @@ Adds a lesson to the specified tutee from our list of tutees and to the user's s
 Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
 
 * Adds a lesson to the tutee at the specified `INDEX`.
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * The lesson occurs on the specified `DAY_OF_WEEK`, from the specified `START_TIME` to the specified `END_TIME`, costing `HOURLY_RATE` dollars per hour.
 * `DAY_OF_WEEK` **must be an integer in the range [1, 7]** where `1` to `7` corresponds to Monday to Sunday.
 * `START_TIME` and `END_TIME` must be specified in an `HH:MM` format.
 * The supported duration for a lesson is **30 min — 23 h 59 min**
+* `START_TIME` and `END_TIME` should be within the same day.
 * `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
-* If the lesson that is being added conflicts with an existing lesson belonging to any tutee, Track-O feedbacks that there is a schedule conflict,
-and re-displays the information of the lesson that the user inputs.
+* `HOURLY_RATE` should not have a fee greater than `$1000`.
+* If the added lesson conflicts with an existing lesson belonging to any tutee, Track-O feedbacks that there is a schedule conflict, and re-displays the information of the lesson that the user inputs.
 
 Examples:
 * `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
@@ -317,7 +316,8 @@ Deletes an existing lesson from the specific tutee's lesson list and user's sche
 
 Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
 
-* The tutee's index is the number displayed beside tutee's name in the filtered tutee's list.
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * The lesson index is the number displayed beside the subject name after using `get` command on the tutee.
 * `TUTEE_INDEX` and `LESSON_INDEX` are compulsory fields, an error message is produced if either one is missing.
 
@@ -347,8 +347,8 @@ Format: `payment INDEX`
 <img src="payment_ug.png" width="95%"/>
 
 * Retrieves the payment details of the tutee at the specified `INDEX`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `payment 1`
@@ -360,8 +360,8 @@ Format: `payment INDEX lesson/LESSON_INDEX`
 <img src="payment_lesson_ug.png" width="95%"/>
 
 * Adds the fees of the specified lesson at `LESSON_INDEX` to the specified tutee's payment details at `INDEX`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `LESSON_INDEX` must be within the size of the tutee's lesson list and **must be a positive integer** 1, 2, 3, …
 * If the payment amount exceeds $100,000 after adding the lesson fees, Track-O returns and error message.
 Examples:
@@ -375,8 +375,8 @@ Format: `payment INDEX amount/AMOUNT`
 <img src="payment_amount_ug.png" width="95%"/>
 
 * Changes the payment amount due by the specified tutee at `INDEX` to `AMOUNT`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `AMOUNT` **must be from 0 to 100,000** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 
 Examples:
@@ -391,8 +391,8 @@ Format: `payment INDEX by/DUE_DATE`
 <img src="payment_due_ug.png" width="95%"/>
 
 * Changes the payment due date of the specified tutee at `INDEX` to `DUE_DATE`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `DUE_DATE` **must be later than or on the current date** expressed in the `dd-MM-YYYY` format.
 
 Examples:
@@ -408,8 +408,8 @@ Format: `payment INDEX receive/[DUE_DATE]`
 * Resets the payment amount due of the specified tutee to `0`.
 * Resets the payment due date of the specified tutee at `INDEX` to `-`, or `DUE_DATE` if specified.
 * Updates the specified tutee's last paid date in their payment details to the current date.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `DUE_DATE` **must be later than or on the current date** expressed in the `dd-MM-YYYY` format, if specified.
 
 Examples:
@@ -419,6 +419,8 @@ Examples:
 ### Clearing all entries : `clear`
 
 Clears the tutee list and the user's schedule.
+
+<img src="clear_ug.png" width="95%"/>
 
 Format: `clear`
 
@@ -435,6 +437,9 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
 
+**Q**: What are tags used for? <br>
+**A**: Tags can be used to indicate important details of the tutee. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
@@ -448,7 +453,7 @@ If you do not have Java 11 installed and are unsure of which version to download
     <img src="download_java.png" width="130%"/>
 
 3. Click on **Java 11**.
-4. Select your own Operating System. If you are using a Mac or a MacBook, your Operating System is macOS. Otherwise, your Operating System is likely Windows. You may check your computer's [System Information](https://kb.wisc.edu/helpdesk/page.php?id=8208) to verify this.
+4. Select your own Operating System. You may check your computer's [System Information](https://kb.wisc.edu/helpdesk/page.php?id=8208) for more details.
 5. Download the respective file. (You may need to register for an Oracle account) 
    1. For macOS users, download the file that ends with **.dmg**.
    2. For Windows users, download the file that ends with **.exe**.
