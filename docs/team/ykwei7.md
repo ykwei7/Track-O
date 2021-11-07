@@ -1,4 +1,3 @@
-ykwei7.md
 ---
 layout: page
 title: Yangken' Project Portfolio Page
