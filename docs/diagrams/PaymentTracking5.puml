@@ -10,7 +10,7 @@ package "Payment tracking" <<rectangle>> {
     class Tutee as "__John:Tutee__"
     class Payment as "__p:Payment__" {
         value = "90.00"
-        payByDateAsString = "01-01-2022"
+        payByDate = "01-01-2022"
         paymentHistory = ["Never"]
         isOverdue = true
     }

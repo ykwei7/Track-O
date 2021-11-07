@@ -199,7 +199,7 @@ The payment tracking feature is facilitated by `Payment`, `PaymentCommandParser`
 
 Parsing the user's input through `PaymentCommandParser`, the user may generate any one of the following commands:
 * `PaymentAddCommand`  — Adds the cost of the lesson's fees to the tutee's current payment amount due
-* `PaymentSetAmoutnCommand`  — Sets the payment amount due for the tutee to the specified amount
+* `PaymentSetAmountCommand`  — Sets the payment amount due for the tutee to the specified amount
 * `PaymentSetDateCommand`  — Sets the pay-by date for the tutee to the specified date
 * `PaymentReceiveCommand`  — Resets the tutee's incurred fees and pay-by-date, and updates their payment history
 
@@ -212,7 +212,7 @@ Step 1. The user adds a new `Tutee` John to Track-O and the `Payment` object is 
     <img alt="PaymentTracking1" src="images/PaymentTracking1.png"/>
 </p>
 
-Step 2. After adding lessons to John, the user executes "payment 1 lesson/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` set.
+Step 2. After adding lessons to John, the user executes "payment 1 lesson/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` list.
 
 <p align="center">
     <img alt="PaymentTracking2" src="images/PaymentTracking2.png"/>
@@ -244,7 +244,7 @@ Step 6. The user executes `payment 1 receive` and receives John's payment, updat
 
 #### Design considerations
 
-**Aspect: How payments are updated**
+**Aspect: How lesson fees are added to payment amounts**
 
 * **Option 1 (current choice):** Add a tutee's lesson's cost to their current payment amount due.
     * Pros: Easy to implement and command would be short.
@@ -255,6 +255,17 @@ Step 6. The user executes `payment 1 receive` and receives John's payment, updat
     * Pros: The tutor can easily add multiples of a lesson's cost to a tutee.
     * Cons: The additional integer parameter would require another layer of parsing and validation checking.
     * Cons: Command would be more lengthy as it requires 3 keywords to execute (payment, lesson, integer).
+
+**Aspect: How payment due dates are managed**
+
+* **Option 1 (current choice):** Set a specified payment due date manually for a tutee.
+    * Pros: Gives the user the choice to set a payment due date, as not all tutees may require tracking of payments if they pay immediately after a lesson.
+    * Cons: Requires more effort for the user to set payment due dates for every tutee, if they require so.
+
+* **Option 2:** Set the payment due date exactly 1 week from the date the tutee last paid.
+    * Pros: The tutor need not manually set due dates if the tutees are to pay weekly.
+    * Cons: Different tutors collect payments at different times (i.e monthly, biweekly).
+    * Cons: Lessons may not occur every week, so the payment due date is subject to manual change quite often, making its automatic nature redundant.
 
 
 ### Schedule
