@@ -292,10 +292,15 @@ public class ParserUtil {
     public static double parseHourlyRate(String hourlyRate) throws ParseException {
         requireNonNull(hourlyRate);
         String trimmedHourlyRate = hourlyRate.trim();
-        if (!Lesson.isValidHourlyRate(trimmedHourlyRate)) {
-            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
+        if (!Lesson.isValidHourlyRateFormat(trimmedHourlyRate)) {
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_INVALID_HOURLY_RATE_FORMAT);
         }
-        return Double.parseDouble(hourlyRate);
+
+        double parsedHourlyRate = Double.parseDouble(hourlyRate);
+        if (Lesson.isExceedMaximumHourlyRate(parsedHourlyRate)) {
+            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS_MAXIMUM_HOURLY_RATE_EXCEEDED);
+        }
+        return parsedHourlyRate;
     }
 
     /**

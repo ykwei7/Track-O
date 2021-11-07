@@ -122,7 +122,7 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser,
                 "1" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY
                         + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + INVALID_LESSON_HOURLY_RATE_DESC,
-                Lesson.MESSAGE_CONSTRAINTS); // invalid hourly rate
+                Lesson.MESSAGE_CONSTRAINTS_INVALID_HOURLY_RATE_FORMAT); // invalid hourly rate
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
