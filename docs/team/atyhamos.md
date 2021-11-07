@@ -1,4 +1,4 @@
-atyhamos.md---
+---
 layout: page
 title: Amos' Project Portfolio Page
 ---
@@ -15,7 +15,7 @@ Given below are my contributions to the project.
   * Highlights: This enhancement affects existing commands and commands to be added in future, such as `PaymentAddCommand` and `PaymentSetAmountCommand`.
   It required an in-depth analysis of design alternatives, especially in regard to how the payment amount would be accumulated by the tutee and how the user would track it.
   <br><br>
-  For example, initial plans involved having a fixed payment due date of 1 week since a payment was made, to be calculated automatically using `LocalDate`, but considering not all tutors collect their fees weekly, the final design let them set their own payment due dates.
+  For example, initial design plans involved having a fixed payment due date of 1 week since a payment was made, to be calculated automatically using `LocalDate`, but considering not all tutors collect their fees weekly, the final design let them set their own payment due dates.
   * The implementation was challenging too as it required changes to existing commands, such as `AddCommand`, and modifications to the `JsonAdaptedTutee` to store payment information in the .json file.
   * Credits: *-*
 
@@ -29,7 +29,7 @@ Given below are my contributions to the project.
     4. Added different coloured subject labels to tutee cards for easy identification.
     5. Added red coloured Overdue label to indicate tutees with overdue payments.
   * Justification: The improvements to GUI accommodates the other features implemented, such as `Subject` and `Payment` with subject and Overdue labels, and provides a more appealing interface for the user to view tutees at a glance and interact with the application.
-  * Highlights: This enhancement did not affect existing commands and commands to be added in the future, but did affect code coverage which required the creation of a `TuteeCardTest` class. 
+  * Highlights: This enhancement did not affect existing commands and commands to be added in the future, but did affect code coverage which required the creation of a `TuteeCardTest` class. Most of the changes were applied to .fxml and .css files which were mostly independent from the logic of the application.
   * Credits: *-*
 
   * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=atyhamos&tabRepo=AY2122S1-CS2103T-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
@@ -49,7 +49,9 @@ Given below are my contributions to the project.
       * Added images and logo for the Quick Start, Features, and Troubleshooting section. (Pull requests [\#181](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/181) and [\$184](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/184))
     * Developer Guide:
       * Added implementation details of the `payment` feature and payment tracking (Pull requests [\#55](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/55) and [\#185](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/185)), including:
-        * Object diagrams of how a `Tutee` updates its `Payment` with respective commands by the user
+        * Object diagrams of how a `Tutee` updates its `Payment` with respective commands by the user.
+        *  One of the object diagrams:
+        <img width="70%" alt="Object Diagram" src="../images/PaymentTracking6.png"/>
 
 
 * **Community**:
@@ -61,6 +63,6 @@ Given below are my contributions to the project.
   [\#163](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/163).
   
   * Designed team's application icon:
-    * For Application tray and window: <img width="20%" alt="Application tray" src="../../src/main/resources/images/tracko_logo.png"/>
-    * For User Guide:<img width="20%" alt="For website" src="../images/tracko_logo_docs.png"/>
+    * For Application tray and window: <br> <img width="20%" alt="Application tray" src="../../src/main/resources/images/tracko_logo.png"/>
+    * For User Guide:<br><img width="20%" alt="For website" src="../images/tracko_logo_docs.png"/>
 
