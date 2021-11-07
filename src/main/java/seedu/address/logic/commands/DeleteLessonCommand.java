@@ -64,11 +64,11 @@ public class DeleteLessonCommand extends Command {
         Schedule schedule = model.getSchedule();
 
         schedule.remove(lessonToDelete, tuteeToEdit.getName().toString());
-        tuteeToEdit.deleteLesson(lessonIndex);
 
         Tutee editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
                 tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(), tuteeToEdit.getRemark(),
                 tuteeToEdit.getTags(), tuteeToEdit.getLessons());
+        editedTutee.deleteLesson(lessonIndex);
 
         model.setTutee(tuteeToEdit, editedTutee);
         model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
