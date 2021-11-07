@@ -36,6 +36,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed the deadline and closure of milestones v1.3 - v1.3b (2 milestones) on GitHub.
+  * Took and cropped profile photos for [About-Us](https://ay2122s1-cs2103t-f12-3.github.io/tp/AboutUs.html) page.
 
 * **Enhancements to existing features**: Modified the `find` command to work like a filter.
   * What it does: `Find` command supports keyword search for `name`, `level`, `subjects` and `overdue` status.
@@ -63,4 +64,4 @@ Given below are my contributions to the project.
 [\#74](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/74),
 [\#155](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/155),
 [\#159](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/159),
-* Took and cropped profile photos for [About-Us](https://ay2122s1-cs2103t-f12-3.github.io/tp/AboutUs.html) page.
+
