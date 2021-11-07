@@ -5,11 +5,11 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TrackOParser" as TrackOParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
-participant "predicate:CollectivePredicate" as CollectivePredicate LOGIC_COLOR
 participant ":FindCommand" as FindCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant "predicate:CollectivePredicate" as CollectivePredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
@@ -23,7 +23,8 @@ TrackOParser -> FindCommandParser : parse(" n/david l/p2")
 activate FindCommandParser
 
 create CollectivePredicate
-FindCommandParser -> CollectivePredicate
+skinparam maxMessageSize 300
+FindCommandParser -> CollectivePredicate : CollectivePredicate(nameKeywords, levelKeywords, subjectKeywords, overdueKeyword)
 activate CollectivePredicate
 
 CollectivePredicate --> FindCommandParser : predicate
@@ -47,8 +48,11 @@ LogicManager -> FindCommand : execute()
 activate FindCommand
 
 FindCommand -> Model : updateFilteredTuteeList(predicate)
+activate Model
 
 Model --> FindCommand
+deactivate Model
+
 FindCommand --> LogicManager : CommandResult
 deactivate FindCommand
 
