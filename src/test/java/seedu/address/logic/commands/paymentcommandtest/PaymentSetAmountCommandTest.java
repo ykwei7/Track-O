@@ -28,7 +28,7 @@ import seedu.address.model.tutee.Tutee;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- *  * {@code PaymentSetAmountTest}.
+ *  * {@code PaymentSetAmountCommand}.
  */
 public class PaymentSetAmountCommandTest {
 
