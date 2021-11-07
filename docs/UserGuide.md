@@ -440,7 +440,7 @@ Format: `exit`
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
 
 **Q**: Why does my application look slightly different?<br>
-**A**: The screenshots in this User Guide are from an application running on **macOS**. If you are using Windows, your application would look something like this instead:
+**A**: The screenshots in this User Guide are from an application running on macOS. If you are using Windows, your application would look something like this instead:
 
 <img src="windows_ug.png" width="85%"/>
 
@@ -480,7 +480,7 @@ For macOS users, you may receive an error similar to the one below when double-c
 </p>
  
 Refer to the following steps to get started using Track-O:
-1. Click on the **OK** to close the pop-up window.
+1. Click on the "OK" to close the pop-up window.
 2. Run **Spotlight** by pressing the Command key and Space Bar at the same time.
 3. Type "Security & Privacy" and hit Enter. You should see a window similar to the one below:
 
