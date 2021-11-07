@@ -35,6 +35,10 @@ import seedu.address.model.tutee.Payment;
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.TuteeBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ *  * {@code PaymentAddCommand}.
+ */
 public class PaymentAddCommandTest {
 
     private Model model;
