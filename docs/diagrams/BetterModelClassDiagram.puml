@@ -12,11 +12,14 @@ UniqueTagList -[hidden]down- UniqueTuteeList
 UniqueTagList *-right-> "*" Tag
 UniqueTuteeList -right-> Tutee
 
-Tutee -up-> "*" Tag
+Tutee *-up-> "*" Tag
 
 Tutee *--> Name
 Tutee *--> Phone
+Tutee *--> School
 Tutee *--> Level
 Tutee *--> Address
+Tutee *--> Payment
 Tutee *--> Remark
+Tutee *-right-> "*" Lesson
 @enduml

@@ -14,14 +14,18 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+Class Schedule
 
 
 Class UniqueTuteeList
 Class Tutee
 Class Address
+Class Lesson
 Class Level
 Class Name
+Class Payment
 Class Phone
+Class School
 Class Remark
 Class Tag
 
@@ -36,22 +40,30 @@ ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyTrackO
 ModelManager -left-> "1" TrackO
+ModelManager --> "1" Schedule
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 TrackO *--> "1" UniqueTuteeList
 UniqueTuteeList --> "~* all" Tutee
-Tutee *--> Name
+Tutee *-left-> Name
 Tutee *--> Phone
+Tutee *--> School
 Tutee *--> Level
 Tutee *--> Address
+Tutee *--> Payment
 Tutee *--> Remark
 Tutee *--> "*" Tag
+Tutee *-right-> "*" Lesson
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Level
-Level -[hidden]right-> Remark
+Name -[hidden]down-> Phone
+Phone -[hidden]right-> School
+School -[hidden]right-> Level
+Level -[hidden]right-> Address
+Address -[hidden]right-> Payment
+Payment -[hidden]right-> Remark
+Remark -[hidden]right-> Tag
+Tag -[hidden]up-> Lesson
 
 ModelManager -->"~* filtered" Tutee
 @enduml

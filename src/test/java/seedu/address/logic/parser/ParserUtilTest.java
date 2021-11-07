@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,6 +17,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.Address;
 import seedu.address.model.tutee.Level;
@@ -35,6 +39,12 @@ public class ParserUtilTest {
     private static final String INVALID_PAYMENT = "5a00";
     private static final String INVALID_PAYMENT_EXCEED_MAXIMUM = "100001";
     private static final String INVALID_OVERDUE = "nope";
+    private static final String INVALID_DAY_OF_WEEK_1 = "0";
+    private static final String INVALID_DAY_OF_WEEK_2 = "8";
+    private static final String INVALID_DAY_OF_WEEK_3 = "Monday";
+    private static final String INVALID_LOCAL_TIME = "13:45:00"; // not strictly in "HH:mm" format
+    private static final String INVALID_HOURLY_RATE_FORMAT = "150.11";
+    private static final String INVALID_HOURLY_RATE_EXCEED_MAXIMUM = "1000.50";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "12345678";
@@ -49,6 +59,9 @@ public class ParserUtilTest {
     private static final String VALID_PAYMENT_DECIMALS = "500.50";
     private static final LocalDate VALID_PAYMENT_DATE = LocalDate.of(2021, 11, 1);
     private static final String VALID_OVERDUE = "yes";
+    private static final String VALID_DAY_OF_WEEK = "4";
+    private static final String VALID_LOCAL_TIME = "14:20";
+    private static final String VALID_HOURLY_RATE = "42.75";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -339,5 +352,66 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseDayOfWeek_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDayOfWeek((String) null));
+    }
+
+    @Test
+    public void parseDayOfWeek_invalidDay_throwsParseException() {
+        assertThrows(ParseException.class, Time.MESSAGE_CONSTRAINTS_INVALID_DAY, () ->
+                ParserUtil.parseDayOfWeek(INVALID_DAY_OF_WEEK_1));
+        assertThrows(ParseException.class, Time.MESSAGE_CONSTRAINTS_INVALID_DAY, () ->
+                ParserUtil.parseDayOfWeek(INVALID_DAY_OF_WEEK_2));
+        assertThrows(ParseException.class, Time.MESSAGE_CONSTRAINTS_INVALID_DAY, () ->
+                ParserUtil.parseDayOfWeek(INVALID_DAY_OF_WEEK_3));
+    }
+
+    @Test
+    public void parseDayOfWeek_validDay_returnsDayOfWeek() throws ParseException {
+        DayOfWeek expectedDay = DayOfWeek.of(Integer.parseInt(VALID_DAY_OF_WEEK));
+        assertEquals(expectedDay, ParserUtil.parseDayOfWeek(VALID_DAY_OF_WEEK));
+    }
+
+    @Test
+    public void parseLocalTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocalTime((String) null));
+    }
+
+    @Test
+    public void parseLocalTime_invalidLocalTime_throwsParseException() {
+        assertThrows(ParseException.class, Time.MESSAGE_CONSTRAINTS_INVALID_LOCALTIME, () ->
+                ParserUtil.parseLocalTime(INVALID_LOCAL_TIME));
+    }
+
+    @Test
+    public void parseLocalTime_validLocalTime_returnsLocalTime() throws ParseException {
+        LocalTime expectedLocalTime = LocalTime.parse(VALID_LOCAL_TIME);
+        assertEquals(expectedLocalTime, ParserUtil.parseLocalTime(VALID_LOCAL_TIME));
+    }
+
+    @Test
+    public void parseHourlyRate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseHourlyRate((String) null));
+    }
+
+    @Test
+    public void parseHourlyRate_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, Lesson.MESSAGE_CONSTRAINTS_INVALID_HOURLY_RATE_FORMAT, () ->
+                ParserUtil.parseHourlyRate(INVALID_HOURLY_RATE_FORMAT));
+    }
+
+    @Test
+    public void parseHourlyRate_exceedMaximumHourlyRate_throwsParseException() {
+        assertThrows(ParseException.class, Lesson.MESSAGE_CONSTRAINTS_MAXIMUM_HOURLY_RATE_EXCEEDED, () ->
+                ParserUtil.parseHourlyRate(INVALID_HOURLY_RATE_EXCEED_MAXIMUM));
+    }
+
+    @Test
+    public void parseHourlyRate_validHourlyRate_returnsHourlyRate() throws ParseException {
+        double expectedHourlyRate = Double.parseDouble(VALID_HOURLY_RATE);
+        assertEquals(expectedHourlyRate, ParserUtil.parseHourlyRate(VALID_HOURLY_RATE));
     }
 }

@@ -11,8 +11,9 @@ Class Tutee
 Class Schedule
 Class ModelManager
 
-Schedule .r.> ModelManager
+ModelManager -l-> Schedule
 Schedule -d-> Lesson
+Schedule ..> Tutee
 Tutee -r-> Lesson : attends >
 ModelManager --> Tutee : tutee list
 
