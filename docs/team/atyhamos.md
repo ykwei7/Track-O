@@ -1,4 +1,5 @@
-atyhamos.md---
+atyhamos.md
+---
 layout: page
 title: Amos' Project Portfolio Page
 ---
