@@ -30,6 +30,8 @@ public class RemarkCommand extends Command {
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to tutee: %1$s";
 
+    private static final String EMPTY_REMARK = "-";
+
     private final Index index;
     private final Remark remark;
 
@@ -56,7 +58,7 @@ public class RemarkCommand extends Command {
         Remark tuteeRemark = tuteeToEdit.getRemark();
         Tutee editedTutee;
 
-        if (!tuteeRemark.value.equals("-")) {
+        if (!tuteeRemark.value.equals(EMPTY_REMARK)) {
             editedTutee = new Tutee(tuteeToEdit.getName(), tuteeToEdit.getPhone(), tuteeToEdit.getSchool(),
                     tuteeToEdit.getLevel(), tuteeToEdit.getAddress(), tuteeToEdit.getPayment(),
                     tuteeRemark.appendRemark(remark), tuteeToEdit.getTags(),

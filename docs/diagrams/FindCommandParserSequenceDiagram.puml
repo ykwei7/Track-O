@@ -19,25 +19,26 @@ activate LogicManager
 LogicManager -> TrackOParser : parseCommand("find n/david l/p2")
 activate TrackOParser
 
-TrackOParser -> FindCommandParser : parse("find n/david l/p2")
+TrackOParser -> FindCommandParser : parse(" n/david l/p2")
 activate FindCommandParser
 
 create CollectivePredicate
 FindCommandParser -> CollectivePredicate
 activate CollectivePredicate
 
-CollectivePredicate --> FindCommandParser
+CollectivePredicate --> FindCommandParser : predicate
 deactivate CollectivePredicate
 
 create FindCommand
-FindCommandParser -> FindCommand
+FindCommandParser -> FindCommand : FindCommand(predicate)
 activate FindCommand
 
 FindCommand --> FindCommandParser
 deactivate FindCommand
 
-FindCommandParser --> TrackOParser
+FindCommandParser --> TrackOParser : FindCommand
 deactivate FindCommandParser
+destroy FindCommandParser
 
 TrackOParser --> LogicManager
 deactivate TrackOParser
@@ -48,7 +49,7 @@ activate FindCommand
 FindCommand -> Model : updateFilteredTuteeList(predicate)
 
 Model --> FindCommand
-FindCommand --> LogicManager
+FindCommand --> LogicManager : CommandResult
 deactivate FindCommand
 
 [<--LogicManager

@@ -22,7 +22,7 @@ Given below are my contributions to the project.
   are relevant.<br>
   Instead of creating a completely new field for that, we decided to replace the existing `email` field with education
   level because email would not be relevant if tutors are teaching younger tutees in the primary level and do not use 
-  email for communication.
+  email for communication purpose.
   * Highlights: This enhancement affects existing commands such as `add` and `edit` as the `email` field now contains 
   different information and parameter constraints.
   * Credits: *-*
@@ -37,7 +37,7 @@ Given below are my contributions to the project.
 * **Project management**:
   * Managed the deadline and closure of milestones v1.3 - v1.3b (2 milestones) on GitHub.
 
-* **Enhancements to existing features**: Modified the `find` command to work like a filter
+* **Enhancements to existing features**: Modified the `find` command to work like a filter.
   * What it does: `Find` command supports keyword search for `name`, `level`, `subjects` and `overdue` status.
   * Justification: The previous `find` function returns matched tutees whose name fulfils any of the keyword supplied.
     However, we felt that the feature is not very helpful for tutors if we wanted to extend it to support `level`,
