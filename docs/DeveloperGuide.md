@@ -312,7 +312,7 @@ them the ability to quickly identify specific tutees and getting information as 
 
 #### Current implementation
 `FindCommandParser` uses `parserUtil` to get the keywords used in the command.
-The keywords are supplied after the flags when tutors enter the command. Supported flags are `n/` `l/` 
+The keywords are supplied after the prefix when tutors enter the command. Supported prefixes are `n/` `l/` 
 `subject/` and `overdue/`.<br><br>
 `FindCommandParser` then initialises 4 empty string arrays, each represents one of the 4 fields. The keywords
 obtained by `parserUtil` will be added to the respective arrays. If the field does not contain any keywords, the array
@@ -322,7 +322,8 @@ converts each arrays into streams and does an `allmatch` method call, which retu
 matches all the keywords of that field. However, if the keyword stream is empty, the returned result will also be
 `true`. To address this issue, we used an `activeTests` array and only add the result of `allmatch` to the array 
 if the stream contains keywords. `CollectivePredicate#test` finally returns true if `activeTests` is a non-zero length
-array and all the booleans are `true`. The following activity diagram shows an example of the flow of`CollectivePredicate#test`
+array and all the booleans are `true`.<br><br>
+The following activity diagram shows an example of the flow of`CollectivePredicate#test`
 executed on a `Tutee` Bob.
 
 ![CollectivePredicateActivityDiagram](images/CollectivePredicateActivityDiagram.png)
@@ -338,11 +339,9 @@ We had 2 design ideas of the `find` command:
 We decided on the 2nd implementation due to the reasons:
 * Everytime a new keyword is supplied, the returned tutee list will be equals to or smaller than without the new keyword,
 as opposed to design 1, where the tutee list is equals to or longer than the without the keyword. 
-* We want the find feature to address the issue of tutee list being to cluttered when number of tutees increases, so
+* We want the find feature to address the issue of tutee list being too cluttered when number of tutees increases, so
 design 2 fits our requirement better.
 * In addition, it enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
