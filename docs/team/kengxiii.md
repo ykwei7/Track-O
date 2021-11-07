@@ -28,9 +28,9 @@ Given below are my contributions to the project.
   * Credits: *-*
 
 * **New Feature**: Added the ability to delete lessons from a tutee.
-  * What it does: the `deletelesson` command identifies the lesson to be deleted and removes it from the user's schedule
-  as well as the lessonlist of the tutee.
-  * Justification: Track-O supports adding lesson to individual tutees. If the tutee decides to quit the tuition lesson 
+  * What it does: the `deletelesson` command identifies the `lesson` to be deleted and removes it from the user's schedule
+  as well as the `lessonlist` of the `tutee`.
+  * Justification: Track-O supports adding `lesson` to individual `tutee`. If the tutee decides to quit the tuition lesson 
   permanently, the user has the ability to free up his schedule and remove the lesson.
   * Credits: *-*
 
@@ -39,7 +39,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**: Modified the `find` command to work like a filter.
   * What it does: `Find` command supports keyword search for `name`, `level`, `subjects` and `overdue` status.
-  * Justification: The previous `find` function returns matched tutees whose name fulfils any of the keyword supplied.
+  * Justification: The previous `find` function returns matched `tutee` whose name fulfils any of the keyword supplied.
     However, we felt that the feature is not very helpful for tutors if we wanted to extend it to support `level`,
     `subject` and `overdue` status as well.<br><br>
     For example, if the tutor wants to search up all secondary 4 students taking math classes, using
@@ -55,7 +55,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `deleteLesson` and `find`.
   * Developer Guide:
-    * Added implementation details of the `deleteLesson` and `find` feature.
+    * Added implementation details of the `find` feature.
 
 * **Community**:
 * PRs reviewed (with non-trivial review comments):
@@ -63,3 +63,4 @@ Given below are my contributions to the project.
 [\#74](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/74),
 [\#155](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/155),
 [\#159](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/159),
+* Took and cropped profile photos for [About-Us](https://ay2122s1-cs2103t-f12-3.github.io/tp/AboutUs.html) page.
