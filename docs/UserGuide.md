@@ -52,6 +52,7 @@ parameter | A value that is defined based on your input and is immediately prece
 alphanumeric characters | Words that consist of only English alphabets and/or numbers e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
 integer | A number that has strictly no decimal places.
 level | Refers to the education level of a student in the context of Singapore's education system.
+
 <div style="page-break-after: always;"></div>
 ### Application layout
 
@@ -82,7 +83,7 @@ This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30
 the 5th of January 2022.
 5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-<img src="john_ug.png" width="95%"/>
+<img src="john_ug.png" width="85%"/>
 <div style="page-break-after: always;"></div>
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
@@ -93,7 +94,7 @@ under the remarks for John.
 the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
 4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-<img src="john_2_ug.png" width="95%"/>
+<img src="john_2_ug.png" width="85%"/>
 
 <div style="page-break-after: always;"></div>
 ### Managing your payments
