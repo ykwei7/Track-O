@@ -38,6 +38,8 @@ public class ParserUtilTest {
     private static final String INVALID_PAYMENT_DECIMALS = "500.1";
     private static final String INVALID_PAYMENT = "5a00";
     private static final String INVALID_PAYMENT_EXCEED_MAXIMUM = "100001";
+    private static final String INVALID_PAYMENT_DATE = "abc-123-xyz";
+    private static final String INVALID_PAYMENT_DATE_PAST = "7-11-2021";
     private static final String INVALID_OVERDUE = "nope";
     private static final String INVALID_DAY_OF_WEEK_1 = "0";
     private static final String INVALID_DAY_OF_WEEK_2 = "8";
@@ -174,6 +176,23 @@ public class ParserUtilTest {
     public void parsePaymentValue_exceedMaximumValue_throwsParseException() {
         assertThrows(ParseException.class, Payment.AMOUNT_CONSTRAINTS_MESSAGE, () ->
                 ParserUtil.parsePaymentValue(INVALID_PAYMENT_EXCEED_MAXIMUM));
+    }
+
+    @Test
+    public void parsePayByDate_emptyDate_returnsNull() throws ParseException {
+        assertEquals(null, ParserUtil.parsePayByDate(""));
+    }
+
+    @Test
+    public void parsePayByDate_invalidDateFormat_throwsParseException() {
+        assertThrows(ParseException.class, Payment.DATE_CONSTRAINTS_MESSAGE, () ->
+                ParserUtil.parsePayByDate(INVALID_PAYMENT_DATE));
+    }
+
+    @Test
+    public void parsePayByDate_dateInThePast_throwsParseException() {
+        assertThrows(ParseException.class, Payment.DATE_CONSTRAINTS_MESSAGE, () ->
+                ParserUtil.parsePayByDate(INVALID_PAYMENT_DATE_PAST));
     }
 
     @Test
