@@ -481,8 +481,8 @@ It is just a visual difference. Both applications have the same functionalities 
 **Q**: What are tags used for? <br>
 **A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
 
-**Q**: What does it mean by a lesson clashing with other lessons under the section on [adding a lesson to a tutee](#adding-a-lesson-to-a-tutee--addlesson)? Why is it not allowed?<br>
-**A**: This means that the lesson is occurring at the same day and the same time as other lessons. This is not allowed as it is not feasible for a tutor to have two or more ongoing lessons at the same time.
+**Q**: What does it mean by a lesson clashing with other lessons in the user's schedule under the section on [adding a lesson to a tutee](#adding-a-lesson-to-a-tutee--addlesson)? Why is it not allowed?<br>
+**A**: A schedule clash means that the lesson added coincides with another lesson in the existing schedule. To resolve this, pick a different day/timing where your schedule is free.
 
 **Q**: Why doesn't pressing `F1` open the Help menu on my Mac?<br>
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
