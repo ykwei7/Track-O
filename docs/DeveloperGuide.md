@@ -154,6 +154,34 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Education Level of tutees
+
+Education level is a compulsory parameter when adding a new tutee. It requires the prefix `l/`,
+followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
+the first letter of the education level in lowercase, followed by the year of study.
+
+#### Supported Education Levels
+
+* Primary: 1 to 6
+* Secondary: 1 to 5
+* Junior College: 1 to 2
+
+#### Design considerations
+The `value` field of education level in Tutee class is in the abbreviation form.
+In `TuteeCard`, the string displayed is `stringRepresentation`,
+which is the returned value of the `parse` method in Level class, using `value` as the parameter.
+For example, `stringRepresentation` of `p5` is the result of `Level.parse("p5")` which returns `Primary 5`.
+
+Both `value` and `stringRepresentation` are fields belonging to Level.
+This is designed for better readability in displaying tutees. Having two fields ensures that the
+abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
+to its abbreviated form. In our implementation of `Find`, we use the abbreviations to filter the `tuteelist`. 
+`Find` requires the keywords to be exactly equals to the value stored in each `tutee`. Using abbreviations instead of 
+the full education level title helps to reduce incorrect find results due to missing spaces or spelling errors.
+
+#### Parse method
+The `parse` method splits the string parameter into a charArray and switches case according to the first char.
+Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
 
 ### Get feature
 
@@ -370,11 +398,6 @@ When the tutor attempts to add a `Lesson` that occurs on Friday 6pm to 7pm, the 
 #### DeleteLesson
 `deleteLesson` command is responsible for removing a lesson that exists in the `tuteelist` as well as a tutee’s `lessons`.
 
-##### Current Implementation
-`deleteLesson` command requires 2 inputs:
-* Index of tutee
-* Index of lesson in `lessons` of tutee
-
 Suppose Bob has index number of 2 in `tuteelist` and the user wants to delete the 3rd lesson in his list of lessons. 
 The following sequence diagram and steps showcase how the `DeleteLessonCommand` would work.
 
@@ -401,35 +424,47 @@ Education level is a compulsory parameter when adding a new tutee. It requires t
 followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
 the first letter of the education level in lowercase, followed by the year of study.
 
-#### Supported Education Levels
+### Find 
+``FindCommand` allows tutors to filter the `tuteelist` according to the keywords supplied. The supported fields for `FindCommand`
+includes: `name`, `level`, `subject`, `overdue`.
 
-* Primary: 1 to 6
-* Secondary: 1 to 5
-* Junior College: 1 to 2
+#### Rationale
+Track-O aims to solve problems that arises when he teaches multiple tutees. Tutors may find it difficult to look for a
+tutee within the long list. A `find` feature helps to shrink the list down to display only the tutee of interest, giving
+them the ability to quickly identify specific tutees and getting information as required.
 
-#### Design
-The `value` field of education level in Tutee class is in the abbreviation form.
-In `TuteeCard`, the string displayed is `stringRepresentation`,
-which is the returned value of the `parse` method in Level class, using `value` as the parameter.
-For example, `stringRepresentation` of `p5` is `Primary 5`.
+#### Current implementation
+`FindCommandParser` uses `parserUtil` to get the keywords used in the command.
+The keywords are supplied after the prefix when tutors enter the command. Supported prefixes are `n/` `l/` 
+`subject/` and `overdue/`.<br><br>
+`FindCommandParser` then initialises 4 empty string arrays, each represents one of the 4 fields. The keywords
+obtained by `parserUtil` will be added to the respective arrays. If the field does not contain any keywords, the array
+for that field remains empty.<br><br>
+A `CollectivePredicate` object will be created using these arrays of keywords, which serves as our filter test. It
+converts each arrays into streams and does an `allmatch` method call, which returns true if the tutee's information 
+matches all the keywords of that field. However, if the keyword stream is empty, the returned result will also be
+`true`. To address this issue, we used an `activeTests` array and only add the result of `allmatch` to the array 
+if the stream contains keywords. `CollectivePredicate#test` finally returns true if `activeTests` is a non-zero length
+array and all the booleans are `true`.<br><br>
+The following activity diagram shows an example of the flow of`CollectivePredicate#test`
+executed on a `Tutee` Bob.
 
-Both `value` and `stringRepresentation` are fields belonging to Level.
-This is designed for better readability in displaying tutees. Having two fields ensures that the
-abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
-to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
-education level.
+![CollectivePredicateActivityDiagram](images/CollectivePredicateActivityDiagram.png)
 
-#### Parse method
-The `parse` method splits the string parameter into a charArray and switches case according to the first char.
-Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
+The following sequence diagram shows the workflow when a user uses the `Find` feature.
+![FindCommandParserSequenceDiagram](images/FindCommandParserSequenceDiagram.png)
 
-#### Restrictions
-1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
-2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
+#### Design Considerations
+We had 2 design ideas of the `find` command:
+1. Allow `FindCommand` to search with multiple keywords, and return tutees that fulfills **either** keywords
+2. Allow `FindCommand` to search with multiple keywords, and return tutees that fulfills **all** keywords
 
-Failing either restriction will result in the constraint message showing up in the console component,
-and the tutee will not be created/modified.
-
+We decided on the 2nd implementation due to these reasons:
+* Everytime a new keyword is supplied, the returned `tuteelist` will be equals to or smaller than without the new keyword,
+as opposed to design 1, where the `tuteelist` is equals to or longer than the without the keyword. 
+* We want the find feature to address the issue of `tuteelist` being too cluttered when number of tutees increases, so
+design 2 fits our requirement better.
+* It enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
