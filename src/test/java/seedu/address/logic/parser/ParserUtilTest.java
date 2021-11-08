@@ -2,9 +2,12 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.ParserUtil.EMPTY_STRING;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INDEX_OUT_OF_BOUNDS;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTEE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -131,6 +134,12 @@ public class ParserUtilTest {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    }
+
+    @Test
+    public void parsePaymentLessonIndex_null_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseLessonIndex(EMPTY_STRING));
     }
 
     @Test
