@@ -4,10 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.TrackOParser.anyPrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteLessonCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.IndexOutOfBoundsException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -34,7 +42,11 @@ public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteLessonCommand.MESSAGE_USAGE), pe);
         } catch (IndexOutOfBoundsException ie) {
-            throw new ParseException(MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX, ie);
+            if (anyPrefixesPresent(argMultimap, PREFIX_LESSON)) {
+                throw new ParseException(MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX, ie);
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteLessonCommand.MESSAGE_USAGE), ie);
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isEmpty()) {
