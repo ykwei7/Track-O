@@ -52,6 +52,7 @@ parameter | A value that is defined based on your input and is immediately prece
 alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
 integer | A number that has no decimal places or fractions.
 level | Refers to the education level of a student in the context of Singapore's education system.
+lesson/schedule conflict | 
 
 <div style="page-break-after: always;"></div>
 ### Application layout
@@ -318,7 +319,7 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * `START_TIME` and `END_TIME` should be within the same day.
 * `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 * `HOURLY_RATE` should not have a fee greater than `$1000`.
-* If the added lesson conflicts with an existing lesson belonging to any tutee, Track-O feedbacks that there is a schedule conflict, and re-displays the information of the lesson that the user inputs.
+* The lesson to be added must not clash with any of the lessons in the user's schedule.
 
 Examples:
 * `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
@@ -449,6 +450,9 @@ Format: `exit`
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 ## FAQ
+
+**Q**: What does it mean by a lesson clashing with other lessons? Why is it not allowed?<br>
+**A**: This means that the lesson is occurring at the same day and the same time as other lessons. This is not allowed as it is not feasible for a tutor to have two or more ongoing lessons at the same time.    
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder (`tracko.json`).
