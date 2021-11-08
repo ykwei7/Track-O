@@ -154,6 +154,34 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Education Level of tutees
+
+Education level is a compulsory parameter when adding a new tutee. It requires the prefix `l/`,
+followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
+the first letter of the education level in lowercase, followed by the year of study.
+
+#### Supported Education Levels
+
+* Primary: 1 to 6
+* Secondary: 1 to 5
+* Junior College: 1 to 2
+
+#### Design considerations
+The `value` field of education level in Tutee class is in the abbreviation form.
+In `TuteeCard`, the string displayed is `stringRepresentation`,
+which is the returned value of the `parse` method in Level class, using `value` as the parameter.
+For example, `stringRepresentation` of `p5` is the result of `Level.parse("p5")` which returns `Primary 5`.
+
+Both `value` and `stringRepresentation` are fields belonging to Level.
+This is designed for better readability in displaying tutees. Having two fields ensures that the
+abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
+to its abbreviated form. In our implementation of `Find`, we use the abbreviations to filter the `tuteelist`. 
+`Find` requires the keywords to be exactly equals to the value stored in each `tutee`. Using abbreviations instead of 
+the full education level title helps to reduce incorrect find results due to missing spaces or spelling errors.
+
+#### Parse method
+The `parse` method splits the string parameter into a charArray and switches case according to the first char.
+Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
 
 ### Get feature
 
@@ -277,34 +305,59 @@ Step 6. The user executes `payment 1 receive` and receives John's payment, updat
     * Cons: Different tutors collect payments at different times (i.e monthly, biweekly).
     * Cons: Lessons may not occur every week, so the payment due date is subject to manual change quite often, making its automatic nature redundant.
 
-
-### Schedule
-
-`Schedule` helps to list the weekly lessons of the tutor.
+### Lesson management
 
 #### Rationale
 
+A tutor may teach various subjects to various tutees at different times. Hence, it might be difficult to keep track of this information manually. Our lesson management feature aims to provide easy tracking of the lessons taught under each tutee, as well as a quick overview of the tutor’s schedule.
+
+The lesson management feature is facilitated by `Lesson`, `Schedule`, `AddLessonCommand` and `DeleteLessonCommand`.
+
+#### Lesson
+
+##### Current Implementation
+
+`Lesson` contains:
+* `subject`  — the subject of the lesson
+* `time`  — the time the lesson takes place, which includes the day of week of the lesson, as well as its start time and end time
+* `hourlyRate`  — the cost per hour of the lesson
+* `cost`  — the total cost of the lesson, derived from the product of the lesson duration and the hourly rate of the lesson
+
+![Lessons with overlapping time slots](images/equal_lessons.png)
+
+*Figure: `Lesson`s labelled as **A**, **B** and **C** that take place on Friday at different times.*
+
+When comparing between two lessons:
+- The two lessons are considered equal when both lessons have the same day of week and they have overlapping time slots. In the figure above, lesson **A** is equal to lesson **B** as they both occur on a Friday and have an overlapping time slot between 1:30pm and 2pm. Similarly, lesson **A** is equal to lesson **C** as they both occur on a Friday and have an overlapping time slot between 2pm and 2:30pm.
+- One lesson is considered less than (i.e. before or earlier than) the other lesson when the lesson occurs on a day that is earlier than the other. If both lessons occur on the same day, the lesson that is earlier is the one that has a start time earlier than the other, provided that both lessons do not have overlapping time slots. In the figure above, lesson **B** starts at 1pm while lesson **C** starts at 2pm, and there is no overlapping time slot, hence lesson **B** is earlier than lesson **C**.
+
+#### Schedule
+
+`Schedule` helps to list the weekly lessons of the tutor.
+
+##### Rationale
+
 A tutor may be teaching many lessons to many tutees. It may be difficult to track their upcoming lessons, hence `Schedule` solves these through listing these upcoming lessons.
 
-#### Current Implementation
+##### Current Implementation
 
-The `Schedule` class consists of a `TreeMap<Lesson, String>` that stores a set of lessons that is sorted by day of occurrence and start time.
+The `Schedule` class consists of a `TreeMap<Lesson, String>` that stores a mapping of lessons that are sorted by day of occurrence and start time, to the name of the tutee involved in the corresponding lesson.
 
-On the start-up of Track-O, before the tutor inputs any commands, the tutee list is iterated through and each `Lesson` of each tutee, along with their name, is added to the `TreeMap<Lesson, String>` set of lessons.
+On the start-up of Track-O, before the tutor inputs any commands, the tutee list is iterated through and each `Lesson` of each tutee, along with their name, is added to the `TreeMap<Lesson, String>` map of lessons.
 
 ![ScheduleClassDiagram](images/ScheduleClassDiagram.png)
 
 *Figure: Structure of `Schedule`*
 
-The `TreeMap<Lesson, String>` set of lessons will be updated after every execution of commands that modify a tutee's lessons or name. The activity diagram below shows how `Schedule` is involved when an `addlesson` command is executed.
+The `TreeMap<Lesson, String>` map of lessons will be updated after every execution of commands that modify a tutee's lessons or name.
 
-![AddLessonCommandActivityDiagram](images/AddLessonCommandActivityDiagram.png)
+When adding a lesson to the `Schedule`, the private `Schedule#isClash` method will be invoked on the lesson to check if the lesson is in the `TreeMap<Lesson, String>` map. This is done via the `Lesson#equals` method. If the lesson is in the `TreeMap<Lesson, String>` map, a `ScheduleClashException` will be thrown. This helps to enforce the constraint that the tutor’s schedule should not have any clashes in lesson time.
 
-*Figure: Steps involved in adding a lesson*
+Consequently, it also means that if the tutor manually adds in lessons to `tracko.json` stored under the `data/` folder such that there are clashes in the tutor's schedule, a `ScheduleClashException` will be thrown on start-up. This exception is handled by wiping out the existing data and starting with an empty tutee list and an empty schedule.
 
 The tutor's schedule can be accessed via the `schedule` command. The sorted lessons will be displayed.
 
-#### Design considerations:
+##### Design considerations:
 
 **Aspect: How the schedule is to be stored**
 
@@ -316,41 +369,73 @@ The tutor's schedule can be accessed via the `schedule` command. The sorted less
     * Pros: The tutor can view their schedule directly on their hard disk without starting up Track-O.
     * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out.
 
-### Education Level of tutees
+#### AddLessonCommand
 
-Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`,
-followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
-the first letter of the education level in lowercase, followed by the year of study.
+`AddLessonCommand` is responsible for creating a `Lesson`, and inserting it into the specified tutee’s list of lessons as well as the tutor’s schedule.
 
-#### Supported Education Levels
+The following activity diagram summarises the steps involved when `AddLessonCommand` is executed.
 
-* Primary: 1 to 6
-* Secondary: 1 to 5
-* Junior College: 1 to 2
+![AddLessonCommandActivityDiagram](images/AddLessonCommandActivityDiagram.png)
 
-#### Design
-The `value` field of education level in Tutee class is in the abbreviation form.
-In `TuteeCard`, the string displayed is `stringRepresentation`,
-which is the returned value of the `parse` method in Level class, using `value` as the parameter.
-For example, `stringRepresentation` of `p5` is `Primary 5`.
+*Figure: Steps involved in adding a lesson*
 
-Both `value` and `stringRepresentation` are fields belonging to Level.
-This is designed for better readability in displaying tutees. Having two fields ensures that the
-abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
-to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
-education level.
+Let us consider a scenario to illustrate how `AddLessonCommand` works with `Schedule`:
 
-#### Parse method
-The `parse` method splits the string parameter into a charArray and switches case according to the first char.
-Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
+Suppose there exists two `Tutee` objects in the `TuteeList`, named Alice and Bob. Alice currently has a lesson on Friday 3pm to 5pm, while Bob has no lessons. The figure below illustrates this.
 
-#### Restrictions
-1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
-2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
+![AddLessonCommandObjectDiagram1](images/AddLessonCommandObjectDiagram1.png)
 
-Failing either restriction will result in the constraint message showing up in the console component,
-and the tutee will not be created/modified.
+*Figure: Initial object diagram containing Alice, Bob, Alice's lessons and the tutor's schedule*
 
+When the tutor attempts to add a `Lesson` that occurs on Friday 2pm to 4pm, the `Schedule#isClash` method is invoked on the `Lesson` and returns true. This is because the `Lesson` is considered to be equal to Alice’s lesson due to the overlapping time. Thus, a `ScheduleClashException` is thrown and the lesson is not added to Bob. The object diagram remains the same as the figure above.
+
+When the tutor attempts to add a `Lesson` that occurs on Friday 6pm to 7pm, the `Schedule#isClash` method is invoked on the `Lesson` and returns false since there is no overlap in time. The `Lesson` is inserted in the `TreeMap<Lesson, String>` map in `Schedule` after Alice’s lesson, because it is greater than (i.e. after) Alice’s lesson. The updated object diagram is shown below.
+
+![AddLessonCommandObjectDiagram2](images/AddLessonCommandObjectDiagram2.png)
+
+*Figure: Object diagram after `AddLessonCommand` is successfully executed*
+
+### Find 
+``FindCommand` allows tutors to filter the `tuteelist` according to the keywords supplied. The supported fields for `FindCommand`
+includes: `name`, `level`, `subject`, `overdue`.
+
+#### Rationale
+Track-O aims to solve problems that arises when he teaches multiple tutees. Tutors may find it difficult to look for a
+tutee within the long list. A `find` feature helps to shrink the list down to display only the tutee of interest, giving
+them the ability to quickly identify specific tutees and getting information as required.
+
+#### Current implementation
+`FindCommandParser` uses `parserUtil` to get the keywords used in the command.
+The keywords are supplied after the prefix when tutors enter the command. Supported prefixes are `n/` `l/` 
+`subject/` and `overdue/`.<br><br>
+`FindCommandParser` then initialises 4 empty string arrays, each represents one of the 4 fields. The keywords
+obtained by `parserUtil` will be added to the respective arrays. If the field does not contain any keywords, the array
+for that field remains empty.<br><br>
+A `CollectivePredicate` object will be created using these arrays of keywords, which serves as our filter test. It
+converts each arrays into streams and does an `allmatch` method call, which returns true if the tutee's information 
+matches all the keywords of that field. However, if the keyword stream is empty, the returned result will also be
+`true`. To address this issue, we used an `activeTests` array and only add the result of `allmatch` to the array 
+if the stream contains keywords. `CollectivePredicate#test` finally returns true if `activeTests` is a non-zero length
+array and all the booleans are `true`.<br><br>
+The following activity diagram shows an example of the flow of`CollectivePredicate#test`
+executed on a `Tutee` Bob.
+
+![CollectivePredicateActivityDiagram](images/CollectivePredicateActivityDiagram.png)
+
+The following sequence diagram shows the workflow when a user uses the `Find` feature.
+![FindCommandParserSequenceDiagram](images/FindCommandParserSequenceDiagram.png)
+
+#### Design Considerations
+We had 2 design ideas of the `find` command:
+1. Allow `FindCommand` to search with multiple keywords, and return tutees that fulfills **either** keywords
+2. Allow `FindCommand` to search with multiple keywords, and return tutees that fulfills **all** keywords
+
+We decided on the 2nd implementation due to these reasons:
+* Everytime a new keyword is supplied, the returned `tuteelist` will be equals to or smaller than without the new keyword,
+as opposed to design 1, where the `tuteelist` is equals to or longer than the without the keyword. 
+* We want the find feature to address the issue of `tuteelist` being too cluttered when number of tutees increases, so
+design 2 fits our requirement better.
+* It enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

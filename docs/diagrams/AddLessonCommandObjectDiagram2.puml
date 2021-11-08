@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+package "Model" <<rectangle>> {
+    class TuteeAlice as "__Alice:Tutee__"
+    class LessonAlice as "__:Lesson__"
+    class TimeAlice as "__:Time__" {
+         dayOfOccurrence = "FRIDAY"
+         startTime = "15:00"
+         endTime = "17:00"
+    }
+    class TuteeBob as "__Bob:Tutee__"
+    class LessonBob as "__:Lesson__"
+    class TimeBob as "__:Time__" {
+         dayOfOccurrence = "FRIDAY"
+         startTime = "18:00"
+         endTime = "19:00"
+    }
+    class Schedule as "__:Schedule__"
+}
+
+TuteeAlice --> LessonAlice : > attends
+LessonAlice --> TimeAlice : > occurs at
+Schedule --> LessonAlice : > contains
+
+TuteeBob --> LessonBob : > attends
+LessonBob --> TimeBob : > occurs at
+Schedule --> LessonBob : > contains
+
+show TimeAlice members
+show TimeBob members
+
+@enduml
