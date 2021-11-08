@@ -159,6 +159,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -314,6 +316,8 @@ Step 6. The user executes `payment 1 receive` and receives John's payment, updat
     * Cons: Different tutors collect payments at different times (i.e monthly, biweekly).
     * Cons: Lessons may not occur every week, so the payment due date is subject to manual change quite often, making its automatic nature redundant.
 
+<div style="page-break-after: always;"></div>
+
 ### Lesson management
 
 #### Rationale
@@ -428,6 +432,8 @@ of Bob, except the lesson that was deleted.
 Step 4: `BobWithoutLesson` is then used to replace the `Bob` at the original index 2, and model resets the displayed 
 list to show the full list of tutee once again.
 
+<div style="page-break-after: always;"></div>
+
 ### Find 
 ``FindCommand` allows tutors to filter the `tuteelist` according to the keywords supplied. The supported fields for `FindCommand`
 includes: `name`, `level`, `subject`, `overdue`.
@@ -471,6 +477,8 @@ design 2 fits our requirement better.
 * It enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -522,6 +530,8 @@ The platform is personalized for private tutors as opposed to other audiences (l
 | `*`      | first-time user                            | clear all sample data | start adding in my own data. |
 | `*`      | forgetful tutor                            | know what's the current upcoming tuition session | plan for it. |
 | `*`      | private tutor with an increasing number of students | sort my students by specific fields, such as lesson date or level and school of student. | so that I can find them easily |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -803,6 +813,8 @@ The platform is personalized for private tutors as opposed to other audiences (l
 * **Database**: Storage on local system
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
