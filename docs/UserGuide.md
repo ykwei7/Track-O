@@ -42,17 +42,17 @@ This section explains the terms used in the user guide.
 
 If you are an intermediate user, you can hop over to the [Features](#features) section for the details of each command.
 
-If you are an advanced user, you can see all the commands at a glance at the [Command Summary](#command-summary) section.
+If you are an advanced user, you can view all the commands at a glance at the [Command Summary](#command-summary) section.
 
 ### Glossary
 
 Terms | Explanation
 --------|------------------
 command | The text that you enter in the command box. Different commands have different formats.
-prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+prefix | A word or letter that ends with `/`. It is a shorthand notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
 parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km`
-integer | A number that has strictly no decimal places.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
+integer | A number that has no decimal places or fractions.
 level | Refers to the education level of a student in the context of Singapore's education system.
 
 ### Application layout
@@ -60,7 +60,7 @@ level | Refers to the education level of a student in the context of Singapore's
 ![gui_layout.png](gui_layout.png)
 
 The GUI of Track-O is divided mainly into 4 sections:
-- `Menu Bar`: Navigation buttons that you can click to exit Track-O or open up a window containing a link to this User Guide. 
+- `Menu Bar`: Navigation buttons that you can click to exit Track-O or open up a `help` window containing a link to this User Guide. 
 - `Tutee list`: A scrollable panel that shows a numbered list of your tutees.
   - The index number of the tutee list is the number that is assigned to each tutee in the numbered list.
 - `Command box`: A text box where you can type in commands and hit `enter` to execute them.
@@ -77,10 +77,10 @@ on each command, it can found under the [Features](#Features) section of our gui
 ### Before your lesson
 1. Let's clear the existing sample data first. Run `clear` to remove the existing tutees.
 2. To add in a new tutee, run `add n/John Tan l/p5 a/246 Hougang Ave sch/Rosyth School p/84567890`.
-This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, living in `246 Hougang Ave` who can be contacted at `84567890`.
+This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, staying at `246 Hougang Ave` whose phone number is `84567890`.
 3. To add a lesson for this tutee, run `addlesson 1 subject/English d/7 s/14:00 e/16:00 rate/30`.
 This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
-4. To state a date to receive payment by, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
+4. To state a payment receive date, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
 the 5th of January 2022.
 5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
@@ -88,17 +88,17 @@ the 5th of January 2022.
 
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
-the rate was `$30` per hour over 2 hours, the final fees adds up to `$60.00`.
+the rate was `$30` per hour over 2 hours, the total adds up to `$60.00`.
 2. To add in any remarks for the lesson, run `remark 1 r/Good Progress!` and this set the comments `Good Progress!`
-under the remarks for John.
+under John's remarks.
 3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00`,
-the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
+removes the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
 4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
 <img src="john_2_ug.png" width="95%"/>
 
 ### Managing your payments
-1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John. 
+1. To view John's payment details, run `payment 1`. This shows us John's existing payment details. 
 2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
 `$100.00`.
 3. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
@@ -106,8 +106,8 @@ This resets the value owed by John to `0` and sets the next date to pay by to `0
 
 ### Managing your lessons
 1. To view your schedule for the week, run `schedule` and this displays your upcoming lessons for the week.
-2. To add in a new lesson to John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
-3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Math` lesson previously added. 
+2. To add in a new lesson for John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
+3. To delete John's first lesson, run `deletelesson 1 lesson/2`. This will delete John's second lesson which was the `Math` lesson previously added. 
 
 --------------------------------------------------------------------------------------------------------------------
 
