@@ -6,19 +6,15 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTEE_DISPLAYE
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.TrackOParser.anyPrefixesPresent;
 import static seedu.address.logic.parser.TrackOParser.arePrefixesPresent;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.IndexOutOfBoundsException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Subject;
@@ -50,7 +46,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                     PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_HOURLY_RATE)) {
                 throw new ParseException(MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX, ie);
             }
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,AddLessonCommand.MESSAGE_USAGE), ie);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), ie);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_DAY_OF_WEEK,
