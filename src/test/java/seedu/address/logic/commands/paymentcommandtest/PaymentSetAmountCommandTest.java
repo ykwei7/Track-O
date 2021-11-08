@@ -34,11 +34,13 @@ public class PaymentSetAmountCommandTest {
 
     private static final String NEW_PAYMENT_VAL_STUB_1 = "100";
     private static final String NEW_PAYMENT_VAL_STUB_2 = "200";
-    private Model model;
+    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+
+    public PaymentSetAmountCommandTest() throws ScheduleClashException {
+    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws ScheduleClashException {
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size() + 1);
         PaymentSetAmountCommand paymentSetAmountCommand = new PaymentSetAmountCommand(outOfBoundIndex,
                 NEW_PAYMENT_VAL_STUB_1);
@@ -74,7 +76,6 @@ public class PaymentSetAmountCommandTest {
     @Test
     public void execute_noChangeInPayment_throwsCommandException() throws ScheduleClashException {
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
@@ -92,7 +93,6 @@ public class PaymentSetAmountCommandTest {
     public void execute_changeInPayment_success() throws ScheduleClashException {
         // Creates tutee with specified payment details
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
         LocalDate existingPayByDate = retrievedTuteePayment.getPayByDate();

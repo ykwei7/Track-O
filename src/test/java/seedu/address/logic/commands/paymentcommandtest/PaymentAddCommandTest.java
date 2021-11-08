@@ -41,10 +41,9 @@ import seedu.address.testutil.TuteeBuilder;
  */
 public class PaymentAddCommandTest {
 
-    private Model model;
+    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
     public PaymentAddCommandTest() throws ScheduleClashException {
-        this.model = new ModelManager(getTypicalTrackO(), new UserPrefs());
     }
 
     @Test

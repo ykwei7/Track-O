@@ -44,13 +44,14 @@ public class PaymentReceiveCommandTest {
     private static final List<String> TODAY_DATE_AS_LIST = Arrays.asList("Never", TODAY_DATE_AS_STRING);
     private static final LocalDate NULL_DATE = null;
 
-    private Model model;
+    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
 
+    public PaymentReceiveCommandTest() throws ScheduleClashException {
+    }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws ParseException,
-            ScheduleClashException {
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws ParseException {
+
         LocalDate newPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_1);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size() + 1);
         PaymentReceiveCommand paymentReceiveCommand = new PaymentReceiveCommand(outOfBoundIndex,
@@ -90,7 +91,6 @@ public class PaymentReceiveCommandTest {
     @Test
     public void execute_noChangeInPaymentVal_throwsCommandException() throws ScheduleClashException {
         // Creates tutee with specified payment details
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, NULL_DATE, TODAY_DATE_AS_STRING);
 
         PaymentReceiveCommand paymentReceiveCommand = new PaymentReceiveCommand(INDEX_FIRST_TUTEE,
@@ -104,7 +104,6 @@ public class PaymentReceiveCommandTest {
     public void execute_sameDatesGiven_throwsCommandException() throws ScheduleClashException,
             ParseException {
         // Creates model with specified payment details
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         LocalDate samePayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
         model = modifyPaymentOfTutee(INDEX_FIRST_TUTEE, ZERO_PAYMENT_VAL_STUB, samePayByDate, TODAY_DATE_AS_STRING);
 
@@ -118,7 +117,6 @@ public class PaymentReceiveCommandTest {
     @Test
     public void execute_changeInPaymentVal_success() throws ScheduleClashException {
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
@@ -145,7 +143,6 @@ public class PaymentReceiveCommandTest {
     @Test
     public void execute_changeInPaymentVal2_success() throws ScheduleClashException, ParseException {
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         LocalDate existingPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_1);
@@ -172,7 +169,6 @@ public class PaymentReceiveCommandTest {
     @Test
     public void execute_changeInPaymentVal3_success() throws ScheduleClashException, ParseException {
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         LocalDate existingPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_1);
@@ -198,7 +194,6 @@ public class PaymentReceiveCommandTest {
     @Test
     public void execute_changeInPaymentVal4_success() throws ScheduleClashException, ParseException {
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         LocalDate newPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);

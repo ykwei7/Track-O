@@ -38,12 +38,13 @@ public class PaymentSetDateCommandTest {
     private static final String NEW_PAYBYDATE_VAL_STUB_2 = "20-10-2022";
     private static final LocalDate NULL_DATE = null;
 
-    private Model model;
+    private Model model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+
+    public PaymentSetDateCommandTest() throws ScheduleClashException {
+    }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws ParseException,
-            ScheduleClashException {
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws ParseException {
         LocalDate newPayByDate = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_1);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTuteeList().size() + 1);
         PaymentSetDateCommand paymentSetDateCommand = new PaymentSetDateCommand(outOfBoundIndex,
@@ -83,7 +84,6 @@ public class PaymentSetDateCommandTest {
     @Test
     public void execute_noChangeInPaymentDate_throwsCommandException() throws ParseException, ScheduleClashException {
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
         Payment retrievedTuteePayment = retrievedTutee.getPayment();
@@ -102,7 +102,6 @@ public class PaymentSetDateCommandTest {
     @Test
     public void execute_changeInPaymentDate_success() throws ParseException, ScheduleClashException {
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         LocalDate newPayByDate2 = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
@@ -126,7 +125,6 @@ public class PaymentSetDateCommandTest {
     @Test
     public void execute_changeInPaymentDate2_success() throws ParseException, ScheduleClashException {
 
-        model = new ModelManager(getTypicalTrackO(), new UserPrefs());
         LocalDate newPayByDate2 = ParserUtil.parsePayByDate(NEW_PAYBYDATE_VAL_STUB_2);
         // Creates tutee with specified payment details
         Tutee retrievedTutee = model.getFilteredTuteeList().get(INDEX_FIRST_TUTEE.getZeroBased());
