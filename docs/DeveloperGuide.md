@@ -433,7 +433,7 @@ list to show the full list of tutee once again.
 <div style="page-break-after: always;"></div>
 
 ### Find 
-``FindCommand` allows tutors to filter the `tuteelist` according to the keywords supplied. The supported fields for `FindCommand`
+`FindCommand` allows tutors to filter the `tuteelist` according to the keywords supplied. The supported fields for `FindCommand`
 includes: `name`, `level`, `subject`, `overdue`.
 
 #### Rationale
@@ -442,11 +442,11 @@ tutee within the long list. A `find` feature helps to shrink the list down to di
 them the ability to quickly identify specific tutees and getting information as required.
 
 #### Current implementation
-`FindCommandParser` uses `parserUtil` to get the keywords used in the command.
+`FindCommandParser` uses `ParserUtil` to get the keywords used in the command.
 The keywords are supplied after the prefix when tutors enter the command. Supported prefixes are `n/` `l/` 
 `subject/` and `overdue/`.<br><br>
 `FindCommandParser` then initialises 4 empty string arrays, each represents one of the 4 fields. The keywords
-obtained by `parserUtil` will be added to the respective arrays. If the field does not contain any keywords, the array
+obtained by `ParserUtil` will be added to the respective arrays. If the field does not contain any keywords, the array
 for that field remains empty.<br><br>
 A `CollectivePredicate` object will be created using these arrays of keywords, which serves as our filter test. It
 converts each arrays into streams and does an `allmatch` method call, which returns true if the tutee's information 
