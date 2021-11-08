@@ -32,8 +32,6 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
 
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## About
@@ -160,7 +158,6 @@ Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
 * `p/PHONE` should only take in 8-digit phone numbers.
 * `l/LEVEL` should only take in `p1` to `p6`, `s1` to `s5`, `j1` to `j2`.
-* All entries should **not be blank**.
 
 Examples:
 * `add n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link`
@@ -199,7 +196,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG
 * Existing values will be updated to the input values while all other values without input values remains unchanged.
 * When editing tags, the existing tags of the tutee will be removed i.e adding of tags is not cumulative.
 * You can remove all the tutee’s tags by typing `t/` without specifying any tags after it.
-* All entries should **not be blank**.
 
 Examples:
 * `edit 1 p/91234567 a/345 Bedok North Ave 3` Edits the phone number and address of the 1st tutee to be `91234567` and `345 Bedok North Ave 3` respectively.
@@ -442,7 +438,7 @@ Format: `exit`
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
 
 **Q**: What are tags used for? <br>
-**A**: Tags can be used to indicate important details of the tutee. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
+**A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
 
 **Q**: Why does my application look slightly different?<br>
 **A**: The screenshots in this User Guide are from an application running on macOS. If you are using Windows, your application would look something like this instead:
