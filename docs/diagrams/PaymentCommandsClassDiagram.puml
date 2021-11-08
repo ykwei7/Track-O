@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+
+package "Creation of payment commands" <<rectangle>> {
+
+    class TrackOParser as "TrackOParser"
+    class Parser as "PaymentCommandParser"
+
+    class PaymentCommand as "PaymentCommand" {
+        targetIndex: Index
+        execute(): CommandResult
+    }
+    class AddCommand as "PaymentAddCommand" {
+        targetIndex: Index
+        lessonIndex: Index
+        execute(): CommandResult
+    }
+    class SetDateCommand as "PaymentSetDateCommand" {
+        targetIndex: Index
+        newPayByDate: LocalDate
+        execute(): CommandResult
+    }
+    class SetAmountCommand as "PaymentSetAmountCommand" {
+        targetIndex: Index
+        paymentValueToSet: String
+        execute(): CommandResult
+    }
+    class ReceiveCommand as "PaymentReceiveCommand" {
+        targetIndex: Index
+        newPayByDate: LocalDate
+        execute(): CommandResult
+    }
+}
+TrackOParser .down.> Parser : > creates
+Parser .left.> PaymentCommand : > creates
+Parser .down.> AddCommand : > creates
+Parser .down.> SetDateCommand : > creates
+Parser .down.> SetAmountCommand : > creates
+Parser .right.> ReceiveCommand : > creates
+
+
+show PaymentCommand members
+show AddCommand members
+show SetDateCommand members
+show SetAmountCommand members
+show ReceiveCommand members
+@end
