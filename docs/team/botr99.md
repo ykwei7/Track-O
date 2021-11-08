@@ -34,8 +34,10 @@ Given below are my contributions to the project.
     * Added documentation for the `addlesson` and `schedule` commands (Pull requests [\#67](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/67), [\#91](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/91))
     * Updated existing documentation for the `add`, `edit` and `clear` commands (Pull request [\#98](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/98))
   * Developer Guide:
-    * Added implementation details of the `schedule` feature (Pull request [\#56](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/56))
+    * Added implementation details of the `Schedule` feature (Pull request [\#56](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/56))
     * Updated the UML diagrams in the Model component section with updated `Tutee` fields (Pull request [\#171](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/171))
+    * Added implementation details of the `Lesson` feature and the `AddLessonCommand` (Pull request [\#191](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/191))
+    * Added the use cases for adding and deleting lessons (Pull request [\#204](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/204))
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#44](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/44), [\#71](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/71), [\#74](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/74), [\#87](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/87)
