@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on [AddressBook Level-3](https://se-education.org/addressbook-level3/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -460,6 +461,7 @@ as opposed to design 1, where the `tuteelist` is equals to or longer than the wi
 * We want the find feature to address the issue of `tuteelist` being too cluttered when number of tutees increases, so
 design 2 fits our requirement better.
 * It enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -512,13 +514,12 @@ The platform is personalized for private tutors as opposed to other audiences (l
 | `*`      | first-time user                            | clear all sample data | start adding in my own data. |
 | `*`      | forgetful tutor                            | know what's the current upcoming tuition session | plan for it. |
 | `*`      | private tutor with an increasing number of students | sort my students by specific fields, such as lesson date or level and school of student. | so that I can find them easily |
-| `*`      | first-time user                            | import all my existing data into the app when I first start it up | quickly set-up the app. |
 
 ### Use cases
 
 (For all use cases below, the **System** is `Track-o` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC01: Seek help on the usage of commands**
+#### UC01: Seek help on the usage of commands
 
 **MSS**
 1. User requests for help regarding how to use the commands.
@@ -528,23 +529,7 @@ The platform is personalized for private tutors as opposed to other audiences (l
 
 <br>
 
-**UC02: Import existing data**
-
-**MSS**
-1. User requests to import existing data.
-2. System processes and shows the data.
-
-   Use case ends.
-
-**Extensions**
-* 1a. Data is of an improper format.
-    * 1a1. System shows an error message.
-
-      Use case resumes at step 1.
-
-<br>
-
-**UC03: Add a tutee**
+#### UC02: Add a tutee
 
 **MSS**
 1. User requests to add a tutee by providing the details of the tutee.
@@ -560,7 +545,7 @@ The platform is personalized for private tutors as opposed to other audiences (l
 
 <br>
 
-**UC04: View all tutees**
+#### UC03: View all tutees
 
 **MSS**
 1. User requests to view all tutees.
@@ -570,93 +555,79 @@ The platform is personalized for private tutors as opposed to other audiences (l
 
 <br>
 
-**UC05: Delete a tutee**
+#### UC04: Delete a tutee
 
 **MSS**
-1. User requests to list tutees (UC04)
-2. System shows a list of tutees
-3. User requests to delete a specific tutee in the list
-4. System deletes the tutee
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to delete a specific tutee in the displayed tutee list.
+4. System deletes the tutee.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given tutee list index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
-**UC06: View a specific tutee**
+#### UC05: View a specific tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to view a specific tutee.
+3. User requests to view a specific tutee in the displayed tutee list.
 4. System shows that specific tutee.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given tutee list index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
-**UC07: Search for tutees by their name**
+#### UC06: Search for tutees by their name, level and/or subject
 
 **MSS**
-1. User requests to list tutees. (UC04)
-2. System shows a list of tutees.
-3. User requests to search for tutees by their name.
-4. System shows a list of tutees matching this name.
+1. User requests to search for tutees by their name, level and/or subject.
+2. System shows a list of tutees matching the name, level and/or subject.
 
    Use case ends.
 
 <br>
 
-**UC08: Filter tutees by their level or subject**
+#### UC07: Edit a specific tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to filter tutees by their level or subject.
-4. System shows a filtered list of tutees.
-
-   Use case ends.
-
-<br>
-
-**UC09: Edit a specific tutee**
-
-**MSS**
-1. User requests to list tutees. (UC04)
-2. System shows a list of tutees.
-3. User requests to edit a specific tutee.
+3. User requests to edit a specific tutee in the displayed tutee list.
 4. System edits that specific tutee.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given tutee list index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
-* 3b. No details of the tutee are provided.
+* 3b. No details to be edited to the tutee are provided.
     * 3b1. System shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
-**UC10: View the schedule for the week**
+#### UC08: View the schedule for the week
 
 **MSS**
 1. User requests to view his/her schedule for the week.
@@ -666,106 +637,142 @@ The platform is personalized for private tutors as opposed to other audiences (l
 
 <br>
 
-**UC11: View existing payment details of tutee**
+#### UC09: Add a lesson to a specific tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to view payment details of a specific tutee.
+3. User requests to add a lesson to a specific tutee in the displayed tutee list.
+4. System adds a lesson to that specific tutee.
 
    Use case ends.
 
-   **Extensions**
+**Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given tutee list index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. Details of the lesson are not fully provided.
+    * 3b1. System shows an error message.
+
+      Use case resumes at step 2.
+    
 <br>
 
-**UC12: Add lesson fees to payment owed by tutee**
+#### UC10: Delete a specific lesson from a specific tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to view payment details of tutee. (UC11)
-4. User selects lesson and adds fees of lesson to existing fees.
-5. System shows new updated payment details.
+3. User requests to delete a specific lesson from a specific tutee in the displayed tutee list.
+4. System deletes that specific lesson from that specific tutee.
 
    Use case ends.
 
-   **Extensions**
+**Extensions**
 
-* 4a. The given lesson index is invalid.
-    * 4a1. System shows an error message.
+* 3a. The given tutee list index is invalid.
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given lesson index of that specific tutee is invalid.
+    * 3b1. System shows an error message.
 
       Use case resumes at step 2.
 
-* 4b. The given lesson index is wrong.
-    * 4b1. System shows incorrect updated payment details.
-    * 4b2. User manually edits data to revert payment details. (UC13)
-
-      Use case resumes at step 2.
 <br>
 
-**UC13: Manually update payment fees owed by tutee**
+#### UC11: View existing payment details of a tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to view payment details of tutee. (UC11)
-4. User updates fees to new desired amount.
-5. System shows new updated payment details.
+3. User requests to view payment details of a specific tutee in the displayed tutee list.
 
    Use case ends.
 
    **Extensions**
 
-* 5a. The given amount is invalid.
-    * 5a1. System shows an error message.
+* 3a. The given tutee list index is invalid.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
-* 5b. The given amount is wrong.
-    * 5b1. System shows incorrect updated payment details.
-    * 5b2. User manually updates payment fees to new correct amount.
+<br>
 
-      Use case resumes at step 4.
-      <br>
-
-**UC14: Receive payment fees owed by tutee**
+#### UC12: Add lesson fees to payment owed by tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
-2. System shows a list of tutees.
-3. User requests to view payment details of tutee. (UC11)
-4. User sets fees of tutee as received.
-5. System shows new updated payment details.
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+2. User requests to add the fees of a specific lesson to the existing fees.
+3. System shows new updated payment details.
 
    Use case ends.
 
    **Extensions**
 
-* 4a. Date is provided.
-    * 4a1. System updates and shows the new date to make payment by.
+* 2a. The given lesson index is invalid.
+    * 2a1. System shows an error message.
 
-* 4b. Date is not provided.
-    * 4a1. System updates and removes the date to make payment by.
+      Use case resumes at step 2.
+    
+<br>
 
-      Use case resumes at step 4.
-      <br>
-
-**UC15: Find tutees with overdue payment**
+#### UC13: Manually update payment fees owed by tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
-2. System shows a list of tutees.
-3. User requests to find tutees with overdue payment.
-5. System shows list of tutees that are overdue.
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+2. User requests to update fees to new desired amount.
+3. System shows new updated payment details.
 
    Use case ends.
 
-**UC16: Clear all data**
+   **Extensions**
+
+* 2a. The given amount is invalid.
+    * 2a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+<br>
+
+#### UC14: Receive payment fees owed by tutee
+
+**MSS**
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+2. User requests to set fees of tutee as received.
+3. System shows new updated payment details.
+
+   Use case ends.
+
+   **Extensions**
+
+* 2a. Date is provided.
+    * 2a1. System updates and shows the new date to make payment by.
+
+      Use case resumes at step 3.
+
+* 2b. Date is not provided.
+    * 2b1. System updates and removes the date to make payment by.
+
+      Use case resumes at step 3.
+    
+<br>
+
+#### UC15: Find tutees with overdue payment
+
+**MSS**
+1. User requests to find tutees with overdue payment.
+2. System shows list of tutees that are overdue.
+
+   Use case ends.
+
+<br>
+
+#### UC16: Clear all data
 
 **MSS**
 1. User requests to clear all data.
