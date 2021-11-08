@@ -49,9 +49,11 @@ Given below are my contributions to the project.
       * Added images and logo for the Quick Start, Features, and Troubleshooting section. (Pull requests [\#181](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/181) and [\$184](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/184))
     * Developer Guide:
       * Added implementation details of the `payment` feature and payment tracking (Pull requests [\#55](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/55) and [\#185](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/185)), including:
+        * Class diagram depicting the creation of respective payment commands
+        <br><img width="80%" alt="Class Diagram" src="../images/PaymentCommandsClassDiagram.png"/>
         * Object diagrams of how a `Tutee` updates its `Payment` with respective commands by the user.
-        *  One of the object diagrams:
-        <img width="70%" alt="Object Diagram" src="../images/PaymentTracking6.png"/>
+          * One of the object diagrams:
+          <br><img width="70%" alt="Object Diagram" src="../images/PaymentTrackingObjectDiagram6.png"/>
 
 
 * **Community**:
