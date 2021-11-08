@@ -379,6 +379,11 @@ public class ParserUtil {
         if (!formattedPayByDate.isAfter(dateToday) && !formattedPayByDate.equals(dateToday)) {
             throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
         }
+
+        if (formattedPayByDate == null) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
+        }
+
         return formattedPayByDate;
     }
 }
