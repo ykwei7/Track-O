@@ -16,9 +16,12 @@ import seedu.address.model.tutee.Tutee;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TuteeBuilder;
 
+/**
+ * This class ensures that the sample data in Track-O have not been changed.
+ */
 class SampleDataUtilTest {
 
-    private static final Tutee[] TEST_TUTEES = new Tutee[] {
+    private static final Tutee[] VALID_SAMPLE_TUTEES = new Tutee[] {
             new TuteeBuilder().withName("Alex Yeoh").withPhone("87438807").withSchool("Nan Hua Primary School")
                     .withLevel("p6").withAddress("Blk 30 Geylang Street 29, #06-40")
                     .withPayment("50", STANDARD_PAYMENT_DATE).withRemark("Good progress!").withTags("PSLE")
@@ -38,26 +41,22 @@ class SampleDataUtilTest {
                             STANDARD_PAYMENT_DATE).withTags("Hamlet")
                     .withLesson(LESSONS_DAVID.get(0)).withLesson(LESSONS_DAVID.get(1)).build()};
 
+
     @Test
-    void getSampleTuteesTest_success() {
+    void getSampleTuteesTest() {
         Tutee[] sampleTutees = SampleDataUtil.getSampleTutees();
-        for (int i = 0; i < TEST_TUTEES.length; i++) {
-            assertEquals(sampleTutees[i], TEST_TUTEES[i]);
+        for (int i = 0; i < VALID_SAMPLE_TUTEES.length; i++) {
+            assertEquals(sampleTutees[i], VALID_SAMPLE_TUTEES[i]);
         }
     }
 
     @Test
-    void getSampleTrackOTest_success() {
+    void getSampleTrackOTest() {
         // Type-casting is safe as getSampleTrackO returns a TrackO object
         TrackO testTrackO = (TrackO) SampleDataUtil.getSampleTrackO();
-        for (Tutee t : TEST_TUTEES) {
+        for (Tutee t : VALID_SAMPLE_TUTEES) {
             assertTrue(testTrackO.hasTutee(t));
         }
     }
 
-
-
-    @Test
-    void getTagSet() {
-    }
 }

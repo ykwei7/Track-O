@@ -3,24 +3,20 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title After current date exceeds 25-10-2021
+title After current date reaches 02-01-2022
 
 package "Payment tracking" <<rectangle>> {
 
     class Tutee as "__John:Tutee__"
     class Payment as "__p:Payment__" {
-        value = "180"
-        payByDate = "25-10-2021"
+        value = "90.00"
+        payByDate = "01-01-2022"
         paymentHistory = ["Never"]
         isOverdue = true
-        addPayment(Lesson, int)
-        editPayment(float)
-        receivePayment()
-        setPayByDate(LocalDate)
     }
     class Lesson1 as "__lesson1:Lesson__" {
         subject = "Science"
-        time = "Mon 11:00 - "13:00"
+        time = "Mon 11:00 - 13:00"
         hourlyRate = 90.00
         cost = 180.00
     }
@@ -31,11 +27,12 @@ package "Payment tracking" <<rectangle>> {
         cost = 150.00
     }
 }
-Tutee -right-> Payment : > owes
-Tutee -left-> Lesson1 : > has
-Tutee -down-> Lesson2 : > has
+Tutee -right-> Payment
+Tutee -left-> Lesson1
+Tutee -down-> Lesson2
 
 show Payment members
 show Lesson1 members
 show Lesson2 members
+hide methods
 @end

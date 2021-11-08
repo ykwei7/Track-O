@@ -4,16 +4,16 @@ title: User Guide
 ---
 
 <p align="center">
-    <img src="images/tracko_logo_docs.png" width="90%"/>
+    <img src="images/tracko_logo_docs.png" width="70%"/>
 </p>
 
-Track-O is a **desktop app for private tutors to manage their tutees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Track-O lets you track an assortment of data, from grades to home addresses to lesson timings. You can easily access the many functions of Track-O using simple commands, such as add and get. Hop over to our Quick Start section to get started.
+Track-O is a **desktop app for private tutors to manage their tutees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Track-O lets you track an assortment of data, from payment details to home addresses to lesson timings. You can easily access the many functions of Track-O using simple commands, such as add and get. Hop over to our Quick Start section to get started.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
@@ -32,43 +32,42 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
 
-
-
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## About
 
 This section explains the terms used in the user guide.
 
 If you are an intermediate user, you can hop over to the [Features](#features) section for the details of each command.
 
-If you are an advanced user, you can see all the commands at a glance at the [Command Summary](#command-summary) section.
+If you are an advanced user, you can view all the commands at a glance at the [Command Summary](#command-summary) section.
 
 ### Glossary
 
 Terms | Explanation
 --------|------------------
 command | The text that you enter in the command box. Different commands have different formats.
-prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+prefix | A word or letter that ends with `/`. It is a shorthand notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
 parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers. Characters such as `@`, `?` and `%` are not alphanumeric. e.g. `2km`
-integer | A number that has strictly no decimal places.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
+integer | A number that has no decimal places or fractions.
 level | Refers to the education level of a student in the context of Singapore's education system.
 
+<div style="page-break-after: always;"></div>
 ### Application layout
 
 ![gui_layout.png](gui_layout.png)
 
 The GUI of Track-O is divided mainly into 4 sections:
-- `Menu Bar`: Navigation buttons that you can click to exit Track-O or open up a window containing a link to this User Guide. 
+- `Menu Bar`: Navigation buttons that you can click to exit Track-O or open up a `help` window containing a link to this User Guide. 
 - `Tutee list`: A scrollable panel that shows a numbered list of your tutees.
   - The index number of the tutee list is the number that is assigned to each tutee in the numbered list.
-- `Command box`: A text box where you can type in commands and hit `enter` to execute them.
+- `Command box`: A text box where you can type in commands and hit the Enter key on your keyboard to execute them.
 - `Result panel`: A scrollable panel that shows the result of the command that you have just executed.
   - Note that some commands such as `get` will show a particular tutee's lessons in the form of a numbered list. Similar to the tutee list, the index number of a tutee's lesson refers to the number assigned to each lesson in the numbered list.
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Setting up your first tutee
 
 This section provides a quick guide to adding your first tutee and carrying out your first lesson. For more information
@@ -77,28 +76,29 @@ on each command, it can found under the [Features](#Features) section of our gui
 ### Before your lesson
 1. Let's clear the existing sample data first. Run `clear` to remove the existing tutees.
 2. To add in a new tutee, run `add n/John Tan l/p5 a/246 Hougang Ave sch/Rosyth School p/84567890`.
-This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, living in `246 Hougang Ave` who can be contacted at `84567890`.
+This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, staying at `246 Hougang Ave` whose phone number is `84567890`.
 3. To add a lesson for this tutee, run `addlesson 1 subject/English d/7 s/14:00 e/16:00 rate/30`.
 This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
-4. To state a date to receive payment by, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
+4. To state a payment receive date, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
 the 5th of January 2022.
-5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+5. Run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-<img src="john_ug.png" width="95%"/>
-
+<img src="john_ug.png" width="85%"/>
+<div style="page-break-after: always;"></div>
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
-the rate was `$30` per hour over 2 hours, the final fees adds up to `$60.00`.
+the rate was `$30` per hour over 2 hours, the total adds up to `$60.00`.
 2. To add in any remarks for the lesson, run `remark 1 r/Good Progress!` and this set the comments `Good Progress!`
-under the remarks for John.
+under John's remarks.
 3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00`,
-the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
-4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+removes the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
+4. Run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-<img src="john_2_ug.png" width="95%"/>
+<img src="john_2_ug.png" width="85%"/>
 
+<div style="page-break-after: always;"></div>
 ### Managing your payments
-1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John. 
+1. To view John's payment details, run `payment 1`. This shows us John's existing payment details. 
 2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
 `$100.00`.
 3. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
@@ -106,10 +106,12 @@ This resets the value owed by John to `0` and sets the next date to pay by to `0
 
 ### Managing your lessons
 1. To view your schedule for the week, run `schedule` and this displays your upcoming lessons for the week.
-2. To add in a new lesson to John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
-3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Math` lesson previously added. 
+2. To add in a new lesson for John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
+3. To delete John's first lesson, run `deletelesson 1 lesson/2`. This will delete John's second lesson which was the `Math` lesson previously added. 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -137,10 +139,14 @@ e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple ke
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
-
+<div style="page-break-after: always;"></div>
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
+
+<p align="center">
+    <img src="help_ug.png" width="85%"/>
+</p>
 
 Format: `help`
 
@@ -156,27 +162,26 @@ Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
 * `p/PHONE` should only take in 8-digit phone numbers.
 * `l/LEVEL` should only take in `p1` to `p6`, `s1` to `s5`, `j1` to `j2`.
-* All entries should **not be blank**.
 
 Examples:
 * `add n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link`
 * `add n/Betsy Crowe l/p5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/Northeast region`
-
+<div style="page-break-after: always;"></div>
 #### Deleting a tutee : `delete`
 
 Deletes the specified tutee from our list of tutees.
 
-![](delete_ug.png)
+<img src="delete_ug.png" width="95%"/>
 
 Format: `delete INDEX`
 
 * Deletes the tutee at the specified `INDEX`.
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `delete 2` deletes the 2nd tutee in the tutee list.
-
+<div style="page-break-after: always;"></div>
 #### Editing a tutee :  `edit`
 
 Edits an existing tutee in the tutee list.
@@ -186,7 +191,8 @@ Edits an existing tutee in the tutee list.
 Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
 
 * Edits the person at the specified `INDEX`.
-* The index refers to the index number shown in the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
 * `p/PHONE` should only take in 8-digit phone numbers.
@@ -194,12 +200,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG
 * Existing values will be updated to the input values while all other values without input values remains unchanged.
 * When editing tags, the existing tags of the tutee will be removed i.e adding of tags is not cumulative.
 * You can remove all the tutee’s tags by typing `t/` without specifying any tags after it.
-* All entries should **not be blank**.
 
 Examples:
 * `edit 1 p/91234567 a/345 Bedok North Ave 3` Edits the phone number and address of the 1st tutee to be `91234567` and `345 Bedok North Ave 3` respectively.
 * `edit 2 n/Betty Chan t/` Edits the name of the 2nd tutee to be `Betty Chan` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
 #### Finding tutee by fields : `find`
 
 Filters the tutee list to display matches according to keywords.
@@ -225,31 +231,29 @@ Example:
 * Find all tutees taking `math` and `physics` classes: `find subject/math physics`.
 * Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
 
-
 #### Listing all tutees : `list`
 
 Shows the full list of tutees stored.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
 #### Get tutee's information : `get`
 
 Gets the details of a specified tutee from the tutee list.
 
-![](get_ug.png)
+<img src="get_ug.png" width="95%"/>
 
 Format: `get INDEX`
 
 * Gets the tutee at the specified `INDEX` in the format `Name: John Doe Level: P5`
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
-<img src="clear_ug.png" width="95%"/>
-
-Format: `clear`
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the tutee list.
 
+<div style="page-break-after: always;"></div>
 ### Managing Remarks
 
 #### Adding a remark to a tutee: `remark`
@@ -262,12 +266,13 @@ a new line and will not overwrite them.
 Format: `remark INDEX r/TEXT`
 
 * Adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
 
+<div style="page-break-after: always;"></div>
 #### Clearing all remarks of a tutee: `clearremark`
 
 Clears all remarks of the specified tutee.
@@ -277,55 +282,14 @@ Clears all remarks of the specified tutee.
 Format: `clearremark INDEX`
 
 * Clears all remarks of the tutee specified at the specified `INDEX`.
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `clearremark 1`
 
+<div style="page-break-after: always;"></div>
 ### Managing Lessons
-
-#### Adding a lesson to a tutee : `addlesson`
-
-Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
-
-<img src="addlesson_ug.png" width="95%"/>
-
-Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
-
-* Adds a lesson to the tutee at the specified `INDEX`.
-* The index refers to the index number tagged to each tutee in the tutee list.
-* The index must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
-* The lesson occurs on the specified `DAY_OF_WEEK`, from the specified `START_TIME` to the specified `END_TIME`, costing `HOURLY_RATE` dollars per hour.
-* `DAY_OF_WEEK` **must be an integer in the range [1, 7]** where `1` to `7` corresponds to Monday to Sunday.
-* `START_TIME` and `END_TIME` must be specified in an `HH:MM` format.
-* The supported duration for a lesson is **30 min — 23 h 59 min**
-* `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
-* If the lesson that is being added conflicts with an existing lesson belonging to any tutee, Track-O feedbacks that there is a schedule conflict,
-and re-displays the information of the lesson that the user inputs.
-
-Examples:
-* `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
-* `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
-* `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
-
-#### Deleting a lesson to a tutee : `deletelesson`
-
-Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
-
-<img src="deletelesson_ug.png" width="95%"/>
-
-Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
-
-* The tutee's index is the number displayed beside tutee's name in the filtered tutee's list.
-* The lesson index is the number displayed beside the subject name after using `get` command on the tutee.
-* `TUTEE_INDEX` and `LESSON_INDEX` are compulsory fields, an error message is produced if either one is missing.
-
-Examples:
-* Deleting **lesson 2** from **tutee 3**:
-  `deletelesson 3 lesson/2`
-* Deleting **lesson 3** from **tutee 1**:
-  `deletelesson 1 lesson/3`
 
 #### Tracking lesson schedule : `schedule`
 
@@ -335,6 +299,53 @@ Retrieves the user's schedule of lessons.
 
 Format: `schedule`
 
+<div style="page-break-after: always;"></div>
+#### Adding a lesson to a tutee : `addlesson`
+
+Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
+
+<img src="addlesson_ug.png" width="95%"/>
+
+Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE`
+
+* Adds a lesson to the tutee at the specified `INDEX`.
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
+* The lesson occurs on the specified `DAY_OF_WEEK`, from the specified `START_TIME` to the specified `END_TIME`, costing `HOURLY_RATE` dollars per hour.
+* `DAY_OF_WEEK` **must be an integer in the range [1, 7]** where `1` to `7` corresponds to Monday to Sunday.
+* `START_TIME` and `END_TIME` must be specified in an `HH:MM` format.
+* The supported duration for a lesson is **30 min — 23 h 59 min**
+* `START_TIME` and `END_TIME` should be within the same day.
+* `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
+* `HOURLY_RATE` should not have a fee greater than `$1000`.
+* If the added lesson conflicts with an existing lesson belonging to any tutee, Track-O feedbacks that there is a schedule conflict, and re-displays the information of the lesson that the user inputs.
+
+Examples:
+* `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
+* `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
+* `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
+
+<div style="page-break-after: always;"></div>
+#### Deleting a lesson to a tutee : `deletelesson`
+
+Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
+
+<img src="deletelesson_ug.png" width="95%"/>
+
+Format: `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`
+
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
+* The lesson index is the number displayed beside the subject name after using `get` command on the tutee.
+* `TUTEE_INDEX` and `LESSON_INDEX` are compulsory fields, an error message is produced if either one is missing.
+
+Examples:
+* Deleting **lesson 2** from **tutee 3**:
+  `deletelesson 3 lesson/2`
+* Deleting **lesson 3** from **tutee 1**:
+  `deletelesson 1 lesson/3`
+
+<div style="page-break-after: always;"></div>
 ### Tracking Payments
 
 Entering `payment` shows you all the payment-related commands available.<br>
@@ -347,12 +358,13 @@ Format: `payment INDEX`
 <img src="payment_ug.png" width="95%"/>
 
 * Retrieves the payment details of the tutee at the specified `INDEX`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `payment 1`
 
+<div style="page-break-after: always;"></div>
 #### To add a specified lesson's fees to a specified tutee:
 
 Format: `payment INDEX lesson/LESSON_INDEX`
@@ -360,14 +372,15 @@ Format: `payment INDEX lesson/LESSON_INDEX`
 <img src="payment_lesson_ug.png" width="95%"/>
 
 * Adds the fees of the specified lesson at `LESSON_INDEX` to the specified tutee's payment details at `INDEX`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `LESSON_INDEX` must be within the size of the tutee's lesson list and **must be a positive integer** 1, 2, 3, …
 * If the payment amount exceeds $100,000 after adding the lesson fees, Track-O returns and error message.
 Examples:
 * `payment 1 lesson/1`
 * `payment 1 lesson/2`
 
+<div style="page-break-after: always;"></div>
 #### To edit a specified tutee's payment amount:
 
 Format: `payment INDEX amount/AMOUNT`
@@ -375,8 +388,8 @@ Format: `payment INDEX amount/AMOUNT`
 <img src="payment_amount_ug.png" width="95%"/>
 
 * Changes the payment amount due by the specified tutee at `INDEX` to `AMOUNT`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `AMOUNT` **must be from 0 to 100,000** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 
 Examples:
@@ -384,6 +397,7 @@ Examples:
 * `payment 1 amount/80.50`
 * `payment 2 amount/100`
 
+<div style="page-break-after: always;"></div>
 #### To set a specified tutee's payment due date:
 
 Format: `payment INDEX by/DUE_DATE`
@@ -391,14 +405,15 @@ Format: `payment INDEX by/DUE_DATE`
 <img src="payment_due_ug.png" width="95%"/>
 
 * Changes the payment due date of the specified tutee at `INDEX` to `DUE_DATE`.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `DUE_DATE` **must be later than or on the current date** expressed in the `dd-MM-YYYY` format.
 
 Examples:
 * `payment 1 by/25-12-2021`
 * `payment 2 by/01-01-2022`
 
+<div style="page-break-after: always;"></div>
 #### To receive a tutee's payment (and set a next payment due date):
 
 Format: `payment INDEX receive/[DUE_DATE]`
@@ -408,17 +423,20 @@ Format: `payment INDEX receive/[DUE_DATE]`
 * Resets the payment amount due of the specified tutee to `0`.
 * Resets the payment due date of the specified tutee at `INDEX` to `-`, or `DUE_DATE` if specified.
 * Updates the specified tutee's last paid date in their payment details to the current date.
-* `INDEX` refers to the index number tagged to each tutee in the tutee list.
-* `INDEX` must be within the size of the tutee list and **must be a positive integer** 1, 2, 3, …
+* The index refers to the index number tagged to each tutee in the currently displayed tutee list.
+* The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `DUE_DATE` **must be later than or on the current date** expressed in the `dd-MM-YYYY` format, if specified.
 
 Examples:
 * `payment 1 receive/`
 * `payment 2 receive/01-01-2022`
 
+<div style="page-break-after: always;"></div>
 ### Clearing all entries : `clear`
 
 Clears the tutee list and the user's schedule.
+
+<img src="clear_ug.png" width="95%"/>
 
 Format: `clear`
 
@@ -429,14 +447,31 @@ Exits from the application.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder (`tracko.json`).
+
+**Q**: I opened my application and all my data is gone! What do I do?<br>
+**A**: The data is most likely corrupted. If you are familiar with how to edit `json` files, you may open your `tracko.json` file to make the necessary edits. Otherwise, you would have to delete the existing `tracko.json` file and start afresh.
+
+**Q**: Why does my application look slightly different?<br>
+**A**: The screenshots in this User Guide are from an application running on macOS. If you are using Windows, your application would look something like this instead:
+
+<img src="windows_ug.png" width="85%"/>
+
+It is just a visual difference. Both applications have the same functionalities otherwise.
+
+<div style="page-break-after: always;"></div>
+**Q**: What are tags used for? <br>
+**A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
+
+**Q**: Why doesn't pressing `F1` open the Help menu on my Mac?<br>
+**A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Troubleshooting
 
 ### Installing Java 11
@@ -448,7 +483,7 @@ If you do not have Java 11 installed and are unsure of which version to download
     <img src="download_java.png" width="130%"/>
 
 3. Click on **Java 11**.
-4. Select your own Operating System. If you are using a Mac or a MacBook, your Operating System is macOS. Otherwise, your Operating System is likely Windows. You may check your computer's [System Information](https://kb.wisc.edu/helpdesk/page.php?id=8208) to verify this.
+4. Select your own Operating System. You may check your computer's [System Information](https://kb.wisc.edu/helpdesk/page.php?id=8208) for more details.
 5. Download the respective file. (You may need to register for an Oracle account) 
    1. For macOS users, download the file that ends with **.dmg**.
    2. For Windows users, download the file that ends with **.exe**.
@@ -465,7 +500,7 @@ For macOS users, you may receive an error similar to the one below when double-c
 </p>
  
 Refer to the following steps to get started using Track-O:
-1. Click on the **OK** to close the pop-up window.
+1. Click on the "OK" to close the pop-up window.
 2. Run **Spotlight** by pressing the Command key and Space Bar at the same time.
 3. Type "Security & Privacy" and hit Enter. You should see a window similar to the one below:
 
@@ -483,8 +518,7 @@ Refer to the following steps to get started using Track-O:
 
 
 --------------------------------------------------------------------------------------------------------------------
-
-
+<div style="page-break-after: always;"></div>
 ## Command summary
 
 Action | Format, Examples

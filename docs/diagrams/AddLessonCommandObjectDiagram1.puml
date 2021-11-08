@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+package "Model" <<rectangle>> {
+    class Schedule as "__:Schedule__"
+    class TuteeAlice as "__Alice:Tutee__"
+    class TuteeBob as "__Bob:Tutee__"
+    class Lesson as "__:Lesson__"
+    class Time as "__:Time__" {
+         dayOfOccurrence = "FRIDAY"
+         startTime = "15:00"
+         endTime = "17:00"
+    }
+}
+
+TuteeAlice --> Lesson : > attends
+Lesson --> Time : > occurs at
+Schedule --> Lesson : > contains
+
+TuteeBob -[hidden]left-> Schedule
+
+show Time members
+
+@enduml

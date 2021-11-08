@@ -52,14 +52,17 @@ public class TuteeCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    // A List of hexadecimal values of colors to choose from (Green, Pink, Orange, Purple, Cyan)
+    /** A List of five hexadecimal values of colors for subject labels (Green, Pink, Orange, Purple, Cyan). */
     private List<String> subjectColors = Arrays.asList("#35893b", "#d2729d", "#ae950c", "#5912b0",
             "#48ac9a");
-    // The index of the color to choose from
+
+    /** The index of the color to choose from. */
     private int colorIndex = 0;
 
     /**
-     * Creates a {@code TuteeCode} with the given {@code Tutee} and index to display.
+     * Creates a {@code TuteeCard} with the given {@code Tutee} and index to display.
+     * @param tutee The Tutee whose information is to be displayed
+     * @param displayedIndex The index to be displayed alongside the tutee's information
      */
     public TuteeCard(Tutee tutee, int displayedIndex) {
         super(FXML);
@@ -73,7 +76,7 @@ public class TuteeCard extends UiPart<Region> {
         school.setText(tutee.getSchool().value);
         level.setText(tutee.getLevel().stringRepresentation);
 
-        //Adds subject names as tags
+        // Adds subject names as tags
         tutee.getLessons().stream()
                 .sorted(Comparator.comparing(lesson -> lesson.getSubject().toString()))
                 .forEach(lesson -> addSubjectToTag(lesson.getSubject()));
@@ -84,11 +87,13 @@ public class TuteeCard extends UiPart<Region> {
     }
 
     /**
-     * Adds colored subject tags to Tutee Card
-     * @param subject The Lesson with the subject to be added
+     * Adds colored subject tags to a TuteeCard.
+     * @param subject The Subject to be added and displayed
      */
     public void addSubjectToTag(Subject subject) {
         Label subjectLabel = new Label(subject.toString());
+
+        // This sets the subject to be displayed as a tag with white font colour and a coloured background
         subjectLabel.setStyle(" -fx-text-fill: white;\n"
                 + "    -fx-background-color: " + this.subjectColors.get(colorIndex)
                 + ";\n"
@@ -96,7 +101,10 @@ public class TuteeCard extends UiPart<Region> {
                 + "    -fx-border-radius: 2;\n"
                 + "    -fx-background-radius: 2;\n"
                 + "    -fx-font-size: 11;\n");
+
+        // Wrap-around if student has more than 5 subjects
         colorIndex = colorIndex == 4 ? 0 : colorIndex + 1;
+
         tags.getChildren().add(subjectLabel);
     }
 

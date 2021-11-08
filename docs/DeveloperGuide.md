@@ -7,9 +7,12 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on [AddressBook Level-3](https://se-education.org/addressbook-level3/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,6 +21,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -49,7 +53,6 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -67,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -83,6 +88,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Tutee` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -146,14 +153,44 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Education Level of tutees
+
+Education level is a compulsory parameter when adding a new tutee. It requires the prefix `l/`,
+followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
+the first letter of the education level in lowercase, followed by the year of study.
+
+#### Supported Education Levels
+
+* Primary: 1 to 6
+* Secondary: 1 to 5
+* Junior College: 1 to 2
+
+#### Design considerations
+The `value` field of education level in Tutee class is in the abbreviation form.
+In `TuteeCard`, the string displayed is `stringRepresentation`,
+which is the returned value of the `parse` method in Level class, using `value` as the parameter.
+For example, `stringRepresentation` of `p5` is the result of `Level.parse("p5")` which returns `Primary 5`.
+
+Both `value` and `stringRepresentation` are fields belonging to Level.
+This is designed for better readability in displaying tutees. Having two fields ensures that the
+abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
+to its abbreviated form. In our implementation of `Find`, we use the abbreviations to filter the `tuteelist`. 
+`Find` requires the keywords to be exactly equals to the value stored in each `tutee`. Using abbreviations instead of 
+the full education level title helps to reduce incorrect find results due to missing spaces or spelling errors.
+
+#### Parse method
+The `parse` method splits the string parameter into a charArray and switches case according to the first char.
+Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
 
 ### Get feature
 
@@ -168,8 +205,8 @@ listing this additional information when necessary.
 
 The current implementation uses indexing to identify
 the tutee selected. For instance, `get 2` will list the information
-of the second tutee found on the list. The information to be listed is based on
-`Tutee#toString()` which contains additional information on fields such as `remark` and `lesson`.
+of the second tutee found on the list. The information to be listed is based on the
+string representation of a tutee which contains additional information on fields such as `remark` and `lesson`.
 
 #### Design considerations:
 
@@ -179,84 +216,161 @@ of the second tutee found on the list. The information to be listed is based on
     * Pros: Displays information on output terminal.
     * Cons: May be less aesthetic compared to initial implementation.
 
+<div style="page-break-after: always;"></div>
+
 ### Payment tracking feature
 
-The payment tracking feature is facilitated by `Payment`, `PaymentCommand`[Proposed]
-and `PaymentCommandParser`[Proposed].
+`Payment` keeps track of the payment details of the tutee, such as the amount of fees incurred, the payment due date and the payment history.
 
-`Payment` contains:
+#### Rationale
+
+A tutor may miscalculate fees, forget payment due dates, or have too many tutees to keep track of their payment information manually.
+
+#### Current Implementation
+
+The payment tracking feature is facilitated by `Payment`, `PaymentCommandParser`, and respective payment-related commands.
+
+
+`Payment` contains the following attributes:
 * `value`  — the amount of fees incurred by the Tutee since the last payment date
 * `payByDate`  — the date which the Tutee has to pay the `value` by
 * `paymentHistory`  — a list of dates which the Tutee previously paid on
 * `isOverdue` — a boolean flag which denotes if the payment is overdue
 
-Parsing the user's input through `PaymentCommand`, the user may:
-* `Payment#addPayment(Lesson, int)`  — Adds the cost of `Lesson` to total fees incurred, `int` times
-* `Payment#editPayment(float)`  — Updates the total fees incurred to the specified `float` amount
-* `Payment#setPayByDate(LocalDate)`  — Updates the pay-by date for the Tutee to the specified `LocalDate`
-* `Payment#receivePayment()`  — Resets the Tutee's incurred fees and updates their payment history
+Parsing the user's input through `PaymentCommandParser`, the user may execute any one of the following payment-related commands:
+* `PaymentCommand`  — Views all the payment details of the specified tutee
+* `PaymentAddCommand`  — Adds the cost of the lesson's fees to the tutee's current payment amount due
+* `PaymentSetAmountCommand`  — Sets the payment amount due for the tutee to the specified amount
+* `PaymentSetDateCommand`  — Sets the pay-by date for the tutee to the specified date
+* `PaymentReceiveCommand`  — Resets the tutee's incurred fees and pay-by-date, and updates their payment history
 
-[Proposed] Given below is an example scenario of how payments may be tracked.
+Unlike how `TrackOParser` parses input to return lower-level parsers like `AddCommandParser` which then creates an `AddCommand` only, 
+`PaymentCommandParser` parses input to return any one of the payment-related commands as described in the simplified Class diagram below.
+
+![](images/PaymentCommandsClassDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** All the commands in the above diagram inherit from the abstract Command class, but it is omitted from the diagram for simplicity.
+
+</div>
+
+The following steps showcase how a tutee's payment details are managed by the user.
 
 Step 1. The user adds a new `Tutee` John to Track-O and the `Payment` object is initialized with default values.
 
-![PaymentTracking1](images/PaymentTracking1.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram1" src="images/PaymentTrackingObjectDiagram1.png"/>
+</p>
 
-Step 2. After adding lessons to John, the user executes "payment 1 add/2 l/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` set.
+Step 2. After adding lessons to John, the user executes `payment 1 lesson/1`, where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` list.
 
-![PaymentTracking2](images/PaymentTracking2.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram2" src="images/PaymentTrackingObjectDiagram2.png"/>
+</p>
 
-Step 3. The user executes "payment 1 edit/180" after accidentally overcharging fees previously.
+Step 3. The user executes `payment 1 amount/90` after accidentally overcharging fees previously.
 
-![PaymentTracking3](images/PaymentTracking3.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram3" src="images/PaymentTrackingObjectDiagram3.png"/>
+</p>
 
-Step 4. The user executes "payment 1 by/25-10-2021", updating the `Payment#payByDate` for John.
+Step 4. The user executes `payment 1 by/01-01-2022`, updating the `Payment#payByDate` for John.
 
-![PaymentTracking4](images/PaymentTracking4.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram4" src="images/PaymentTrackingObjectDiagram4.png"/>
+</p>
 
 Step 5. In the event that the current date passes the `Payment#payByDate`, the `Payment#isOverdue` flag will turn `true`.
 
-![PaymentTracking5](images/PaymentTracking5.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram5" src="images/PaymentTrackingObjectDiagram5.png"/>
+</p>
 
-Step 6. The user executes `payment 1 receive` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
+Step 6. The user executes `payment 1 receive/` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
 
-![PaymentTracking6](images/PaymentTracking6.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram6" src="images/PaymentTrackingObjectDiagram6.png"/>
+</p>
 
+#### Design considerations
 
-The following sequence diagram shows how the add payment operation works, which is similar to how the other payment functions work as well:
+**Aspect: How lesson fees are added to payment amounts**
 
-![PaymentSequenceDiagram](images/PaymentSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+* **Option 1 (current choice):** Add a tutee's lesson's cost to their current payment amount due.
+    * Pros: Easy to implement and command would be short.
+    * Pros: Would be commonly used to increment tutee's payments directly after a lesson.
+    * Cons: Adding multiples of a lesson's cost requires multiple copies of the same command (i.e adding 3 lesson's worth of fees at once).
 
+* **Option 2:** Add a tutee's lesson's cost multiplied by an integer parameter to their current payment amount due
+    * Pros: The tutor can easily add multiples of a lesson's cost to a tutee.
+    * Cons: The additional integer parameter would require another layer of parsing and validation checking.
+    * Cons: Command would be more lengthy as it requires 3 keywords to execute (payment, lesson, integer).
 
-### Schedule
+**Aspect: How payment due dates are managed**
 
-`Schedule` helps to list the weekly lessons of the tutor.
+* **Option 1 (current choice):** Set a specified payment due date manually for a tutee.
+    * Pros: Gives the user the choice to set a payment due date, as not all tutees may require tracking of payments if they pay immediately after a lesson.
+    * Cons: Requires more effort for the user to set payment due dates for every tutee, if they require so.
+
+* **Option 2:** Set the payment due date exactly 1 week from the date the tutee last paid.
+    * Pros: The tutor need not manually set due dates if the tutees are to pay weekly.
+    * Cons: Different tutors collect payments at different times (i.e monthly, biweekly).
+    * Cons: Lessons may not occur every week, so the payment due date is subject to manual change quite often, making its automatic nature redundant.
+
+<div style="page-break-after: always;"></div>
+
+### Lesson management
 
 #### Rationale
 
+A tutor may teach various subjects to various tutees at different times. Hence, it might be difficult to keep track of this information manually. Our lesson management feature aims to provide easy tracking of the lessons taught under each tutee, as well as a quick overview of the tutor’s schedule.
+
+The lesson management feature is facilitated by `Lesson`, `Schedule`, `AddLessonCommand` and `DeleteLessonCommand`.
+
+#### Lesson
+
+##### Current Implementation
+
+`Lesson` contains:
+* `subject`  — the subject of the lesson
+* `time`  — the time the lesson takes place, which includes the day of week of the lesson, as well as its start time and end time
+* `hourlyRate`  — the cost per hour of the lesson
+* `cost`  — the total cost of the lesson, derived from the product of the lesson duration and the hourly rate of the lesson
+
+![Lessons with overlapping time slots](images/equal_lessons.png)
+
+*Figure: `Lesson`s labelled as **A**, **B** and **C** that take place on Friday at different times.*
+
+When comparing between two lessons:
+- The two lessons are considered equal when both lessons have the same day of week and they have overlapping time slots. In the figure above, lesson **A** is equal to lesson **B** as they both occur on a Friday and have an overlapping time slot between 1:30pm and 2pm. Similarly, lesson **A** is equal to lesson **C** as they both occur on a Friday and have an overlapping time slot between 2pm and 2:30pm.
+- One lesson is considered less than (i.e. before or earlier than) the other lesson when the lesson occurs on a day that is earlier than the other. If both lessons occur on the same day, the lesson that is earlier is the one that has a start time earlier than the other, provided that both lessons do not have overlapping time slots. In the figure above, lesson **B** starts at 1pm while lesson **C** starts at 2pm, and there is no overlapping time slot, hence lesson **B** is earlier than lesson **C**.
+
+#### Schedule
+
+`Schedule` helps to list the weekly lessons of the tutor.
+
+##### Rationale
+
 A tutor may be teaching many lessons to many tutees. It may be difficult to track their upcoming lessons, hence `Schedule` solves these through listing these upcoming lessons.
 
-#### Current Implementation
+##### Current Implementation
 
-The `Schedule` class consists of a `TreeMap<Lesson, String>` that stores a set of lessons that is sorted by day of occurrence and start time.
+The `Schedule` class consists of a `TreeMap<Lesson, String>` that stores a mapping of lessons that are sorted by day of occurrence and start time, to the name of the tutee involved in the corresponding lesson.
 
-On the start-up of Track-O, before the tutor inputs any commands, the tutee list is iterated through and each `Lesson` of each tutee, along with their name, is added to the `TreeMap<Lesson, String>` set of lessons.
+On the start-up of Track-O, before the tutor inputs any commands, the tutee list is iterated through and each `Lesson` of each tutee, along with their name, is added to the `TreeMap<Lesson, String>` map of lessons.
 
 ![ScheduleClassDiagram](images/ScheduleClassDiagram.png)
 
 *Figure: Structure of `Schedule`*
 
-The `TreeMap<Lesson, String>` set of lessons will be updated after every execution of commands that modify a tutee's lessons or name. The activity diagram below shows how `Schedule` is involved when an `addlesson` command is executed.
+The `TreeMap<Lesson, String>` map of lessons will be updated after every execution of commands that modify a tutee's lessons or name.
 
-![AddLessonCommandActivityDiagram](images/AddLessonCommandActivityDiagram.png)
+When adding a lesson to the `Schedule`, the private `Schedule#isClash` method will be invoked on the lesson to check if the lesson is in the `TreeMap<Lesson, String>` map. This is done via the `Lesson#equals` method. If the lesson is in the `TreeMap<Lesson, String>` map, a `ScheduleClashException` will be thrown. This helps to enforce the constraint that the tutor’s schedule should not have any clashes in lesson time.
 
-*Figure: Steps involved in adding a lesson*
+Consequently, it also means that if the tutor manually adds in lessons to `tracko.json` stored under the `data/` folder such that there are clashes in the tutor's schedule, a `ScheduleClashException` will be thrown on start-up. This exception is handled by wiping out the existing data and starting with an empty tutee list and an empty schedule.
 
 The tutor's schedule can be accessed via the `schedule` command. The sorted lessons will be displayed.
 
-#### Design considerations:
+##### Design considerations:
 
 **Aspect: How the schedule is to be stored**
 
@@ -268,42 +382,103 @@ The tutor's schedule can be accessed via the `schedule` command. The sorted less
     * Pros: The tutor can view their schedule directly on their hard disk without starting up Track-O.
     * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out.
 
-### Education Level of tutees
+#### AddLessonCommand
 
-Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`,
-followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
-the first letter of the education level in lowercase, followed by the year of study.
+`AddLessonCommand` is responsible for creating a `Lesson`, and inserting it into the specified tutee’s list of lessons as well as the tutor’s schedule.
 
-#### Supported Education Levels
+The following activity diagram summarises the steps involved when `AddLessonCommand` is executed.
 
-* Primary: 1 to 6
-* Secondary: 1 to 5
-* Junior College: 1 to 2
+![AddLessonCommandActivityDiagram](images/AddLessonCommandActivityDiagram.png)
 
-#### Design
-The `value` field of education level in Tutee class is in the abbreviation form.
-In `TuteeCard`, the string displayed is `stringRepresentation`,
-which is the returned value of the `parse` method in Level class, using `value` as the parameter.
-For example, `stringRepresentation` of `p5` is `Primary 5`.
+*Figure: Steps involved in adding a lesson*
 
-Both `value` and `stringRepresentation` are fields belonging to Level.
-This is designed for better readability in displaying tutees. Having two fields ensures that the
-abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
-to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
-education level.
+Let us consider a scenario to illustrate how `AddLessonCommand` works with `Schedule`:
 
-#### Parse method
-The `parse` method splits the string parameter into a charArray and switches case according to the first char.
-Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
+Suppose there exists two `Tutee` objects in the `TuteeList`, named Alice and Bob. Alice currently has a lesson on Friday 3pm to 5pm, while Bob has no lessons. The figure below illustrates this.
 
-#### Restrictions
-1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
-2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
+![AddLessonCommandObjectDiagram1](images/AddLessonCommandObjectDiagram1.png)
 
-Failing either restriction will result in the constraint message showing up in the console component,
-and the tutee will not be created/modified.
+*Figure: Initial object diagram containing Alice, Bob, Alice's lessons and the tutor's schedule*
+
+When the tutor attempts to add a `Lesson` that occurs on Friday 2pm to 4pm, the `Schedule#isClash` method is invoked on the `Lesson` and returns true. This is because the `Lesson` is considered to be equal to Alice’s lesson due to the overlapping time. Thus, a `ScheduleClashException` is thrown and the lesson is not added to Bob. The object diagram remains the same as the figure above.
+
+When the tutor attempts to add a `Lesson` that occurs on Friday 6pm to 7pm, the `Schedule#isClash` method is invoked on the `Lesson` and returns false since there is no overlap in time. The `Lesson` is inserted in the `TreeMap<Lesson, String>` map in `Schedule` after Alice’s lesson, because it is greater than (i.e. after) Alice’s lesson. The updated object diagram is shown below.
+
+![AddLessonCommandObjectDiagram2](images/AddLessonCommandObjectDiagram2.png)
+
+*Figure: Object diagram after `AddLessonCommand` is successfully executed*
+
+#### DeleteLessonCommand
+
+`DeleteLessonCommand` is responsible for removing a lesson that exists in the tutee list as well as a tutee’s lessons.
+
+Suppose Bob has index number of 2 in tutee list and the user wants to delete the 3rd lesson in his list of lessons. 
+The following sequence diagram and steps showcase how the `DeleteLessonCommand` would work.
+
+![DeleteLessonCommandSequenceDiagram](images/DeleteLessonCommandSequenceDiagram.png)<br>
+_Figure: Steps involved in deleting a lesson. Do note that trivial details are omitted e.g getting Bob from tutee list using index 2_
+
+Step 1: The user inputs `deletelesson 2 lesson/3` to remove the lesson. A `DeleteLessonCommand` will be created by 
+`LogicManager` and invokes `DeleteLessonCommand#execute`
+_Note that the index of lesson "3" is obtained prior to the method call using `get 2` command._
+
+Step 2: `DeleteLessonCommand` retrieves the 3rd lesson in the tutee’s list of lessons. The user’s schedule is accessed and the 
+`Schedule#remove` is invoked. This uses the uniqueness property of every element in TreeMap to accurately remove 
+**only** the object with key `lessonToDelete` and value `Bob`.
+
+Step 3: When the process is completed, `DeleteLesson` creates a new `BobWithoutLesson` tutee that copies over all the information 
+of Bob, except the lesson that was deleted.
+
+Step 4: `BobWithoutLesson` is then used to replace the `Bob` at the original index 2, and model resets the displayed 
+list to show the full list of tutee once again.
+
+<div style="page-break-after: always;"></div>
+
+### Find 
+`FindCommand` allows tutors to filter the `tuteelist` according to the keywords supplied. The supported fields for `FindCommand`
+includes: `name`, `level`, `subject`, `overdue`.
+
+#### Rationale
+Track-O aims to solve problems that arises when he teaches multiple tutees. Tutors may find it difficult to look for a
+tutee within the long list. A `find` feature helps to shrink the list down to display only the tutee of interest, giving
+them the ability to quickly identify specific tutees and getting information as required.
+
+#### Current implementation
+`FindCommandParser` uses `ParserUtil` to get the keywords used in the command.
+The keywords are supplied after the prefix when tutors enter the command. Supported prefixes are `n/` `l/` 
+`subject/` and `overdue/`.<br><br>
+`FindCommandParser` then initialises 4 empty string arrays, each represents one of the 4 fields. The keywords
+obtained by `ParserUtil` will be added to the respective arrays. If the field does not contain any keywords, the array
+for that field remains empty.<br><br>
+A `CollectivePredicate` object will be created using these arrays of keywords, which serves as our filter test. It
+converts each arrays into streams and does an `allmatch` method call, which returns true if the tutee's information 
+matches all the keywords of that field. However, if the keyword stream is empty, the returned result will also be
+`true`. To address this issue, we used an `activeTests` array and only add the result of `allmatch` to the array 
+if the stream contains keywords. `CollectivePredicate#test` finally returns true if `activeTests` is a non-zero length
+array and all the booleans are `true`.<br><br>
+The following activity diagram shows an example of the flow of`CollectivePredicate#test`
+executed on a `Tutee` Bob.
+
+![CollectivePredicateActivityDiagram](images/CollectivePredicateActivityDiagram.png)
+
+The following sequence diagram shows the workflow when a user uses the `Find` feature.
+![FindCommandParserSequenceDiagram](images/FindCommandParserSequenceDiagram.png)
+
+#### Design Considerations
+We had 2 design ideas of the `find` command:
+1. Allow `FindCommand` to search with multiple keywords, and return tutees that fulfills **either** keywords
+2. Allow `FindCommand` to search with multiple keywords, and return tutees that fulfills **all** keywords
+
+We decided on the 2nd implementation due to these reasons:
+* Everytime a new keyword is supplied, the returned `tuteelist` will be equals to or smaller than without the new keyword,
+as opposed to design 1, where the `tuteelist` is equals to or longer than the without the keyword. 
+* We want the find feature to address the issue of `tuteelist` being too cluttered when number of tutees increases, so
+design 2 fits our requirement better.
+* It enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -314,6 +489,8 @@ and the tutee will not be created/modified.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -355,13 +532,14 @@ The platform is personalized for private tutors as opposed to other audiences (l
 | `*`      | first-time user                            | clear all sample data | start adding in my own data. |
 | `*`      | forgetful tutor                            | know what's the current upcoming tuition session | plan for it. |
 | `*`      | private tutor with an increasing number of students | sort my students by specific fields, such as lesson date or level and school of student. | so that I can find them easily |
-| `*`      | first-time user                            | import all my existing data into the app when I first start it up | quickly set-up the app. |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
 (For all use cases below, the **System** is `Track-o` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC01: Seek help on the usage of commands**
+#### UC01: Seek help on the usage of commands
 
 **MSS**
 1. User requests for help regarding how to use the commands.
@@ -371,23 +549,7 @@ The platform is personalized for private tutors as opposed to other audiences (l
 
 <br>
 
-**UC02: Import existing data**
-
-**MSS**
-1. User requests to import existing data.
-2. System processes and shows the data.
-
-   Use case ends.
-
-**Extensions**
-* 1a. Data is of an improper format.
-    * 1a1. System shows an error message.
-
-      Use case resumes at step 1.
-
-<br>
-
-**UC03: Add a tutee**
+#### UC02: Add a tutee
 
 **MSS**
 1. User requests to add a tutee by providing the details of the tutee.
@@ -403,7 +565,7 @@ The platform is personalized for private tutors as opposed to other audiences (l
 
 <br>
 
-**UC04: View all tutees**
+#### UC03: View all tutees
 
 **MSS**
 1. User requests to view all tutees.
@@ -413,93 +575,79 @@ The platform is personalized for private tutors as opposed to other audiences (l
 
 <br>
 
-**UC05: Delete a tutee**
+#### UC04: Delete a tutee
 
 **MSS**
-1. User requests to list tutees (UC04)
-2. System shows a list of tutees
-3. User requests to delete a specific tutee in the list
-4. System deletes the tutee
+1. User requests to list tutees.
+2. System shows a list of tutees.
+3. User requests to delete a specific tutee in the displayed tutee list.
+4. System deletes the tutee.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given tutee list index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
-**UC06: View a specific tutee**
+#### UC05: View a specific tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to view a specific tutee.
+3. User requests to view a specific tutee in the displayed tutee list.
 4. System shows that specific tutee.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given tutee list index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
-**UC07: Search for tutees by their name**
+#### UC06: Search for tutees by their name, level and/or subject
 
 **MSS**
-1. User requests to list tutees. (UC04)
-2. System shows a list of tutees.
-3. User requests to search for tutees by their name.
-4. System shows a list of tutees matching this name.
+1. User requests to search for tutees by their name, level and/or subject.
+2. System shows a list of tutees matching the name, level and/or subject.
 
    Use case ends.
 
 <br>
 
-**UC08: Filter tutees by their level or subject**
+#### UC07: Edit a specific tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to filter tutees by their level or subject.
-4. System shows a filtered list of tutees.
-
-   Use case ends.
-
-<br>
-
-**UC09: Edit a specific tutee**
-
-**MSS**
-1. User requests to list tutees. (UC04)
-2. System shows a list of tutees.
-3. User requests to edit a specific tutee.
+3. User requests to edit a specific tutee in the displayed tutee list.
 4. System edits that specific tutee.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given tutee list index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
-* 3b. No details of the tutee are provided.
+* 3b. No details to be edited to the tutee are provided.
     * 3b1. System shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
-**UC10: View the schedule for the week**
+#### UC08: View the schedule for the week
 
 **MSS**
 1. User requests to view his/her schedule for the week.
@@ -509,112 +657,150 @@ The platform is personalized for private tutors as opposed to other audiences (l
 
 <br>
 
-**UC11: View existing payment details of tutee**
+#### UC09: Add a lesson to a specific tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to view payment details of a specific tutee.
+3. User requests to add a lesson to a specific tutee in the displayed tutee list.
+4. System adds a lesson to that specific tutee.
 
    Use case ends.
 
-   **Extensions**
+**Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given tutee list index is invalid.
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. Details of the lesson are not fully provided.
+    * 3b1. System shows an error message.
+
+      Use case resumes at step 2.
+    
 <br>
 
-**UC12: Add lesson fees to payment owed by tutee**
+#### UC10: Delete a specific lesson from a specific tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to view payment details of tutee. (UC11)
-4. User selects lesson and adds fees of lesson to existing fees.
-5. System shows new updated payment details.
+3. User requests to delete a specific lesson from a specific tutee in the displayed tutee list.
+4. System deletes that specific lesson from that specific tutee.
 
    Use case ends.
 
-   **Extensions**
+**Extensions**
 
-* 4a. The given lesson index is invalid.
-    * 4a1. System shows an error message.
+* 3a. The given tutee list index is invalid.
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given lesson index of that specific tutee is invalid.
+    * 3b1. System shows an error message.
 
       Use case resumes at step 2.
 
-* 4b. The given lesson index is wrong.
-    * 4b1. System shows incorrect updated payment details.
-    * 4b2. User manually edits data to revert payment details. (UC13)
-
-      Use case resumes at step 2.
 <br>
 
-**UC13: Manually update payment fees owed by tutee**
+#### UC11: View existing payment details of a tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
+1. User requests to list tutees.
 2. System shows a list of tutees.
-3. User requests to view payment details of tutee. (UC11)
-4. User updates fees to new desired amount.
-5. System shows new updated payment details.
+3. User requests to view payment details of a specific tutee in the displayed tutee list.
 
    Use case ends.
 
    **Extensions**
 
-* 5a. The given amount is invalid.
-    * 5a1. System shows an error message.
+* 3a. The given tutee list index is invalid.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
-* 5b. The given amount is wrong.
-    * 5b1. System shows incorrect updated payment details.
-    * 5b2. User manually updates payment fees to new correct amount.
+<br>
 
-      Use case resumes at step 4.
-      <br>
-
-**UC14: Receive payment fees owed by tutee**
+#### UC12: Add lesson fees to payment owed by tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
-2. System shows a list of tutees.
-3. User requests to view payment details of tutee. (UC11)
-4. User sets fees of tutee as received.
-5. System shows new updated payment details.
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+2. User requests to add the fees of a specific lesson to the existing fees.
+3. System shows new updated payment details.
 
    Use case ends.
 
    **Extensions**
 
-* 4a. Date is provided.
-    * 4a1. System updates and shows the new date to make payment by.
+* 2a. The given lesson index is invalid.
+    * 2a1. System shows an error message.
 
-* 4b. Date is not provided.
-    * 4a1. System updates and removes the date to make payment by.
+      Use case resumes at step 2.
+    
+<br>
 
-      Use case resumes at step 4.
-      <br>
-
-**UC15: Find tutees with overdue payment**
+#### UC13: Manually update payment fees owed by tutee
 
 **MSS**
-1. User requests to list tutees. (UC04)
-2. System shows a list of tutees.
-3. User requests to find tutees with overdue payment.
-5. System shows list of tutees that are overdue.
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+2. User requests to update fees to new desired amount.
+3. System shows new updated payment details.
 
    Use case ends.
 
-**UC16: Clear all data**
+   **Extensions**
+
+* 2a. The given amount is invalid.
+    * 2a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+<br>
+
+#### UC14: Receive payment fees owed by tutee
+
+**MSS**
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+2. User requests to set fees of tutee as received.
+3. System shows new updated payment details.
+
+   Use case ends.
+
+   **Extensions**
+
+* 2a. Date is provided.
+    * 2a1. System updates and shows the new date to make payment by.
+
+      Use case resumes at step 3.
+
+* 2b. Date is not provided.
+    * 2b1. System updates and removes the date to make payment by.
+
+      Use case resumes at step 3.
+    
+<br>
+
+#### UC15: Find tutees with overdue payment
+
+**MSS**
+1. User requests to find tutees with overdue payment.
+2. System shows list of tutees that are overdue.
+
+   Use case ends.
+
+<br>
+
+#### UC16: Clear all data
 
 **MSS**
 1. User requests to clear all data.
 2. System clears all data.
 
    Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -631,6 +817,8 @@ The platform is personalized for private tutors as opposed to other audiences (l
 * **Database**: Storage on local system
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -656,8 +844,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a tutee
 
 1. Deleting a tutee while all tutees are being shown
@@ -665,15 +851,26 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
-       Expected: No tutee is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No tutee is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing payment amount
+
+1. Manually editing a tutee's payment amount
+
+    1. Prerequisites: A tutee is already initialized with the `add` command. List all tutees using the `list` command. At least one tutee is in the list.
+   
+    2. Test case: `payment 1 amount/50`<br>
+       Expected: Tutee's payment details are changed to `$50.00`. Details of the tutee's new payment details are shown in the status message.
+    3. Test case: `payment 1 amount/`<br>
+       Expected: Tutee's payment details are not changed. Error details shown in the status message.
+    4. Other incorrect payment amount commands to try: `payment 1 amount/a`, `payment 1 amount/-30`, `payment 1 amount/500000`, `payment 1 amount/30.12`
+       Expected: Similar to previous.
 
 ### Saving data
 

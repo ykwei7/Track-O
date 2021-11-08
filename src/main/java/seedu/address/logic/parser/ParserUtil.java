@@ -314,12 +314,12 @@ public class ParserUtil {
         requireNonNull(paymentValue);
         String trimmedPayment = paymentValue.trim();
         if (!Payment.isNumberWithAnyDecimals(trimmedPayment)) {
-            throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Payment.FORMAT_CONSTRAINTS_MESSAGE);
         } else if (!Payment.isValidPaymentFormat(trimmedPayment)) {
-            throw new ParseException(Payment.DECIMAL_CONSTRAINTS);
+            throw new ParseException(Payment.DECIMAL_CONSTRAINTS_MESSAGE);
         } else if (!Payment.isValidPaymentAmount(trimmedPayment)) {
             // Payment amount is greater than maximum allowed
-            throw new ParseException(Payment.AMOUNT_CONSTRAINTS);
+            throw new ParseException(Payment.AMOUNT_CONSTRAINTS_MESSAGE);
         } else {
             Double paymentValueToSetValue = Double.parseDouble(trimmedPayment);
             String paymentValueToSetWithDecimals = String.format("%.2f", paymentValueToSetValue);
@@ -367,17 +367,17 @@ public class ParserUtil {
         }
 
         if (!Payment.isValidPayByDate(trimmedPayByDate)) {
-            throw new ParseException(Payment.DATE_CONSTRAINTS);
+            throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
         }
 
         try {
             formattedPayByDate = LocalDate.parse(trimmedPayByDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         } catch (DateTimeParseException e) {
-            throw new ParseException(Payment.DATE_CONSTRAINTS);
+            throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
         }
 
         if (!formattedPayByDate.isAfter(dateToday) && !formattedPayByDate.equals(dateToday)) {
-            throw new ParseException(Payment.DATE_CONSTRAINTS);
+            throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
         }
         return formattedPayByDate;
     }

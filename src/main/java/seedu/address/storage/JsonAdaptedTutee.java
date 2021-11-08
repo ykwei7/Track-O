@@ -157,21 +157,21 @@ class JsonAdaptedTutee {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName()));
         }
         if (!Payment.isValidPaymentFormat(payment)) {
-            throw new IllegalValueException(Payment.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Payment.FORMAT_CONSTRAINTS_MESSAGE);
         }
 
         if (payByDateAsString == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "payment pay-by date"));
         }
         if (!Payment.isValidPayByDate(payByDateAsString)) {
-            throw new IllegalValueException(Payment.DATE_CONSTRAINTS);
+            throw new IllegalValueException(Payment.DATE_CONSTRAINTS_MESSAGE);
         }
 
         if (paymentHistory == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "payment history"));
         }
         if (!Payment.isValidPaymentHistory(paymentHistory)) {
-            throw new IllegalValueException(Payment.PAYMENT_HISTORY_CONSTRAINTS);
+            throw new IllegalValueException(Payment.PAYMENT_HISTORY_CONSTRAINTS_MESSAGE);
         }
 
         final Address modelAddress = new Address(address);
