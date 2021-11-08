@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.IndexOutOfBoundsException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -191,6 +194,10 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        } catch (IndexOutOfBoundsException ie) {
+            logger.info("Invalid index: " + commandText);
+            resultDisplay.setFeedbackToUser(ie.getMessage());
+            throw new ParseException(MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX, ie);
         }
     }
 }

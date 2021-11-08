@@ -29,7 +29,6 @@ public class TuteeCardTest {
     // Singleton pattern ensures no multiple initialisations of JavaFX toolkit
     private static boolean isJavaFxCompatible = true;
 
-    // Solution to initialise JavaFX toolkit below adapted from https://stackoverflow.com/a/38883519
     @Test
     public void constructor_invalidTutee_throwsAssertionError() {
         if (isJavaFxCompatible && initToolkitSuccess()) {
@@ -83,6 +82,7 @@ public class TuteeCardTest {
         }
     }
 
+    // Solution to initialise JavaFX toolkit below adapted from https://stackoverflow.com/a/53760312
     private boolean initToolkitSuccess() {
         try {
             Platform.startup(() -> {});

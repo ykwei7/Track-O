@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DAY_OF_WEEK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_END_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_HOURLY_RATE_DESC;
@@ -23,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_START_TI
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_SUBJECT_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTEE;
 
 import java.time.DayOfWeek;
@@ -89,10 +91,14 @@ public class AddLessonCommandParserTest {
                 "1 i/ string" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY
                         + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, INDEX_OUT_OF_BOUNDS, MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
+
     }
 
     @Test
     public void parse_invalidValue_failure() {
+
         assertParseFailure(parser,
                 "1" + INVALID_LESSON_SUBJECT_DESC + LESSON_DAY_OF_WEEK_DESC_AMY
                         + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
@@ -116,13 +122,14 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser,
                 "1" + LESSON_SUBJECT_DESC_AMY + LESSON_DAY_OF_WEEK_DESC_AMY
                         + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + INVALID_LESSON_HOURLY_RATE_DESC,
-                Lesson.MESSAGE_CONSTRAINTS); // invalid hourly rate
+                Lesson.MESSAGE_CONSTRAINTS_INVALID_HOURLY_RATE_FORMAT); // invalid hourly rate
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
                 "1" + INVALID_LESSON_SUBJECT_DESC + INVALID_LESSON_DAY_OF_WEEK_DESC
                         + INVALID_LESSON_START_TIME_DESC + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 Subject.MESSAGE_CONSTRAINTS); // invalid subject
+
     }
 
     @Test
