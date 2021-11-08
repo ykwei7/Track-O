@@ -273,7 +273,6 @@ Format: `remark INDEX r/TEXT`
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
 
-<div style="page-break-after: always;"></div>
 #### Clearing all remarks of a tutee: `clearremark`
 
 Clears all remarks of the specified tutee.
