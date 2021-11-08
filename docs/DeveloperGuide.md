@@ -216,6 +216,8 @@ of the second tutee found on the list. The information to be listed is based on
     * Pros: Displays information on output terminal.
     * Cons: May be less aesthetic compared to initial implementation.
 
+<div style="page-break-after: always;"></div>
+
 ### Payment tracking feature
 
 `Payment` keeps track of the payment details of the tutee, such as the amount of fees incurred, the payment due date and the payment history.
@@ -797,6 +799,8 @@ The platform is personalized for private tutors as opposed to other audiences (l
 2. System clears all data.
 
    Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
