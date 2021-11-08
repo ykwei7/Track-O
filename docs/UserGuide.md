@@ -351,7 +351,7 @@ Examples:
 Entering `payment` shows you all the payment-related commands available.<br>
 Note that Track-O keeps track of fees up to $100,000, any payment command that results in the fees exceeding the amount will return an error.
 
-#### To retrieve a specified tutee's payment details:
+#### To retrieve a specified tutee's payment details: `payment`
 
 Format: `payment INDEX`
 
@@ -365,7 +365,7 @@ Examples:
 * `payment 1`
 
 <div style="page-break-after: always;"></div>
-#### To add a specified lesson's fees to a specified tutee:
+#### To add a specified lesson's fees to a specified tutee: `… lesson`
 
 Format: `payment INDEX lesson/LESSON_INDEX`
 
@@ -381,7 +381,7 @@ Examples:
 * `payment 1 lesson/2`
 
 <div style="page-break-after: always;"></div>
-#### To edit a specified tutee's payment amount:
+#### To edit a specified tutee's payment amount: `… amount`
 
 Format: `payment INDEX amount/AMOUNT`
 
@@ -398,7 +398,7 @@ Examples:
 * `payment 2 amount/100`
 
 <div style="page-break-after: always;"></div>
-#### To set a specified tutee's payment due date:
+#### To set a specified tutee's payment due date: `… by`
 
 Format: `payment INDEX by/DUE_DATE`
 
@@ -414,7 +414,7 @@ Examples:
 * `payment 2 by/01-01-2022`
 
 <div style="page-break-after: always;"></div>
-#### To receive a tutee's payment (and set a next payment due date):
+#### To receive a tutee's payment (and set a next payment due date): `… receive`
 
 Format: `payment INDEX receive/[DUE_DATE]`
 
