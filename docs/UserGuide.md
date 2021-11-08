@@ -18,7 +18,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
  
-2. Download the latest `tracko.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.4/tracko.jar).
+2. Download the latest `Track-O.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-3/tp/releases/download/v1.4/CS2103T-F12-3.Track-O.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ to run Track-O.
 
