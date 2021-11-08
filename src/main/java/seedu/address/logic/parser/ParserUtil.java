@@ -321,7 +321,9 @@ public class ParserUtil {
             // Payment amount is greater than maximum allowed
             throw new ParseException(Payment.AMOUNT_CONSTRAINTS);
         } else {
-            return trimmedPayment;
+            Double paymentValueToSetValue = Double.parseDouble(trimmedPayment);
+            String paymentValueToSetWithDecimals = String.format("%.2f", paymentValueToSetValue);
+            return paymentValueToSetWithDecimals;
         }
     }
 
