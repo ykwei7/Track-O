@@ -40,7 +40,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_HOURLY_RATE + "HOURLY_RATE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SUBJECT + "Biology "
-            + PREFIX_DAY_OF_WEEK + "4 "
+            + PREFIX_DAY_OF_WEEK + "7 "
             + PREFIX_START_TIME + "11:30 "
             + PREFIX_END_TIME + "13:30 "
             + PREFIX_HOURLY_RATE + "40.50";
