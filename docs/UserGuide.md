@@ -477,6 +477,7 @@ Format: `exit`
 It is just a visual difference. Both applications have the same functionalities otherwise.
 
 <div style="page-break-after: always;"></div>
+
 **Q**: What are tags used for? <br>
 **A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
 
