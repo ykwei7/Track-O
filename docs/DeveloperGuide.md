@@ -397,24 +397,24 @@ When the tutor attempts to add a `Lesson` that occurs on Friday 6pm to 7pm, the 
 
 #### DeleteLessonCommand
 
-`DeleteLessonCommand` is responsible for removing a lesson that exists in the `tuteelist` as well as a tutee’s `lessons`.
+`DeleteLessonCommand` is responsible for removing a lesson that exists in the tutee list as well as a tutee’s lessons.
 
-Suppose Bob has index number of 2 in `tuteelist` and the user wants to delete the 3rd lesson in his list of lessons. 
+Suppose Bob has index number of 2 in tutee list and the user wants to delete the 3rd lesson in his list of lessons. 
 The following sequence diagram and steps showcase how the `DeleteLessonCommand` would work.
 
 ![DeleteLessonCommandSequenceDiagram](images/DeleteLessonCommandSequenceDiagram.png)<br>
-_Figure: Steps involved in deleting a lesson. Do note that trivial details are omitted e.g getting `Bob` from `tuteelist` using index 2_
+_Figure: Steps involved in deleting a lesson. Do note that trivial details are omitted e.g getting Bob from tutee list using index 2_
 
 Step 1: The user inputs `deletelesson 2 lesson/3` to remove the lesson. A `DeleteLessonCommand` will be created by 
 `LogicManager` and invokes `DeleteLessonCommand#execute`
 _Note that the index of lesson "3" is obtained prior to the method call using `get 2` command._
 
-Step 2: `DeleteLessonCommand` retrieves the 3rd `lesson` in the tutee’s list of lessons. The user’s `schedule` is accessed and the 
+Step 2: `DeleteLessonCommand` retrieves the 3rd lesson in the tutee’s list of lessons. The user’s schedule is accessed and the 
 `Schedule#remove` is invoked. This uses the uniqueness property of every element in TreeMap to accurately remove 
 **only** the object with key `lessonToDelete` and value `Bob`.
 
 Step 3: When the process is completed, `DeleteLesson` creates a new `BobWithoutLesson` tutee that copies over all the information 
-of `Bob`, except the lesson that was deleted.
+of Bob, except the lesson that was deleted.
 
 Step 4: `BobWithoutLesson` is then used to replace the `Bob` at the original index 2, and model resets the displayed 
 list to show the full list of tutee once again.
