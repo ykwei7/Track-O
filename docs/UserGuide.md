@@ -52,7 +52,6 @@ parameter | A value that is defined based on your input and is immediately prece
 alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
 integer | A number that has no decimal places or fractions.
 level | Refers to the education level of a student in the context of Singapore's education system.
-lesson/schedule conflict | 
 
 <div style="page-break-after: always;"></div>
 ### Application layout
