@@ -459,6 +459,7 @@ Format: `exit`
 **Q**: What are tags used for? <br>
 **A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
 
+<div style="page-break-after: always;"></div>
 **Q**: Why does my application look slightly different?<br>
 **A**: The screenshots in this User Guide are from an application running on macOS. If you are using Windows, your application would look something like this instead:
 
