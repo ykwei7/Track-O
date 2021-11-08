@@ -14,6 +14,8 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
@@ -33,6 +35,8 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## About
 
@@ -66,6 +70,8 @@ The GUI of Track-O is divided mainly into 4 sections:
   - Note that some commands such as `get` will show a particular tutee's lessons in the form of a numbered list. Similar to the tutee list, the index number of a tutee's lesson refers to the number assigned to each lesson in the numbered list.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Setting up your first tutee
 
