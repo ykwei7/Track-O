@@ -53,8 +53,6 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-<div style="page-break-after: always;"></div>
-
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
