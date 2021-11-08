@@ -5,8 +5,9 @@ start
 
 if () then ([command format is followed])
     if () then ([Lesson does not overlap with the tutor's schedule])
-    :Add the Lesson to the schedule;
-    :Add the Lesson to the tutee's lessons;
+    : Create a ""Lesson"" object;
+    :Add the ""Lesson"" to the ""Schedule"";
+    :Add the ""Lesson"" to the tutee's lessons;
     :Show command success message;
     else ([else])
     :Show lesson clashes message;

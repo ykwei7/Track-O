@@ -12,10 +12,12 @@ import java.util.Objects;
  */
 public class Lesson implements Comparable<Lesson> {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_CONSTRAINTS_INVALID_HOURLY_RATE_FORMAT =
             "Hourly rate should only contain positive numbers expressed strictly in "
                     + "either no decimal places or two decimal places with the last decimal place being 0 or 5, "
                     + "and it should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS_MAXIMUM_HOURLY_RATE_EXCEEDED =
+            "Hourly rate should not exceed $1000.";
     /*
      * Only 0 or 2 decimal places of a number is allowed.
      * For 2 decimal places, the last decimal place has to end in either 0 or 5.
@@ -23,6 +25,7 @@ public class Lesson implements Comparable<Lesson> {
     public static final String VALIDATION_REGEX_HOURLY_RATE_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
             .replaceFirst("^0+", "");
     public static final String VALIDATION_REGEX_HOURLY_RATE_ALL_ZEROES = "^[0]*([.][0][0])?$";
+    public static final double MAXIMUM_HOURLY_RATE = 1000.00;
 
     private Subject subject;
     private Time time;
@@ -52,11 +55,18 @@ public class Lesson implements Comparable<Lesson> {
     }
 
     /**
-     * Returns true if a given string is a valid hourly rate.
+     * Returns true if a given string follows the format of a valid hourly rate.
      */
-    public static boolean isValidHourlyRate(String hourlyRate) {
+    public static boolean isValidHourlyRateFormat(String hourlyRate) {
         return hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_NO_OR_TWO_DECIMAL_PLACES)
                 && !hourlyRate.matches(VALIDATION_REGEX_HOURLY_RATE_ALL_ZEROES);
+    }
+
+    /**
+     * Returns true if a given double is greater than the maximum hourly rate.
+     */
+    public static boolean isExceedMaximumHourlyRate(double hourlyRate) {
+        return hourlyRate > MAXIMUM_HOURLY_RATE;
     }
 
     /**

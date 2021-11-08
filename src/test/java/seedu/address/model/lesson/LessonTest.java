@@ -13,37 +13,37 @@ import org.junit.jupiter.api.Test;
 public class LessonTest {
 
     @Test
-    public void isValidHourlyRate() {
+    public void isValidHourlyRateFormat() {
         // null hourly rate
-        assertThrows(NullPointerException.class, () -> Lesson.isValidHourlyRate(null));
+        assertThrows(NullPointerException.class, () -> Lesson.isValidHourlyRateFormat(null));
 
         // invalid hourly rates
-        assertFalse(Lesson.isValidHourlyRate("")); // empty string
-        assertFalse(Lesson.isValidHourlyRate(" ")); // spaces only
-        assertFalse(Lesson.isValidHourlyRate("15a")); // contains non-numeric characters
+        assertFalse(Lesson.isValidHourlyRateFormat("")); // empty string
+        assertFalse(Lesson.isValidHourlyRateFormat(" ")); // spaces only
+        assertFalse(Lesson.isValidHourlyRateFormat("15a")); // contains non-numeric characters
 
-        assertFalse(Lesson.isValidHourlyRate("15.")); // no decimal places
-        assertFalse(Lesson.isValidHourlyRate("15.1")); // only 1 decimal place
-        assertFalse(Lesson.isValidHourlyRate("15.133")); // exceeds 2 decimal places
+        assertFalse(Lesson.isValidHourlyRateFormat("15.")); // no decimal places
+        assertFalse(Lesson.isValidHourlyRateFormat("15.1")); // only 1 decimal place
+        assertFalse(Lesson.isValidHourlyRateFormat("15.133")); // exceeds 2 decimal places
 
         // zero hourly rate is not allowed
-        assertFalse(Lesson.isValidHourlyRate("0"));
-        assertFalse(Lesson.isValidHourlyRate("00000.00"));
+        assertFalse(Lesson.isValidHourlyRateFormat("0"));
+        assertFalse(Lesson.isValidHourlyRateFormat("00000.00"));
 
         // last decimal place does not end with 0 or 5
-        assertFalse(Lesson.isValidHourlyRate("155.09"));
-        assertFalse(Lesson.isValidHourlyRate("123.44"));
-        assertFalse(Lesson.isValidHourlyRate("143.87"));
+        assertFalse(Lesson.isValidHourlyRateFormat("155.09"));
+        assertFalse(Lesson.isValidHourlyRateFormat("123.44"));
+        assertFalse(Lesson.isValidHourlyRateFormat("143.87"));
 
         // valid hourly rates with leading zeroes
-        assertTrue(Lesson.isValidHourlyRate("015"));
-        assertTrue(Lesson.isValidHourlyRate("0000000.30"));
-        assertTrue(Lesson.isValidHourlyRate("0000012.45"));
+        assertTrue(Lesson.isValidHourlyRateFormat("015"));
+        assertTrue(Lesson.isValidHourlyRateFormat("0000000.30"));
+        assertTrue(Lesson.isValidHourlyRateFormat("0000012.45"));
 
         // valid hourly rates with no leading zeroes
-        assertTrue(Lesson.isValidHourlyRate("40"));
-        assertTrue(Lesson.isValidHourlyRate("4.05"));
-        assertTrue(Lesson.isValidHourlyRate("400.70"));
+        assertTrue(Lesson.isValidHourlyRateFormat("40"));
+        assertTrue(Lesson.isValidHourlyRateFormat("4.05"));
+        assertTrue(Lesson.isValidHourlyRateFormat("400.70"));
     }
 
     @Test
