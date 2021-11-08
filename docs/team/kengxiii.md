@@ -45,7 +45,7 @@ used for the profile of each team member.
     However, we felt that the feature is not very helpful for tutors if we wanted to extend it to support `level`,
     `subject` and `overdue` status as well.<br>
     For example, if the tutor wants to search up all secondary 4 students taking math classes, using
-    `find l/p4 subject/math` will return tutees who are **either** primary 4 or tutee's taking math classes.
+    `find l/p4 subject/math` will return tutees who are **either** primary 4 or tutees taking math classes.
     The tutor would then have to sieve through the results once again to find the tutee of interest.<br>
     Hence, we modified the implementation to work just like a filter placed sequentially: a matched tutee has to pass all
     the filters to be returned as a matched tutee.
