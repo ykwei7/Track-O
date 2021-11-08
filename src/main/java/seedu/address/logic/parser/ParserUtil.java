@@ -39,6 +39,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index provided is invalid.";
 
+    public static final String EMPTY_STRING = "";
+
     /**
      * Returns true if string has length less than or equal to 9 after trimming leading zeroes.
      *
@@ -337,6 +339,11 @@ public class ParserUtil {
     public static Index parseLessonIndex(String lessonIndex) throws ParseException {
         requireNonNull(lessonIndex);
         String trimmedLessonIndex = lessonIndex.trim();
+
+        if (trimmedLessonIndex.equals(EMPTY_STRING)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
         if (!Payment.isValidPaymentFormat(trimmedLessonIndex)) {
             throw new ParseException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
