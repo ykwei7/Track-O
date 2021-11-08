@@ -85,6 +85,7 @@ the 5th of January 2022.
 
 <img src="john_ug.png" width="85%"/>
 <div style="page-break-after: always;"></div>
+
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
 the rate was `$30` per hour over 2 hours, the total adds up to `$60.00`.
@@ -97,6 +98,7 @@ removes the pay-by date used in step 4 under [Before your lesson](#before-your-l
 <img src="john_2_ug.png" width="85%"/>
 
 <div style="page-break-after: always;"></div>
+
 ### Managing your payments
 1. To view John's payment details, run `payment 1`. This shows us John's existing payment details. 
 2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
@@ -206,6 +208,7 @@ Examples:
 * `edit 2 n/Betty Chan t/` Edits the name of the 2nd tutee to be `Betty Chan` and clears all existing tags.
 
 <div style="page-break-after: always;"></div>
+
 #### Finding tutee by fields : `find`
 
 Filters the tutee list to display matches according to keywords.
@@ -238,6 +241,7 @@ Shows the full list of tutees stored.
 Format: `list`
 
 <div style="page-break-after: always;"></div>
+
 #### Get tutee's information : `get`
 
 Gets the details of a specified tutee from the tutee list.
@@ -254,6 +258,7 @@ Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the tutee list.
 
 <div style="page-break-after: always;"></div>
+
 ### Managing Remarks
 
 #### Adding a remark to a tutee: `remark`
@@ -300,6 +305,7 @@ Retrieves the user's schedule of lessons.
 Format: `schedule`
 
 <div style="page-break-after: always;"></div>
+
 #### Adding a lesson to a tutee : `addlesson`
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
@@ -318,7 +324,7 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * `START_TIME` and `END_TIME` should be within the same day.
 * `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 * `HOURLY_RATE` should not have a fee greater than `$1000`.
-* If the added lesson conflicts with an existing lesson belonging to any tutee, Track-O feedbacks that there is a schedule conflict, and re-displays the information of the lesson that the user inputs.
+* The lesson to be added must not clash with any of the lessons in the user's schedule.
 
 Examples:
 * `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
@@ -326,6 +332,7 @@ Examples:
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
 
 <div style="page-break-after: always;"></div>
+
 #### Deleting a lesson to a tutee : `deletelesson`
 
 Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
@@ -365,6 +372,7 @@ Examples:
 * `payment 1`
 
 <div style="page-break-after: always;"></div>
+
 #### To add a specified lesson's fees to a specified tutee: `… lesson`
 
 Format: `payment INDEX lesson/LESSON_INDEX`
@@ -381,6 +389,7 @@ Examples:
 * `payment 1 lesson/2`
 
 <div style="page-break-after: always;"></div>
+
 #### To edit a specified tutee's payment amount: `… amount`
 
 Format: `payment INDEX amount/AMOUNT`
@@ -398,6 +407,7 @@ Examples:
 * `payment 2 amount/100`
 
 <div style="page-break-after: always;"></div>
+
 #### To set a specified tutee's payment due date: `… by`
 
 Format: `payment INDEX by/DUE_DATE`
@@ -414,6 +424,7 @@ Examples:
 * `payment 2 by/01-01-2022`
 
 <div style="page-break-after: always;"></div>
+
 #### To receive a tutee's payment (and set a next payment due date): `… receive`
 
 Format: `payment INDEX receive/[DUE_DATE]`
@@ -432,6 +443,7 @@ Examples:
 * `payment 2 receive/01-01-2022`
 
 <div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
 Clears the tutee list and the user's schedule.
@@ -448,6 +460,7 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -464,14 +477,19 @@ Format: `exit`
 It is just a visual difference. Both applications have the same functionalities otherwise.
 
 <div style="page-break-after: always;"></div>
+
 **Q**: What are tags used for? <br>
 **A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
+
+**Q**: What does it mean by a lesson clashing with other lessons under the section on [adding a lesson to a tutee](#adding-a-lesson-to-a-tutee--addlesson)? Why is it not allowed?<br>
+**A**: This means that the lesson is occurring at the same day and the same time as other lessons. This is not allowed as it is not feasible for a tutor to have two or more ongoing lessons at the same time.
 
 **Q**: Why doesn't pressing `F1` open the Help menu on my Mac?<br>
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 ## Troubleshooting
 
 ### Installing Java 11
@@ -519,6 +537,7 @@ Refer to the following steps to get started using Track-O:
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 ## Command summary
 
 Action | Format, Examples
