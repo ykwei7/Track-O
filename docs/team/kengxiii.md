@@ -35,6 +35,7 @@ Given below are my contributions to the project.
   * Credits: *-*
 
 <div style="page-break-after: always;"></div>
+
 * **Project management**:
   * Managed the deadline and closure of milestones v1.3 - v1.3b (2 milestones) on GitHub.
   * Set up the [About-Us](https://ay2122s1-cs2103t-f12-3.github.io/tp/AboutUs.html) page and took pictures 
