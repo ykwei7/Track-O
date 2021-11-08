@@ -28,7 +28,7 @@ Given below are my contributions to the project.
   * Credits: *-*
 
 * **New Feature**: Added the ability to delete lessons from a tutee.
-  * What it does: the `deletelesson` command identifies the `lesson` to be deleted and removes it from the user's schedule
+  * What it does: the `DeleteLessonCommand`  identifies the `lesson` to be deleted and removes it from the user's schedule
   as well as the `lessonlist` of the `tutee`.
   * Justification: Track-O supports adding `lesson` to individual `tutee`. If the tutee decides to quit the tuition lesson 
   permanently, the user has the ability to free up his schedule and remove the lesson.
@@ -40,8 +40,8 @@ Given below are my contributions to the project.
   * Set up the [About-Us](https://ay2122s1-cs2103t-f12-3.github.io/tp/AboutUs.html) page and took pictures 
 used for the profile of each team member.
 
-* **Enhancements to existing features**: Modified the `find` command to work like a filter.
-  * What it does: `Find` command supports keyword search for `name`, `level`, `subjects` and `overdue` status.
+* **Enhancements to existing features**: Modified the `FindCommand` to work like a filter.
+  * What it does: `FindCommand` supports keyword search for `name`, `level`, `subjects` and `overdue` status.
   * Justification: The previous `find` function returns matched `tutee` whose name fulfils any of the keyword supplied.
     However, we felt that the feature is not very helpful for tutors if we wanted to extend it to support `level`,
     `subject` and `overdue` status as well.<br>
@@ -51,7 +51,7 @@ used for the profile of each team member.
     Hence, we modified the implementation to work just like a filter placed sequentially: a matched tutee has to pass all
     the filters to be returned as a matched tutee.
   * Highlights: This enhancement did not affect existing commands and commands to be added in future, but the old
-    test cases using the old implementation had to be modified to align with our new design of the `find` command.
+    test cases using the old implementation had to be modified to align with our new design of the `FindCommand`.
   * Credits: *-*
 
 * **Documentation**:
