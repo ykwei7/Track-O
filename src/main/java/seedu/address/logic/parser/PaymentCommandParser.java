@@ -78,7 +78,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             String userInput = argMultimap.getValue(PREFIX_PAYMENT_DATE).get();
             LocalDate paymentPayByDateToSet = ParserUtil.parsePayByDate(userInput);
             if (paymentPayByDateToSet == null) {
-                throw new ParseException(Payment.DATE_CONSTRAINTS);
+                throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
             }
             return new PaymentSetDateCommand(index, paymentPayByDateToSet);
         }

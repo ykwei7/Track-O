@@ -31,16 +31,16 @@ Given below are my contributions to the project.
   * Highlights: This enhancement did not affect existing commands and commands to be added in the future, but did affect code coverage which required the creation of a `TuteeCardTest` class. Most of the changes were applied to .fxml and .css files which were mostly independent from the logic of the application.
   * Credits: *-*
 
-  * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=atyhamos&tabRepo=AY2122S1-CS2103T-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+ * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=atyhamos&tabRepo=AY2122S1-CS2103T-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
-  * **Project management**:
-    * Managed releases `v1.3` and `v1.3.1` (2 releases) on GitHub
+ * **Project management**:
+   * Managed releases `v1.3` and `v1.3.1` (2 releases) on GitHub
 
-  * **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull request [\#36](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/36))
-    * Added test cases for `TuteeCard` to improve code coverage.
-      * Created `TuteeCardTest` to improve code coverage and testing for the `TuteeCard` class. Difficulties arose as testing the `TuteeCard` class required JavaFX toolkit to be initialised, but a workaround was used after researching on the Internet.
-      * Credits: *https://stackoverflow.com/a/53760312*
+ * **Enhancements to existing features**:
+   * Updated the GUI color scheme (Pull request [\#36](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/36))
+   * Added test cases for `TuteeCard` to improve code coverage.
+     * Created `TuteeCardTest` to improve code coverage and testing for the `TuteeCard` class. Difficulties arose as testing the `TuteeCard` class required JavaFX toolkit to be initialised, but a workaround was used after researching on the Internet.
+     * Credits: *https://stackoverflow.com/a/53760312*
 
   * **Documentation**:
     * User Guide:
@@ -63,7 +63,7 @@ Given below are my contributions to the project.
   [\#88](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/88),
   [\#90](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/90),
   [\#163](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/163).
-  
+
   * Designed team's application icon:
     * For Application tray and window: <br> <img width="20%" alt="Application tray" src="../../src/main/resources/images/tracko_logo.png"/>
     * For User Guide:<br><img width="20%" alt="For website" src="../images/tracko_logo_docs.png"/>
