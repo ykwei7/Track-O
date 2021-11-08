@@ -146,7 +146,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -181,82 +181,155 @@ of the second tutee found on the list. The information to be listed is based on
 
 ### Payment tracking feature
 
-The payment tracking feature is facilitated by `Payment`, `PaymentCommand`[Proposed]
-and `PaymentCommandParser`[Proposed].
+`Payment` keeps track of the payment details of the tutee, such as the amount of fees incurred, the payment due date and the payment history.
 
-`Payment` contains:
+#### Rationale
+
+A tutor may miscalculate fees, forget payment due dates, or have too many tutees to keep track of their payment information manually.
+
+#### Current Implementation
+
+The payment tracking feature is facilitated by `Payment`, `PaymentCommandParser`, and respective payment-related commands.
+
+
+`Payment` contains the following attributes:
 * `value`  — the amount of fees incurred by the Tutee since the last payment date
 * `payByDate`  — the date which the Tutee has to pay the `value` by
 * `paymentHistory`  — a list of dates which the Tutee previously paid on
 * `isOverdue` — a boolean flag which denotes if the payment is overdue
 
-Parsing the user's input through `PaymentCommand`, the user may:
-* `Payment#addPayment(Lesson, int)`  — Adds the cost of `Lesson` to total fees incurred, `int` times
-* `Payment#editPayment(float)`  — Updates the total fees incurred to the specified `float` amount
-* `Payment#setPayByDate(LocalDate)`  — Updates the pay-by date for the Tutee to the specified `LocalDate`
-* `Payment#receivePayment()`  — Resets the Tutee's incurred fees and updates their payment history
+Parsing the user's input through `PaymentCommandParser`, the user may execute any one of the following payment-related commands:
+* `PaymentCommand`  — Views all the payment details of the specified tutee
+* `PaymentAddCommand`  — Adds the cost of the lesson's fees to the tutee's current payment amount due
+* `PaymentSetAmountCommand`  — Sets the payment amount due for the tutee to the specified amount
+* `PaymentSetDateCommand`  — Sets the pay-by date for the tutee to the specified date
+* `PaymentReceiveCommand`  — Resets the tutee's incurred fees and pay-by-date, and updates their payment history
 
-[Proposed] Given below is an example scenario of how payments may be tracked.
+Unlike how `TrackOParser` parses input to return lower-level parsers like `AddCommandParser` which then creates an `AddCommand` only, 
+`PaymentCommandParser` parses input to return any one of the payment-related commands as described in the simplified Class diagram below.
+
+![](images/PaymentCommandsClassDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** All the commands in the above diagram inherit from the abstract Command class, but it is omitted from the diagram for simplicity.
+
+</div>
+
+The following steps showcase how a tutee's payment details are managed by the user.
 
 Step 1. The user adds a new `Tutee` John to Track-O and the `Payment` object is initialized with default values.
 
-![PaymentTracking1](images/PaymentTracking1.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram1" src="images/PaymentTrackingObjectDiagram1.png"/>
+</p>
 
-Step 2. After adding lessons to John, the user executes "payment 1 add/2 l/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` set.
+Step 2. After adding lessons to John, the user executes "payment 1 lesson/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` list.
 
-![PaymentTracking2](images/PaymentTracking2.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram2" src="images/PaymentTrackingObjectDiagram2.png"/>
+</p>
 
-Step 3. The user executes "payment 1 edit/180" after accidentally overcharging fees previously.
+Step 3. The user executes "payment 1 amount/90" after accidentally overcharging fees previously.
 
-![PaymentTracking3](images/PaymentTracking3.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram3" src="images/PaymentTrackingObjectDiagram3.png"/>
+</p>
 
-Step 4. The user executes "payment 1 by/25-10-2021", updating the `Payment#payByDate` for John.
+Step 4. The user executes "payment 1 by/01-01-2022", updating the `Payment#payByDate` for John.
 
-![PaymentTracking4](images/PaymentTracking4.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram4" src="images/PaymentTrackingObjectDiagram4.png"/>
+</p>
 
 Step 5. In the event that the current date passes the `Payment#payByDate`, the `Payment#isOverdue` flag will turn `true`.
 
-![PaymentTracking5](images/PaymentTracking5.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram5" src="images/PaymentTrackingObjectDiagram5.png"/>
+</p>
 
 Step 6. The user executes `payment 1 receive` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
 
-![PaymentTracking6](images/PaymentTracking6.png)
+<p align="center">
+    <img alt="PaymentTrackingObjectDiagram6" src="images/PaymentTrackingObjectDiagram6.png"/>
+</p>
 
+#### Design considerations
 
-The following sequence diagram shows how the add payment operation works, which is similar to how the other payment functions work as well:
+**Aspect: How lesson fees are added to payment amounts**
 
-![PaymentSequenceDiagram](images/PaymentSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+* **Option 1 (current choice):** Add a tutee's lesson's cost to their current payment amount due.
+    * Pros: Easy to implement and command would be short.
+    * Pros: Would be commonly used to increment tutee's payments directly after a lesson.
+    * Cons: Adding multiples of a lesson's cost requires multiple copies of the same command (i.e adding 3 lesson's worth of fees at once).
 
+* **Option 2:** Add a tutee's lesson's cost multiplied by an integer parameter to their current payment amount due
+    * Pros: The tutor can easily add multiples of a lesson's cost to a tutee.
+    * Cons: The additional integer parameter would require another layer of parsing and validation checking.
+    * Cons: Command would be more lengthy as it requires 3 keywords to execute (payment, lesson, integer).
 
-### Schedule
+**Aspect: How payment due dates are managed**
 
-`Schedule` helps to list the weekly lessons of the tutor.
+* **Option 1 (current choice):** Set a specified payment due date manually for a tutee.
+    * Pros: Gives the user the choice to set a payment due date, as not all tutees may require tracking of payments if they pay immediately after a lesson.
+    * Cons: Requires more effort for the user to set payment due dates for every tutee, if they require so.
+
+* **Option 2:** Set the payment due date exactly 1 week from the date the tutee last paid.
+    * Pros: The tutor need not manually set due dates if the tutees are to pay weekly.
+    * Cons: Different tutors collect payments at different times (i.e monthly, biweekly).
+    * Cons: Lessons may not occur every week, so the payment due date is subject to manual change quite often, making its automatic nature redundant.
+
+### Lesson management
 
 #### Rationale
 
+A tutor may teach various subjects to various tutees at different times. Hence, it might be difficult to keep track of this information manually. Our lesson management feature aims to provide easy tracking of the lessons taught under each tutee, as well as a quick overview of the tutor’s schedule.
+
+The lesson management feature is facilitated by `Lesson`, `Schedule`, `AddLessonCommand` and `DeleteLessonCommand`.
+
+#### Lesson
+
+##### Current Implementation
+
+`Lesson` contains:
+* `subject`  — the subject of the lesson
+* `time`  — the time the lesson takes place, which includes the day of week of the lesson, as well as its start time and end time
+* `hourlyRate`  — the cost per hour of the lesson
+* `cost`  — the total cost of the lesson, derived from the product of the lesson duration and the hourly rate of the lesson
+
+![Lessons with overlapping time slots](images/equal_lessons.png)
+
+*Figure: `Lesson`s labelled as **A**, **B** and **C** that take place on Friday at different times.*
+
+When comparing between two lessons:
+- The two lessons are considered equal when both lessons have the same day of week and they have overlapping time slots. In the figure above, lesson **A** is equal to lesson **B** as they both occur on a Friday and have an overlapping time slot between 1:30pm and 2pm. Similarly, lesson **A** is equal to lesson **C** as they both occur on a Friday and have an overlapping time slot between 2pm and 2:30pm.
+- One lesson is considered less than (i.e. before or earlier than) the other lesson when the lesson occurs on a day that is earlier than the other. If both lessons occur on the same day, the lesson that is earlier is the one that has a start time earlier than the other, provided that both lessons do not have overlapping time slots. In the figure above, lesson **B** starts at 1pm while lesson **C** starts at 2pm, and there is no overlapping time slot, hence lesson **B** is earlier than lesson **C**.
+
+#### Schedule
+
+`Schedule` helps to list the weekly lessons of the tutor.
+
+##### Rationale
+
 A tutor may be teaching many lessons to many tutees. It may be difficult to track their upcoming lessons, hence `Schedule` solves these through listing these upcoming lessons.
 
-#### Current Implementation
+##### Current Implementation
 
-The `Schedule` class consists of a `TreeMap<Lesson, String>` that stores a set of lessons that is sorted by day of occurrence and start time.
+The `Schedule` class consists of a `TreeMap<Lesson, String>` that stores a mapping of lessons that are sorted by day of occurrence and start time, to the name of the tutee involved in the corresponding lesson.
 
-On the start-up of Track-O, before the tutor inputs any commands, the tutee list is iterated through and each `Lesson` of each tutee, along with their name, is added to the `TreeMap<Lesson, String>` set of lessons.
+On the start-up of Track-O, before the tutor inputs any commands, the tutee list is iterated through and each `Lesson` of each tutee, along with their name, is added to the `TreeMap<Lesson, String>` map of lessons.
 
 ![ScheduleClassDiagram](images/ScheduleClassDiagram.png)
 
 *Figure: Structure of `Schedule`*
 
-The `TreeMap<Lesson, String>` set of lessons will be updated after every execution of commands that modify a tutee's lessons or name. The activity diagram below shows how `Schedule` is involved when an `addlesson` command is executed.
+The `TreeMap<Lesson, String>` map of lessons will be updated after every execution of commands that modify a tutee's lessons or name.
 
-![AddLessonCommandActivityDiagram](images/AddLessonCommandActivityDiagram.png)
+When adding a lesson to the `Schedule`, the private `Schedule#isClash` method will be invoked on the lesson to check if the lesson is in the `TreeMap<Lesson, String>` map. This is done via the `Lesson#equals` method. If the lesson is in the `TreeMap<Lesson, String>` map, a `ScheduleClashException` will be thrown. This helps to enforce the constraint that the tutor’s schedule should not have any clashes in lesson time.
 
-*Figure: Steps involved in adding a lesson*
+Consequently, it also means that if the tutor manually adds in lessons to `tracko.json` stored under the `data/` folder such that there are clashes in the tutor's schedule, a `ScheduleClashException` will be thrown on start-up. This exception is handled by wiping out the existing data and starting with an empty tutee list and an empty schedule.
 
 The tutor's schedule can be accessed via the `schedule` command. The sorted lessons will be displayed.
 
-#### Design considerations:
+##### Design considerations:
 
 **Aspect: How the schedule is to be stored**
 
@@ -267,6 +340,32 @@ The tutor's schedule can be accessed via the `schedule` command. The sorted less
 * **Option 2:** Retrieves the schedule from another JSON file (e.g: `schedule.json`)
     * Pros: The tutor can view their schedule directly on their hard disk without starting up Track-O.
     * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out.
+
+#### AddLessonCommand
+
+`AddLessonCommand` is responsible for creating a `Lesson`, and inserting it into the specified tutee’s list of lessons as well as the tutor’s schedule.
+
+The following activity diagram summarises the steps involved when `AddLessonCommand` is executed.
+
+![AddLessonCommandActivityDiagram](images/AddLessonCommandActivityDiagram.png)
+
+*Figure: Steps involved in adding a lesson*
+
+Let us consider a scenario to illustrate how `AddLessonCommand` works with `Schedule`:
+
+Suppose there exists two `Tutee` objects in the `TuteeList`, named Alice and Bob. Alice currently has a lesson on Friday 3pm to 5pm, while Bob has no lessons. The figure below illustrates this.
+
+![AddLessonCommandObjectDiagram1](images/AddLessonCommandObjectDiagram1.png)
+
+*Figure: Initial object diagram containing Alice, Bob, Alice's lessons and the tutor's schedule*
+
+When the tutor attempts to add a `Lesson` that occurs on Friday 2pm to 4pm, the `Schedule#isClash` method is invoked on the `Lesson` and returns true. This is because the `Lesson` is considered to be equal to Alice’s lesson due to the overlapping time. Thus, a `ScheduleClashException` is thrown and the lesson is not added to Bob. The object diagram remains the same as the figure above.
+
+When the tutor attempts to add a `Lesson` that occurs on Friday 6pm to 7pm, the `Schedule#isClash` method is invoked on the `Lesson` and returns false since there is no overlap in time. The `Lesson` is inserted in the `TreeMap<Lesson, String>` map in `Schedule` after Alice’s lesson, because it is greater than (i.e. after) Alice’s lesson. The updated object diagram is shown below.
+
+![AddLessonCommandObjectDiagram2](images/AddLessonCommandObjectDiagram2.png)
+
+*Figure: Object diagram after `AddLessonCommand` is successfully executed*
 
 #### DeleteLesson
 `deleteLesson` command is responsible for removing a lesson that exists in the `tuteelist` as well as a tutee’s `lessons`.
