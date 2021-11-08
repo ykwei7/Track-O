@@ -71,7 +71,7 @@ The GUI of Track-O is divided mainly into 4 sections:
 ## Setting up your first tutee
 
 This section provides a quick guide to adding your first tutee and carrying out your first lesson. For more information
-on each command, it can found under the [Features](#Features) section of our guide. To run a command, simply type the command in the command box and hit the Enter key on your keyboard.
+on each command, it can found under the [Features](#features) section of our guide. To run a command, simply type the command in the command box and hit the Enter key on your keyboard.
 
 ### Before your lesson
 1. Let's clear the existing sample data first. Run `clear` to remove the existing tutees.
