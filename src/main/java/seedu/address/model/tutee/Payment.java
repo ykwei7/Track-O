@@ -145,8 +145,8 @@ public class Payment {
      * @return Whether the given List follows the correct format for payment histories
      */
     public static boolean isValidPaymentHistory(List<String> paymentHistory) {
-        String firstEntry = paymentHistory.get(0);
-        if (!firstEntry.equals("Never")) {
+        String firstPaymentDate = paymentHistory.get(0);
+        if (!firstPaymentDate.equals("Never")) {
             return false;
         } else {
             // Checks if all the entries are valid payment due dates
