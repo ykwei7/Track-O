@@ -205,8 +205,8 @@ listing this additional information when necessary.
 
 The current implementation uses indexing to identify
 the tutee selected. For instance, `get 2` will list the information
-of the second tutee found on the list. The information to be listed is based on
-`Tutee#toString()` which contains additional information on fields such as `remark` and `lesson`.
+of the second tutee found on the list. The information to be listed is based on the
+string representation of a tutee which contains additional information on fields such as `remark` and `lesson`.
 
 #### Design considerations:
 
