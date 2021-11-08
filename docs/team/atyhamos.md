@@ -65,6 +65,6 @@ Given below are my contributions to the project.
   [\#163](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/163).
 
   * Designed team's application icon:
-    * For Application tray and window: <br><img width="20%" alt="Application tray" src="../../src/main/resources/images/tracko_logo.png"/>
+    * For Application tray and window: <br><img width="20%" alt="Application tray" src="../images/tracko_logo.png"/>
     * For User Guide:<br><img width="20%" alt="For website" src="../images/tracko_logo_docs.png"/>
 
