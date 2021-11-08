@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 <p align="center">
-    <img src="images/tracko_logo_docs.png" width="90%"/>
+    <img src="images/tracko_logo_docs.png" width="70%"/>
 </p>
 
 Track-O is a **desktop app for private tutors to manage their tutees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Track-O lets you track an assortment of data, from payment details to home addresses to lesson timings. You can easily access the many functions of Track-O using simple commands, such as add and get. Hop over to our Quick Start section to get started.
@@ -141,6 +141,10 @@ e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple ke
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
+
+<p align="center">
+    <img src="help_ug.png" width="85%"/>
+</p>
 
 Format: `help`
 
@@ -440,6 +444,16 @@ Format: `exit`
 **Q**: What are tags used for? <br>
 **A**: Tags can be used to indicate important details of the tutee. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
 
+**Q**: Why does my application look slightly different?<br>
+**A**: The screenshots in this User Guide are from an application running on macOS. If you are using Windows, your application would look something like this instead:
+
+<img src="windows_ug.png" width="85%"/>
+
+It is just a visual difference. Both applications have the same functionalities otherwise.
+
+**Q**: Why doesn't pressing `F1` open the Help menu on my Mac?<br>
+**A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
@@ -470,7 +484,7 @@ For macOS users, you may receive an error similar to the one below when double-c
 </p>
  
 Refer to the following steps to get started using Track-O:
-1. Click on the **OK** to close the pop-up window.
+1. Click on the "OK" to close the pop-up window.
 2. Run **Spotlight** by pressing the Command key and Space Bar at the same time.
 3. Type "Security & Privacy" and hit Enter. You should see a window similar to the one below:
 
