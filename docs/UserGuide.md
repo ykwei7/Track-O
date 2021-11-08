@@ -171,7 +171,7 @@ Examples:
 
 Deletes the specified tutee from our list of tutees.
 
-![](delete_ug.png)
+<img src="delete_ug.png" width="95%"/>
 
 Format: `delete INDEX`
 
@@ -242,7 +242,7 @@ Format: `list`
 
 Gets the details of a specified tutee from the tutee list.
 
-![](get_ug.png)
+<img src="get_ug.png" width="95%"/>
 
 Format: `get INDEX`
 
