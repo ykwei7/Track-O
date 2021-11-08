@@ -35,8 +35,8 @@ Given below are my contributions to the project.
   * Credits: *-*
 
 <div style="page-break-after: always;"></div>
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=KengXIII&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&zA=KengXIII&zR=AY2122S1-CS2103T-F12-3%2Ftp%5Bmaster%5D&zACS=137.52941176470588&zS=2021-09-17&zFS=KengXIII&zU=2021-11-08&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=KengXIII&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&zA=KengXIII&zR=AY2122S1-CS2103T-F12-3%2Ftp%5Bmaster%5D&zACS=137.52941176470588&zS=2021-09-17&zFS=KengXIII&zU=2021-11-08&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 * **Project management**:
   * Managed the deadline and closure of milestones v1.3 - v1.3b (2 milestones) on GitHub.
