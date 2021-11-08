@@ -789,8 +789,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a tutee
 
 1. Deleting a tutee while all tutees are being shown
@@ -798,15 +796,26 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
-       Expected: No tutee is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No tutee is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing payment amount
+
+1. Manually editing a tutee's payment amount
+
+    1. Prerequisites: A tutee is already initialized with the `add` command. List all tutees using the `list` command. At least one tutee is in the list.
+   
+    2. Test case: `payment 1 amount/50`<br>
+       Expected: Tutee's payment details are changed to `$50.00`. Details of the tutee's new payment details are shown in the status message.
+    3. Test case: `payment 1 amount/`<br>
+       Expected: Tutee's payment details are not changed. Error details shown in the status message.
+    4. Other incorrect payment amount commands to try: `payment 1 amount/a`, `payment 1 amount/-30`, `payment 1 amount/500000`, `payment 1 amount/30.12`
+       Expected: Similar to previous.
 
 ### Saving data
 

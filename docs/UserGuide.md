@@ -13,7 +13,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
@@ -32,43 +32,42 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
 
-
-
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## About
 
 This section explains the terms used in the user guide.
 
 If you are an intermediate user, you can hop over to the [Features](#features) section for the details of each command.
 
-If you are an advanced user, you can see all the commands at a glance at the [Command Summary](#command-summary) section.
+If you are an advanced user, you can view all the commands at a glance at the [Command Summary](#command-summary) section.
 
 ### Glossary
 
 Terms | Explanation
 --------|------------------
 command | The text that you enter in the command box. Different commands have different formats.
-prefix | A word or letter that ends with `/`. It is a short-handed notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+prefix | A word or letter that ends with `/`. It is a shorthand notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
 parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
-integer | A number that has strictly no decimal places.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
+integer | A number that has no decimal places or fractions.
 level | Refers to the education level of a student in the context of Singapore's education system.
 
+<div style="page-break-after: always;"></div>
 ### Application layout
 
 ![gui_layout.png](gui_layout.png)
 
 The GUI of Track-O is divided mainly into 4 sections:
-- `Menu Bar`: Navigation buttons that you can click to exit Track-O or open up a window containing a link to this User Guide. 
+- `Menu Bar`: Navigation buttons that you can click to exit Track-O or open up a `help` window containing a link to this User Guide. 
 - `Tutee list`: A scrollable panel that shows a numbered list of your tutees.
   - The index number of the tutee list is the number that is assigned to each tutee in the numbered list.
-- `Command box`: A text box where you can type in commands and hit `enter` to execute them.
+- `Command box`: A text box where you can type in commands and hit the Enter key on your keyboard to execute them.
 - `Result panel`: A scrollable panel that shows the result of the command that you have just executed.
   - Note that some commands such as `get` will show a particular tutee's lessons in the form of a numbered list. Similar to the tutee list, the index number of a tutee's lesson refers to the number assigned to each lesson in the numbered list.
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Setting up your first tutee
 
 This section provides a quick guide to adding your first tutee and carrying out your first lesson. For more information
@@ -77,28 +76,29 @@ on each command, it can found under the [Features](#Features) section of our gui
 ### Before your lesson
 1. Let's clear the existing sample data first. Run `clear` to remove the existing tutees.
 2. To add in a new tutee, run `add n/John Tan l/p5 a/246 Hougang Ave sch/Rosyth School p/84567890`.
-This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, living in `246 Hougang Ave` who can be contacted at `84567890`.
+This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, staying at `246 Hougang Ave` whose phone number is `84567890`.
 3. To add a lesson for this tutee, run `addlesson 1 subject/English d/7 s/14:00 e/16:00 rate/30`.
 This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
-4. To state a date to receive payment by, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
+4. To state a payment receive date, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
 the 5th of January 2022.
-5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+5. Run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-<img src="john_ug.png" width="95%"/>
-
+<img src="john_ug.png" width="85%"/>
+<div style="page-break-after: always;"></div>
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
-the rate was `$30` per hour over 2 hours, the final fees adds up to `$60.00`.
+the rate was `$30` per hour over 2 hours, the total adds up to `$60.00`.
 2. To add in any remarks for the lesson, run `remark 1 r/Good Progress!` and this set the comments `Good Progress!`
-under the remarks for John.
+under John's remarks.
 3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00`,
-the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
-4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+removes the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
+4. Run `get 1`. If you performed all the steps correctly, the application should look like this.
 
-<img src="john_2_ug.png" width="95%"/>
+<img src="john_2_ug.png" width="85%"/>
 
+<div style="page-break-after: always;"></div>
 ### Managing your payments
-1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John. 
+1. To view John's payment details, run `payment 1`. This shows us John's existing payment details. 
 2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
 `$100.00`.
 3. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
@@ -106,10 +106,12 @@ This resets the value owed by John to `0` and sets the next date to pay by to `0
 
 ### Managing your lessons
 1. To view your schedule for the week, run `schedule` and this displays your upcoming lessons for the week.
-2. To add in a new lesson to John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
-3. To delete the first lesson from John, run `deletelesson 1 lesson/2`. This will delete the second lesson of John which was the `Math` lesson previously added. 
+2. To add in a new lesson for John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
+3. To delete John's first lesson, run `deletelesson 1 lesson/2`. This will delete John's second lesson which was the `Math` lesson previously added. 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -137,7 +139,7 @@ e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple ke
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
-
+<div style="page-break-after: always;"></div>
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -160,12 +162,11 @@ Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 * `n/NAME` and `[t/TAG]` can only take in alphanumeric characters and spaces.
 * `p/PHONE` should only take in 8-digit phone numbers.
 * `l/LEVEL` should only take in `p1` to `p6`, `s1` to `s5`, `j1` to `j2`.
-* All entries should **not be blank**.
 
 Examples:
 * `add n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link`
 * `add n/Betsy Crowe l/p5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/Northeast region`
-
+<div style="page-break-after: always;"></div>
 #### Deleting a tutee : `delete`
 
 Deletes the specified tutee from our list of tutees.
@@ -180,7 +181,7 @@ Format: `delete INDEX`
 
 Examples:
 * `delete 2` deletes the 2nd tutee in the tutee list.
-
+<div style="page-break-after: always;"></div>
 #### Editing a tutee :  `edit`
 
 Edits an existing tutee in the tutee list.
@@ -199,12 +200,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG
 * Existing values will be updated to the input values while all other values without input values remains unchanged.
 * When editing tags, the existing tags of the tutee will be removed i.e adding of tags is not cumulative.
 * You can remove all the tutee’s tags by typing `t/` without specifying any tags after it.
-* All entries should **not be blank**.
 
 Examples:
 * `edit 1 p/91234567 a/345 Bedok North Ave 3` Edits the phone number and address of the 1st tutee to be `91234567` and `345 Bedok North Ave 3` respectively.
 * `edit 2 n/Betty Chan t/` Edits the name of the 2nd tutee to be `Betty Chan` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
 #### Finding tutee by fields : `find`
 
 Filters the tutee list to display matches according to keywords.
@@ -230,13 +231,13 @@ Example:
 * Find all tutees taking `math` and `physics` classes: `find subject/math physics`.
 * Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
 
-
 #### Listing all tutees : `list`
 
 Shows the full list of tutees stored.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
 #### Get tutee's information : `get`
 
 Gets the details of a specified tutee from the tutee list.
@@ -252,6 +253,7 @@ Format: `get INDEX`
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the tutee list.
 
+<div style="page-break-after: always;"></div>
 ### Managing Remarks
 
 #### Adding a remark to a tutee: `remark`
@@ -270,6 +272,7 @@ Format: `remark INDEX r/TEXT`
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
 
+<div style="page-break-after: always;"></div>
 #### Clearing all remarks of a tutee: `clearremark`
 
 Clears all remarks of the specified tutee.
@@ -285,6 +288,7 @@ Format: `clearremark INDEX`
 Examples:
 * `clearremark 1`
 
+<div style="page-break-after: always;"></div>
 ### Managing Lessons
 
 #### Tracking lesson schedule : `schedule`
@@ -295,6 +299,7 @@ Retrieves the user's schedule of lessons.
 
 Format: `schedule`
 
+<div style="page-break-after: always;"></div>
 #### Adding a lesson to a tutee : `addlesson`
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
@@ -320,6 +325,7 @@ Examples:
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
 
+<div style="page-break-after: always;"></div>
 #### Deleting a lesson to a tutee : `deletelesson`
 
 Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
@@ -339,6 +345,7 @@ Examples:
 * Deleting **lesson 3** from **tutee 1**:
   `deletelesson 1 lesson/3`
 
+<div style="page-break-after: always;"></div>
 ### Tracking Payments
 
 Entering `payment` shows you all the payment-related commands available.<br>
@@ -357,6 +364,7 @@ Format: `payment INDEX`
 Examples:
 * `payment 1`
 
+<div style="page-break-after: always;"></div>
 #### To add a specified lesson's fees to a specified tutee:
 
 Format: `payment INDEX lesson/LESSON_INDEX`
@@ -372,6 +380,7 @@ Examples:
 * `payment 1 lesson/1`
 * `payment 1 lesson/2`
 
+<div style="page-break-after: always;"></div>
 #### To edit a specified tutee's payment amount:
 
 Format: `payment INDEX amount/AMOUNT`
@@ -388,6 +397,7 @@ Examples:
 * `payment 1 amount/80.50`
 * `payment 2 amount/100`
 
+<div style="page-break-after: always;"></div>
 #### To set a specified tutee's payment due date:
 
 Format: `payment INDEX by/DUE_DATE`
@@ -403,6 +413,7 @@ Examples:
 * `payment 1 by/25-12-2021`
 * `payment 2 by/01-01-2022`
 
+<div style="page-break-after: always;"></div>
 #### To receive a tutee's payment (and set a next payment due date):
 
 Format: `payment INDEX receive/[DUE_DATE]`
@@ -420,6 +431,7 @@ Examples:
 * `payment 1 receive/`
 * `payment 2 receive/01-01-2022`
 
+<div style="page-break-after: always;"></div>
 ### Clearing all entries : `clear`
 
 Clears the tutee list and the user's schedule.
@@ -435,15 +447,19 @@ Exits from the application.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder (`tracko.json`).
+
+**Q**: I opened my application and all my data is gone! What do I do?<br>
+**A**: The data is most likely corrupted. If you are familiar with how to edit `json` files, you may open your `tracko.json` file to make the necessary edits. Otherwise, you would have to delete the existing `tracko.json` file and start afresh.
 
 **Q**: What are tags used for? <br>
-**A**: Tags can be used to indicate important details of the tutee. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
+**A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
 
+<div style="page-break-after: always;"></div>
 **Q**: Why does my application look slightly different?<br>
 **A**: The screenshots in this User Guide are from an application running on macOS. If you are using Windows, your application would look something like this instead:
 
@@ -455,7 +471,7 @@ It is just a visual difference. Both applications have the same functionalities 
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Troubleshooting
 
 ### Installing Java 11
@@ -502,8 +518,7 @@ Refer to the following steps to get started using Track-O:
 
 
 --------------------------------------------------------------------------------------------------------------------
-
-
+<div style="page-break-after: always;"></div>
 ## Command summary
 
 Action | Format, Examples
