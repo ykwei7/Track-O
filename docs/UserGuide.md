@@ -283,6 +283,14 @@ Examples:
 
 ### Managing Lessons
 
+#### Tracking lesson schedule : `schedule`
+
+Retrieves the user's schedule of lessons.
+
+<img src="schedule_ug.png" width="95%"/>
+
+Format: `schedule`
+
 #### Adding a lesson to a tutee : `addlesson`
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
@@ -326,14 +334,6 @@ Examples:
   `deletelesson 3 lesson/2`
 * Deleting **lesson 3** from **tutee 1**:
   `deletelesson 1 lesson/3`
-
-#### Tracking lesson schedule : `schedule`
-
-Retrieves the user's schedule of lessons.
-
-<img src="schedule_ug.png" width="95%"/>
-
-Format: `schedule`
 
 ### Tracking Payments
 
