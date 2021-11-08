@@ -115,6 +115,8 @@ This resets the value owed by John to `0` and sets the next date to pay by to `0
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -438,6 +440,8 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -457,6 +461,8 @@ It is just a visual difference. Both applications have the same functionalities 
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Troubleshooting
 
@@ -505,6 +511,7 @@ Refer to the following steps to get started using Track-O:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
