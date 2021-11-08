@@ -210,7 +210,7 @@ Unlike how `TrackOParser` parses input to return lower-level parsers like `AddCo
 
 ![](images/PaymentCommandsClassDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** All the commands in the above diagram inherit from the abstract Command class, but is omitted for simplicity.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** All the commands in the above diagram inherit from the abstract Command class, but it is omitted from the diagram for simplicity.
 
 </div>
 
@@ -219,37 +219,37 @@ The following steps showcase how a tutee's payment details are managed by the us
 Step 1. The user adds a new `Tutee` John to Track-O and the `Payment` object is initialized with default values.
 
 <p align="center">
-    <img alt="PaymentTracking1" src="images/PaymentTrackingObjectDiagram1.png"/>
+    <img alt="PaymentTrackingObjectDiagram1" src="images/PaymentTrackingObjectDiagram1.png"/>
 </p>
 
 Step 2. After adding lessons to John, the user executes "payment 1 lesson/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` list.
 
 <p align="center">
-    <img alt="PaymentTracking2" src="images/PaymentTrackingObjectDiagram2.png"/>
+    <img alt="PaymentTrackingObjectDiagram2" src="images/PaymentTrackingObjectDiagram2.png"/>
 </p>
 
 Step 3. The user executes "payment 1 amount/90" after accidentally overcharging fees previously.
 
 <p align="center">
-    <img alt="PaymentTracking3" src="images/PaymentTrackingObjectDiagram3.png"/>
+    <img alt="PaymentTrackingObjectDiagram3" src="images/PaymentTrackingObjectDiagram3.png"/>
 </p>
 
 Step 4. The user executes "payment 1 by/01-01-2022", updating the `Payment#payByDate` for John.
 
 <p align="center">
-    <img alt="PaymentTracking4" src="images/PaymentTrackingObjectDiagram4.png"/>
+    <img alt="PaymentTrackingObjectDiagram4" src="images/PaymentTrackingObjectDiagram4.png"/>
 </p>
 
 Step 5. In the event that the current date passes the `Payment#payByDate`, the `Payment#isOverdue` flag will turn `true`.
 
 <p align="center">
-    <img alt="PaymentTracking5" src="images/PaymentTrackingObjectDiagram5.png"/>
+    <img alt="PaymentTrackingObjectDiagram5" src="images/PaymentTrackingObjectDiagram5.png"/>
 </p>
 
 Step 6. The user executes `payment 1 receive` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
 
 <p align="center">
-    <img alt="PaymentTracking6" src="images/PaymentTrackingObjectDiagram6.png"/>
+    <img alt="PaymentTrackingObjectDiagram6" src="images/PaymentTrackingObjectDiagram6.png"/>
 </p>
 
 #### Design considerations
