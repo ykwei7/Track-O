@@ -43,10 +43,10 @@ used for the profile of each team member.
   * What it does: `Find` command supports keyword search for `name`, `level`, `subjects` and `overdue` status.
   * Justification: The previous `find` function returns matched `tutee` whose name fulfils any of the keyword supplied.
     However, we felt that the feature is not very helpful for tutors if we wanted to extend it to support `level`,
-    `subject` and `overdue` status as well.<br><br>
+    `subject` and `overdue` status as well.<br>
     For example, if the tutor wants to search up all secondary 4 students taking math classes, using
     `find l/p4 subject/math` will return tutees who are **either** primary 4 or tutee's taking math classes.
-    The tutor would then have to sieve through the results once again to find the tutee of interest.<br><br>
+    The tutor would then have to sieve through the results once again to find the tutee of interest.<br>
     Hence, we modified the implementation to work just like a filter placed sequentially: a matched tutee has to pass all
     the filters to be returned as a matched tutee.
   * Highlights: This enhancement did not affect existing commands and commands to be added in future, but the old
