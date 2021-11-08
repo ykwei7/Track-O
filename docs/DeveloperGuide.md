@@ -146,7 +146,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -189,57 +189,67 @@ A tutor may miscalculate fees, forget payment due dates, or have too many tutees
 
 #### Current Implementation
 
-The payment tracking feature is facilitated by `Payment`, `PaymentCommandParser`, `PaymentAddCommand` `PaymentSetAmountCommand`, `PaymentSetDateCommand` and `PaymentReceiveCommand`.
+The payment tracking feature is facilitated by `Payment`, `PaymentCommandParser`, and respective payment-related commands.
 
-`Payment` contains:
+
+`Payment` contains the following attributes:
 * `value`  — the amount of fees incurred by the Tutee since the last payment date
 * `payByDate`  — the date which the Tutee has to pay the `value` by
 * `paymentHistory`  — a list of dates which the Tutee previously paid on
 * `isOverdue` — a boolean flag which denotes if the payment is overdue
 
-Parsing the user's input through `PaymentCommandParser`, the user may generate any one of the following commands:
+Parsing the user's input through `PaymentCommandParser`, the user may execute any one of the following payment-related commands:
+* `PaymentCommand`  — Views all the payment details of the specified tutee
 * `PaymentAddCommand`  — Adds the cost of the lesson's fees to the tutee's current payment amount due
 * `PaymentSetAmountCommand`  — Sets the payment amount due for the tutee to the specified amount
 * `PaymentSetDateCommand`  — Sets the pay-by date for the tutee to the specified date
 * `PaymentReceiveCommand`  — Resets the tutee's incurred fees and pay-by-date, and updates their payment history
 
+Unlike how `TrackOParser` parses input to return lower-level parsers like `AddCommandParser` which then creates an `AddCommand` only, 
+`PaymentCommandParser` parses input to return any one of the payment-related commands as described in the simplified Class diagram below.
+
+![](images/PaymentCommandsClassDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** All the commands in the above diagram inherit from the abstract Command class, but is omitted for simplicity.
+
+</div>
 
 The following steps showcase how a tutee's payment details are managed by the user.
 
 Step 1. The user adds a new `Tutee` John to Track-O and the `Payment` object is initialized with default values.
 
 <p align="center">
-    <img alt="PaymentTracking1" src="images/PaymentTracking1.png"/>
+    <img alt="PaymentTracking1" src="images/PaymentTrackingObjectDiagram1.png"/>
 </p>
 
 Step 2. After adding lessons to John, the user executes "payment 1 lesson/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` list.
 
 <p align="center">
-    <img alt="PaymentTracking2" src="images/PaymentTracking2.png"/>
+    <img alt="PaymentTracking2" src="images/PaymentTrackingObjectDiagram2.png"/>
 </p>
 
 Step 3. The user executes "payment 1 amount/90" after accidentally overcharging fees previously.
 
 <p align="center">
-    <img alt="PaymentTracking3" src="images/PaymentTracking3.png"/>
+    <img alt="PaymentTracking3" src="images/PaymentTrackingObjectDiagram3.png"/>
 </p>
 
 Step 4. The user executes "payment 1 by/01-01-2022", updating the `Payment#payByDate` for John.
 
 <p align="center">
-    <img alt="PaymentTracking4" src="images/PaymentTracking4.png"/>
+    <img alt="PaymentTracking4" src="images/PaymentTrackingObjectDiagram4.png"/>
 </p>
 
 Step 5. In the event that the current date passes the `Payment#payByDate`, the `Payment#isOverdue` flag will turn `true`.
 
 <p align="center">
-    <img alt="PaymentTracking5" src="images/PaymentTracking5.png"/>
+    <img alt="PaymentTracking5" src="images/PaymentTrackingObjectDiagram5.png"/>
 </p>
 
 Step 6. The user executes `payment 1 receive` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
 
 <p align="center">
-    <img alt="PaymentTracking6" src="images/PaymentTracking6.png"/>
+    <img alt="PaymentTracking6" src="images/PaymentTrackingObjectDiagram6.png"/>
 </p>
 
 #### Design considerations

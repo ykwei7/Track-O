@@ -10,13 +10,14 @@ package "Payment tracking" <<rectangle>> {
     class Tutee as "__John:Tutee__"
     class Payment as "__p:Payment__" {
          value = "0.00"
-         payByDate
+         payByDate = null
          paymentHistory = ["Never"]
          isOverdue = false
     }
 }
-Tutee -right-> Payment : > owes
+Tutee -right-> Payment
 
 
 show Payment members
+hide methods
 @end
