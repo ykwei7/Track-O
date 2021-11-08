@@ -83,7 +83,7 @@ the 5th of January 2022.
 5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
 
 <img src="john_ug.png" width="95%"/>
-
+<div style="page-break-after: always;"></div>
 ### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
 the rate was `$30` per hour over 2 hours, the final fees adds up to `$60.00`.
@@ -95,6 +95,7 @@ the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), 
 
 <img src="john_2_ug.png" width="95%"/>
 
+<div style="page-break-after: always;"></div>
 ### Managing your payments
 1. To view the payment details of John, run `payment 1`. This shows us the existing payment details of John. 
 2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
