@@ -39,7 +39,7 @@ public class ParserUtilTest {
     private static final String INVALID_PAYMENT = "5a00";
     private static final String INVALID_PAYMENT_EXCEED_MAXIMUM = "100001";
     private static final String INVALID_PAYMENT_DATE = "abc-123-xyz";
-    private static final String INVALID_PAYMENT_DATE_PAST = "7-11-2021";
+    private static final String INVALID_PAYMENT_DATE_PAST = "07-11-2021";
     private static final String INVALID_OVERDUE = "nope";
     private static final String INVALID_DAY_OF_WEEK_1 = "0";
     private static final String INVALID_DAY_OF_WEEK_2 = "8";
