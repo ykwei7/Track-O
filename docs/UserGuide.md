@@ -81,7 +81,7 @@ This will add in a tutee with the name `John Tan`, a `Primary 5` student from `R
 This will add an `English` lesson from `Sunday 2pm to 4pm` with the rate of `$30` per hour for John.
 4. To state a payment receive date, run `payment 1 by/05-01-2022`. This means that you expect to collect the fees on
 the 5th of January 2022.
-5. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+5. Run `get 1`. If you performed all the steps correctly, the application should look like this.
 
 <img src="john_ug.png" width="85%"/>
 <div style="page-break-after: always;"></div>
@@ -92,7 +92,7 @@ the rate was `$30` per hour over 2 hours, the total adds up to `$60.00`.
 under John's remarks.
 3. If you have collected the fees for this lesson, run `payment 1 receive/` and this resets the payment value to `0.00`,
 removes the pay-by date used in step 4 under [Before your lesson](#before-your-lesson), and updates John's last paid date to today's date.
-4. Now run `get 1`. If you performed all the steps correctly, the application should look like this.
+4. Run `get 1`. If you performed all the steps correctly, the application should look like this.
 
 <img src="john_2_ug.png" width="85%"/>
 
