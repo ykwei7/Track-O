@@ -49,48 +49,15 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
-            if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE,
-                    PREFIX_PAYMENT_RECEIVED_DATE)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        PaymentCommand.MESSAGE_USAGE_ALL));
-            }
-            Index lessonIndex = ParserUtil.parseLessonIndex(argMultimap.getValue(PREFIX_LESSON).get());
-            return new PaymentAddCommand(index, lessonIndex);
+            return parsePaymentAddCmd(index, argMultimap);
+        } else if (argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).isPresent()) {
+            return parsePaymentSetAmountCmd(index, argMultimap);
+        } else if (argMultimap.getValue(PREFIX_PAYMENT_DATE).isPresent()) {
+            return parsePaymentSetDateCmd(index, argMultimap);
+        } else if (argMultimap.getValue(PREFIX_PAYMENT_RECEIVED_DATE).isPresent()) {
+            return parsePaymentReceiveCmd(index, argMultimap);
         }
 
-        if (argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).isPresent()) {
-            if (anyPrefixesPresent(argMultimap, PREFIX_LESSON , PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_RECEIVED_DATE)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        PaymentCommand.MESSAGE_USAGE_ALL));
-            }
-            String paymentValueToSet = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
-            return new PaymentSetAmountCommand(index, paymentValueToSet);
-        }
-
-        if (argMultimap.getValue(PREFIX_PAYMENT_DATE).isPresent()) {
-            if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_LESSON, PREFIX_PAYMENT_RECEIVED_DATE)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        PaymentCommand.MESSAGE_USAGE_ALL));
-            }
-            // Null value for payByDate is disallowed in the constructor for PaymentSetDateCommand
-            String userInput = argMultimap.getValue(PREFIX_PAYMENT_DATE).get();
-            LocalDate paymentPayByDateToSet = ParserUtil.parsePayByDate(userInput);
-            if (paymentPayByDateToSet == null) {
-                throw new ParseException(Payment.DATE_CONSTRAINTS);
-            }
-            return new PaymentSetDateCommand(index, paymentPayByDateToSet);
-        }
-
-        if (argMultimap.getValue(PREFIX_PAYMENT_RECEIVED_DATE).isPresent()) {
-            if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE, PREFIX_LESSON)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        PaymentCommand.MESSAGE_USAGE_ALL));
-            }
-            // Null value for payByDate is allowed here
-            LocalDate paymentPayByDateToSet =
-                    ParserUtil.parsePayByDate(argMultimap.getValue(PREFIX_PAYMENT_RECEIVED_DATE).get());
-            return new PaymentReceiveCommand(index, paymentPayByDateToSet);
-        }
         return new PaymentCommand(index);
     }
 
@@ -100,6 +67,57 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
      */
     private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+
+    private static PaymentAddCommand parsePaymentAddCmd(Index index, ArgumentMultimap argMultimap)
+            throws ParseException {
+        if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE,
+                PREFIX_PAYMENT_RECEIVED_DATE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PaymentCommand.MESSAGE_USAGE_ALL));
+        }
+        Index lessonIndex = ParserUtil.parseLessonIndex(argMultimap.getValue(PREFIX_LESSON).get());
+        return new PaymentAddCommand(index, lessonIndex);
+    }
+
+
+    private static PaymentSetAmountCommand parsePaymentSetAmountCmd(Index index, ArgumentMultimap argMultimap)
+            throws ParseException {
+        if (anyPrefixesPresent(argMultimap, PREFIX_LESSON , PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_RECEIVED_DATE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PaymentCommand.MESSAGE_USAGE_ALL));
+        }
+        String paymentValueToSet = ParserUtil.parsePaymentValue(argMultimap.getValue(PREFIX_PAYMENT_AMOUNT).get());
+        return new PaymentSetAmountCommand(index, paymentValueToSet);
+    }
+
+    private static PaymentSetDateCommand parsePaymentSetDateCmd(Index index, ArgumentMultimap argMultimap)
+            throws ParseException {
+        if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_LESSON, PREFIX_PAYMENT_RECEIVED_DATE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PaymentCommand.MESSAGE_USAGE_ALL));
+        }
+        // Null value for payByDate is disallowed in the constructor for PaymentSetDateCommand
+        String userInput = argMultimap.getValue(PREFIX_PAYMENT_DATE).get();
+        LocalDate paymentPayByDateToSet = ParserUtil.parsePayByDate(userInput);
+        if (paymentPayByDateToSet == null) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS);
+        }
+        return new PaymentSetDateCommand(index, paymentPayByDateToSet);
+    }
+
+
+    private static PaymentReceiveCommand parsePaymentReceiveCmd(Index index, ArgumentMultimap argMultimap)
+            throws ParseException {
+        if (anyPrefixesPresent(argMultimap, PREFIX_PAYMENT_AMOUNT, PREFIX_PAYMENT_DATE, PREFIX_LESSON)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PaymentCommand.MESSAGE_USAGE_ALL));
+        }
+        // Null value for payByDate is allowed here
+        LocalDate paymentPayByDateToSet =
+                ParserUtil.parsePayByDate(argMultimap.getValue(PREFIX_PAYMENT_RECEIVED_DATE).get());
+        return new PaymentReceiveCommand(index, paymentPayByDateToSet);
     }
 
 }
