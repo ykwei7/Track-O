@@ -138,7 +138,7 @@ e.g. `[subject/SUBJECT…]` subject keywords are optional and allows multiple ke
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
-
+<div style="page-break-after: always;"></div>
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -165,7 +165,7 @@ Format: `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…`
 Examples:
 * `add n/John Doe p/93456789 sch/Temasek Jc l/j2 a/135 Rivervale Link`
 * `add n/Betsy Crowe l/p5 a/246 Hougang Ave 6 sch/Rosyth p/84567890 t/Northeast region`
-
+<div style="page-break-after: always;"></div>
 #### Deleting a tutee : `delete`
 
 Deletes the specified tutee from our list of tutees.
@@ -180,7 +180,7 @@ Format: `delete INDEX`
 
 Examples:
 * `delete 2` deletes the 2nd tutee in the tutee list.
-
+<div style="page-break-after: always;"></div>
 #### Editing a tutee :  `edit`
 
 Edits an existing tutee in the tutee list.
@@ -204,6 +204,7 @@ Examples:
 * `edit 1 p/91234567 a/345 Bedok North Ave 3` Edits the phone number and address of the 1st tutee to be `91234567` and `345 Bedok North Ave 3` respectively.
 * `edit 2 n/Betty Chan t/` Edits the name of the 2nd tutee to be `Betty Chan` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
 #### Finding tutee by fields : `find`
 
 Filters the tutee list to display matches according to keywords.
@@ -229,7 +230,7 @@ Example:
 * Find all tutees taking `math` and `physics` classes: `find subject/math physics`.
 * Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
 
-
+<div style="page-break-after: always;"></div>
 #### Listing all tutees : `list`
 
 Shows the full list of tutees stored.
@@ -251,6 +252,7 @@ Format: `get INDEX`
 Examples:
 * `list` followed by `get 2` shows the 2nd tutee in the tutee list.
 
+<div style="page-break-after: always;"></div>
 ### Managing Remarks
 
 #### Adding a remark to a tutee: `remark`
@@ -269,6 +271,7 @@ Format: `remark INDEX r/TEXT`
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
 
+<div style="page-break-after: always;"></div>
 #### Clearing all remarks of a tutee: `clearremark`
 
 Clears all remarks of the specified tutee.
@@ -294,6 +297,7 @@ Retrieves the user's schedule of lessons.
 
 Format: `schedule`
 
+<div style="page-break-after: always;"></div>
 #### Adding a lesson to a tutee : `addlesson`
 
 Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
@@ -319,6 +323,7 @@ Examples:
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
 
+<div style="page-break-after: always;"></div>
 #### Deleting a lesson to a tutee : `deletelesson`
 
 Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
@@ -338,6 +343,7 @@ Examples:
 * Deleting **lesson 3** from **tutee 1**:
   `deletelesson 1 lesson/3`
 
+<div style="page-break-after: always;"></div>
 ### Tracking Payments
 
 Entering `payment` shows you all the payment-related commands available.<br>
@@ -356,6 +362,7 @@ Format: `payment INDEX`
 Examples:
 * `payment 1`
 
+<div style="page-break-after: always;"></div>
 #### To add a specified lesson's fees to a specified tutee:
 
 Format: `payment INDEX lesson/LESSON_INDEX`
@@ -371,6 +378,7 @@ Examples:
 * `payment 1 lesson/1`
 * `payment 1 lesson/2`
 
+<div style="page-break-after: always;"></div>
 #### To edit a specified tutee's payment amount:
 
 Format: `payment INDEX amount/AMOUNT`
@@ -387,6 +395,7 @@ Examples:
 * `payment 1 amount/80.50`
 * `payment 2 amount/100`
 
+<div style="page-break-after: always;"></div>
 #### To set a specified tutee's payment due date:
 
 Format: `payment INDEX by/DUE_DATE`
@@ -402,6 +411,7 @@ Examples:
 * `payment 1 by/25-12-2021`
 * `payment 2 by/01-01-2022`
 
+<div style="page-break-after: always;"></div>
 #### To receive a tutee's payment (and set a next payment due date):
 
 Format: `payment INDEX receive/[DUE_DATE]`
@@ -419,6 +429,7 @@ Examples:
 * `payment 1 receive/`
 * `payment 2 receive/01-01-2022`
 
+<div style="page-break-after: always;"></div>
 ### Clearing all entries : `clear`
 
 Clears the tutee list and the user's schedule.
