@@ -252,8 +252,8 @@ The lesson management feature is facilitated by `Lesson`, `Schedule`, `AddLesson
 *Figure: `Lesson`s labelled as **A**, **B** and **C** that take place on Friday at different times.*
 
 When comparing between two lessons:
-- The two lessons are considered equal when both lessons have the same day of week and they have overlapping time slots. In the figure above, lesson **A** is equal to lesson **B** as well as lesson **C**. 
-- One lesson is considered less than (i.e. before or earlier than) the other lesson when the lesson occurs on a day that is earlier than the other. If both lessons occur on the same day, the lesson that is earlier is the one that has a start time earlier than the other, provided that both lessons do not have overlapping time slots. In the figure above, lesson **B** is earlier than lesson **C**.
+- The two lessons are considered equal when both lessons have the same day of week and they have overlapping time slots. In the figure above, lesson **A** is equal to lesson **B** as they both occur on a Friday and have an overlapping time slot between 1:30pm and 2pm. Similarly, lesson **A** is equal to lesson **C** as they both occur on a Friday and have an overlapping time slot between 2pm and 2:30pm.
+- One lesson is considered less than (i.e. before or earlier than) the other lesson when the lesson occurs on a day that is earlier than the other. If both lessons occur on the same day, the lesson that is earlier is the one that has a start time earlier than the other, provided that both lessons do not have overlapping time slots. In the figure above, lesson **B** starts at 1pm while lesson **C** starts at 2pm, and there is no overlapping time slot, hence lesson **B** is earlier than lesson **C**.
 
 #### Schedule
 
