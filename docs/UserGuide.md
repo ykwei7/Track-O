@@ -230,13 +230,13 @@ Example:
 * Find all tutees taking `math` and `physics` classes: `find subject/math physics`.
 * Find all tutees taking `math` classes with fees overdue: `find subject/math overdue/yes`.
 
-<div style="page-break-after: always;"></div>
 #### Listing all tutees : `list`
 
 Shows the full list of tutees stored.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
 #### Get tutee's information : `get`
 
 Gets the details of a specified tutee from the tutee list.
@@ -287,6 +287,7 @@ Format: `clearremark INDEX`
 Examples:
 * `clearremark 1`
 
+<div style="page-break-after: always;"></div>
 ### Managing Lessons
 
 #### Tracking lesson schedule : `schedule`
