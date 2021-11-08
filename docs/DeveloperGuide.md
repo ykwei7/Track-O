@@ -261,19 +261,19 @@ Step 1. The user adds a new `Tutee` John to Track-O and the `Payment` object is 
     <img alt="PaymentTrackingObjectDiagram1" src="images/PaymentTrackingObjectDiagram1.png"/>
 </p>
 
-Step 2. After adding lessons to John, the user executes "payment 1 lesson/1", where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` list.
+Step 2. After adding lessons to John, the user executes `payment 1 lesson/1`, where John is index `1` in the `Tutee` list, and `lesson1` is index `1` in the `Lesson` list.
 
 <p align="center">
     <img alt="PaymentTrackingObjectDiagram2" src="images/PaymentTrackingObjectDiagram2.png"/>
 </p>
 
-Step 3. The user executes "payment 1 amount/90" after accidentally overcharging fees previously.
+Step 3. The user executes `payment 1 amount/90` after accidentally overcharging fees previously.
 
 <p align="center">
     <img alt="PaymentTrackingObjectDiagram3" src="images/PaymentTrackingObjectDiagram3.png"/>
 </p>
 
-Step 4. The user executes "payment 1 by/01-01-2022", updating the `Payment#payByDate` for John.
+Step 4. The user executes `payment 1 by/01-01-2022`, updating the `Payment#payByDate` for John.
 
 <p align="center">
     <img alt="PaymentTrackingObjectDiagram4" src="images/PaymentTrackingObjectDiagram4.png"/>
@@ -285,7 +285,7 @@ Step 5. In the event that the current date passes the `Payment#payByDate`, the `
     <img alt="PaymentTrackingObjectDiagram5" src="images/PaymentTrackingObjectDiagram5.png"/>
 </p>
 
-Step 6. The user executes `payment 1 receive` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
+Step 6. The user executes `payment 1 receive/` and receives John's payment, updating the `Payment#paymentHistory` with the current date, and resetting `Payment#payByDate`, and `Payment#value` respectively.
 
 <p align="center">
     <img alt="PaymentTrackingObjectDiagram6" src="images/PaymentTrackingObjectDiagram6.png"/>
