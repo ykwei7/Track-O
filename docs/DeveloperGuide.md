@@ -156,7 +156,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Education Level of tutees
 
-Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`,
+Education level is a compulsory parameter when adding a new tutee. It requires the prefix `l/`,
 followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
 the first letter of the education level in lowercase, followed by the year of study.
 
@@ -166,28 +166,22 @@ the first letter of the education level in lowercase, followed by the year of st
 * Secondary: 1 to 5
 * Junior College: 1 to 2
 
-#### Design
+#### Design considerations
 The `value` field of education level in Tutee class is in the abbreviation form.
 In `TuteeCard`, the string displayed is `stringRepresentation`,
 which is the returned value of the `parse` method in Level class, using `value` as the parameter.
-For example, `stringRepresentation` of `p5` is `Primary 5`.
+For example, `stringRepresentation` of `p5` is the result of `Level.parse("p5")` which returns `Primary 5`.
 
 Both `value` and `stringRepresentation` are fields belonging to Level.
 This is designed for better readability in displaying tutees. Having two fields ensures that the
 abbreviation can be obtained using `getLevel()` method in Tutee, instead of parsing the string representation back
-to its abbreviated form. In future implementations, we can use the abbreviations to do comparison and sort tutees according to their
-education level.
+to its abbreviated form. In our implementation of `Find`, we use the abbreviations to filter the `tuteelist`. 
+`Find` requires the keywords to be exactly equals to the value stored in each `tutee`. Using abbreviations instead of 
+the full education level title helps to reduce incorrect find results due to missing spaces or spelling errors.
 
 #### Parse method
 The `parse` method splits the string parameter into a charArray and switches case according to the first char.
 Due to the regex validation when creating tutee, the first char will be a valid character so no exceptions are thrown here.
-
-#### Restrictions
-1. The first character of the education level has to be lowercase and one of the 3 alphabets: p, s, j.
-2. The second character has to be a valid year of study of its respective level as defined in the constraint message.
-
-Failing either restriction will result in the constraint message showing up in the console component,
-and the tutee will not be created/modified.
 
 ### Get feature
 
@@ -302,7 +296,7 @@ The tutor's schedule can be accessed via the `schedule` command. The `ArrayList<
     * Cons: Any changes to the schedule through lesson commands have to be updated in both `tracko.json` and `schedule.json`. If the user manually edits `schedule.json` and not edit `tracko.json`, it is likely to cause issues in processing both JSON files, resulting in the data in both JSON files to be wiped out.
 
 ### Find 
-`find` command allows tutors to filter the tuteelist according to the keywords supplied. The supported fields for `find`
+`find` command allows tutors to filter the `tuteelist` according to the keywords supplied. The supported fields for `find`
 includes: `name`, `level`, `subject`, `overdue`.
 
 #### Rationale
@@ -328,7 +322,7 @@ executed on a `Tutee` Bob.
 
 ![CollectivePredicateActivityDiagram](images/CollectivePredicateActivityDiagram.png)
 
-The following sequence diagram shows the workflow of how a FindCommand is used.
+The following sequence diagram shows the workflow when a user uses the `Find` feature.
 ![FindCommandParserSequenceDiagram](images/FindCommandParserSequenceDiagram.png)
 
 #### Design Considerations
@@ -336,12 +330,12 @@ We had 2 design ideas of the `find` command:
 1. Allow `find` to search with multiple keywords, and return tutees that fulfills **either** keywords
 2. Allow `find` to search with multiple keywords, and return tutees that fulfills **all** keywords
 
-We decided on the 2nd implementation due to the reasons:
+We decided on the 2nd implementation due to these reasons:
 * Everytime a new keyword is supplied, the returned `tuteelist` will be equals to or smaller than without the new keyword,
 as opposed to design 1, where the `tuteelist` is equals to or longer than the without the keyword. 
 * We want the find feature to address the issue of `tuteelist` being too cluttered when number of tutees increases, so
 design 2 fits our requirement better.
-* In addition, it enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
+* It enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
