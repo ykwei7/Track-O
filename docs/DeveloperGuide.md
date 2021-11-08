@@ -419,12 +419,6 @@ of `Bob`, except the lesson that was deleted.
 Step 4: `BobWithoutLesson` is then used to replace the `Bob` at the original index 2, and model resets the displayed 
 list to show the full list of tutee once again.
 
-### Education Level of tutees
-
-Education level is a compulsory parameter when adding a new tutee. It requires the flag `l/`,
-followed by the abbreviation of the respective education level. Abbreviations can only contain 2 characters:
-the first letter of the education level in lowercase, followed by the year of study.
-
 ### Find 
 ``FindCommand` allows tutors to filter the `tuteelist` according to the keywords supplied. The supported fields for `FindCommand`
 includes: `name`, `level`, `subject`, `overdue`.
