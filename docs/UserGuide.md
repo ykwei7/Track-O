@@ -268,6 +268,7 @@ Format: `remark INDEX r/TEXT`
 * Adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
 * The index refers to the index number tagged to each tutee in the currently displayed tutee list.
 * The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
+* Empty remarks and remarks with whitespaces are allowed to provide users the ability to skip lines when appending.
 
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
