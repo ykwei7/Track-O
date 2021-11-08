@@ -13,9 +13,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
-
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
@@ -35,9 +33,7 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
-
 ## About
 
 This section explains the terms used in the user guide.
@@ -56,7 +52,7 @@ parameter | A value that is defined based on your input and is immediately prece
 alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
 integer | A number that has no decimal places or fractions.
 level | Refers to the education level of a student in the context of Singapore's education system.
-
+<div style="page-break-after: always;"></div>
 ### Application layout
 
 ![gui_layout.png](gui_layout.png)
@@ -70,9 +66,7 @@ The GUI of Track-O is divided mainly into 4 sections:
   - Note that some commands such as `get` will show a particular tutee's lessons in the form of a numbered list. Similar to the tutee list, the index number of a tutee's lesson refers to the number assigned to each lesson in the numbered list.
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
-
 ## Setting up your first tutee
 
 This section provides a quick guide to adding your first tutee and carrying out your first lesson. For more information
@@ -439,9 +433,7 @@ Exits from the application.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -464,9 +456,7 @@ It is just a visual difference. Both applications have the same functionalities 
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
-
 ## Troubleshooting
 
 ### Installing Java 11
@@ -513,9 +503,7 @@ Refer to the following steps to get started using Track-O:
 
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
-
 ## Command summary
 
 Action | Format, Examples
