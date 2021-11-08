@@ -680,7 +680,7 @@ The platform is personalized for private tutors as opposed to other audiences (l
 #### UC12: Add lesson fees to payment owed by tutee
 
 **MSS**
-1. User requests to <ins>[view payment details of a tutee. (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
 2. User requests to add the fees of a specific lesson to the existing fees.
 3. System shows new updated payment details.
 
@@ -698,7 +698,7 @@ The platform is personalized for private tutors as opposed to other audiences (l
 #### UC13: Manually update payment fees owed by tutee
 
 **MSS**
-1. User requests to <ins>[view payment details of a tutee. (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
 2. User requests to update fees to new desired amount.
 3. System shows new updated payment details.
 
@@ -716,7 +716,7 @@ The platform is personalized for private tutors as opposed to other audiences (l
 #### UC14: Receive payment fees owed by tutee
 
 **MSS**
-1. User requests to <ins>[view payment details of a tutee. (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
+1. User requests to <ins>[view payment details of a tutee (UC11)](#uc11-view-existing-payment-details-of-a-tutee)</ins>
 2. User requests to set fees of tutee as received.
 3. System shows new updated payment details.
 
