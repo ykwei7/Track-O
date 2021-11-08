@@ -327,7 +327,7 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * The lesson to be added must not clash with any of the lessons in the user's schedule.
 
 Examples:
-* `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
+* `addlesson 1 subject/Biology d/7 s/11:30 e/13:30 rate/40.50`
 * `addlesson 2 subject/Math d/5 s/19:30 e/21:30 rate/40.75`
 * `addlesson 3 subject/Chemistry d/7 s/08:30 e/09:45 rate/40`
 
