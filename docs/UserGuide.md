@@ -62,7 +62,7 @@ The GUI of Track-O is divided mainly into 4 sections:
 - `Menu Bar`: Navigation buttons that you can click to exit Track-O or open up a `help` window containing a link to this User Guide. 
 - `Tutee list`: A scrollable panel that shows a numbered list of your tutees.
   - The index number of the tutee list is the number that is assigned to each tutee in the numbered list.
-- `Command box`: A text box where you can type in commands and hit `enter` to execute them.
+- `Command box`: A text box where you can type in commands and hit the Enter key on your keyboard to execute them.
 - `Result panel`: A scrollable panel that shows the result of the command that you have just executed.
   - Note that some commands such as `get` will show a particular tutee's lessons in the form of a numbered list. Similar to the tutee list, the index number of a tutee's lesson refers to the number assigned to each lesson in the numbered list.
 
