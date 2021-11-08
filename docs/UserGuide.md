@@ -456,16 +456,16 @@ Format: `exit`
 **Q**: I opened my application and all my data is gone! What do I do?<br>
 **A**: The data is most likely corrupted. If you are familiar with how to edit `json` files, you may open your `tracko.json` file to make the necessary edits. Otherwise, you would have to delete the existing `tracko.json` file and start afresh.
 
-**Q**: What are tags used for? <br>
-**A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
-
-<div style="page-break-after: always;"></div>
 **Q**: Why does my application look slightly different?<br>
 **A**: The screenshots in this User Guide are from an application running on macOS. If you are using Windows, your application would look something like this instead:
 
 <img src="windows_ug.png" width="85%"/>
 
 It is just a visual difference. Both applications have the same functionalities otherwise.
+
+<div style="page-break-after: always;"></div>
+**Q**: What are tags used for? <br>
+**A**: Tags can be used to indicate important details of the tutee that you would like to see straight from the `tuteelist`. For instance, in the sample data provided, tags were used to indicate important upcoming examinations for tutees such as `PSLE`. 
 
 **Q**: Why doesn't pressing `F1` open the Help menu on my Mac?<br>
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
