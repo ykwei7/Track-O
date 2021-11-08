@@ -396,6 +396,7 @@ When the tutor attempts to add a `Lesson` that occurs on Friday 6pm to 7pm, the 
 *Figure: Object diagram after `AddLessonCommand` is successfully executed*
 
 #### DeleteLesson
+
 `deleteLesson` command is responsible for removing a lesson that exists in the `tuteelist` as well as a tutee’s `lessons`.
 
 Suppose Bob has index number of 2 in `tuteelist` and the user wants to delete the 3rd lesson in his list of lessons. 
