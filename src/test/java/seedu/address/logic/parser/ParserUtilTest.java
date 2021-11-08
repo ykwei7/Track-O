@@ -57,7 +57,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_SUBJECT = "Chemistry";
     private static final String VALID_SUBJECT_2 = "Math";
-    private static final String VALID_PAYMENT = "500";
+    private static final String VALID_PAYMENT = "500.00";
     private static final String VALID_PAYMENT_DECIMALS = "500.50";
     private static final LocalDate VALID_PAYMENT_DATE = LocalDate.of(2021, 11, 1);
     private static final String VALID_OVERDUE = "yes";
@@ -166,8 +166,8 @@ public class ParserUtilTest {
 
     @Test
     public void parsePaymentValue_validValueWithWhitespace_returnsTrimmedPayment() throws Exception {
-        String paymentWithWhitespace = WHITESPACE + VALID_PAYMENT + WHITESPACE;
-        Payment expectedPayment = new Payment(VALID_PAYMENT, VALID_PAYMENT_DATE);
+        String paymentWithWhitespace = WHITESPACE + VALID_PAYMENT_DECIMALS + WHITESPACE;
+        Payment expectedPayment = new Payment(VALID_PAYMENT_DECIMALS, VALID_PAYMENT_DATE);
         String expectedPaymentValue = expectedPayment.getValue();
         assertEquals(expectedPaymentValue, ParserUtil.parsePaymentValue(paymentWithWhitespace));
     }

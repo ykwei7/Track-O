@@ -321,7 +321,9 @@ public class ParserUtil {
             // Payment amount is greater than maximum allowed
             throw new ParseException(Payment.AMOUNT_CONSTRAINTS_MESSAGE);
         } else {
-            return trimmedPayment;
+            Double paymentValueToSetValue = Double.parseDouble(trimmedPayment);
+            String paymentValueToSetWithDecimals = String.format("%.2f", paymentValueToSetValue);
+            return paymentValueToSetWithDecimals;
         }
     }
 
@@ -377,6 +379,11 @@ public class ParserUtil {
         if (!formattedPayByDate.isAfter(dateToday) && !formattedPayByDate.equals(dateToday)) {
             throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
         }
+
+        if (formattedPayByDate == null) {
+            throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
+        }
+
         return formattedPayByDate;
     }
 }
