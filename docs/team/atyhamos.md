@@ -20,8 +20,7 @@ Given below are my contributions to the project.
 
 * **Revamped GUI**: Updated the GUI completely to better suit the application's vision and the intended user's workflow.
 ![](ab3_comparison.png)
-  * What it does: Allows the user to view their list of tutees on the left panel, while viewing all their command results on the right panel.
-  <br> In detail:
+  * What it does: Allows the user to view their list of tutees on the left panel, while viewing all their command results on the right panel. In detail:
     1. Changed overall colour scheme and fonts to fit a more modern application's aesthetic.
     2. Increased size and changed position of result display to fit more useful information.
     3. Reduced size of tutee list display due to excess, unused space.
@@ -65,6 +64,7 @@ Given below are my contributions to the project.
   [\#163](https://github.com/AY2122S1-CS2103T-F12-3/tp/pull/163).
 
   * Designed team's application icon:
-    * For Application tray and window: <br><img width="20%" alt="Application tray" src="../images/tracko_logo.png"/>
-    * For User Guide:<br><img width="20%" alt="For website" src="../images/tracko_logo_docs.png"/>
-
+  
+Logo in Application | Logo In User Guide 
+--- | --- 
+<img width="20%" alt="Application tray" src="../images/tracko_logo.png"/> | <img width="20%" alt="For website" src="../images/tracko_logo_docs.png"/>
