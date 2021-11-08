@@ -437,7 +437,10 @@ Format: `exit`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Track-O home folder (`tracko.json`).
+
+**Q**: I opened my application and all my data is gone! What do I do?<br>
+**A**: The data is most likely corrupted. If you are familiar with how to edit `json` files, you may open your `tracko.json` file to make the necessary edits. Otherwise, you would have to delete the existing `tracko.json` file and start afresh.
 
 **Q**: Why does my application look slightly different?<br>
 **A**: The screenshots in this User Guide are from an application running on macOS. If you are using Windows, your application would look something like this instead:
