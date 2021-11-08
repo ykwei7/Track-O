@@ -381,7 +381,7 @@ public class ParserUtil {
         }
 
         if (formattedPayByDate == null) {
-            throw new ParseException(Payment.DATE_CONSTRAINTS);
+            throw new ParseException(Payment.DATE_CONSTRAINTS_MESSAGE);
         }
 
         return formattedPayByDate;
