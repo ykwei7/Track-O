@@ -138,13 +138,13 @@ public class ParserUtilTest {
 
     @Test
     public void parsePaymentValue_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, Payment.MESSAGE_CONSTRAINTS, () ->
+        assertThrows(ParseException.class, Payment.FORMAT_CONSTRAINTS_MESSAGE, () ->
                 ParserUtil.parsePaymentValue(INVALID_PAYMENT));
     }
 
     @Test
     public void parsePaymentValue_invalidValueWithDecimals_throwsParseException() {
-        assertThrows(ParseException.class, Payment.DECIMAL_CONSTRAINTS, () ->
+        assertThrows(ParseException.class, Payment.DECIMAL_CONSTRAINTS_MESSAGE, () ->
                 ParserUtil.parsePaymentValue(INVALID_PAYMENT_DECIMALS));
     }
 
@@ -172,7 +172,7 @@ public class ParserUtilTest {
 
     @Test
     public void parsePaymentValue_exceedMaximumValue_throwsParseException() {
-        assertThrows(ParseException.class, Payment.AMOUNT_CONSTRAINTS, () ->
+        assertThrows(ParseException.class, Payment.AMOUNT_CONSTRAINTS_MESSAGE, () ->
                 ParserUtil.parsePaymentValue(INVALID_PAYMENT_EXCEED_MAXIMUM));
     }
 

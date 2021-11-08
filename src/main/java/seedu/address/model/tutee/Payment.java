@@ -17,29 +17,54 @@ import java.util.List;
  */
 public class Payment {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    /** Error message displayed when the payment is not a positive number. */
+    public static final String FORMAT_CONSTRAINTS_MESSAGE =
             "Payment values should only contain non-negative numbers with at least 1 digit, allowing 0 or 2 decimals "
                     + "i.e 0, 100 or 74.50";
-    public static final String DECIMAL_CONSTRAINTS =
+
+    /**  Error message displayed when the payment does not have valid decimal places. */
+    public static final String DECIMAL_CONSTRAINTS_MESSAGE =
             "Payment values must have either 0 or 2 decimal places. If it has 2 decimal places, it must "
                     + "end with either a 0 or 5, i.e 40.50 or 40.55.";
-    public static final String AMOUNT_CONSTRAINTS = "Payment value should not exceed $100,000";
-    public static final String DATE_CONSTRAINTS =
+
+    /** Error message displayed when the payment exceeds the maximum amount. */
+    public static final String AMOUNT_CONSTRAINTS_MESSAGE = "Payment value should not exceed $100,000";
+
+    /** Error message displayed when the payment due date is in the incorrect format. */
+    public static final String DATE_CONSTRAINTS_MESSAGE =
             "Payment due dates should be a valid date in the format of dd-MM-yyyy, i.e 20-10-2021 and"
                     + " must equal to or after today's date.";
-    public static final String PAYMENT_HISTORY_CONSTRAINTS =
+
+    /** Error message displayed when the payment history is in the incorrect format. */
+    public static final String PAYMENT_HISTORY_CONSTRAINTS_MESSAGE =
             "Payment history should only contain dates in the format of dd-MM-yyyy, i.e 20-10-2021, and 'Never'.";
+
+    /** The formatter used to format dates in the dd-MM-YYY pattern. */
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final String TODAY_DATE_AS_STRING = LocalDate.now().format(FORMATTER);
+
+    /** The regex used to determine if a string is a valid non-negative number*/
     public static final String VALIDATION_REGEX_NUMERICAL_FRONT_ANY_DECIMALS = "^[0-9][\\d]*([.][0-9]+)?$"
             .replaceFirst("^0+", "");
+
+    /** The regex used to determine if a string is a valid non_negative number with strictly zero or two decimals. */
     public static final String VALIDATION_REGEX_PAYMENT_NO_OR_TWO_DECIMAL_PLACES = "^[0-9][\\d]*([.][0-9][0|5])?$"
             .replaceFirst("^0+", "");
+
+    /** The maximum amount that a tutee can owe. */
     public static final Double MAXIMUM_AMOUNT = 100000.00;
+
+    /** The payment amount due by the tutee. */
     public final String value;
+
+    /** The payment due date set for the tutee. */
     public final LocalDate payByDate;
     public final String payByDateAsString;
+
+    /** Whether the current date has exceeded the payment due date. */
     public final boolean isOverdue;
+
+    /** The previous payment dates of the tutee. */
     public final List<String> paymentHistory = new ArrayList<String>();
 
 
@@ -50,7 +75,7 @@ public class Payment {
      */
     public Payment(String payment, LocalDate payByDate) {
         requireNonNull(payment);
-        checkArgument(isValidPaymentFormat(payment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPaymentFormat(payment), FORMAT_CONSTRAINTS_MESSAGE);
         value = payment;
         this.payByDate = payByDate;
         this.paymentHistory.add("Never");
@@ -59,7 +84,7 @@ public class Payment {
     }
 
     /**
-     * Initializes a standard payment sum starting from $0
+     * Initializes a standard payment sum starting from $0.
      * @return A payment of 0 without a last payment date.
      */
     public static Payment initializePayment() {
@@ -67,7 +92,7 @@ public class Payment {
     }
 
     /**
-     * Returns true if a given string is a valid payment amount.
+     * Returns true if a given string has a valid payment format of a non-negative number with zero or two decimals.
      * @param test The string to test on
      * @return Whether the string matches the regex
      */
@@ -120,12 +145,15 @@ public class Payment {
      * @return Whether the given List follows the correct format for payment histories
      */
     public static boolean isValidPaymentHistory(List<String> paymentHistory) {
-        if (!paymentHistory.get(0).equals("Never")) {
+        String firstEntry = paymentHistory.get(0);
+        if (!firstEntry.equals("Never")) {
             return false;
-        }
-        for (int i = 1; i < paymentHistory.size(); i++) {
-            if (!isValidPayByDate(paymentHistory.get(i))) {
-                return false;
+        } else {
+            // Checks if all the entries are valid payment due dates
+            for (int i = 1; i < paymentHistory.size(); i++) {
+                if (!isValidPayByDate(paymentHistory.get(i))) {
+                    return false;
+                }
             }
         }
         return true;
@@ -139,6 +167,7 @@ public class Payment {
         if (!isValidPaymentHistory(historyToCopy)) {
             return;
         } else {
+            // Ensure current payment history is empty before copying over
             paymentHistory.clear();
             assert paymentHistory.isEmpty() : "paymentHistory should be empty";
             for (String payment : historyToCopy) {
@@ -149,8 +178,9 @@ public class Payment {
 
     @Override
     public String toString() {
+        String lastPaidDate = paymentHistory.get(paymentHistory.size() - 1);
         return String.format("$%s (Last paid on: %s)\nOverdue: %s",
-                value, paymentHistory.get(paymentHistory.size() - 1), getOverdueStatus());
+                getValue(), lastPaidDate, getOverdueStatus());
     }
 
     /**
@@ -163,6 +193,7 @@ public class Payment {
         } else if (payByDateAsString.equals("-")) {
             return "No (Pay-by date not set)";
         } else {
+            // Payment is not overdue
             return "No (Next payment date by: " + payByDateAsString + ")";
         }
     }

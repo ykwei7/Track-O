@@ -26,7 +26,6 @@ public class TuteeCardTest {
             .withPhone("94824423").withSchool("acsj").withLevel("p1").withAddress("3rd street").withPayment("65",
                     LocalDate.of(2023, 10, 20)).build();
 
-    // Singleton pattern ensures no multiple initialisations of JavaFX toolkit
     private static boolean isJavaFxCompatible = true;
 
     @Test
@@ -90,9 +89,11 @@ public class TuteeCardTest {
             return true;
         } catch (UnsupportedOperationException | IllegalStateException e) {
             if (e instanceof UnsupportedOperationException) {
+                // build (ubuntu-latest) on Codecov cannot run Platform.startup, this disables the testing for that run
                 isJavaFxCompatible = false;
-                return false; // build-Ubuntu cannot run Platform.startup
+                return false;
             } else {
+                // Attempting to run JavaFX toolkit after it has been initialised
                 isJavaFxCompatible = true;
                 return true;
             }

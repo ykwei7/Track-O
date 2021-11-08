@@ -175,7 +175,7 @@ public class JsonAdaptedTuteeTest {
                 new JsonAdaptedTutee(VALID_NAME, VALID_PHONE, VALID_SCHOOL, VALID_LEVEL, VALID_ADDRESS, VALID_REMARK,
                         INVALID_PAYMENT, VALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY, VALID_TAGS, VALID_LESSONS);
 
-        String expectedMessage = Payment.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Payment.FORMAT_CONSTRAINTS_MESSAGE;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
     }
 
@@ -195,7 +195,7 @@ public class JsonAdaptedTuteeTest {
                 VALID_ADDRESS, VALID_REMARK, VALID_PAYMENT, INVALID_PAYMENT_DATE, VALID_PAYMENT_HISTORY,
                 VALID_TAGS, VALID_LESSONS);
 
-        String expectedMessage = Payment.DATE_CONSTRAINTS;
+        String expectedMessage = Payment.DATE_CONSTRAINTS_MESSAGE;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
     }
 
@@ -215,7 +215,7 @@ public class JsonAdaptedTuteeTest {
                 VALID_ADDRESS, VALID_REMARK, VALID_PAYMENT, VALID_PAYMENT_DATE, INVALID_PAYMENT_HISTORY,
                 VALID_TAGS, VALID_LESSONS);
 
-        String expectedMessage = Payment.PAYMENT_HISTORY_CONSTRAINTS;
+        String expectedMessage = Payment.PAYMENT_HISTORY_CONSTRAINTS_MESSAGE;
         assertThrows(IllegalValueException.class, expectedMessage, tutee::toModelType);
     }
 
