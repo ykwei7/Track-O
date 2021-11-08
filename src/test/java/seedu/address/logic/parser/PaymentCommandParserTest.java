@@ -72,13 +72,13 @@ public class PaymentCommandParserTest {
         assertParseFailure(parser, INDEX_OUT_OF_BOUNDS, MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
 
         assertParseFailure(parser, "1" + INVALID_PAYMENT_AMOUNT_DESC,
-                Payment.MESSAGE_CONSTRAINTS); // invalid payment amount
+                Payment.FORMAT_CONSTRAINTS_MESSAGE); // invalid payment amount
         // assertParseFailure(parser, "1" + INVALID_LESSON_INDEX_DESC,
         //        Phone.MESSAGE_CONSTRAINTS); // invalid lesson index
         assertParseFailure(parser, "1" + INVALID_PAYMENT_DATE_DESC,
-                Payment.DATE_CONSTRAINTS); // invalid date
+                Payment.DATE_CONSTRAINTS_MESSAGE); // invalid date
         assertParseFailure(parser, "1" + INVALID_PAYMENT_RECV_DATE_DESC,
-                Payment.DATE_CONSTRAINTS); // invalid date
+                Payment.DATE_CONSTRAINTS_MESSAGE); // invalid date
     }
 
     /**

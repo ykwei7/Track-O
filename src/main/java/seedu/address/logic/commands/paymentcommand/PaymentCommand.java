@@ -51,8 +51,7 @@ public class PaymentCommand extends Command {
             + PaymentAddCommand.MESSAGE_USAGE
             + PaymentSetAmountCommand.MESSAGE_USAGE
             + PaymentSetDateCommand.MESSAGE_USAGE
-            + PaymentReceiveCommand.MESSAGE_USAGE
-            + "\n";
+            + PaymentReceiveCommand.MESSAGE_USAGE;
 
     // Separator to showcase basic extensions on payment command
     public static final String SEPARATOR_TITLE = "Command usages to manage the payment details of tutee:\n";

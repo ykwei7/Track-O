@@ -102,7 +102,7 @@ public class PaymentTest {
     }
 
     @Test
-    public void isValidPayByDate() {
+    public void isValidPayByDateTest() {
         assertThrows(NullPointerException.class, () -> Payment.isValidPayByDate(null));
 
         // invalid payment dates
@@ -126,7 +126,7 @@ public class PaymentTest {
     }
 
     @Test
-    public void isValidPaymentHistory() {
+    public void isValidPaymentHistoryTest() {
         assertThrows(NullPointerException.class, () -> Payment.isValidPaymentHistory(null));
 
         // invalid payment histories
@@ -143,7 +143,7 @@ public class PaymentTest {
     }
 
     @Test
-    public void copyPaymentHistoryTest_validPaymentHistory_copiesList() {
+    public void copyPaymentHistoryTest_validPaymentHistory_success() {
         List<String> validPaymentHistory = Arrays.asList("Never", "20-10-2021", "21-10-2021");
         Payment p1 = Payment.initializePayment();
         p1.copyPaymentHistory(validPaymentHistory);
@@ -151,7 +151,7 @@ public class PaymentTest {
     }
 
     @Test
-    public void copyPaymentHistoryTest_invalidPaymentHistory_keepsOwnList() {
+    public void copyPaymentHistoryTest_invalidPaymentHistory_failure() {
         List<String> invalidPaymentHistory = Arrays.asList("Never", "20-10-2021", "21-13-2021");
         List<String> emptyPaymentHistory = Arrays.asList("Never");
         Payment p1 = Payment.initializePayment();

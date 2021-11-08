@@ -3,24 +3,20 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title After command "payment 1 receive"
+title After command "payment 1 lesson/1"
 
 package "Payment tracking" <<rectangle>> {
 
     class Tutee as "__John:Tutee__"
     class Payment as "__p:Payment__" {
-        value = "0"
-        payByDate = "-"
-        paymentHistory = ["Never", "26-10-2021"]
-        isOverdue = false
-        addPayment(Lesson, int)
-        editPayment(float)
-        receivePayment()
-        setPayByDate(LocalDate)
+         value = "180.00"
+         payByDate = null
+         paymentHistory = ["Never"]
+         isOverdue = false
     }
     class Lesson1 as "__lesson1:Lesson__" {
         subject = "Science"
-        time = "Mon 11:00 - "13:00"
+        time = "Mon 11:00 - 13:00"
         hourlyRate = 90.00
         cost = 180.00
     }
@@ -31,11 +27,12 @@ package "Payment tracking" <<rectangle>> {
         cost = 150.00
     }
 }
-Tutee -right-> Payment : > owes
-Tutee -left-> Lesson1 : > has
-Tutee -down-> Lesson2 : > has
+Tutee -right-> Payment
+Tutee -left-> Lesson1
+Tutee -down-> Lesson2
 
 show Payment members
 show Lesson1 members
 show Lesson2 members
+hide methods
 @end
