@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on [AddressBook Level-3](https://se-education.org/addressbook-level3/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -436,6 +437,7 @@ as opposed to design 1, where the `tuteelist` is equals to or longer than the wi
 * We want the find feature to address the issue of `tuteelist` being too cluttered when number of tutees increases, so
 design 2 fits our requirement better.
 * It enables tutors to find a specific tutee by adding additional keywords if many tutees share the same name.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
