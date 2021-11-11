@@ -14,7 +14,9 @@ It is available for Ubuntu, Windows and macOS operating systems. If you are unsu
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Table of Contents
+<h2>
+    Table of Contents
+</h2>
 
 * Table of Contents
 {:toc}
