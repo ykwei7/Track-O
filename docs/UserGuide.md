@@ -27,7 +27,6 @@ If you are an advanced user, you can view all the commands at a glance at the [C
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 ## Quick start
 
 ### Installation
@@ -467,6 +466,8 @@ It is just a visual difference. Both applications have the same functionalities 
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
