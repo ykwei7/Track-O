@@ -113,7 +113,7 @@ Our main features includes storing the information of tutees, scheduling lessons
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -265,7 +265,7 @@ Format: `remark INDEX r/TEXT`
 * Adds the desired `TEXT` to the tutee specified at the specified `INDEX`.
 * The index refers to the index number tagged to each tutee in the currently displayed tutee list.
 * The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
-* Empty remarks and remarks with whitespaces are allowed to provide users the ability to skip lines when appending.
+* Empty remarks and remarks with whitespaces allow you to skip lines when appending.
 
 Examples:
 * `remark 1 r/Went through Organic Chemistry`
@@ -290,7 +290,7 @@ Examples:
 
 #### Tracking lesson schedule : `schedule`
 
-Retrieves the user's schedule of lessons.
+Retrieves your lesson schedule.
 
 <img src="schedule_ug.png" width="95%"/>
 
@@ -300,7 +300,7 @@ Format: `schedule`
 
 #### Adding a lesson to a tutee : `addlesson`
 
-Adds a lesson to the specified tutee from our list of tutees and to the user's schedule.
+Adds a lesson to the specified tutee and your current schedule.
 
 <img src="addlesson_ug.png" width="95%"/>
 
@@ -316,7 +316,7 @@ Format: `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME r
 * `START_TIME` and `END_TIME` should be within the same day.
 * `HOURLY_RATE` **must be a positive number** expressed in either zero decimal places or two decimal places with the last decimal place (i.e. last digit) being `0` or `5`.
 * `HOURLY_RATE` should not have a fee greater than `$1000`.
-* The lesson to be added must not clash with any of the lessons in the user's schedule.
+* The lesson to be added must not clash with any of the lessons in your schedule.
 
 Examples:
 * `addlesson 1 subject/Biology d/7 s/11:30 e/13:30 rate/40.50`
@@ -325,9 +325,9 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-#### Deleting a lesson to a tutee : `deletelesson`
+#### Deleting a lesson from a tutee : `deletelesson`
 
-Deletes an existing lesson from the specific tutee's lesson list and user's schedule.
+Deletes an existing lesson from your tutee and from your schedule.
 
 <img src="deletelesson_ug.png" width="95%"/>
 
@@ -350,7 +350,7 @@ Examples:
 Entering `payment` shows you all the payment-related commands available.<br>
 Note that Track-O keeps track of fees up to $100,000, any payment command that results in the fees exceeding the amount will return an error.
 
-#### To retrieve a specified tutee's payment details: `payment`
+#### Retrieve payment details from tutee: `payment`
 
 Format: `payment INDEX`
 
@@ -365,7 +365,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-#### To add a specified lesson's fees to a specified tutee: `… lesson`
+#### Adding lesson's fees to a tutee: `… lesson`
 
 Format: `payment INDEX lesson/LESSON_INDEX`
 
@@ -375,14 +375,15 @@ Format: `payment INDEX lesson/LESSON_INDEX`
 * The index refers to the index number tagged to each tutee in the currently displayed tutee list.
 * The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * `LESSON_INDEX` must be within the size of the tutee's lesson list and **must be a positive integer** 1, 2, 3, …
-* If the payment amount exceeds $100,000 after adding the lesson fees, Track-O returns and error message.
+* If the payment amount exceeds $100,000 after adding the lesson fees, Track-O returns an error message.
+
 Examples:
 * `payment 1 lesson/1`
 * `payment 1 lesson/2`
 
 <div style="page-break-after: always;"></div>
 
-#### To edit a specified tutee's payment amount: `… amount`
+#### Editing a tutee's payment amount: `… amount`
 
 Format: `payment INDEX amount/AMOUNT`
 
@@ -400,7 +401,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-#### To set a specified tutee's payment due date: `… by`
+#### Setting a tutee's payment due date: `… by`
 
 Format: `payment INDEX by/DUE_DATE`
 
@@ -417,7 +418,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-#### To receive a tutee's payment (and set a next payment due date): `… receive`
+#### Receiving a tutee's payment (and setting a next payment due date): `… receive`
 
 Format: `payment INDEX receive/[DUE_DATE]`
 
@@ -438,7 +439,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears the tutee list and the user's schedule.
+Clears the tutee list and your schedule.
 
 <img src="clear_ug.png" width="95%"/>
 
@@ -561,6 +562,7 @@ Refer to the following steps to get started using Track-O:
 
 Terms | Explanation
 --------|------------------
+operating system | The system software that manages computer hardware.
 command | The text that you enter in the command box. Different commands have different formats.
 prefix | A word or letter that ends with `/`. It is a shorthand notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
 parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
