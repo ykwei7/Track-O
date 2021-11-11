@@ -9,7 +9,7 @@ title: User Guide
 
 Track-O  is a **free desktop application** built for freelance tutors in Singapore. You can use Track-O to manage your tutee’s information, schedule lessons, track their payments, and many other functions. This application uses a command line interface; this means that you operate the application by typing commands.
 
-It is available for Ubuntu, Windows and macOS operating systems. If you are unsure of your operating system, you can head over to our section on [Troubleshooting](#troubleshooting).
+It is available for Ubuntu, Windows and macOS operating systems.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
