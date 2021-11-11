@@ -7,7 +7,10 @@ title: User Guide
     <img src="images/tracko_logo_docs.png" width="70%"/>
 </p>
 
-Track-O is a **desktop app for private tutors to manage their tutees**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Track-O lets you track an assortment of data, from payment details to home addresses to lesson timings. You can easily access the many functions of Track-O using simple commands, such as add and get. Hop over to our Quick Start section to get started.
+Track-O  is a **__free desktop application__** built for freelance tutors in Singapore. You can use Track-O to manage your tutee’s information, schedule lessons, track their payments, and many other functions. This application uses a command line interface; this means that you operate the application by typing commands.
+
+It is available for Ubuntu, Windows and macOS operating systems. If you are unsure of your operating system, you can head over to our section on [Troubleshooting](# troubleshooting).
+
 
 * Table of Contents
 {:toc}
@@ -95,6 +98,10 @@ removes the pay-by date used in step 4 under [Before your lesson](#before-your-l
 <div style="page-break-after: always;"></div>
 
 ## Features
+
+This section covers the various features of **Track-O**. 
+
+Our main features includes storing the information of tutees, scheduling lessons and managing payments of tutees.
 
 <div markdown="block" class="alert alert-info">
 
