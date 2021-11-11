@@ -16,7 +16,9 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 <div style="page-break-after: always;"></div>
 ## About
 
-This user guide explains how to utilize our desktop app **Track-O**.
+This user guide explains how to use **Track-O**.
+
+If you are new to Track-O, you can head over to our [Quick Start](#quick-start) section to learn the basic features.
 
 For detailed information on each command, you can hop over to the [Features](#features) section for an in-depth guide.
 
