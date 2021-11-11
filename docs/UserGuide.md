@@ -14,6 +14,19 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+## About
+
+This user guide explains how to utilize our desktop app **Track-O**.
+
+For detailed information on each command, you can hop over to the [Features](#features) section for an in-depth guide.
+
+If you are an advanced user, you can view all the commands at a glance at the [Command Summary](#command-summary) section.
+
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
@@ -32,28 +45,6 @@ Track-O is a **desktop app for private tutors to manage their tutees**, optimize
 
 If you need help with the start up process, visit our [Troubleshooting](#troubleshooting) section.
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-## About
-
-This section explains the terms used in the user guide.
-
-If you are an intermediate user, you can hop over to the [Features](#features) section for the details of each command.
-
-If you are an advanced user, you can view all the commands at a glance at the [Command Summary](#command-summary) section.
-
-### Glossary
-
-Terms | Explanation
---------|------------------
-command | The text that you enter in the command box. Different commands have different formats.
-prefix | A word or letter that ends with `/`. It is a shorthand notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
-parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
-integer | A number that has no decimal places or fractions.
-level | Refers to the education level of a student in the context of Singapore's education system.
-
-<div style="page-break-after: always;"></div>
 ### Application layout
 
 ![gui_layout.png](gui_layout.png)
@@ -66,7 +57,6 @@ The GUI of Track-O is divided mainly into 4 sections:
 - `Result panel`: A scrollable panel that shows the result of the command that you have just executed.
   - Note that some commands such as `get` will show a particular tutee's lessons in the form of a numbered list. Similar to the tutee list, the index number of a tutee's lesson refers to the number assigned to each lesson in the numbered list.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 ## Setting up your first tutee
 
@@ -97,20 +87,9 @@ removes the pay-by date used in step 4 under [Before your lesson](#before-your-l
 
 <img src="john_2_ug.png" width="85%"/>
 
-<div style="page-break-after: always;"></div>
 
-### Managing your payments
-1. To view John's payment details, run `payment 1`. This shows us John's existing payment details. 
-2. To manually overwrite the payment amount John owes, run `payment 1 amount/100`. This sets the amount owed by John to
-`$100.00`.
-3. To receive the payment and set the next date to pay by in the same command, run `payment 1 receive/05-02-2022`.
-This resets the value owed by John to `0` and sets the next date to pay by to `05-02-2022`.
 
-### Managing your lessons
-1. To view your schedule for the week, run `schedule` and this displays your upcoming lessons for the week.
-2. To add in a new lesson for John, run `addlesson 1 subject/Math d/6 s/10:00 e/12:00 rate/40`. This will add a `Math` lesson from `Saturday 10am to 12pm` with the rate of `$40` per hour for John.  
-3. To delete John's first lesson, run `deletelesson 1 lesson/2`. This will delete John's second lesson which was the `Math` lesson previously added. 
-
+--------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -486,6 +465,19 @@ It is just a visual difference. Both applications have the same functionalities 
 
 **Q**: Why doesn't pressing `F1` open the Help menu on my Mac?<br>
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Glossary
+
+Terms | Explanation
+--------|------------------
+command | The text that you enter in the command box. Different commands have different formats.
+prefix | A word or letter that ends with `/`. It is a shorthand notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
+integer | A number that has no decimal places or fractions.
+level | Refers to the education level of a student in the context of Singapore's education system.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
