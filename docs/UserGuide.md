@@ -7,10 +7,14 @@ title: User Guide
     <img src="images/tracko_logo_docs.png" width="70%"/>
 </p>
 
-Track-O  is a **__free desktop application__** built for freelance tutors in Singapore. You can use Track-O to manage your tutee’s information, schedule lessons, track their payments, and many other functions. This application uses a command line interface; this means that you operate the application by typing commands.
+Track-O  is a **free desktop application** built for freelance tutors in Singapore. You can use Track-O to manage your tutee’s information, schedule lessons, track their payments, and many other functions. This application uses a command line interface; this means that you operate the application by typing commands.
 
 It is available for Ubuntu, Windows and macOS operating systems. If you are unsure of your operating system, you can head over to our section on [Troubleshooting](# troubleshooting).
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
@@ -447,6 +451,33 @@ Format: `exit`
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Help** | `help`
+**Add tutee** | `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…` <br> e.g. `add n/James Ho p/87652345 sch/Anderson sec l/s4 a/200 Yio Chu Kang Road`
+**Delete tutee** | `delete INDEX`<br> e.g. `delete 3`
+**Edit tutee** | `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…` <br> e.g. `edit 2 sch/Victoria Jc l/j1`
+**Find tutee** | `find [n/NAME…] [l/LEVEL] [subject/SUBJECT…] [overdue/OVERDUE]`<br> e.g `find n/david subject/math`
+**List all tutees** | `list`
+**Get tutee information** | `get INDEX`<br> e.g. `get 2`
+**Add remark** | `remark INDEX r/TEXT` <br> e.g `remark 1 r/Good progress.`
+**Clear remarks** | `clearremark INDEX` <br> e.g `clearremark 1`
+**View schedule** | `schedule`
+**Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
+**Delete Lesson from tutee** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
+**View payment details** | `payment INDEX` <br> e.g `payment 1`
+**Add payment due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
+**Edit payment due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
+**Set payment date** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
+**Receive payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
+**Clear** | `clear`
+**Exit** | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -472,21 +503,6 @@ It is just a visual difference. Both applications have the same functionalities 
 
 **Q**: Why doesn't pressing `F1` open the Help menu on my Mac?<br>
 **A**: Try pressing `Fn` + `F1` (The Function and the F1 key together) instead. This is due to how macOS handles function keys.
-
---------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
-
-## Glossary
-
-Terms | Explanation
---------|------------------
-command | The text that you enter in the command box. Different commands have different formats.
-prefix | A word or letter that ends with `/`. It is a shorthand notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
-parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
-alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
-integer | A number that has no decimal places or fractions.
-level | Refers to the education level of a student in the context of Singapore's education system.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -535,30 +551,17 @@ Refer to the following steps to get started using Track-O:
 
 6. Click on "Open" and Track-O will start.
 
-
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## Glossary
 
-Action | Format, Examples
+Terms | Explanation
 --------|------------------
-**Help** | `help`
-**Add tutee** | `add n/NAME p/PHONE sch/SCHOOL l/LEVEL a/ADDRESS [t/TAG]…` <br> e.g. `add n/James Ho p/87652345 sch/Anderson sec l/s4 a/200 Yio Chu Kang Road`
-**Delete tutee** | `delete INDEX`<br> e.g. `delete 3`
-**Edit tutee** | `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…` <br> e.g. `edit 2 sch/Victoria Jc l/j1`
-**Find tutee** | `find [n/NAME…] [l/LEVEL] [subject/SUBJECT…] [overdue/OVERDUE]`<br> e.g `find n/david subject/math`
-**List all tutees** | `list`
-**Get tutee information** | `get INDEX`<br> e.g. `get 2`
-**Add remark** | `remark INDEX r/TEXT` <br> e.g `remark 1 r/Good progress.`
-**Clear remarks** | `clearremark INDEX` <br> e.g `clearremark 1`
-**View schedule** | `schedule`
-**Add lesson to tutee** | `addlesson INDEX subject/SUBJECT d/DAY_OF_WEEK s/START_TIME e/END_TIME rate/HOURLY_RATE` <br> e.g `addlesson 1 subject/Biology d/4 s/11:30 e/13:30 rate/40.50`
-**Delete Lesson from tutee** | `deletelesson TUTEE_INDEX lesson/LESSON_INDEX`<br> e.g `deletelesson 2 lesson/1`
-**View payment details** | `payment INDEX` <br> e.g `payment 1`
-**Add payment due** | `payment INDEX lesson/LESSON_INDEX` <br> e.g `payment 1 lesson/1`
-**Edit payment due** | `payment INDEX amount/AMOUNT` <br> e.g `payment 1 amount/80.50`
-**Set payment date** | `payment INDEX by/DUE_DATE` <br> e.g `payment 1 by/01-01-2022`
-**Receive payment** | `payment INDEX receive/[DUE_DATE]` <br> e.g `payment 1 receive/01-02-2022`
-**Clear** | `clear`
-**Exit** | `exit`
+command | The text that you enter in the command box. Different commands have different formats.
+prefix | A word or letter that ends with `/`. It is a shorthand notation that is used to specify the fields involved in a command. e.g. `n/` indicates that a name is involved.
+parameter | A value that is defined based on your input and is immediately preceded by a prefix. e.g. Given a `p/` prefix which represents a phone number, followed by a `PHONE` parameter; if you input `98765432` in place of the `PHONE` parameter, the phone number holds a value of `98765432`.
+alphanumeric characters | Words that consist of only English alphabets and/or numbers, e.g. `2km`. Characters such as `@`, `?` and `%` are not alphanumeric. 
+integer | A number that has no decimal places or fractions.
+level | Refers to the education level of a student in the context of Singapore's education system.
