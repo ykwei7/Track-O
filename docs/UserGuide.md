@@ -24,9 +24,10 @@ For detailed information on each command, you can hop over to the [Features](#fe
 
 If you are an advanced user, you can view all the commands at a glance at the [Command Summary](#command-summary) section.
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
 ### Installation
