@@ -58,12 +58,12 @@ The GUI of Track-O is divided mainly into 4 sections:
   - Note that some commands such as `get` will show a particular tutee's lessons in the form of a numbered list. Similar to the tutee list, the index number of a tutee's lesson refers to the number assigned to each lesson in the numbered list.
 
 <div style="page-break-after: always;"></div>
-## Setting up your first tutee
+### Setting up your first tutee
 
 This section provides a quick guide to adding your first tutee and carrying out your first lesson. For more information
 on each command, it can found under the [Features](#features) section of our guide. To run a command, simply type the command in the command box and hit the Enter key on your keyboard.
 
-### Before your lesson
+#### Before your lesson
 1. Let's clear the existing sample data first. Run `clear` to remove the existing tutees.
 2. To add in a new tutee, run `add n/John Tan l/p5 a/246 Hougang Ave sch/Rosyth School p/84567890`.
 This will add in a tutee with the name `John Tan`, a `Primary 5` student from `Rosyth School`, staying at `246 Hougang Ave` whose phone number is `84567890`.
@@ -76,7 +76,7 @@ the 5th of January 2022.
 <img src="john_ug.png" width="85%"/>
 <div style="page-break-after: always;"></div>
 
-### After your lesson
+#### After your lesson
 1. To add in the fees of this lesson, run `payment 1 lesson/1`. This will add in the total fees of the first lesson. Since
 the rate was `$30` per hour over 2 hours, the total adds up to `$60.00`.
 2. To add in any remarks for the lesson, run `remark 1 r/Good Progress!` and this set the comments `Good Progress!`
@@ -87,9 +87,6 @@ removes the pay-by date used in step 4 under [Before your lesson](#before-your-l
 
 <img src="john_2_ug.png" width="85%"/>
 
-
-
---------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -468,7 +465,7 @@ It is just a visual difference. Both applications have the same functionalities 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Glossary
+## Glossary
 
 Terms | Explanation
 --------|------------------
