@@ -171,7 +171,7 @@ Edits an existing tutee in the tutee list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [sch/SCHOOL] [l/LEVEL] [a/ADDRESS] [t/TAG]…`
 
-* Edits the person at the specified `INDEX`.
+* Edits the tutee at the specified `INDEX`.
 * The index refers to the index number tagged to each tutee in the currently displayed tutee list.
 * The index must be within the size of the displayed tutee list and **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
