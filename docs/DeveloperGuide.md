@@ -825,57 +825,210 @@ The platform is personalized for private tutors as opposed to other audiences (l
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more *exploratory* testing. Additionally, test cases are not continuous and prerequisites must be met for each test case.
+
 
 </div>
 
+We recommend you copy the command required for adding a new tutee as it will be used in every test case.
+A valid `add` command is provided below:<br>
+`add n/John Tan l/p5 a/246 Hougang Ave sch/Rosyth School p/84567890`
+
 ### Launch and shutdown
 
-1. Initial launch
+Initial launch
 
-    1. Download the jar file and copy into an empty folder
+1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+2. Re-launch the app by double-clicking the jar file.<br>
+   Expected: The most recent window size and location is retained.
 
-### Deleting a tutee
+### Getting a tutee's information
 
-1. Deleting a tutee while all tutees are being shown
+Getting a tutee's information
 
-    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+1. Prerequisites:
+   1. Clear tutee list with `clear` command. 
+   2. Add a new tutee with the `add` command.
+2. Test case: get 1
+Expected: First tutee's information is retrieved. The tutee's details are shown in the result panel.
+3. Test case: get 0
+   Expected: No tutee's information is retrieved. Error details shown in the status message.
+4. Other incorrect `get` commands to try: `get`, `get x` (where x is larger than the list size) <br>Expected: Similar to previous.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+### Adding a lesson to a tutee
 
-    1. Test case: `delete 0`<br>
-       Expected: No tutee is deleted. Error details shown in the status message.
+1. Prerequisites:
+    1. Clear tutee list with clear command.
+    2. Add a new tutee with the add command.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+2. Test case: addlesson 1 subject/Biology d/7 s/11:30 e/13:30 rate/40.50<br>
+   Expected: Details of the tutee's new lesson is shown in the status message.
+3. Test case: addlesson 0 subject/Biology d/7 s/11:30 e/13:30 rate/40.50<br>
+   Expected: No lesson is added. Error details shown in the status message.
+4. Other incorrect `addlesson` commands to try: `addlesson 1 subject/Biology d/99 s/11:30 e/13:30 rate/40.50`, `addlesson 1 subject/Biology d/7 s/55:30 e/13:30 rate/40.50`, `addlesson x subject/Biology d/7 s/11:30 e/13:30 rate/40.50` (where x is larger than the list size)<br>Expected: Similar to previous.
+
+
+###  Finding a tutee
+
+1. Test case: find n/David<br>
+   <br>Expected: All tutees with name containing the word “David” will be displayed. The tutee list should only show the matched tutee.
+2. Test case: Test case: find n/David Lee<br>
+   <br>Expected: All tutees with name containing both “David” and “Lee” will be displayed. The tutee list should only show matched tutee.
+3. Test case: Test case: find n/David subject/math<br>
+   <br>Expected: All tutees with name containing “David” and has a lesson with subject name “math” will be displayed. The tutee list should only show matched tutee.
+4. Test case: find name/David
+   <br>Expected: Error details shown in the results panel.
+5. Other incorrect find commands to try: find n/, find n/C@@l, find l/primary 5.
+   <br>Expected: Similar to previous.
+
+
+### Adding lesson fees to payment amount
+
+Adding lesson fees a tutee's payment amount
+
+1. Prerequisites: 
+   1. Clear tutee list with `clear` command. 
+   2. Add a new tutee with the `add` command.
+   3. Add one lesson with the `addlesson` commmand.
+
+2. Test case: `payment 1 lesson/1`<br>
+   Expected: Tutee's payment amount is changed to the lesson's total cost, the hourly rate multiplied by the duration in hours. Details of the tutee's new payment details are shown in the status message.
+3. Test case: `payment 1 lesson/`<br>
+   Expected: Tutee's payment details are not changed. Error details shown in the status message.
+4. Other incorrect `payment...lesson` commands to try: `payment 1 lesson/a`, `payment 1 lesson/-30`<br>
+   Expected: Similar to previous.
+
+### Deleting a lesson from a tutee
+
+1. Prerequisites:
+    1. Clear tutee list with clear command.
+    2. Add a new tutee with the add command.
+    3. Add a new lesson to the tutee with the following command: addlesson 1 subject/Biology d/7 s/11:30 e/13:30 rate/40.50.
+
+2. Test case: deletelesson 1 lesson/1<br>
+   Expected: The first lesson of the first tutee in the tutee list is deleted.
+3. Test case: deletelesson 0 lesson/1<br>
+   Expected: No lesson is deleted. Error details shown in the status message.
+4. Other incorrect deletelesson commands to try: deletelesson 1 lesson/0, deletelesson x lesson/1, ... (where x is larger than the tutee list size)
+   <br>Expected: Similar to previous.
+
+
+### Setting payment due dates for a tutee
+
+Setting tutee's payment due date to 1st January 2022.
+
+1. Prerequisites:
+    1. Clear tutee list with `clear` command.
+    2. Add a new tutee with the `add` command.
+
+2. Test case: `payment 1 by/01-01-2022`<br>
+   Expected: Tutee's payment due date is changed to the 1st January 2022. Details of the tutee's new payment details are shown in the status message.
+3. Test case: `payment 1 by/`<br>
+   Expected: Tutee's payment due date is not changed. Error details shown in the status message.
+4. Other incorrect `payment...by` commands to try: `payment 1 by/a`, `payment 1 by/05-11-2021`, `payment 1 by/5-Nov-2021`<br>
+   Expected: Similar to previous.
+
 
 ### Editing payment amount
 
-1. Manually editing a tutee's payment amount
+Manually editing a tutee's payment amount
 
-    1. Prerequisites: A tutee is already initialized with the `add` command. List all tutees using the `list` command. At least one tutee is in the list.
-   
-    2. Test case: `payment 1 amount/50`<br>
-       Expected: Tutee's payment details are changed to `$50.00`. Details of the tutee's new payment details are shown in the status message.
-    3. Test case: `payment 1 amount/`<br>
-       Expected: Tutee's payment details are not changed. Error details shown in the status message.
-    4. Other incorrect payment amount commands to try: `payment 1 amount/a`, `payment 1 amount/-30`, `payment 1 amount/500000`, `payment 1 amount/30.12`
-       Expected: Similar to previous.
+1. Prerequisites: 
+   1. Clear tutee list with `clear` command.
+   2. Add a new tutee with the `add` command.
+2. Test case: `payment 1 amount/50`<br>
+   Expected: Tutee's payment details are changed to `$50.00`. Details of the tutee's new payment details are shown in the status message.
+3. Test case: `payment 1 amount/`<br>
+   Expected: Tutee's payment details are not changed. Error details shown in the status message.
+4. Other incorrect `payment...amount`commands to try: `payment 1 amount/a`, `payment 1 amount/-30`, `payment 1 amount/500000`, `payment 1 amount/30.12`<br>
+Expected: Similar to previous.
+
+
+### Receiving payments from a tutee
+
+Receiving a payment from a tutee after collecting their payments.
+
+1. Prerequisites:
+    1. Clear tutee list with `clear` command.
+    2. Add a new tutee with the `add` command.
+    3. Add a payment due date for the tutee with the `payment ... by/` command.
+    4. Set a payment amount for the tutee with the `payment ... amount/` command. (Optional)
+
+2. Test case: `payment 1 receive/`<br>
+   Expected: Tutee's payment amount is reset to 0 and the payment due date is reset. Their last paid date is set to today's date. Details of the tutee's new payment details are shown in the status message.
+3. Test case: `payment 1 receive/01-01-2022`<br>
+   Expected: Tutee's payment amount is reset to 0 and the payment due date is set to 1st January 2022. Their last paid date is set to today's date. Details of the tutee's new payment details are shown in the status message.
+5. Test case: `payment 1 receive/1-1-2022`<br>
+   Expected: Tutee's payment due date is not changed. Error details shown in the status message.
+6. Other incorrect `payment...receive` commands to try: `payment 1 receive/a`, `payment 1 receive/124123`<br>
+   Expected: Similar to previous.
+
+
+### Adding a remark to a tutee
+
+Adding a remark to a tutee with no remarks
+1. Prerequisites:
+    1. Clear tutee list with `clear` command.
+    2. Add a new tutee with the `add` command.
+    3. The tutee's remark field is blank (-).
+2. Test case: remark 1 r/test
+   Expected: First tutee's remarks are modified. The tutee's remarks are shown in the result panel under "Remarks:".
+3. Test case: remark 1 r/
+   Expected: First tutee's remarks are modified. The tutee's remarks are shown in the results panel under "Remarks:". The application allows for blank remarks as line breaks.
+4. Test case remark 0 r/
+   Expected: First tutee's remarks are not modified. Error details shown in the status message.
+5. Other incorrect remark commands to try: remark, remark 1, remark x r/, ... (where x is larger than the list size)
+   Expected: Similar to previous.
+Adding a remark to a tutee with existing remarks
+1. Prerequisites: 
+   1. Clear tutee list with `clear` command.
+   2. Add a new tutee with the `add` command.
+   3. The tutee's remark field already has user input with the `remark` command.
+2. Test case: `remark 1 r/test`<br>
+   Expected: First tutee's remarks are modified. The tutee's remarks are appended to existing remarks in the result panel under "Remarks:" .
+3. Test case: `remark 1 r/`<br>
+   Expected: First tutee's remarks are modified. The tutee's remarks are appended to existing remarks in the results panel under "Remarks:". The application allows for blank remarks as line breaks.
+4. Test case `remark 0 r/`<br>
+   Expected: No remarks are modified. Error details shown in the status message.
+5. Other incorrect remark commands to try: `remark`, `remark 1`, `remark x r/` (where x is larger than the list size)
+    <br>Expected: Similar to previous.
+
+### Clearing a remark from a tutee
+
+Clearing a remark from a tutee with no remarks
+1. Prerequisites:
+   1. Clear tutee list with `clear` command.
+   2. Add a new tutee with the `add` command.
+   3. The tutee's remark field is blank (-).
+2. Test case: `clearremark 1`
+<br>       Expected: There are no changes to the tutee's remarks as there are no remarks to clear. Error details shown in the status message.
+3. Test case `clearremark 0`
+<br>       Expected: No remarks are cleared. Error details shown in the status message.
+
+Clearing a remark from a tutee with existing remarks
+1. Prerequisites:
+   1. Clear tutee list with `clear` command.
+   2. Add a new tutee with the `add` command.
+   3. The tutee's remark field already has user input.
+2. Test case: `clearremark 1`
+<br>       Expected: First tutee's remarks are cleared. The tutee's remarks should show as "Remarks: -" in the results panel.
+3. Test case: `clearremark 0`
+<br>   Expected: No remarks are cleared. Error details shown in the status message.
+4. Other incorrect remark commands to try: `clearremark`, `clearremark x` (where x is larger than the list size)
+<br>       Expected: Similar to previous.
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+Dealing with missing/corrupted data files
 
-    1. Application will launch with an empty file
-    2. Update the file as necessary to include the relevant tutee information.
+1. Application will launch with an empty file
+2. Update the file as necessary to include the relevant tutee information.
 

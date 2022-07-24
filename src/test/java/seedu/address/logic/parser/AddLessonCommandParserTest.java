@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DAY_OF_WEEK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_END_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_HOURLY_RATE_DESC;
@@ -92,7 +91,8 @@ public class AddLessonCommandParserTest {
                         + LESSON_START_TIME_DESC_AMY + LESSON_END_TIME_DESC_AMY + LESSON_HOURLY_RATE_DESC_AMY,
                 MESSAGE_INVALID_FORMAT);
 
-        assertParseFailure(parser, INDEX_OUT_OF_BOUNDS, MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
+        assertParseFailure(parser, INDEX_OUT_OF_BOUNDS, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddLessonCommand.MESSAGE_USAGE));
 
     }
 

@@ -8,10 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLY_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.TrackOParser.arePrefixesPresent;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
@@ -42,7 +42,11 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), pe);
         } catch (IndexOutOfBoundsException ie) {
-            throw new ParseException(MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX, ie);
+            if (arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_DAY_OF_WEEK,
+                    PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_HOURLY_RATE)) {
+                throw new ParseException(MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX, ie);
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), ie);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_DAY_OF_WEEK,
@@ -57,14 +61,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         double hourlyRate = ParserUtil.parseHourlyRate(argMultimap.getValue(PREFIX_HOURLY_RATE).get());
 
         return new AddLessonCommand(index, subject, dayOfWeek, startTime, endTime, hourlyRate);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
